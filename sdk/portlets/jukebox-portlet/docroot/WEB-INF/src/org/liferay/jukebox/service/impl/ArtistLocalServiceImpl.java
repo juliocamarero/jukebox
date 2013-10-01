@@ -17,6 +17,14 @@ package org.liferay.jukebox.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
+
+import java.util.Date;
+import java.util.List;
+
+import org.liferay.jukebox.ArtistNameException;
 import org.liferay.jukebox.model.Artist;
 import org.liferay.jukebox.service.base.ArtistLocalServiceBaseImpl;
 
@@ -36,6 +44,121 @@ import org.liferay.jukebox.service.base.ArtistLocalServiceBaseImpl;
  */
 public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 
+	public Artist addArtist(
+			long userId, String name, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		Date now = new Date();
+
+		validate(name);
+
+		long artistId = counterLocalService.increment(Artist.class.getName());
+
+		Artist artist = artistPersistence.create(artistId);
+
+		artist.setUuid(serviceContext.getUuid());
+		artist.setGroupId(serviceContext.getScopeGroupId());
+		artist.setCompanyId(user.getCompanyId());
+		artist.setUserId(user.getUserId());
+		artist.setUserName(user.getFullName());
+		artist.setCreateDate(serviceContext.getCreateDate(now));
+		artist.setModifiedDate(serviceContext.getModifiedDate(now));
+		artist.setName(name);
+		artist.setExpandoBridgeAttributes(serviceContext);
+
+		artistPersistence.update(artist);
+
+		// Resources
+
+		if (serviceContext.isAddGroupPermissions() ||
+			serviceContext.isAddGuestPermissions()) {
+
+			addEntryResources(
+				artist, serviceContext.isAddGroupPermissions(),
+				serviceContext.isAddGuestPermissions());
+		}
+		else {
+			addEntryResources(
+				artist, serviceContext.getGroupPermissions(),
+				serviceContext.getGuestPermissions());
+		}
+
+		// Asset
+
+		updateAsset(
+			userId, artist, serviceContext.getAssetCategoryIds(),
+			serviceContext.getAssetTagNames());
+
+		return artist;
+	}
+
+	@Override
+	public void addEntryResources(
+			Artist artist, boolean addGroupPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		resourceLocalService.addResources(
+			artist.getCompanyId(), artist.getGroupId(), artist.getUserId(),
+			Artist.class.getName(), artist.getArtistId(), false,
+			addGroupPermissions, addGuestPermissions);
+	}
+
+	@Override
+	public void addEntryResources(
+			Artist artist, String[] groupPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		resourceLocalService.addModelResources(
+			artist.getCompanyId(), artist.getGroupId(), artist.getUserId(),
+			Artist.class.getName(), artist.getArtistId(), groupPermissions,
+			guestPermissions);
+	}
+
+	public List<Artist> getArtists(long groupId, int start, int end)
+		throws SystemException {
+
+		return artistPersistence.findByGroupId(groupId, start, end);
+	}
+
+	public List<Artist> getArtists(long groupId) throws SystemException {
+		return artistPersistence.findByGroupId(groupId);
+	}
+
+	public int getArtistsCount(long groupId) throws SystemException {
+		return artistPersistence.countByGroupId(groupId);
+	}
+
+	public Artist updateArtist(
+			long userId, long artistId, String name,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		// Event
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		validate(name);
+
+		Artist artist = artistPersistence.findByPrimaryKey(artistId);
+
+		artist.setModifiedDate(serviceContext.getModifiedDate(null));
+		artist.setName(name);
+		artist.setExpandoBridgeAttributes(serviceContext);
+
+		artistPersistence.update(artist);
+
+		// Asset
+
+		updateAsset(
+			userId, artist, serviceContext.getAssetCategoryIds(),
+			serviceContext.getAssetTagNames());
+
+		return artist;
+	}
+
 	public void updateAsset(
 			long userId, Artist artist, long[] assetCategoryIds,
 			String[] assetTagNames)
@@ -48,4 +171,11 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 			assetTagNames, true, null, null, null, ContentTypes.TEXT_HTML,
 			artist.getName(), null, null, null, null, 0, 0, null, false);
 	}
+
+	protected void validate(String name) throws PortalException {
+		if (Validator.isNull(name)) {
+			throw new ArtistNameException();
+		}
+	}
+
 }
