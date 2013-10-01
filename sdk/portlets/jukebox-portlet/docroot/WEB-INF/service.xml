@@ -40,7 +40,13 @@
 			<finder-column name="groupId" />
 		</finder>
 
-		<!-- References -->	
+		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="Company" />
+		<reference package-path="com.liferay.portal" entity="Group" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
+		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 	</entity>
 	<entity name="Album" local-service="true" remote-service="true" uuid="true">
 
@@ -87,7 +93,13 @@
 			<finder-column name="artistId" />
 		</finder>
 
-		<!-- References -->	
+		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="Company" />
+		<reference package-path="com.liferay.portal" entity="Group" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
+		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 	</entity>
 	<entity name="Song" local-service="true" remote-service="true" uuid="true">
 
@@ -129,6 +141,12 @@
 		</finder>
 
 		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="Company" />
+		<reference package-path="com.liferay.portal" entity="Group" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
+		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 	</entity>
 	<exceptions>
 		<exception>NoSuchArtist</exception>
