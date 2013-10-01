@@ -502,6 +502,69 @@ public interface ArtistPersistence extends BasePersistence<Artist> {
 			org.liferay.jukebox.NoSuchArtistException;
 
 	/**
+	* Returns all the artists that the user has permission to view where groupId = &#63;.
+	*
+	* @param groupId the group ID
+	* @return the matching artists that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Artist> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the artists that the user has permission to view where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.ArtistModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param start the lower bound of the range of artists
+	* @param end the upper bound of the range of artists (not inclusive)
+	* @return the range of matching artists that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Artist> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the artists that the user has permissions to view where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.ArtistModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param start the lower bound of the range of artists
+	* @param end the upper bound of the range of artists (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching artists that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Artist> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the artists before and after the current artist in the ordered set of artists that the user has permission to view where groupId = &#63;.
+	*
+	* @param artistId the primary key of the current artist
+	* @param groupId the group ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next artist
+	* @throws org.liferay.jukebox.NoSuchArtistException if a artist with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Artist[] filterFindByGroupId_PrevAndNext(
+		long artistId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchArtistException;
+
+	/**
 	* Removes all the artists where groupId = &#63; from the database.
 	*
 	* @param groupId the group ID
@@ -518,6 +581,16 @@ public interface ArtistPersistence extends BasePersistence<Artist> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of artists that the user has permission to view where groupId = &#63;.
+	*
+	* @param groupId the group ID
+	* @return the number of matching artists that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -919,6 +992,73 @@ public interface ArtistPersistence extends BasePersistence<Artist> {
 			org.liferay.jukebox.NoSuchArtistException;
 
 	/**
+	* Returns all the artists that the user has permission to view where userId = &#63; and groupId = &#63;.
+	*
+	* @param userId the user ID
+	* @param groupId the group ID
+	* @return the matching artists that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Artist> filterFindByU_G(
+		long userId, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the artists that the user has permission to view where userId = &#63; and groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.ArtistModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param groupId the group ID
+	* @param start the lower bound of the range of artists
+	* @param end the upper bound of the range of artists (not inclusive)
+	* @return the range of matching artists that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Artist> filterFindByU_G(
+		long userId, long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the artists that the user has permissions to view where userId = &#63; and groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.ArtistModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param groupId the group ID
+	* @param start the lower bound of the range of artists
+	* @param end the upper bound of the range of artists (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching artists that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Artist> filterFindByU_G(
+		long userId, long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the artists before and after the current artist in the ordered set of artists that the user has permission to view where userId = &#63; and groupId = &#63;.
+	*
+	* @param artistId the primary key of the current artist
+	* @param userId the user ID
+	* @param groupId the group ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next artist
+	* @throws org.liferay.jukebox.NoSuchArtistException if a artist with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Artist[] filterFindByU_G_PrevAndNext(
+		long artistId, long userId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchArtistException;
+
+	/**
 	* Removes all the artists where userId = &#63; and groupId = &#63; from the database.
 	*
 	* @param userId the user ID
@@ -937,6 +1077,17 @@ public interface ArtistPersistence extends BasePersistence<Artist> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByU_G(long userId, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of artists that the user has permission to view where userId = &#63; and groupId = &#63;.
+	*
+	* @param userId the user ID
+	* @param groupId the group ID
+	* @return the number of matching artists that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByU_G(long userId, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
