@@ -3,11 +3,31 @@
 
 <liferay-portlet-app>
 	<portlet>
-		<portlet-name>jukebox</portlet-name>
-		<icon>/icon.png</icon>
-		<header-portlet-css>/css/main.css</header-portlet-css>
-		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
-		<css-class-wrapper>jukebox-portlet</css-class-wrapper>
+		<portlet-name>artists</portlet-name>
+		<icon>/icons/artists.png</icon>
+		<instanceable>false</instanceable>
+		<scopeable>true</scopeable>
+		<header-portlet-css>/css/artists.css</header-portlet-css>
+		<footer-portlet-javascript>/js/artists.js</footer-portlet-javascript>
+		<css-class-wrapper>artists-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>albums</portlet-name>
+		<icon>/icons/albums.png</icon>
+		<instanceable>false</instanceable>
+		<scopeable>true</scopeable>
+		<header-portlet-css>/css/albums.css</header-portlet-css>
+		<footer-portlet-javascript>/js/albums.js</footer-portlet-javascript>
+		<css-class-wrapper>albums-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>songs</portlet-name>
+		<icon>/icons/songs.png</icon>
+		<instanceable>false</instanceable>
+		<scopeable>true</scopeable>
+		<header-portlet-css>/css/songs.css</header-portlet-css>
+		<footer-portlet-javascript>/js/songs.js</footer-portlet-javascript>
+		<css-class-wrapper>songs-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
