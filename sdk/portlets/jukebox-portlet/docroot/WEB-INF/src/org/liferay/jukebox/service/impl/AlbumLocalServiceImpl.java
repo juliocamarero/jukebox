@@ -14,6 +14,10 @@
 
 package org.liferay.jukebox.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ContentTypes;
+import org.liferay.jukebox.model.Album;
 import org.liferay.jukebox.service.base.AlbumLocalServiceBaseImpl;
 
 /**
@@ -31,9 +35,17 @@ import org.liferay.jukebox.service.base.AlbumLocalServiceBaseImpl;
  * @see org.liferay.jukebox.service.AlbumLocalServiceUtil
  */
 public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link org.liferay.jukebox.service.AlbumLocalServiceUtil} to access the album local service.
-	 */
+
+	public void updateAsset(
+			long userId, Album album, long[] assetCategoryIds,
+			String[] assetTagNames)
+		throws PortalException, SystemException {
+
+		assetEntryLocalService.updateEntry(
+			userId, album.getGroupId(), album.getCreateDate(),
+			album.getModifiedDate(), Album.class.getName(), album.getAlbumId(),
+			album.getUuid(), 0, assetCategoryIds, assetTagNames, true, null,
+			null, null, ContentTypes.TEXT_HTML, album.getName(), null, null,
+			null, null, 0, 0, null, false);
+	}
 }

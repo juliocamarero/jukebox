@@ -14,6 +14,10 @@
 
 package org.liferay.jukebox.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ContentTypes;
+import org.liferay.jukebox.model.Song;
 import org.liferay.jukebox.service.base.SongLocalServiceBaseImpl;
 
 /**
@@ -31,9 +35,17 @@ import org.liferay.jukebox.service.base.SongLocalServiceBaseImpl;
  * @see org.liferay.jukebox.service.SongLocalServiceUtil
  */
 public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link org.liferay.jukebox.service.SongLocalServiceUtil} to access the song local service.
-	 */
+
+	public void updateAsset(
+			long userId, Song song, long[] assetCategoryIds,
+			String[] assetTagNames)
+		throws PortalException, SystemException {
+
+		assetEntryLocalService.updateEntry(
+			userId, song.getGroupId(), song.getCreateDate(),
+			song.getModifiedDate(), Song.class.getName(), song.getSongId(),
+			song.getUuid(), 0, assetCategoryIds, assetTagNames, true, null,
+			null, null, ContentTypes.TEXT_HTML, song.getName(), null, null,
+			null, null, 0, 0, null, false);
+	}
 }

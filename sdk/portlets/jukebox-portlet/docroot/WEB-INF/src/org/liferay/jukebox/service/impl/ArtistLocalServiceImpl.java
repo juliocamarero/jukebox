@@ -14,6 +14,10 @@
 
 package org.liferay.jukebox.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ContentTypes;
+import org.liferay.jukebox.model.Artist;
 import org.liferay.jukebox.service.base.ArtistLocalServiceBaseImpl;
 
 /**
@@ -31,9 +35,17 @@ import org.liferay.jukebox.service.base.ArtistLocalServiceBaseImpl;
  * @see org.liferay.jukebox.service.ArtistLocalServiceUtil
  */
 public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link org.liferay.jukebox.service.ArtistLocalServiceUtil} to access the artist local service.
-	 */
+
+	public void updateAsset(
+			long userId, Artist artist, long[] assetCategoryIds,
+			String[] assetTagNames)
+		throws PortalException, SystemException {
+
+		assetEntryLocalService.updateEntry(
+			userId, artist.getGroupId(), artist.getCreateDate(),
+			artist.getModifiedDate(), Artist.class.getName(),
+			artist.getArtistId(), artist.getUuid(), 0, assetCategoryIds,
+			assetTagNames, true, null, null, null, ContentTypes.TEXT_HTML,
+			artist.getName(), null, null, null, null, 0, 0, null, false);
+	}
 }
