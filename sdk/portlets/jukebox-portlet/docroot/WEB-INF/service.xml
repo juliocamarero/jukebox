@@ -135,6 +135,12 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
+		<finder name="ArtistId" return-type="Collection">
+			<finder-column name="artistId" />
+		</finder>
+		<finder name="AlbumId" return-type="Collection">
+			<finder-column name="albumId" />
+		</finder>
 		<finder name="G_U" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
@@ -149,6 +155,9 @@
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 	</entity>
 	<exceptions>
+		<exception>AlbumName</exception>
+		<exception>ArtistName</exception>
+		<exception>SongName</exception>
 		<exception>NoSuchArtist</exception>
 		<exception>NoSuchAlbum</exception>
 		<exception>NoSuchSong</exception>
