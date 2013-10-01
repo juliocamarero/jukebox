@@ -271,6 +271,14 @@ public class ClpSerializer {
 			return new SystemException();
 		}
 
+		if (className.equals("org.liferay.jukebox.AlbumNameException")) {
+			return new org.liferay.jukebox.AlbumNameException();
+		}
+
+		if (className.equals("org.liferay.jukebox.ArtistNameException")) {
+			return new org.liferay.jukebox.ArtistNameException();
+		}
+
 		if (className.equals("org.liferay.jukebox.NoSuchAlbumException")) {
 			return new org.liferay.jukebox.NoSuchAlbumException();
 		}
@@ -281,6 +289,10 @@ public class ClpSerializer {
 
 		if (className.equals("org.liferay.jukebox.NoSuchSongException")) {
 			return new org.liferay.jukebox.NoSuchSongException();
+		}
+
+		if (className.equals("org.liferay.jukebox.SongNameException")) {
+			return new org.liferay.jukebox.SongNameException();
 		}
 
 		if (className.equals("org.liferay.jukebox.NoSuchAlbumException")) {

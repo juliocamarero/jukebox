@@ -331,6 +331,63 @@ public class SongLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static org.liferay.jukebox.model.Song addSong(long userId,
+		long albumId, java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().addSong(userId, albumId, name, serviceContext);
+	}
+
+	public static void addEntryResources(org.liferay.jukebox.model.Song song,
+		boolean addGroupPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.addEntryResources(song, addGroupPermissions, addGuestPermissions);
+	}
+
+	public static void addEntryResources(org.liferay.jukebox.model.Song song,
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().addEntryResources(song, groupPermissions, guestPermissions);
+	}
+
+	public static java.util.List<org.liferay.jukebox.model.Song> getSongs(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getSongs(groupId, start, end);
+	}
+
+	public static java.util.List<org.liferay.jukebox.model.Song> getSongs(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getSongs(groupId);
+	}
+
+	public static int getSongsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getSongsCount(groupId);
+	}
+
+	public static org.liferay.jukebox.model.Song updateSong(long userId,
+		long songId, long albumId, java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateSong(userId, songId, albumId, name, serviceContext);
+	}
+
+	public static void updateAsset(long userId,
+		org.liferay.jukebox.model.Song song, long[] assetCategoryIds,
+		java.lang.String[] assetTagNames)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().updateAsset(userId, song, assetCategoryIds, assetTagNames);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

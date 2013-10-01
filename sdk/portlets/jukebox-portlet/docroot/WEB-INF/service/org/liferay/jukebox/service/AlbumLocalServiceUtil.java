@@ -331,6 +331,67 @@ public class AlbumLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static org.liferay.jukebox.model.Album addAlbum(long userId,
+		long artistId, java.lang.String name, int year,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addAlbum(userId, artistId, name, year, serviceContext);
+	}
+
+	public static void addEntryResources(
+		org.liferay.jukebox.model.Album album, boolean addGroupPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.addEntryResources(album, addGroupPermissions, addGuestPermissions);
+	}
+
+	public static void addEntryResources(
+		org.liferay.jukebox.model.Album album,
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().addEntryResources(album, groupPermissions, guestPermissions);
+	}
+
+	public static java.util.List<org.liferay.jukebox.model.Album> getAlbums(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getAlbums(groupId, start, end);
+	}
+
+	public static java.util.List<org.liferay.jukebox.model.Album> getAlbums(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getAlbums(groupId);
+	}
+
+	public static int getAlbumsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getAlbumsCount(groupId);
+	}
+
+	public static org.liferay.jukebox.model.Album updateAlbum(long userId,
+		long albumId, long artistId, java.lang.String name, int year,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateAlbum(userId, albumId, artistId, name, year,
+			serviceContext);
+	}
+
+	public static void updateAsset(long userId,
+		org.liferay.jukebox.model.Album album, long[] assetCategoryIds,
+		java.lang.String[] assetTagNames)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().updateAsset(userId, album, assetCategoryIds, assetTagNames);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

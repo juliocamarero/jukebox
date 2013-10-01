@@ -344,6 +344,73 @@ public class ArtistLocalServiceWrapper implements ArtistLocalService,
 		return _artistLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public org.liferay.jukebox.model.Artist addArtist(long userId,
+		java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _artistLocalService.addArtist(userId, name, serviceContext);
+	}
+
+	@Override
+	public void addEntryResources(org.liferay.jukebox.model.Artist artist,
+		boolean addGroupPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_artistLocalService.addEntryResources(artist, addGroupPermissions,
+			addGuestPermissions);
+	}
+
+	@Override
+	public void addEntryResources(org.liferay.jukebox.model.Artist artist,
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_artistLocalService.addEntryResources(artist, groupPermissions,
+			guestPermissions);
+	}
+
+	@Override
+	public java.util.List<org.liferay.jukebox.model.Artist> getArtists(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _artistLocalService.getArtists(groupId, start, end);
+	}
+
+	@Override
+	public java.util.List<org.liferay.jukebox.model.Artist> getArtists(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _artistLocalService.getArtists(groupId);
+	}
+
+	@Override
+	public int getArtistsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _artistLocalService.getArtistsCount(groupId);
+	}
+
+	@Override
+	public org.liferay.jukebox.model.Artist updateArtist(long userId,
+		long artistId, java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _artistLocalService.updateArtist(userId, artistId, name,
+			serviceContext);
+	}
+
+	@Override
+	public void updateAsset(long userId,
+		org.liferay.jukebox.model.Artist artist, long[] assetCategoryIds,
+		java.lang.String[] assetTagNames)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_artistLocalService.updateAsset(userId, artist, assetCategoryIds,
+			assetTagNames);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

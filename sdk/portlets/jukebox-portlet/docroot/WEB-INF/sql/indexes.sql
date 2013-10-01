@@ -16,6 +16,8 @@ create index IX_48F8612E on jukebox_Artist (uuid_);
 create index IX_7B16BA3A on jukebox_Artist (uuid_, companyId);
 create unique index IX_A99C873C on jukebox_Artist (uuid_, groupId);
 
+create index IX_D2A960C6 on jukebox_Song (albumId);
+create index IX_DBB74E8A on jukebox_Song (artistId);
 create index IX_F1948554 on jukebox_Song (companyId);
 create index IX_6B6650D6 on jukebox_Song (groupId);
 create index IX_23087310 on jukebox_Song (groupId, userId);

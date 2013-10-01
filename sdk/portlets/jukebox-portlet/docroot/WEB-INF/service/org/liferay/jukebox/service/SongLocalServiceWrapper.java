@@ -343,6 +343,71 @@ public class SongLocalServiceWrapper implements SongLocalService,
 		return _songLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public org.liferay.jukebox.model.Song addSong(long userId, long albumId,
+		java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _songLocalService.addSong(userId, albumId, name, serviceContext);
+	}
+
+	@Override
+	public void addEntryResources(org.liferay.jukebox.model.Song song,
+		boolean addGroupPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_songLocalService.addEntryResources(song, addGroupPermissions,
+			addGuestPermissions);
+	}
+
+	@Override
+	public void addEntryResources(org.liferay.jukebox.model.Song song,
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_songLocalService.addEntryResources(song, groupPermissions,
+			guestPermissions);
+	}
+
+	@Override
+	public java.util.List<org.liferay.jukebox.model.Song> getSongs(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _songLocalService.getSongs(groupId, start, end);
+	}
+
+	@Override
+	public java.util.List<org.liferay.jukebox.model.Song> getSongs(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _songLocalService.getSongs(groupId);
+	}
+
+	@Override
+	public int getSongsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _songLocalService.getSongsCount(groupId);
+	}
+
+	@Override
+	public org.liferay.jukebox.model.Song updateSong(long userId, long songId,
+		long albumId, java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _songLocalService.updateSong(userId, songId, albumId, name,
+			serviceContext);
+	}
+
+	@Override
+	public void updateAsset(long userId, org.liferay.jukebox.model.Song song,
+		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_songLocalService.updateAsset(userId, song, assetCategoryIds,
+			assetTagNames);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

@@ -3264,6 +3264,977 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 	}
 
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "song.companyId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ARTISTID = new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
+			SongModelImpl.FINDER_CACHE_ENABLED, SongImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByArtistId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ARTISTID =
+		new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
+			SongModelImpl.FINDER_CACHE_ENABLED, SongImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByArtistId",
+			new String[] { Long.class.getName() },
+			SongModelImpl.ARTISTID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_ARTISTID = new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
+			SongModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByArtistId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the songs where artistId = &#63;.
+	 *
+	 * @param artistId the artist ID
+	 * @return the matching songs
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Song> findByArtistId(long artistId) throws SystemException {
+		return findByArtistId(artistId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	/**
+	 * Returns a range of all the songs where artistId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.SongModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param artistId the artist ID
+	 * @param start the lower bound of the range of songs
+	 * @param end the upper bound of the range of songs (not inclusive)
+	 * @return the range of matching songs
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Song> findByArtistId(long artistId, int start, int end)
+		throws SystemException {
+		return findByArtistId(artistId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the songs where artistId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.SongModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param artistId the artist ID
+	 * @param start the lower bound of the range of songs
+	 * @param end the upper bound of the range of songs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching songs
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Song> findByArtistId(long artistId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ARTISTID;
+			finderArgs = new Object[] { artistId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ARTISTID;
+			finderArgs = new Object[] { artistId, start, end, orderByComparator };
+		}
+
+		List<Song> list = (List<Song>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Song song : list) {
+				if ((artistId != song.getArtistId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_SONG_WHERE);
+
+			query.append(_FINDER_COLUMN_ARTISTID_ARTISTID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(SongModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(artistId);
+
+				if (!pagination) {
+					list = (List<Song>)QueryUtil.list(q, getDialect(), start,
+							end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<Song>(list);
+				}
+				else {
+					list = (List<Song>)QueryUtil.list(q, getDialect(), start,
+							end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first song in the ordered set where artistId = &#63;.
+	 *
+	 * @param artistId the artist ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching song
+	 * @throws org.liferay.jukebox.NoSuchSongException if a matching song could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Song findByArtistId_First(long artistId,
+		OrderByComparator orderByComparator)
+		throws NoSuchSongException, SystemException {
+		Song song = fetchByArtistId_First(artistId, orderByComparator);
+
+		if (song != null) {
+			return song;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("artistId=");
+		msg.append(artistId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchSongException(msg.toString());
+	}
+
+	/**
+	 * Returns the first song in the ordered set where artistId = &#63;.
+	 *
+	 * @param artistId the artist ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching song, or <code>null</code> if a matching song could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Song fetchByArtistId_First(long artistId,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<Song> list = findByArtistId(artistId, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last song in the ordered set where artistId = &#63;.
+	 *
+	 * @param artistId the artist ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching song
+	 * @throws org.liferay.jukebox.NoSuchSongException if a matching song could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Song findByArtistId_Last(long artistId,
+		OrderByComparator orderByComparator)
+		throws NoSuchSongException, SystemException {
+		Song song = fetchByArtistId_Last(artistId, orderByComparator);
+
+		if (song != null) {
+			return song;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("artistId=");
+		msg.append(artistId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchSongException(msg.toString());
+	}
+
+	/**
+	 * Returns the last song in the ordered set where artistId = &#63;.
+	 *
+	 * @param artistId the artist ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching song, or <code>null</code> if a matching song could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Song fetchByArtistId_Last(long artistId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByArtistId(artistId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Song> list = findByArtistId(artistId, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the songs before and after the current song in the ordered set where artistId = &#63;.
+	 *
+	 * @param songId the primary key of the current song
+	 * @param artistId the artist ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next song
+	 * @throws org.liferay.jukebox.NoSuchSongException if a song with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Song[] findByArtistId_PrevAndNext(long songId, long artistId,
+		OrderByComparator orderByComparator)
+		throws NoSuchSongException, SystemException {
+		Song song = findByPrimaryKey(songId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Song[] array = new SongImpl[3];
+
+			array[0] = getByArtistId_PrevAndNext(session, song, artistId,
+					orderByComparator, true);
+
+			array[1] = song;
+
+			array[2] = getByArtistId_PrevAndNext(session, song, artistId,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Song getByArtistId_PrevAndNext(Session session, Song song,
+		long artistId, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SONG_WHERE);
+
+		query.append(_FINDER_COLUMN_ARTISTID_ARTISTID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(SongModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(artistId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(song);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Song> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the songs where artistId = &#63; from the database.
+	 *
+	 * @param artistId the artist ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByArtistId(long artistId) throws SystemException {
+		for (Song song : findByArtistId(artistId, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(song);
+		}
+	}
+
+	/**
+	 * Returns the number of songs where artistId = &#63;.
+	 *
+	 * @param artistId the artist ID
+	 * @return the number of matching songs
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByArtistId(long artistId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_ARTISTID;
+
+		Object[] finderArgs = new Object[] { artistId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SONG_WHERE);
+
+			query.append(_FINDER_COLUMN_ARTISTID_ARTISTID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(artistId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_ARTISTID_ARTISTID_2 = "song.artistId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ALBUMID = new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
+			SongModelImpl.FINDER_CACHE_ENABLED, SongImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByAlbumId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ALBUMID =
+		new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
+			SongModelImpl.FINDER_CACHE_ENABLED, SongImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByAlbumId",
+			new String[] { Long.class.getName() },
+			SongModelImpl.ALBUMID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_ALBUMID = new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
+			SongModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByAlbumId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the songs where albumId = &#63;.
+	 *
+	 * @param albumId the album ID
+	 * @return the matching songs
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Song> findByAlbumId(long albumId) throws SystemException {
+		return findByAlbumId(albumId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the songs where albumId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.SongModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param albumId the album ID
+	 * @param start the lower bound of the range of songs
+	 * @param end the upper bound of the range of songs (not inclusive)
+	 * @return the range of matching songs
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Song> findByAlbumId(long albumId, int start, int end)
+		throws SystemException {
+		return findByAlbumId(albumId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the songs where albumId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.SongModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param albumId the album ID
+	 * @param start the lower bound of the range of songs
+	 * @param end the upper bound of the range of songs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching songs
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Song> findByAlbumId(long albumId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ALBUMID;
+			finderArgs = new Object[] { albumId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ALBUMID;
+			finderArgs = new Object[] { albumId, start, end, orderByComparator };
+		}
+
+		List<Song> list = (List<Song>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Song song : list) {
+				if ((albumId != song.getAlbumId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_SONG_WHERE);
+
+			query.append(_FINDER_COLUMN_ALBUMID_ALBUMID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(SongModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(albumId);
+
+				if (!pagination) {
+					list = (List<Song>)QueryUtil.list(q, getDialect(), start,
+							end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<Song>(list);
+				}
+				else {
+					list = (List<Song>)QueryUtil.list(q, getDialect(), start,
+							end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first song in the ordered set where albumId = &#63;.
+	 *
+	 * @param albumId the album ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching song
+	 * @throws org.liferay.jukebox.NoSuchSongException if a matching song could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Song findByAlbumId_First(long albumId,
+		OrderByComparator orderByComparator)
+		throws NoSuchSongException, SystemException {
+		Song song = fetchByAlbumId_First(albumId, orderByComparator);
+
+		if (song != null) {
+			return song;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("albumId=");
+		msg.append(albumId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchSongException(msg.toString());
+	}
+
+	/**
+	 * Returns the first song in the ordered set where albumId = &#63;.
+	 *
+	 * @param albumId the album ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching song, or <code>null</code> if a matching song could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Song fetchByAlbumId_First(long albumId,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<Song> list = findByAlbumId(albumId, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last song in the ordered set where albumId = &#63;.
+	 *
+	 * @param albumId the album ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching song
+	 * @throws org.liferay.jukebox.NoSuchSongException if a matching song could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Song findByAlbumId_Last(long albumId,
+		OrderByComparator orderByComparator)
+		throws NoSuchSongException, SystemException {
+		Song song = fetchByAlbumId_Last(albumId, orderByComparator);
+
+		if (song != null) {
+			return song;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("albumId=");
+		msg.append(albumId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchSongException(msg.toString());
+	}
+
+	/**
+	 * Returns the last song in the ordered set where albumId = &#63;.
+	 *
+	 * @param albumId the album ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching song, or <code>null</code> if a matching song could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Song fetchByAlbumId_Last(long albumId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByAlbumId(albumId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Song> list = findByAlbumId(albumId, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the songs before and after the current song in the ordered set where albumId = &#63;.
+	 *
+	 * @param songId the primary key of the current song
+	 * @param albumId the album ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next song
+	 * @throws org.liferay.jukebox.NoSuchSongException if a song with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Song[] findByAlbumId_PrevAndNext(long songId, long albumId,
+		OrderByComparator orderByComparator)
+		throws NoSuchSongException, SystemException {
+		Song song = findByPrimaryKey(songId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Song[] array = new SongImpl[3];
+
+			array[0] = getByAlbumId_PrevAndNext(session, song, albumId,
+					orderByComparator, true);
+
+			array[1] = song;
+
+			array[2] = getByAlbumId_PrevAndNext(session, song, albumId,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Song getByAlbumId_PrevAndNext(Session session, Song song,
+		long albumId, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SONG_WHERE);
+
+		query.append(_FINDER_COLUMN_ALBUMID_ALBUMID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(SongModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(albumId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(song);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Song> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the songs where albumId = &#63; from the database.
+	 *
+	 * @param albumId the album ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByAlbumId(long albumId) throws SystemException {
+		for (Song song : findByAlbumId(albumId, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(song);
+		}
+	}
+
+	/**
+	 * Returns the number of songs where albumId = &#63;.
+	 *
+	 * @param albumId the album ID
+	 * @return the number of matching songs
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByAlbumId(long albumId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_ALBUMID;
+
+		Object[] finderArgs = new Object[] { albumId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SONG_WHERE);
+
+			query.append(_FINDER_COLUMN_ALBUMID_ALBUMID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(albumId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_ALBUMID_ALBUMID_2 = "song.albumId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_U = new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
 			SongModelImpl.FINDER_CACHE_ENABLED, SongImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_U",
@@ -4529,6 +5500,36 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COMPANYID,
 					args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
+					args);
+			}
+
+			if ((songModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ARTISTID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] { songModelImpl.getOriginalArtistId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ARTISTID, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ARTISTID,
+					args);
+
+				args = new Object[] { songModelImpl.getArtistId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ARTISTID, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ARTISTID,
+					args);
+			}
+
+			if ((songModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ALBUMID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] { songModelImpl.getOriginalAlbumId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ALBUMID, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ALBUMID,
+					args);
+
+				args = new Object[] { songModelImpl.getAlbumId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ALBUMID, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ALBUMID,
 					args);
 			}
 

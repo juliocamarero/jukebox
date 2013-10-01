@@ -94,11 +94,13 @@ public class SongModelImpl extends BaseModelImpl<Song> implements SongModel {
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.org.liferay.jukebox.model.Song"),
 			true);
-	public static long COMPANYID_COLUMN_BITMASK = 1L;
-	public static long GROUPID_COLUMN_BITMASK = 2L;
-	public static long USERID_COLUMN_BITMASK = 4L;
-	public static long UUID_COLUMN_BITMASK = 8L;
-	public static long SONGID_COLUMN_BITMASK = 16L;
+	public static long ALBUMID_COLUMN_BITMASK = 1L;
+	public static long ARTISTID_COLUMN_BITMASK = 2L;
+	public static long COMPANYID_COLUMN_BITMASK = 4L;
+	public static long GROUPID_COLUMN_BITMASK = 8L;
+	public static long USERID_COLUMN_BITMASK = 16L;
+	public static long UUID_COLUMN_BITMASK = 32L;
+	public static long SONGID_COLUMN_BITMASK = 64L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -432,7 +434,19 @@ public class SongModelImpl extends BaseModelImpl<Song> implements SongModel {
 
 	@Override
 	public void setArtistId(long artistId) {
+		_columnBitmask |= ARTISTID_COLUMN_BITMASK;
+
+		if (!_setOriginalArtistId) {
+			_setOriginalArtistId = true;
+
+			_originalArtistId = _artistId;
+		}
+
 		_artistId = artistId;
+	}
+
+	public long getOriginalArtistId() {
+		return _originalArtistId;
 	}
 
 	@JSON
@@ -443,7 +457,19 @@ public class SongModelImpl extends BaseModelImpl<Song> implements SongModel {
 
 	@Override
 	public void setAlbumId(long albumId) {
+		_columnBitmask |= ALBUMID_COLUMN_BITMASK;
+
+		if (!_setOriginalAlbumId) {
+			_setOriginalAlbumId = true;
+
+			_originalAlbumId = _albumId;
+		}
+
 		_albumId = albumId;
+	}
+
+	public long getOriginalAlbumId() {
+		return _originalAlbumId;
 	}
 
 	@JSON
@@ -575,6 +601,14 @@ public class SongModelImpl extends BaseModelImpl<Song> implements SongModel {
 		songModelImpl._originalUserId = songModelImpl._userId;
 
 		songModelImpl._setOriginalUserId = false;
+
+		songModelImpl._originalArtistId = songModelImpl._artistId;
+
+		songModelImpl._setOriginalArtistId = false;
+
+		songModelImpl._originalAlbumId = songModelImpl._albumId;
+
+		songModelImpl._setOriginalAlbumId = false;
 
 		songModelImpl._columnBitmask = 0;
 	}
@@ -748,7 +782,11 @@ public class SongModelImpl extends BaseModelImpl<Song> implements SongModel {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _artistId;
+	private long _originalArtistId;
+	private boolean _setOriginalArtistId;
 	private long _albumId;
+	private long _originalAlbumId;
+	private boolean _setOriginalAlbumId;
 	private String _name;
 	private long _columnBitmask;
 	private Song _escapedModel;
