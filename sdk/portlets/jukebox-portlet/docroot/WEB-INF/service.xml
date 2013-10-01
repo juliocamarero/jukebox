@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+
+	<service-builder package-path="org.liferay.jukebox">
+	<author>Julio Camarero</author>
+	<namespace>jukebox</namespace>
+	<entity name="Artist" local-service="true" remote-service="true" uuid="true">
+
+		<!-- Primary key column -->
+
+		<column name="artistId" type="long" primary="true" />
+
+		<!-- Foreign key columns -->
+
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other columns -->
+
+		<column name="name" type="String" />
+
+		<!-- Finder Methods Standard -->		
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>		
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="U_G" return-type="Collection">
+			<finder-column name="userId" />
+			<finder-column name="groupId" />
+		</finder>
+
+		<!-- References -->	
+	</entity>
+	<entity name="Album" local-service="true" remote-service="true" uuid="true">
+
+		<!-- Primary key column -->
+
+		<column name="albumId" type="long" primary="true" />
+
+		<!-- Foreign key columns -->
+
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<column name="artistId" type="long" />
+
+		<!-- Other columns -->
+
+		<column name="name" type="String" />
+		<column name="year" type="int" />
+
+		<!-- Finder Methods Standard -->		
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>		
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="ArtistId" return-type="Collection">
+			<finder-column name="artistId" />
+		</finder>
+		<finder name="G_U" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+		</finder>
+		<finder name="G_A" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="artistId" />
+		</finder>
+
+		<!-- References -->	
+	</entity>
+	<entity name="Song" local-service="true" remote-service="true" uuid="true">
+
+		<!-- Primary key column -->
+
+		<column name="songId" type="long" primary="true" />
+
+
+		<!-- Foreign key columns -->
+
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<column name="artistId" type="long" />
+		<column name="albumId" type="long" />
+
+		<!-- Other columns -->
+
+		<column name="name" type="String" />
+
+		<!-- Finder Methods Standard -->		
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>		
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="G_U" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+		</finder>
+
+		<!-- References -->
+	</entity>
+	<exceptions>
+		<exception>NoSuchArtist</exception>
+		<exception>NoSuchAlbum</exception>
+		<exception>NoSuchSong</exception>
+	</exceptions>
+</service-builder>
