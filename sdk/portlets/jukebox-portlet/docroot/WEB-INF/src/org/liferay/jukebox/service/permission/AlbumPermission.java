@@ -17,6 +17,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
+
 import org.liferay.jukebox.model.Album;
 import org.liferay.jukebox.service.AlbumLocalServiceUtil;
 
@@ -24,7 +25,7 @@ import org.liferay.jukebox.service.AlbumLocalServiceUtil;
  * @author Julio Camarero
  */
 public class AlbumPermission {
-	
+
 	public static void check(
 			PermissionChecker permissionChecker, long albumId, String actionId)
 		throws PortalException, SystemException {

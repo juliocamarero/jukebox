@@ -18,12 +18,12 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
 
+import java.util.List;
+
 import org.liferay.jukebox.model.Artist;
 import org.liferay.jukebox.service.base.ArtistServiceBaseImpl;
 import org.liferay.jukebox.service.permission.ArtistPermission;
 import org.liferay.jukebox.service.permission.JukeBoxPermission;
-
-import java.util.List;
 
 /**
  * The implementation of the artist remote service.
@@ -51,6 +51,14 @@ public class ArtistServiceImpl extends ArtistServiceBaseImpl {
 		return artistLocalService.addArtist(getUserId(), name, serviceContext);
 	}
 
+	public Artist deleteArtist(long artistId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		ArtistPermission.check(getPermissionChecker(), artistId, "DELETE");
+
+		return artistLocalService.deleteArtist(artistId);
+	}
+
 	public List<Artist> getArtists(long groupId) throws SystemException {
 		return artistPersistence.filterFindByGroupId(groupId);
 	}
@@ -73,15 +81,6 @@ public class ArtistServiceImpl extends ArtistServiceBaseImpl {
 
 		return artistLocalService.updateArtist(
 			getUserId(), artistId, name, serviceContext);
-	}
-
-	public Artist deleteArtist(
-			long artistId, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		ArtistPermission.check(getPermissionChecker(), artistId, "DELETE");
-
-		return artistLocalService.deleteArtist(artistId);
 	}
 
 }

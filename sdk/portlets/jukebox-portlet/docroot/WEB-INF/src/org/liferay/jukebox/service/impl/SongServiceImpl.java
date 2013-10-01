@@ -17,12 +17,13 @@ package org.liferay.jukebox.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
+
+import java.util.List;
+
 import org.liferay.jukebox.model.Song;
 import org.liferay.jukebox.service.base.SongServiceBaseImpl;
 import org.liferay.jukebox.service.permission.JukeBoxPermission;
 import org.liferay.jukebox.service.permission.SongPermission;
-
-import java.util.List;
 
 /**
  * The implementation of the song remote service.
@@ -51,14 +52,20 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 			getUserId(), albumId, name, serviceContext);
 	}
 
-	public List<Song> getSongs(long groupId) throws SystemException {
-		return songPersistence.filterFindByGroupId(groupId);
-	}
+	public Song deleteSong(long songId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
 
-	public List<Song> getSongs(long groupId, int start, int end)
+		SongPermission.check(getPermissionChecker(), songId, "DELETE");
+
+		return songLocalService.deleteSong(songId);
+	} public List<Song> getSongs(long groupId, int start, int end)
 		throws SystemException {
 
 		return songPersistence.filterFindByGroupId(groupId, start, end);
+	}
+
+	public List<Song> getSongs(long groupId) throws SystemException {
+		return songPersistence.filterFindByGroupId(groupId);
 	}
 
 	public int getSongsCount(long groupId) throws SystemException {
@@ -76,12 +83,4 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 			getUserId(), songId, albumId, name, serviceContext);
 	}
 
-	public Song deleteSong(
-			long songId, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		SongPermission.check(getPermissionChecker(), songId, "DELETE");
-
-		return songLocalService.deleteSong(songId);
-	}
 }

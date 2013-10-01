@@ -17,12 +17,13 @@ package org.liferay.jukebox.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
+
+import java.util.List;
+
 import org.liferay.jukebox.model.Album;
 import org.liferay.jukebox.service.base.AlbumServiceBaseImpl;
 import org.liferay.jukebox.service.permission.AlbumPermission;
 import org.liferay.jukebox.service.permission.JukeBoxPermission;
-
-import java.util.List;
 
 /**
  * The implementation of the album remote service.
@@ -51,14 +52,20 @@ public class AlbumServiceImpl extends AlbumServiceBaseImpl {
 			getUserId(), artistId, name, year, serviceContext);
 	}
 
-	public List<Album> getAlbums(long groupId) throws SystemException {
-		return albumPersistence.filterFindByGroupId(groupId);
-	}
+	public Album deleteAlbum(long albumId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
 
-	public List<Album> getAlbums(long groupId, int start, int end)
+		AlbumPermission.check(getPermissionChecker(), albumId, "DELETE");
+
+		return albumLocalService.deleteAlbum(albumId);
+	} public List<Album> getAlbums(long groupId, int start, int end)
 		throws SystemException {
 
 		return albumPersistence.filterFindByGroupId(groupId, start, end);
+	}
+
+	public List<Album> getAlbums(long groupId) throws SystemException {
+		return albumPersistence.filterFindByGroupId(groupId);
 	}
 
 	public int getAlbumsCount(long groupId) throws SystemException {
@@ -76,12 +83,4 @@ public class AlbumServiceImpl extends AlbumServiceBaseImpl {
 			getUserId(), albumId, artistId, name, year, serviceContext);
 	}
 
-	public Album deleteAlbum(
-			long albumId, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		AlbumPermission.check(getPermissionChecker(), albumId, "DELETE");
-
-		return albumLocalService.deleteAlbum(albumId);
-	}
 }
