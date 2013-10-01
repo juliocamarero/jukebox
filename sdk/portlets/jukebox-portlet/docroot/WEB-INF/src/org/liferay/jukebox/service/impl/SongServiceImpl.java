@@ -31,9 +31,4 @@ import org.liferay.jukebox.service.base.SongServiceBaseImpl;
  * @see org.liferay.jukebox.service.SongServiceUtil
  */
 public class SongServiceImpl extends SongServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link org.liferay.jukebox.service.SongServiceUtil} to access the song remote service.
-	 */
 }

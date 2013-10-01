@@ -24,11 +24,6 @@ package org.liferay.jukebox.model.impl;
  * @author Julio Camarero
  */
 public class ArtistImpl extends ArtistBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a artist model instance should use the {@link org.liferay.jukebox.model.Artist} interface instead.
-	 */
 	public ArtistImpl() {
 	}
 }

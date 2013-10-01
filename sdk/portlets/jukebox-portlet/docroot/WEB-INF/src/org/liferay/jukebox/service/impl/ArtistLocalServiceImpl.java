@@ -117,14 +117,14 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 			guestPermissions);
 	}
 
+	public List<Artist> getArtists(long groupId) throws SystemException {
+		return artistPersistence.findByGroupId(groupId);
+	}
+
 	public List<Artist> getArtists(long groupId, int start, int end)
 		throws SystemException {
 
 		return artistPersistence.findByGroupId(groupId, start, end);
-	}
-
-	public List<Artist> getArtists(long groupId) throws SystemException {
-		return artistPersistence.findByGroupId(groupId);
 	}
 
 	public int getArtistsCount(long groupId) throws SystemException {

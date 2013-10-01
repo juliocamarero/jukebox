@@ -31,9 +31,4 @@ import org.liferay.jukebox.service.base.ArtistServiceBaseImpl;
  * @see org.liferay.jukebox.service.ArtistServiceUtil
  */
 public class ArtistServiceImpl extends ArtistServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link org.liferay.jukebox.service.ArtistServiceUtil} to access the artist remote service.
-	 */
 }

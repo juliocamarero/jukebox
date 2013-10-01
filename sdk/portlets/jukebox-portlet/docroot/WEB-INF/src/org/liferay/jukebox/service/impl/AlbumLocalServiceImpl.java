@@ -20,12 +20,13 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
-import org.liferay.jukebox.AlbumNameException;
-import org.liferay.jukebox.model.Album;
-import org.liferay.jukebox.service.base.AlbumLocalServiceBaseImpl;
 
 import java.util.Date;
 import java.util.List;
+
+import org.liferay.jukebox.AlbumNameException;
+import org.liferay.jukebox.model.Album;
+import org.liferay.jukebox.service.base.AlbumLocalServiceBaseImpl;
 
 /**
  * The implementation of the album local service.
@@ -119,14 +120,14 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 			guestPermissions);
 	}
 
+	public List<Album> getAlbums(long groupId) throws SystemException {
+		return albumPersistence.findByGroupId(groupId);
+	}
+
 	public List<Album> getAlbums(long groupId, int start, int end)
 		throws SystemException {
 
 		return albumPersistence.findByGroupId(groupId, start, end);
-	}
-
-	public List<Album> getAlbums(long groupId) throws SystemException {
-		return albumPersistence.findByGroupId(groupId);
 	}
 
 	public int getAlbumsCount(long groupId) throws SystemException {
@@ -170,10 +171,10 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 
 		assetEntryLocalService.updateEntry(
 			userId, album.getGroupId(), album.getCreateDate(),
-			album.getModifiedDate(), Album.class.getName(),
-			album.getAlbumId(), album.getUuid(), 0, assetCategoryIds,
-			assetTagNames, true, null, null, null, ContentTypes.TEXT_HTML,
-			album.getName(), null, null, null, null, 0, 0, null, false);
+			album.getModifiedDate(), Album.class.getName(), album.getAlbumId(),
+			album.getUuid(), 0, assetCategoryIds, assetTagNames, true, null,
+			null, null, ContentTypes.TEXT_HTML, album.getName(), null, null,
+			null, null, 0, 0, null, false);
 	}
 
 	protected void validate(String name) throws PortalException {

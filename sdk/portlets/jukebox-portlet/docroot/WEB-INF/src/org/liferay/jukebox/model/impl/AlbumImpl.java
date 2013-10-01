@@ -24,11 +24,6 @@ package org.liferay.jukebox.model.impl;
  * @author Julio Camarero
  */
 public class AlbumImpl extends AlbumBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a album model instance should use the {@link org.liferay.jukebox.model.Album} interface instead.
-	 */
 	public AlbumImpl() {
 	}
 }

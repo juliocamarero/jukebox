@@ -24,11 +24,11 @@
 
 		<column name="name" type="String" />
 
-		<!-- Finder Methods Standard -->		
+		<!-- Finder Methods Standard -->
 
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
-		</finder>		
+		</finder>
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
@@ -70,11 +70,11 @@
 		<column name="name" type="String" />
 		<column name="year" type="int" />
 
-		<!-- Finder Methods Standard -->		
+		<!-- Finder Methods Standard -->
 
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
-		</finder>		
+		</finder>
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
@@ -124,11 +124,11 @@
 
 		<column name="name" type="String" />
 
-		<!-- Finder Methods Standard -->		
+		<!-- Finder Methods Standard -->
 
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
-		</finder>		
+		</finder>
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>

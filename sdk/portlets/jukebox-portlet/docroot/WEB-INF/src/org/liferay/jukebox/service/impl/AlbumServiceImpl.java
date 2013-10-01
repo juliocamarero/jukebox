@@ -31,9 +31,4 @@ import org.liferay.jukebox.service.base.AlbumServiceBaseImpl;
  * @see org.liferay.jukebox.service.AlbumServiceUtil
  */
 public class AlbumServiceImpl extends AlbumServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link org.liferay.jukebox.service.AlbumServiceUtil} to access the album remote service.
-	 */
 }

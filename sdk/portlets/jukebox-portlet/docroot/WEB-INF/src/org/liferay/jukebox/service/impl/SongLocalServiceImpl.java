@@ -20,13 +20,14 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+
+import java.util.Date;
+import java.util.List;
+
 import org.liferay.jukebox.SongNameException;
 import org.liferay.jukebox.model.Album;
 import org.liferay.jukebox.model.Song;
 import org.liferay.jukebox.service.base.SongLocalServiceBaseImpl;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * The implementation of the song local service.
@@ -43,6 +44,28 @@ import java.util.List;
  * @see org.liferay.jukebox.service.SongLocalServiceUtil
  */
 public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
+	@Override
+	public void addEntryResources(
+			Song song, boolean addGroupPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		resourceLocalService.addResources(
+			song.getCompanyId(), song.getGroupId(), song.getUserId(),
+			Song.class.getName(), song.getSongId(), false, addGroupPermissions,
+			addGuestPermissions);
+	}
+
+	@Override
+	public void addEntryResources(
+			Song song, String[] groupPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		resourceLocalService.addModelResources(
+			song.getCompanyId(), song.getGroupId(), song.getUserId(),
+			Song.class.getName(), song.getSongId(), groupPermissions,
+			guestPermissions);
+	}
+
 	public Song addSong(
 			long userId, long albumId, String name,
 			ServiceContext serviceContext)
@@ -99,27 +122,8 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		return song;
 	}
 
-	@Override
-	public void addEntryResources(
-			Song song, boolean addGroupPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		resourceLocalService.addResources(
-			song.getCompanyId(), song.getGroupId(), song.getUserId(),
-			Song.class.getName(), song.getSongId(), false,
-			addGroupPermissions, addGuestPermissions);
-	}
-
-	@Override
-	public void addEntryResources(
-			Song song, String[] groupPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		resourceLocalService.addModelResources(
-			song.getCompanyId(), song.getGroupId(), song.getUserId(),
-			Song.class.getName(), song.getSongId(), groupPermissions,
-			guestPermissions);
+	public List<Song> getSongs(long groupId) throws SystemException {
+		return songPersistence.findByGroupId(groupId);
 	}
 
 	public List<Song> getSongs(long groupId, int start, int end)
@@ -128,12 +132,21 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		return songPersistence.findByGroupId(groupId, start, end);
 	}
 
-	public List<Song> getSongs(long groupId) throws SystemException {
-		return songPersistence.findByGroupId(groupId);
-	}
-
 	public int getSongsCount(long groupId) throws SystemException {
 		return songPersistence.countByGroupId(groupId);
+	}
+
+	public void updateAsset(
+			long userId, Song song, long[] assetCategoryIds,
+			String[] assetTagNames)
+		throws PortalException, SystemException {
+
+		assetEntryLocalService.updateEntry(
+			userId, song.getGroupId(), song.getCreateDate(),
+			song.getModifiedDate(), Song.class.getName(), song.getSongId(),
+			song.getUuid(), 0, assetCategoryIds, assetTagNames, true, null,
+			null, null, ContentTypes.TEXT_HTML, song.getName(), null, null,
+			null, null, 0, 0, null, false);
 	}
 
 	public Song updateSong(
@@ -168,19 +181,6 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 			serviceContext.getAssetTagNames());
 
 		return song;
-	}
-
-	public void updateAsset(
-			long userId, Song song, long[] assetCategoryIds,
-			String[] assetTagNames)
-		throws PortalException, SystemException {
-
-		assetEntryLocalService.updateEntry(
-			userId, song.getGroupId(), song.getCreateDate(),
-			song.getModifiedDate(), Song.class.getName(),
-			song.getSongId(), song.getUuid(), 0, assetCategoryIds,
-			assetTagNames, true, null, null, null, ContentTypes.TEXT_HTML,
-			song.getName(), null, null, null, null, 0, 0, null, false);
 	}
 
 	protected void validate(String name) throws PortalException {
