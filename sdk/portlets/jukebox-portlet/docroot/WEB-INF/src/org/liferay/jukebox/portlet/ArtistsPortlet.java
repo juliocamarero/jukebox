@@ -13,10 +13,104 @@
  */
 package org.liferay.jukebox.portlet;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+
+import org.liferay.jukebox.ArtistNameException;
+import org.liferay.jukebox.model.Artist;
+import org.liferay.jukebox.service.ArtistServiceUtil;
 
 /**
  * @author Julio Camarero
  */
 public class ArtistsPortlet extends MVCPortlet {
+
+	public void addArtist(ActionRequest request, ActionResponse response)
+		throws Exception {
+
+		String name = ParamUtil.getString(request, "name");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			Artist.class.getName(), request);
+
+		try {
+			ArtistServiceUtil.addArtist(name, serviceContext);
+
+			SessionMessages.add(request, "artistAdded");
+
+			sendRedirect(request, response);
+		}
+		catch (Exception e) {
+			if (e instanceof ArtistNameException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(request, e.getClass().getName());
+
+				response.setRenderParameter(
+					"jspPage", "/html/artists/edit_artist.jsp");
+			}
+			else {
+				response.setRenderParameter("jspPage", "/html/error.jsp");
+			}
+		}
+	}
+
+	public void deleteArtist(ActionRequest request, ActionResponse response)
+		throws Exception {
+
+		long artistId = ParamUtil.getLong(request, "artistId");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			Artist.class.getName(), request);
+
+		try {
+			ArtistServiceUtil.deleteArtist(artistId, serviceContext);
+
+			SessionMessages.add(request, "artistDeleted");
+
+			sendRedirect(request, response);
+		}
+		catch (Exception e) {
+			response.setRenderParameter("jspPage", "/html/error.jsp");
+		}
+	}
+
+	public void updateArtist(ActionRequest request, ActionResponse response)
+		throws Exception {
+
+		long artistId = ParamUtil.getLong(request, "artistId");
+		String name = ParamUtil.getString(request, "name");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			Artist.class.getName(), request);
+
+		try {
+			ArtistServiceUtil.updateArtist(artistId, name, serviceContext);
+
+			SessionMessages.add(request, "artistUpdated");
+
+			sendRedirect(request, response);
+		}
+		catch (Exception e) {
+			if (e instanceof ArtistNameException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(request, e.getClass().getName());
+
+				response.setRenderParameter(
+					"jspPage", "/html/artists/edit_artist.jsp");
+			}
+			else {
+				response.setRenderParameter("jspPage", "/html/error.jsp");
+			}
+		}
+	}
 }

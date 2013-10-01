@@ -13,10 +13,106 @@
  */
 package org.liferay.jukebox.portlet;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import org.liferay.jukebox.SongNameException;
+import org.liferay.jukebox.model.Song;
+import org.liferay.jukebox.service.SongServiceUtil;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 
 /**
  * @author Julio Camarero
  */
 public class SongsPortlet extends MVCPortlet {
+	
+	public void addSong(ActionRequest request, ActionResponse response)
+		throws Exception {
+
+		long albumId = ParamUtil.getLong(request, "albumId");
+		String name = ParamUtil.getString(request, "name");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			Song.class.getName(), request);
+
+		try {
+			SongServiceUtil.addSong(albumId, name, serviceContext);
+
+			SessionMessages.add(request, "songAdded");
+
+			sendRedirect(request, response);
+		}
+		catch (Exception e) {
+			if (e instanceof SongNameException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(request, e.getClass().getName());
+
+				response.setRenderParameter(
+					"jspPage", "/html/songs/edit_song.jsp");
+			}
+			else {
+				response.setRenderParameter("jspPage", "/html/error.jsp");
+			}
+		}
+	}
+
+	public void deleteSong(ActionRequest request, ActionResponse response)
+		throws Exception {
+
+		long songId = ParamUtil.getLong(request, "songId");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			Song.class.getName(), request);
+
+		try {
+			SongServiceUtil.deleteSong(songId, serviceContext);
+
+			SessionMessages.add(request, "songDeleted");
+
+			sendRedirect(request, response);
+		}
+		catch (Exception e) {
+			response.setRenderParameter("jspPage", "/html/error.jsp");
+		}
+	}
+
+	public void updateSong(ActionRequest request, ActionResponse response)
+		throws Exception {
+
+		long albumId = ParamUtil.getLong(request, "albumId");
+		long songId = ParamUtil.getLong(request, "songId");
+		String name = ParamUtil.getString(request, "name");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			Song.class.getName(), request);
+
+		try {
+			SongServiceUtil.updateSong(
+				songId, albumId, name, serviceContext);
+
+			SessionMessages.add(request, "songUpdated");
+
+			sendRedirect(request, response);
+		}
+		catch (Exception e) {
+			if (e instanceof SongNameException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(request, e.getClass().getName());
+
+				response.setRenderParameter(
+					"jspPage", "/html/songs/edit_song.jsp");
+			}
+			else {
+				response.setRenderParameter("jspPage", "/html/error.jsp");
+			}
+		}
+	}
 }
