@@ -14,6 +14,13 @@
 
 package org.liferay.jukebox.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import org.liferay.jukebox.service.AlbumServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link org.liferay.jukebox.service.AlbumServiceUtil} service utility. The
@@ -55,4 +62,97 @@ package org.liferay.jukebox.service.http;
  * @generated
  */
 public class AlbumServiceSoap {
+	public static org.liferay.jukebox.model.AlbumSoap addAlbum(long artistId,
+		java.lang.String name, int year,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			org.liferay.jukebox.model.Album returnValue = AlbumServiceUtil.addAlbum(artistId,
+					name, year, serviceContext);
+
+			return org.liferay.jukebox.model.AlbumSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static org.liferay.jukebox.model.AlbumSoap[] getAlbums(long groupId)
+		throws RemoteException {
+		try {
+			java.util.List<org.liferay.jukebox.model.Album> returnValue = AlbumServiceUtil.getAlbums(groupId);
+
+			return org.liferay.jukebox.model.AlbumSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static org.liferay.jukebox.model.AlbumSoap[] getAlbums(
+		long groupId, int start, int end) throws RemoteException {
+		try {
+			java.util.List<org.liferay.jukebox.model.Album> returnValue = AlbumServiceUtil.getAlbums(groupId,
+					start, end);
+
+			return org.liferay.jukebox.model.AlbumSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getAlbumsCount(long groupId) throws RemoteException {
+		try {
+			int returnValue = AlbumServiceUtil.getAlbumsCount(groupId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static org.liferay.jukebox.model.AlbumSoap updateAlbum(
+		long albumId, long artistId, java.lang.String name, int year,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			org.liferay.jukebox.model.Album returnValue = AlbumServiceUtil.updateAlbum(albumId,
+					artistId, name, year, serviceContext);
+
+			return org.liferay.jukebox.model.AlbumSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static org.liferay.jukebox.model.AlbumSoap deleteAlbum(
+		long albumId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			org.liferay.jukebox.model.Album returnValue = AlbumServiceUtil.deleteAlbum(albumId,
+					serviceContext);
+
+			return org.liferay.jukebox.model.AlbumSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(AlbumServiceSoap.class);
 }

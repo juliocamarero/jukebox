@@ -31,6 +31,38 @@ public class AlbumServiceClpInvoker {
 		_methodName61 = "setBeanIdentifier";
 
 		_methodParameterTypes61 = new String[] { "java.lang.String" };
+
+		_methodName66 = "addAlbum";
+
+		_methodParameterTypes66 = new String[] {
+				"long", "java.lang.String", "int",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName67 = "getAlbums";
+
+		_methodParameterTypes67 = new String[] { "long" };
+
+		_methodName68 = "getAlbums";
+
+		_methodParameterTypes68 = new String[] { "long", "int", "int" };
+
+		_methodName69 = "getAlbumsCount";
+
+		_methodParameterTypes69 = new String[] { "long" };
+
+		_methodName70 = "updateAlbum";
+
+		_methodParameterTypes70 = new String[] {
+				"long", "long", "java.lang.String", "int",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName71 = "deleteAlbum";
+
+		_methodParameterTypes71 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -47,6 +79,46 @@ public class AlbumServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName66.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+			return AlbumServiceUtil.addAlbum(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1],
+				((Integer)arguments[2]).intValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[3]);
+		}
+
+		if (_methodName67.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+			return AlbumServiceUtil.getAlbums(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+			return AlbumServiceUtil.getAlbums(((Long)arguments[0]).longValue(),
+				((Integer)arguments[1]).intValue(),
+				((Integer)arguments[2]).intValue());
+		}
+
+		if (_methodName69.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
+			return AlbumServiceUtil.getAlbumsCount(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName70.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
+			return AlbumServiceUtil.updateAlbum(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				(java.lang.String)arguments[2],
+				((Integer)arguments[3]).intValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[4]);
+		}
+
+		if (_methodName71.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
+			return AlbumServiceUtil.deleteAlbum(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -54,4 +126,16 @@ public class AlbumServiceClpInvoker {
 	private String[] _methodParameterTypes60;
 	private String _methodName61;
 	private String[] _methodParameterTypes61;
+	private String _methodName66;
+	private String[] _methodParameterTypes66;
+	private String _methodName67;
+	private String[] _methodParameterTypes67;
+	private String _methodName68;
+	private String[] _methodParameterTypes68;
+	private String _methodName69;
+	private String[] _methodParameterTypes69;
+	private String _methodName70;
+	private String[] _methodParameterTypes70;
+	private String _methodName71;
+	private String[] _methodParameterTypes71;
 }

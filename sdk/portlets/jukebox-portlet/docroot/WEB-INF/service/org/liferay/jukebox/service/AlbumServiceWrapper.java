@@ -56,6 +56,53 @@ public class AlbumServiceWrapper implements AlbumService,
 		return _albumService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public org.liferay.jukebox.model.Album addAlbum(long artistId,
+		java.lang.String name, int year,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _albumService.addAlbum(artistId, name, year, serviceContext);
+	}
+
+	@Override
+	public java.util.List<org.liferay.jukebox.model.Album> getAlbums(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _albumService.getAlbums(groupId);
+	}
+
+	@Override
+	public java.util.List<org.liferay.jukebox.model.Album> getAlbums(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _albumService.getAlbums(groupId, start, end);
+	}
+
+	@Override
+	public int getAlbumsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _albumService.getAlbumsCount(groupId);
+	}
+
+	@Override
+	public org.liferay.jukebox.model.Album updateAlbum(long albumId,
+		long artistId, java.lang.String name, int year,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _albumService.updateAlbum(albumId, artistId, name, year,
+			serviceContext);
+	}
+
+	@Override
+	public org.liferay.jukebox.model.Album deleteAlbum(long albumId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _albumService.deleteAlbum(albumId, serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

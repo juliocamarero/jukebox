@@ -56,6 +56,51 @@ public class SongServiceWrapper implements SongService,
 		return _songService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public org.liferay.jukebox.model.Song addSong(long albumId,
+		java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _songService.addSong(albumId, name, serviceContext);
+	}
+
+	@Override
+	public java.util.List<org.liferay.jukebox.model.Song> getSongs(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _songService.getSongs(groupId);
+	}
+
+	@Override
+	public java.util.List<org.liferay.jukebox.model.Song> getSongs(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _songService.getSongs(groupId, start, end);
+	}
+
+	@Override
+	public int getSongsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _songService.getSongsCount(groupId);
+	}
+
+	@Override
+	public org.liferay.jukebox.model.Song updateSong(long songId, long albumId,
+		java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _songService.updateSong(songId, albumId, name, serviceContext);
+	}
+
+	@Override
+	public org.liferay.jukebox.model.Song deleteSong(long songId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _songService.deleteSong(songId, serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

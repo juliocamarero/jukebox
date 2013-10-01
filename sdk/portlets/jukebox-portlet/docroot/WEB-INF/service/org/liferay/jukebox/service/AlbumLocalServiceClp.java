@@ -146,11 +146,11 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 
 		_methodName26 = "getAlbums";
 
-		_methodParameterTypes26 = new String[] { "long", "int", "int" };
+		_methodParameterTypes26 = new String[] { "long" };
 
 		_methodName27 = "getAlbums";
 
-		_methodParameterTypes27 = new String[] { "long" };
+		_methodParameterTypes27 = new String[] { "long", "int", "int" };
 
 		_methodName28 = "getAlbumsCount";
 
@@ -969,14 +969,13 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 
 	@Override
 	public java.util.List<org.liferay.jukebox.model.Album> getAlbums(
-		long groupId, int start, int end)
+		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName26,
-					_methodParameterTypes26,
-					new Object[] { groupId, start, end });
+					_methodParameterTypes26, new Object[] { groupId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -999,13 +998,14 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 
 	@Override
 	public java.util.List<org.liferay.jukebox.model.Album> getAlbums(
-		long groupId)
+		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName27,
-					_methodParameterTypes27, new Object[] { groupId });
+					_methodParameterTypes27,
+					new Object[] { groupId, start, end });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

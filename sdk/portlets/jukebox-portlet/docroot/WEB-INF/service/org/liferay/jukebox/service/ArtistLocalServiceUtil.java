@@ -358,15 +358,15 @@ public class ArtistLocalServiceUtil {
 	}
 
 	public static java.util.List<org.liferay.jukebox.model.Artist> getArtists(
-		long groupId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getArtists(groupId, start, end);
-	}
-
-	public static java.util.List<org.liferay.jukebox.model.Artist> getArtists(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getArtists(groupId);
+	}
+
+	public static java.util.List<org.liferay.jukebox.model.Artist> getArtists(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getArtists(groupId, start, end);
 	}
 
 	public static int getArtistsCount(long groupId)

@@ -148,11 +148,11 @@ public class ArtistLocalServiceClpInvoker {
 
 		_methodName89 = "getArtists";
 
-		_methodParameterTypes89 = new String[] { "long", "int", "int" };
+		_methodParameterTypes89 = new String[] { "long" };
 
 		_methodName90 = "getArtists";
 
-		_methodParameterTypes90 = new String[] { "long" };
+		_methodParameterTypes90 = new String[] { "long", "int", "int" };
 
 		_methodName91 = "getArtistsCount";
 
@@ -325,14 +325,14 @@ public class ArtistLocalServiceClpInvoker {
 
 		if (_methodName89.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes89, parameterTypes)) {
-			return ArtistLocalServiceUtil.getArtists(((Long)arguments[0]).longValue(),
-				((Integer)arguments[1]).intValue(),
-				((Integer)arguments[2]).intValue());
+			return ArtistLocalServiceUtil.getArtists(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName90.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
-			return ArtistLocalServiceUtil.getArtists(((Long)arguments[0]).longValue());
+			return ArtistLocalServiceUtil.getArtists(((Long)arguments[0]).longValue(),
+				((Integer)arguments[1]).intValue(),
+				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName91.equals(name) &&

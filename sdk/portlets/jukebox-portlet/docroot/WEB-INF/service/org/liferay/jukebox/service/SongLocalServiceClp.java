@@ -124,50 +124,50 @@ public class SongLocalServiceClp implements SongLocalService {
 
 		_methodParameterTypes21 = new String[] { "java.lang.String" };
 
-		_methodName23 = "addSong";
+		_methodName23 = "addEntryResources";
 
 		_methodParameterTypes23 = new String[] {
-				"long", "long", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"org.liferay.jukebox.model.Song", "boolean", "boolean"
 			};
 
 		_methodName24 = "addEntryResources";
 
 		_methodParameterTypes24 = new String[] {
-				"org.liferay.jukebox.model.Song", "boolean", "boolean"
-			};
-
-		_methodName25 = "addEntryResources";
-
-		_methodParameterTypes25 = new String[] {
 				"org.liferay.jukebox.model.Song", "java.lang.String[][]",
 				"java.lang.String[][]"
 			};
 
+		_methodName25 = "addSong";
+
+		_methodParameterTypes25 = new String[] {
+				"long", "long", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
 		_methodName26 = "getSongs";
 
-		_methodParameterTypes26 = new String[] { "long", "int", "int" };
+		_methodParameterTypes26 = new String[] { "long" };
 
 		_methodName27 = "getSongs";
 
-		_methodParameterTypes27 = new String[] { "long" };
+		_methodParameterTypes27 = new String[] { "long", "int", "int" };
 
 		_methodName28 = "getSongsCount";
 
 		_methodParameterTypes28 = new String[] { "long" };
 
-		_methodName29 = "updateSong";
+		_methodName29 = "updateAsset";
 
 		_methodParameterTypes29 = new String[] {
-				"long", "long", "long", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName30 = "updateAsset";
-
-		_methodParameterTypes30 = new String[] {
 				"long", "org.liferay.jukebox.model.Song", "long[][]",
 				"java.lang.String[][]"
+			};
+
+		_methodName30 = "updateSong";
+
+		_methodParameterTypes30 = new String[] {
+				"long", "long", "long", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -847,57 +847,13 @@ public class SongLocalServiceClp implements SongLocalService {
 	}
 
 	@Override
-	public org.liferay.jukebox.model.Song addSong(long userId, long albumId,
-		java.lang.String name,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName23,
-					_methodParameterTypes23,
-					new Object[] {
-						userId,
-						
-					albumId,
-						
-					ClpSerializer.translateInput(name),
-						
-					ClpSerializer.translateInput(serviceContext)
-					});
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
-				throw (com.liferay.portal.kernel.exception.PortalException)t;
-			}
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (org.liferay.jukebox.model.Song)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
 	public void addEntryResources(org.liferay.jukebox.model.Song song,
 		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			_invokableLocalService.invokeMethod(_methodName24,
-				_methodParameterTypes24,
+			_invokableLocalService.invokeMethod(_methodName23,
+				_methodParameterTypes23,
 				new Object[] {
 					ClpSerializer.translateInput(song),
 					
@@ -933,8 +889,8 @@ public class SongLocalServiceClp implements SongLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			_invokableLocalService.invokeMethod(_methodName25,
-				_methodParameterTypes25,
+			_invokableLocalService.invokeMethod(_methodName24,
+				_methodParameterTypes24,
 				new Object[] {
 					ClpSerializer.translateInput(song),
 					
@@ -965,15 +921,57 @@ public class SongLocalServiceClp implements SongLocalService {
 	}
 
 	@Override
-	public java.util.List<org.liferay.jukebox.model.Song> getSongs(
-		long groupId, int start, int end)
+	public org.liferay.jukebox.model.Song addSong(long userId, long albumId,
+		java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName25,
+					_methodParameterTypes25,
+					new Object[] {
+						userId,
+						
+					albumId,
+						
+					ClpSerializer.translateInput(name),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (org.liferay.jukebox.model.Song)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<org.liferay.jukebox.model.Song> getSongs(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName26,
-					_methodParameterTypes26,
-					new Object[] { groupId, start, end });
+					_methodParameterTypes26, new Object[] { groupId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -995,13 +993,15 @@ public class SongLocalServiceClp implements SongLocalService {
 	}
 
 	@Override
-	public java.util.List<org.liferay.jukebox.model.Song> getSongs(long groupId)
+	public java.util.List<org.liferay.jukebox.model.Song> getSongs(
+		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName27,
-					_methodParameterTypes27, new Object[] { groupId });
+					_methodParameterTypes27,
+					new Object[] { groupId, start, end });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1051,6 +1051,45 @@ public class SongLocalServiceClp implements SongLocalService {
 	}
 
 	@Override
+	public void updateAsset(long userId, org.liferay.jukebox.model.Song song,
+		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName29,
+				_methodParameterTypes29,
+				new Object[] {
+					userId,
+					
+				ClpSerializer.translateInput(song),
+					
+				ClpSerializer.translateInput(assetCategoryIds),
+					
+				ClpSerializer.translateInput(assetTagNames)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
 	public org.liferay.jukebox.model.Song updateSong(long userId, long songId,
 		long albumId, java.lang.String name,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -1059,8 +1098,8 @@ public class SongLocalServiceClp implements SongLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName29,
-					_methodParameterTypes29,
+			returnObj = _invokableLocalService.invokeMethod(_methodName30,
+					_methodParameterTypes30,
 					new Object[] {
 						userId,
 						
@@ -1094,45 +1133,6 @@ public class SongLocalServiceClp implements SongLocalService {
 		}
 
 		return (org.liferay.jukebox.model.Song)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public void updateAsset(long userId, org.liferay.jukebox.model.Song song,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			_invokableLocalService.invokeMethod(_methodName30,
-				_methodParameterTypes30,
-				new Object[] {
-					userId,
-					
-				ClpSerializer.translateInput(song),
-					
-				ClpSerializer.translateInput(assetCategoryIds),
-					
-				ClpSerializer.translateInput(assetTagNames)
-				});
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
-				throw (com.liferay.portal.kernel.exception.PortalException)t;
-			}
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
 	}
 
 	private InvokableLocalService _invokableLocalService;

@@ -31,6 +31,37 @@ public class ArtistServiceClpInvoker {
 		_methodName61 = "setBeanIdentifier";
 
 		_methodParameterTypes61 = new String[] { "java.lang.String" };
+
+		_methodName66 = "addArtist";
+
+		_methodParameterTypes66 = new String[] {
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName67 = "getArtists";
+
+		_methodParameterTypes67 = new String[] { "long" };
+
+		_methodName68 = "getArtists";
+
+		_methodParameterTypes68 = new String[] { "long", "int", "int" };
+
+		_methodName69 = "getArtistsCount";
+
+		_methodParameterTypes69 = new String[] { "long" };
+
+		_methodName70 = "updateArtist";
+
+		_methodParameterTypes70 = new String[] {
+				"long", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName71 = "deleteArtist";
+
+		_methodParameterTypes71 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -47,6 +78,42 @@ public class ArtistServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName66.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+			return ArtistServiceUtil.addArtist((java.lang.String)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
+		if (_methodName67.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+			return ArtistServiceUtil.getArtists(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+			return ArtistServiceUtil.getArtists(((Long)arguments[0]).longValue(),
+				((Integer)arguments[1]).intValue(),
+				((Integer)arguments[2]).intValue());
+		}
+
+		if (_methodName69.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
+			return ArtistServiceUtil.getArtistsCount(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName70.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
+			return ArtistServiceUtil.updateArtist(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1],
+				(com.liferay.portal.service.ServiceContext)arguments[2]);
+		}
+
+		if (_methodName71.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
+			return ArtistServiceUtil.deleteArtist(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -54,4 +121,16 @@ public class ArtistServiceClpInvoker {
 	private String[] _methodParameterTypes60;
 	private String _methodName61;
 	private String[] _methodParameterTypes61;
+	private String _methodName66;
+	private String[] _methodParameterTypes66;
+	private String _methodName67;
+	private String[] _methodParameterTypes67;
+	private String _methodName68;
+	private String[] _methodParameterTypes68;
+	private String _methodName69;
+	private String[] _methodParameterTypes69;
+	private String _methodName70;
+	private String[] _methodParameterTypes70;
+	private String _methodName71;
+	private String[] _methodParameterTypes71;
 }

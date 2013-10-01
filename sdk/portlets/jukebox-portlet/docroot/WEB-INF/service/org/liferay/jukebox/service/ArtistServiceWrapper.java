@@ -56,6 +56,51 @@ public class ArtistServiceWrapper implements ArtistService,
 		return _artistService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public org.liferay.jukebox.model.Artist addArtist(java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _artistService.addArtist(name, serviceContext);
+	}
+
+	@Override
+	public java.util.List<org.liferay.jukebox.model.Artist> getArtists(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _artistService.getArtists(groupId);
+	}
+
+	@Override
+	public java.util.List<org.liferay.jukebox.model.Artist> getArtists(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _artistService.getArtists(groupId, start, end);
+	}
+
+	@Override
+	public int getArtistsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _artistService.getArtistsCount(groupId);
+	}
+
+	@Override
+	public org.liferay.jukebox.model.Artist updateArtist(long artistId,
+		java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _artistService.updateArtist(artistId, name, serviceContext);
+	}
+
+	@Override
+	public org.liferay.jukebox.model.Artist deleteArtist(long artistId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _artistService.deleteArtist(artistId, serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

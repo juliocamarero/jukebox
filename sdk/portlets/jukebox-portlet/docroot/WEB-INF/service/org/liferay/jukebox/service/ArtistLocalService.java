@@ -319,12 +319,12 @@ public interface ArtistLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<org.liferay.jukebox.model.Artist> getArtists(
-		long groupId, int start, int end)
+		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<org.liferay.jukebox.model.Artist> getArtists(
-		long groupId)
+		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

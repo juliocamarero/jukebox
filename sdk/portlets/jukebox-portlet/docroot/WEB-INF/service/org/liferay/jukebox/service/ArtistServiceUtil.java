@@ -63,6 +63,46 @@ public class ArtistServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static org.liferay.jukebox.model.Artist addArtist(
+		java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().addArtist(name, serviceContext);
+	}
+
+	public static java.util.List<org.liferay.jukebox.model.Artist> getArtists(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getArtists(groupId);
+	}
+
+	public static java.util.List<org.liferay.jukebox.model.Artist> getArtists(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getArtists(groupId, start, end);
+	}
+
+	public static int getArtistsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getArtistsCount(groupId);
+	}
+
+	public static org.liferay.jukebox.model.Artist updateArtist(long artistId,
+		java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateArtist(artistId, name, serviceContext);
+	}
+
+	public static org.liferay.jukebox.model.Artist deleteArtist(long artistId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().deleteArtist(artistId, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

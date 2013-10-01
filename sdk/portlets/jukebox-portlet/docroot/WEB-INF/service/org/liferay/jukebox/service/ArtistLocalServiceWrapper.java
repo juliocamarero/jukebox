@@ -373,16 +373,16 @@ public class ArtistLocalServiceWrapper implements ArtistLocalService,
 
 	@Override
 	public java.util.List<org.liferay.jukebox.model.Artist> getArtists(
-		long groupId, int start, int end)
+		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _artistLocalService.getArtists(groupId, start, end);
+		return _artistLocalService.getArtists(groupId);
 	}
 
 	@Override
 	public java.util.List<org.liferay.jukebox.model.Artist> getArtists(
-		long groupId)
+		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _artistLocalService.getArtists(groupId);
+		return _artistLocalService.getArtists(groupId, start, end);
 	}
 
 	@Override
