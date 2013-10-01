@@ -14,7 +14,15 @@
 
 package org.liferay.jukebox.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.service.ServiceContext;
+import org.liferay.jukebox.model.Album;
 import org.liferay.jukebox.service.base.AlbumServiceBaseImpl;
+import org.liferay.jukebox.service.permission.AlbumPermission;
+import org.liferay.jukebox.service.permission.JukeBoxPermission;
+
+import java.util.List;
 
 /**
  * The implementation of the album remote service.
@@ -31,4 +39,49 @@ import org.liferay.jukebox.service.base.AlbumServiceBaseImpl;
  * @see org.liferay.jukebox.service.AlbumServiceUtil
  */
 public class AlbumServiceImpl extends AlbumServiceBaseImpl {
+	public Album addAlbum(
+			long artistId, String name, int year, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		JukeBoxPermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			"ADD_ALBUM");
+
+		return albumLocalService.addAlbum(
+			getUserId(), artistId, name, year, serviceContext);
+	}
+
+	public List<Album> getAlbums(long groupId) throws SystemException {
+		return albumPersistence.filterFindByGroupId(groupId);
+	}
+
+	public List<Album> getAlbums(long groupId, int start, int end)
+		throws SystemException {
+
+		return albumPersistence.filterFindByGroupId(groupId, start, end);
+	}
+
+	public int getAlbumsCount(long groupId) throws SystemException {
+		return albumPersistence.filterCountByGroupId(groupId);
+	}
+
+	public Album updateAlbum(
+			long albumId, long artistId, String name, int year,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		AlbumPermission.check(getPermissionChecker(), albumId, "UPDATE");
+
+		return albumLocalService.updateAlbum(
+			getUserId(), albumId, artistId, name, year, serviceContext);
+	}
+
+	public Album deleteAlbum(
+			long albumId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		AlbumPermission.check(getPermissionChecker(), albumId, "DELETE");
+
+		return albumLocalService.deleteAlbum(albumId);
+	}
 }

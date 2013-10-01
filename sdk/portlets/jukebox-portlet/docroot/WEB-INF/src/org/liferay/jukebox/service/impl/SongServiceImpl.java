@@ -14,7 +14,15 @@
 
 package org.liferay.jukebox.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.service.ServiceContext;
+import org.liferay.jukebox.model.Song;
 import org.liferay.jukebox.service.base.SongServiceBaseImpl;
+import org.liferay.jukebox.service.permission.JukeBoxPermission;
+import org.liferay.jukebox.service.permission.SongPermission;
+
+import java.util.List;
 
 /**
  * The implementation of the song remote service.
@@ -31,4 +39,49 @@ import org.liferay.jukebox.service.base.SongServiceBaseImpl;
  * @see org.liferay.jukebox.service.SongServiceUtil
  */
 public class SongServiceImpl extends SongServiceBaseImpl {
+	public Song addSong(
+			long albumId, String name, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		JukeBoxPermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			"ADD_SONG");
+
+		return songLocalService.addSong(
+			getUserId(), albumId, name, serviceContext);
+	}
+
+	public List<Song> getSongs(long groupId) throws SystemException {
+		return songPersistence.filterFindByGroupId(groupId);
+	}
+
+	public List<Song> getSongs(long groupId, int start, int end)
+		throws SystemException {
+
+		return songPersistence.filterFindByGroupId(groupId, start, end);
+	}
+
+	public int getSongsCount(long groupId) throws SystemException {
+		return songPersistence.filterCountByGroupId(groupId);
+	}
+
+	public Song updateSong(
+			long songId, long albumId, String name,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		SongPermission.check(getPermissionChecker(), songId, "UPDATE");
+
+		return songLocalService.updateSong(
+			getUserId(), songId, albumId, name, serviceContext);
+	}
+
+	public Song deleteSong(
+			long songId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		SongPermission.check(getPermissionChecker(), songId, "DELETE");
+
+		return songLocalService.deleteSong(songId);
+	}
 }

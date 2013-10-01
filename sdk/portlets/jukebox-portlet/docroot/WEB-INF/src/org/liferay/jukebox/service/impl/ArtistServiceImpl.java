@@ -14,7 +14,16 @@
 
 package org.liferay.jukebox.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.service.ServiceContext;
+
+import org.liferay.jukebox.model.Artist;
 import org.liferay.jukebox.service.base.ArtistServiceBaseImpl;
+import org.liferay.jukebox.service.permission.ArtistPermission;
+import org.liferay.jukebox.service.permission.JukeBoxPermission;
+
+import java.util.List;
 
 /**
  * The implementation of the artist remote service.
@@ -31,4 +40,48 @@ import org.liferay.jukebox.service.base.ArtistServiceBaseImpl;
  * @see org.liferay.jukebox.service.ArtistServiceUtil
  */
 public class ArtistServiceImpl extends ArtistServiceBaseImpl {
+
+	public Artist addArtist(String name, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		JukeBoxPermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			"ADD_ARTIST");
+
+		return artistLocalService.addArtist(getUserId(), name, serviceContext);
+	}
+
+	public List<Artist> getArtists(long groupId) throws SystemException {
+		return artistPersistence.filterFindByGroupId(groupId);
+	}
+
+	public List<Artist> getArtists(long groupId, int start, int end)
+		throws SystemException {
+
+		return artistPersistence.filterFindByGroupId(groupId, start, end);
+	}
+
+	public int getArtistsCount(long groupId) throws SystemException {
+		return artistPersistence.filterCountByGroupId(groupId);
+	}
+
+	public Artist updateArtist(
+			long artistId, String name, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		ArtistPermission.check(getPermissionChecker(), artistId, "UPDATE");
+
+		return artistLocalService.updateArtist(
+			getUserId(), artistId, name, serviceContext);
+	}
+
+	public Artist deleteArtist(
+			long artistId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		ArtistPermission.check(getPermissionChecker(), artistId, "DELETE");
+
+		return artistLocalService.deleteArtist(artistId);
+	}
+
 }
