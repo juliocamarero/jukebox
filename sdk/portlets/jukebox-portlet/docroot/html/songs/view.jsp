@@ -31,12 +31,48 @@ if (albumId > 0) {
 	songs = SongLocalServiceUtil.getSongsByAlbumId(albumId);
 }
 else {
-	songs = SongServiceUtil.getSongs(scopeGroupId);
+	String keywords = ParamUtil.getString(request, "keywords");
+
+	if (Validator.isNotNull(keywords)) {
+		Indexer indexer = IndexerRegistryUtil.getIndexer(Song.class);
+
+		SearchContext searchContext = SearchContextFactory.getInstance(request);
+
+		searchContext.setKeywords(keywords);
+
+		Hits hits = indexer.search(searchContext);
+
+		for (int i = 0; i < hits.getDocs().length; i++) {
+			Document doc = hits.doc(i);
+
+			long songId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+
+			Song song = null;
+
+			try {
+				song = SongLocalServiceUtil.getSong(songId);
+
+				song = song.toEscapedModel();
+			}
+			catch (Exception e) {
+				continue;
+			}
+
+			songs.add(song);
+		}
+	}
+	else {
+		songs = SongServiceUtil.getSongs(scopeGroupId);
+	}
 }
 %>
 
 <c:if test="<%= albumId <= 0 %>">
-	<jsp:include page="/html/songs/toolbar.jsp" />
+	<liferay-portlet:renderURL varImpl="searchURL" />
+	
+	<aui:form action="<%= searchURL.toString() %>" method="get" name="fm">
+		<jsp:include page="/html/songs/toolbar.jsp" />
+	</aui:form>
 </c:if>
 
 <c:choose>
