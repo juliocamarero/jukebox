@@ -19,6 +19,10 @@
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
 
 		<!-- Other columns -->
 
@@ -69,6 +73,10 @@
 
 		<column name="name" type="String" />
 		<column name="year" type="int" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
 
 		<!-- Finder Methods Standard -->
 
@@ -123,6 +131,10 @@
 		<!-- Other columns -->
 
 		<column name="name" type="String" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
 
 		<!-- Finder Methods Standard -->
 
