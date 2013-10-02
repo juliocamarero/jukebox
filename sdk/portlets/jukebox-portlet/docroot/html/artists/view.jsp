@@ -49,10 +49,10 @@ List<Artist> artists = ArtistServiceUtil.getArtists(scopeGroupId);
 			<li>
 				<%= artist.getName() %>
 
-				<c:if test='<%= ArtistPermission.contains(permissionChecker, artist.getArtistId(), ActionKeys.UPDATE) %>'>
+				<c:if test="<%= ArtistPermission.contains(permissionChecker, artist.getArtistId(), ActionKeys.UPDATE) %>">
 					<portlet:renderURL var="editArtistURL">
 						<portlet:param name="jspPage" value="/html/artists/edit_artist.jsp" />
-						<portlet:param name="artistId" value="<%= String.valueOf(artist.getArtistId())%>" />
+						<portlet:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
 						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 					</portlet:renderURL>
 
@@ -63,6 +63,7 @@ List<Artist> artists = ArtistServiceUtil.getArtists(scopeGroupId);
 			<%
 			}
 			%>
+
 		</ul>
 	</c:otherwise>
 </c:choose>

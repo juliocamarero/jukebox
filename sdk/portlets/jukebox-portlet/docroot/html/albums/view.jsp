@@ -54,16 +54,16 @@ List<Album> albums = AlbumServiceUtil.getAlbums(scopeGroupId);
 
 				<portlet:renderURL var="viewAlbumURL">
 					<portlet:param name="jspPage" value="/html/albums/view_album.jsp" />
-					<portlet:param name="albumId" value="<%= String.valueOf(album.getAlbumId())%>" />
+					<portlet:param name="albumId" value="<%= String.valueOf(album.getAlbumId()) %>" />
 					<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 				</portlet:renderURL>
 
 				<aui:a href="<%= viewAlbumURL %>" label="<%= album.getName() %>" />, <%= artist.getName() %>, <%= album.getYear() %>
 
-				<c:if test='<%= AlbumPermission.contains(permissionChecker, album.getAlbumId(), ActionKeys.UPDATE) %>'>
+				<c:if test="<%= AlbumPermission.contains(permissionChecker, album.getAlbumId(), ActionKeys.UPDATE) %>">
 					<portlet:renderURL var="editAlbumURL">
 						<portlet:param name="jspPage" value="/html/albums/edit_album.jsp" />
-						<portlet:param name="albumId" value="<%= String.valueOf(album.getAlbumId())%>" />
+						<portlet:param name="albumId" value="<%= String.valueOf(album.getAlbumId()) %>" />
 						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 					</portlet:renderURL>
 
@@ -74,6 +74,7 @@ List<Album> albums = AlbumServiceUtil.getAlbums(scopeGroupId);
 			<%
 			}
 			%>
+
 		</ul>
 	</c:otherwise>
 </c:choose>

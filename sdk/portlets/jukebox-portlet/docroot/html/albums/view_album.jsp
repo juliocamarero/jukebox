@@ -46,5 +46,3 @@ List<Song> songs = SongServiceUtil.getSongs(albumId);
 		<jsp:param name="albumId" value="<%= String.valueOf(albumId) %>" />
 	</jsp:include>
 </c:if>
-
-

@@ -39,6 +39,3 @@ Artist artist = ArtistLocalServiceUtil.getArtist(song.getArtistId());
 	<div class="song-album">(<%= album.getName() %>)</div>
 	<div class="song-year">(<%= album.getYear() %>)</div>
 </div>
-
-
-

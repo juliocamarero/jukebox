@@ -40,5 +40,3 @@ List<Album> albums = AlbumServiceUtil.getAlbums(artistId);
 		<jsp:param name="artistId" value="<%= String.valueOf(artistId) %>" />
 	</jsp:include>
 </c:if>
-
-
