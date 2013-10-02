@@ -37,7 +37,7 @@ import java.util.Date;
 public class ArtistCacheModel implements CacheModel<Artist>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -55,6 +55,14 @@ public class ArtistCacheModel implements CacheModel<Artist>, Externalizable {
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
+		sb.append(", status=");
+		sb.append(status);
+		sb.append(", statusByUserId=");
+		sb.append(statusByUserId);
+		sb.append(", statusByUserName=");
+		sb.append(statusByUserName);
+		sb.append(", statusDate=");
+		sb.append(statusDate);
 		sb.append(", name=");
 		sb.append(name);
 		sb.append("}");
@@ -99,6 +107,23 @@ public class ArtistCacheModel implements CacheModel<Artist>, Externalizable {
 			artistImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
+		artistImpl.setStatus(status);
+		artistImpl.setStatusByUserId(statusByUserId);
+
+		if (statusByUserName == null) {
+			artistImpl.setStatusByUserName(StringPool.BLANK);
+		}
+		else {
+			artistImpl.setStatusByUserName(statusByUserName);
+		}
+
+		if (statusDate == Long.MIN_VALUE) {
+			artistImpl.setStatusDate(null);
+		}
+		else {
+			artistImpl.setStatusDate(new Date(statusDate));
+		}
+
 		if (name == null) {
 			artistImpl.setName(StringPool.BLANK);
 		}
@@ -121,6 +146,10 @@ public class ArtistCacheModel implements CacheModel<Artist>, Externalizable {
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
+		status = objectInput.readInt();
+		statusByUserId = objectInput.readLong();
+		statusByUserName = objectInput.readUTF();
+		statusDate = objectInput.readLong();
 		name = objectInput.readUTF();
 	}
 
@@ -148,6 +177,17 @@ public class ArtistCacheModel implements CacheModel<Artist>, Externalizable {
 
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
+		objectOutput.writeInt(status);
+		objectOutput.writeLong(statusByUserId);
+
+		if (statusByUserName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(statusByUserName);
+		}
+
+		objectOutput.writeLong(statusDate);
 
 		if (name == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -165,5 +205,9 @@ public class ArtistCacheModel implements CacheModel<Artist>, Externalizable {
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
+	public int status;
+	public long statusByUserId;
+	public String statusByUserName;
+	public long statusDate;
 	public String name;
 }

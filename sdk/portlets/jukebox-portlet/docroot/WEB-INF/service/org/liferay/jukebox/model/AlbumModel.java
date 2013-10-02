@@ -15,13 +15,18 @@
 package org.liferay.jukebox.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.trash.TrashHandler;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.StagedGroupedModel;
+import com.liferay.portal.model.TrashedModel;
+import com.liferay.portal.model.WorkflowedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.trash.model.TrashEntry;
 
 import java.io.Serializable;
 
@@ -40,7 +45,8 @@ import java.util.Date;
  * @see org.liferay.jukebox.model.impl.AlbumModelImpl
  * @generated
  */
-public interface AlbumModel extends BaseModel<Album>, StagedGroupedModel {
+public interface AlbumModel extends BaseModel<Album>, StagedGroupedModel,
+	TrashedModel, WorkflowedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -248,6 +254,200 @@ public interface AlbumModel extends BaseModel<Album>, StagedGroupedModel {
 	 * @param year the year of this album
 	 */
 	public void setYear(int year);
+
+	/**
+	 * Returns the status of this album.
+	 *
+	 * @return the status of this album
+	 */
+	@Override
+	public int getStatus();
+
+	/**
+	 * Sets the status of this album.
+	 *
+	 * @param status the status of this album
+	 */
+	@Override
+	public void setStatus(int status);
+
+	/**
+	 * Returns the status by user ID of this album.
+	 *
+	 * @return the status by user ID of this album
+	 */
+	@Override
+	public long getStatusByUserId();
+
+	/**
+	 * Sets the status by user ID of this album.
+	 *
+	 * @param statusByUserId the status by user ID of this album
+	 */
+	@Override
+	public void setStatusByUserId(long statusByUserId);
+
+	/**
+	 * Returns the status by user uuid of this album.
+	 *
+	 * @return the status by user uuid of this album
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public String getStatusByUserUuid() throws SystemException;
+
+	/**
+	 * Sets the status by user uuid of this album.
+	 *
+	 * @param statusByUserUuid the status by user uuid of this album
+	 */
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid);
+
+	/**
+	 * Returns the status by user name of this album.
+	 *
+	 * @return the status by user name of this album
+	 */
+	@AutoEscape
+	@Override
+	public String getStatusByUserName();
+
+	/**
+	 * Sets the status by user name of this album.
+	 *
+	 * @param statusByUserName the status by user name of this album
+	 */
+	@Override
+	public void setStatusByUserName(String statusByUserName);
+
+	/**
+	 * Returns the status date of this album.
+	 *
+	 * @return the status date of this album
+	 */
+	@Override
+	public Date getStatusDate();
+
+	/**
+	 * Sets the status date of this album.
+	 *
+	 * @param statusDate the status date of this album
+	 */
+	@Override
+	public void setStatusDate(Date statusDate);
+
+	/**
+	 * Returns the trash entry created when this album was moved to the Recycle Bin. The trash entry may belong to one of the ancestors of this album.
+	 *
+	 * @return the trash entry created when this album was moved to the Recycle Bin
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public TrashEntry getTrashEntry() throws PortalException, SystemException;
+
+	/**
+	 * Returns the class primary key of the trash entry for this album.
+	 *
+	 * @return the class primary key of the trash entry for this album
+	 */
+	@Override
+	public long getTrashEntryClassPK();
+
+	/**
+	 * Returns the trash handler for this album.
+	 *
+	 * @return the trash handler for this album
+	 */
+	@Override
+	public TrashHandler getTrashHandler();
+
+	/**
+	 * Returns <code>true</code> if this album is in the Recycle Bin.
+	 *
+	 * @return <code>true</code> if this album is in the Recycle Bin; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isInTrash();
+
+	/**
+	 * Returns <code>true</code> if the parent of this album is in the Recycle Bin.
+	 *
+	 * @return <code>true</code> if the parent of this album is in the Recycle Bin; <code>false</code> otherwise
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public boolean isInTrashContainer();
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	 */
+	@Override
+	public boolean getApproved();
+
+	/**
+	 * Returns <code>true</code> if this album is approved.
+	 *
+	 * @return <code>true</code> if this album is approved; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isApproved();
+
+	/**
+	 * Returns <code>true</code> if this album is denied.
+	 *
+	 * @return <code>true</code> if this album is denied; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDenied();
+
+	/**
+	 * Returns <code>true</code> if this album is a draft.
+	 *
+	 * @return <code>true</code> if this album is a draft; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDraft();
+
+	/**
+	 * Returns <code>true</code> if this album is expired.
+	 *
+	 * @return <code>true</code> if this album is expired; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isExpired();
+
+	/**
+	 * Returns <code>true</code> if this album is inactive.
+	 *
+	 * @return <code>true</code> if this album is inactive; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isInactive();
+
+	/**
+	 * Returns <code>true</code> if this album is incomplete.
+	 *
+	 * @return <code>true</code> if this album is incomplete; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isIncomplete();
+
+	/**
+	 * Returns <code>true</code> if this album is pending.
+	 *
+	 * @return <code>true</code> if this album is pending; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isPending();
+
+	/**
+	 * Returns <code>true</code> if this album is scheduled.
+	 *
+	 * @return <code>true</code> if this album is scheduled; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isScheduled();
 
 	@Override
 	public boolean isNew();

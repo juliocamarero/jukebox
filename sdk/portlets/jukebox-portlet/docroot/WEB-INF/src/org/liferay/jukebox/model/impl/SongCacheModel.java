@@ -37,7 +37,7 @@ import java.util.Date;
 public class SongCacheModel implements CacheModel<Song>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -61,6 +61,14 @@ public class SongCacheModel implements CacheModel<Song>, Externalizable {
 		sb.append(albumId);
 		sb.append(", name=");
 		sb.append(name);
+		sb.append(", status=");
+		sb.append(status);
+		sb.append(", statusByUserId=");
+		sb.append(statusByUserId);
+		sb.append(", statusByUserName=");
+		sb.append(statusByUserName);
+		sb.append(", statusDate=");
+		sb.append(statusDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -113,6 +121,23 @@ public class SongCacheModel implements CacheModel<Song>, Externalizable {
 			songImpl.setName(name);
 		}
 
+		songImpl.setStatus(status);
+		songImpl.setStatusByUserId(statusByUserId);
+
+		if (statusByUserName == null) {
+			songImpl.setStatusByUserName(StringPool.BLANK);
+		}
+		else {
+			songImpl.setStatusByUserName(statusByUserName);
+		}
+
+		if (statusDate == Long.MIN_VALUE) {
+			songImpl.setStatusDate(null);
+		}
+		else {
+			songImpl.setStatusDate(new Date(statusDate));
+		}
+
 		songImpl.resetOriginalValues();
 
 		return songImpl;
@@ -131,6 +156,10 @@ public class SongCacheModel implements CacheModel<Song>, Externalizable {
 		artistId = objectInput.readLong();
 		albumId = objectInput.readLong();
 		name = objectInput.readUTF();
+		status = objectInput.readInt();
+		statusByUserId = objectInput.readLong();
+		statusByUserName = objectInput.readUTF();
+		statusDate = objectInput.readLong();
 	}
 
 	@Override
@@ -166,6 +195,18 @@ public class SongCacheModel implements CacheModel<Song>, Externalizable {
 		else {
 			objectOutput.writeUTF(name);
 		}
+
+		objectOutput.writeInt(status);
+		objectOutput.writeLong(statusByUserId);
+
+		if (statusByUserName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(statusByUserName);
+		}
+
+		objectOutput.writeLong(statusDate);
 	}
 
 	public String uuid;
@@ -179,4 +220,8 @@ public class SongCacheModel implements CacheModel<Song>, Externalizable {
 	public long artistId;
 	public long albumId;
 	public String name;
+	public int status;
+	public long statusByUserId;
+	public String statusByUserName;
+	public long statusDate;
 }

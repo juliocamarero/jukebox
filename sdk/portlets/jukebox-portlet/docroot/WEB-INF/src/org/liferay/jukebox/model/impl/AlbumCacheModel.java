@@ -37,7 +37,7 @@ import java.util.Date;
 public class AlbumCacheModel implements CacheModel<Album>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -61,6 +61,14 @@ public class AlbumCacheModel implements CacheModel<Album>, Externalizable {
 		sb.append(name);
 		sb.append(", year=");
 		sb.append(year);
+		sb.append(", status=");
+		sb.append(status);
+		sb.append(", statusByUserId=");
+		sb.append(statusByUserId);
+		sb.append(", statusByUserName=");
+		sb.append(statusByUserName);
+		sb.append(", statusDate=");
+		sb.append(statusDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -113,6 +121,22 @@ public class AlbumCacheModel implements CacheModel<Album>, Externalizable {
 		}
 
 		albumImpl.setYear(year);
+		albumImpl.setStatus(status);
+		albumImpl.setStatusByUserId(statusByUserId);
+
+		if (statusByUserName == null) {
+			albumImpl.setStatusByUserName(StringPool.BLANK);
+		}
+		else {
+			albumImpl.setStatusByUserName(statusByUserName);
+		}
+
+		if (statusDate == Long.MIN_VALUE) {
+			albumImpl.setStatusDate(null);
+		}
+		else {
+			albumImpl.setStatusDate(new Date(statusDate));
+		}
 
 		albumImpl.resetOriginalValues();
 
@@ -132,6 +156,10 @@ public class AlbumCacheModel implements CacheModel<Album>, Externalizable {
 		artistId = objectInput.readLong();
 		name = objectInput.readUTF();
 		year = objectInput.readInt();
+		status = objectInput.readInt();
+		statusByUserId = objectInput.readLong();
+		statusByUserName = objectInput.readUTF();
+		statusDate = objectInput.readLong();
 	}
 
 	@Override
@@ -168,6 +196,17 @@ public class AlbumCacheModel implements CacheModel<Album>, Externalizable {
 		}
 
 		objectOutput.writeInt(year);
+		objectOutput.writeInt(status);
+		objectOutput.writeLong(statusByUserId);
+
+		if (statusByUserName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(statusByUserName);
+		}
+
+		objectOutput.writeLong(statusDate);
 	}
 
 	public String uuid;
@@ -181,4 +220,8 @@ public class AlbumCacheModel implements CacheModel<Album>, Externalizable {
 	public long artistId;
 	public String name;
 	public int year;
+	public int status;
+	public long statusByUserId;
+	public String statusByUserName;
+	public long statusDate;
 }

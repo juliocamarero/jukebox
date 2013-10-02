@@ -61,6 +61,10 @@ public class AlbumWrapper implements Album, ModelWrapper<Album> {
 		attributes.put("artistId", getArtistId());
 		attributes.put("name", getName());
 		attributes.put("year", getYear());
+		attributes.put("status", getStatus());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 
 		return attributes;
 	}
@@ -131,6 +135,30 @@ public class AlbumWrapper implements Album, ModelWrapper<Album> {
 
 		if (year != null) {
 			setYear(year);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
 		}
 	}
 
@@ -394,6 +422,250 @@ public class AlbumWrapper implements Album, ModelWrapper<Album> {
 	@Override
 	public void setYear(int year) {
 		_album.setYear(year);
+	}
+
+	/**
+	* Returns the status of this album.
+	*
+	* @return the status of this album
+	*/
+	@Override
+	public int getStatus() {
+		return _album.getStatus();
+	}
+
+	/**
+	* Sets the status of this album.
+	*
+	* @param status the status of this album
+	*/
+	@Override
+	public void setStatus(int status) {
+		_album.setStatus(status);
+	}
+
+	/**
+	* Returns the status by user ID of this album.
+	*
+	* @return the status by user ID of this album
+	*/
+	@Override
+	public long getStatusByUserId() {
+		return _album.getStatusByUserId();
+	}
+
+	/**
+	* Sets the status by user ID of this album.
+	*
+	* @param statusByUserId the status by user ID of this album
+	*/
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_album.setStatusByUserId(statusByUserId);
+	}
+
+	/**
+	* Returns the status by user uuid of this album.
+	*
+	* @return the status by user uuid of this album
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public java.lang.String getStatusByUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _album.getStatusByUserUuid();
+	}
+
+	/**
+	* Sets the status by user uuid of this album.
+	*
+	* @param statusByUserUuid the status by user uuid of this album
+	*/
+	@Override
+	public void setStatusByUserUuid(java.lang.String statusByUserUuid) {
+		_album.setStatusByUserUuid(statusByUserUuid);
+	}
+
+	/**
+	* Returns the status by user name of this album.
+	*
+	* @return the status by user name of this album
+	*/
+	@Override
+	public java.lang.String getStatusByUserName() {
+		return _album.getStatusByUserName();
+	}
+
+	/**
+	* Sets the status by user name of this album.
+	*
+	* @param statusByUserName the status by user name of this album
+	*/
+	@Override
+	public void setStatusByUserName(java.lang.String statusByUserName) {
+		_album.setStatusByUserName(statusByUserName);
+	}
+
+	/**
+	* Returns the status date of this album.
+	*
+	* @return the status date of this album
+	*/
+	@Override
+	public java.util.Date getStatusDate() {
+		return _album.getStatusDate();
+	}
+
+	/**
+	* Sets the status date of this album.
+	*
+	* @param statusDate the status date of this album
+	*/
+	@Override
+	public void setStatusDate(java.util.Date statusDate) {
+		_album.setStatusDate(statusDate);
+	}
+
+	/**
+	* Returns the trash entry created when this album was moved to the Recycle Bin. The trash entry may belong to one of the ancestors of this album.
+	*
+	* @return the trash entry created when this album was moved to the Recycle Bin
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public com.liferay.portlet.trash.model.TrashEntry getTrashEntry()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _album.getTrashEntry();
+	}
+
+	/**
+	* Returns the class primary key of the trash entry for this album.
+	*
+	* @return the class primary key of the trash entry for this album
+	*/
+	@Override
+	public long getTrashEntryClassPK() {
+		return _album.getTrashEntryClassPK();
+	}
+
+	/**
+	* Returns the trash handler for this album.
+	*
+	* @return the trash handler for this album
+	*/
+	@Override
+	public com.liferay.portal.kernel.trash.TrashHandler getTrashHandler() {
+		return _album.getTrashHandler();
+	}
+
+	/**
+	* Returns <code>true</code> if this album is in the Recycle Bin.
+	*
+	* @return <code>true</code> if this album is in the Recycle Bin; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isInTrash() {
+		return _album.isInTrash();
+	}
+
+	/**
+	* Returns <code>true</code> if the parent of this album is in the Recycle Bin.
+	*
+	* @return <code>true</code> if the parent of this album is in the Recycle Bin; <code>false</code> otherwise
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public boolean isInTrashContainer() {
+		return _album.isInTrashContainer();
+	}
+
+	/**
+	* @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	*/
+	@Override
+	public boolean getApproved() {
+		return _album.getApproved();
+	}
+
+	/**
+	* Returns <code>true</code> if this album is approved.
+	*
+	* @return <code>true</code> if this album is approved; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isApproved() {
+		return _album.isApproved();
+	}
+
+	/**
+	* Returns <code>true</code> if this album is denied.
+	*
+	* @return <code>true</code> if this album is denied; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDenied() {
+		return _album.isDenied();
+	}
+
+	/**
+	* Returns <code>true</code> if this album is a draft.
+	*
+	* @return <code>true</code> if this album is a draft; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDraft() {
+		return _album.isDraft();
+	}
+
+	/**
+	* Returns <code>true</code> if this album is expired.
+	*
+	* @return <code>true</code> if this album is expired; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isExpired() {
+		return _album.isExpired();
+	}
+
+	/**
+	* Returns <code>true</code> if this album is inactive.
+	*
+	* @return <code>true</code> if this album is inactive; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isInactive() {
+		return _album.isInactive();
+	}
+
+	/**
+	* Returns <code>true</code> if this album is incomplete.
+	*
+	* @return <code>true</code> if this album is incomplete; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isIncomplete() {
+		return _album.isIncomplete();
+	}
+
+	/**
+	* Returns <code>true</code> if this album is pending.
+	*
+	* @return <code>true</code> if this album is pending; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isPending() {
+		return _album.isPending();
+	}
+
+	/**
+	* Returns <code>true</code> if this album is scheduled.
+	*
+	* @return <code>true</code> if this album is scheduled; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isScheduled() {
+		return _album.isScheduled();
 	}
 
 	@Override
