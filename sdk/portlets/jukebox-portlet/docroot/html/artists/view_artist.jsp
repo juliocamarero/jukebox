@@ -52,3 +52,13 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 		<jsp:param name="showToolbar" value="<%= String.valueOf(false) %>" />
 	</jsp:include>
 </c:if>
+
+<portlet:actionURL name="invokeTaglibDiscussion" var="discussionURL" />
+
+<liferay-ui:discussion
+	className="<%= Artist.class.getName() %>"
+	classPK="<%= artist.getArtistId() %>"
+	formAction="<%= discussionURL %>"
+	formName="fm2"
+	userId="<%= artist.getUserId() %>"
+/>

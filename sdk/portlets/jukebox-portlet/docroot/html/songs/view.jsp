@@ -39,6 +39,7 @@ else {
 
 		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
+		searchContext.setIncludeDiscussions(true);
 		searchContext.setKeywords(keywords);
 
 		Hits hits = indexer.search(searchContext);

@@ -4594,6 +4594,10 @@ public class ArtistPersistenceImpl extends BasePersistenceImpl<Artist>
 		artistImpl.setUserName(artist.getUserName());
 		artistImpl.setCreateDate(artist.getCreateDate());
 		artistImpl.setModifiedDate(artist.getModifiedDate());
+		artistImpl.setStatus(artist.getStatus());
+		artistImpl.setStatusByUserId(artist.getStatusByUserId());
+		artistImpl.setStatusByUserName(artist.getStatusByUserName());
+		artistImpl.setStatusDate(artist.getStatusDate());
 		artistImpl.setName(artist.getName());
 
 		return artistImpl;

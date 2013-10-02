@@ -5584,6 +5584,10 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 		songImpl.setArtistId(song.getArtistId());
 		songImpl.setAlbumId(song.getAlbumId());
 		songImpl.setName(song.getName());
+		songImpl.setStatus(song.getStatus());
+		songImpl.setStatusByUserId(song.getStatusByUserId());
+		songImpl.setStatusByUserName(song.getStatusByUserName());
+		songImpl.setStatusDate(song.getStatusDate());
 
 		return songImpl;
 	}

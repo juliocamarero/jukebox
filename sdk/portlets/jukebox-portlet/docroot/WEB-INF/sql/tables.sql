@@ -9,7 +9,11 @@ create table jukebox_Album (
 	modifiedDate DATE null,
 	artistId LONG,
 	name VARCHAR(75) null,
-	year INTEGER
+	year INTEGER,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
 );
 
 create table jukebox_Artist (
@@ -21,6 +25,10 @@ create table jukebox_Artist (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null,
 	name VARCHAR(75) null
 );
 
@@ -35,5 +43,9 @@ create table jukebox_Song (
 	modifiedDate DATE null,
 	artistId LONG,
 	albumId LONG,
-	name VARCHAR(75) null
+	name VARCHAR(75) null,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
 );

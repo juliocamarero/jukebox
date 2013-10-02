@@ -6017,6 +6017,10 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 		albumImpl.setArtistId(album.getArtistId());
 		albumImpl.setName(album.getName());
 		albumImpl.setYear(album.getYear());
+		albumImpl.setStatus(album.getStatus());
+		albumImpl.setStatusByUserId(album.getStatusByUserId());
+		albumImpl.setStatusByUserName(album.getStatusByUserName());
+		albumImpl.setStatusDate(album.getStatusDate());
 
 		return albumImpl;
 	}

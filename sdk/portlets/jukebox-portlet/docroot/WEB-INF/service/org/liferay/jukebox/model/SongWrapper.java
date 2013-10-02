@@ -61,6 +61,10 @@ public class SongWrapper implements Song, ModelWrapper<Song> {
 		attributes.put("artistId", getArtistId());
 		attributes.put("albumId", getAlbumId());
 		attributes.put("name", getName());
+		attributes.put("status", getStatus());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 
 		return attributes;
 	}
@@ -131,6 +135,30 @@ public class SongWrapper implements Song, ModelWrapper<Song> {
 
 		if (name != null) {
 			setName(name);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
 		}
 	}
 
@@ -394,6 +422,250 @@ public class SongWrapper implements Song, ModelWrapper<Song> {
 	@Override
 	public void setName(java.lang.String name) {
 		_song.setName(name);
+	}
+
+	/**
+	* Returns the status of this song.
+	*
+	* @return the status of this song
+	*/
+	@Override
+	public int getStatus() {
+		return _song.getStatus();
+	}
+
+	/**
+	* Sets the status of this song.
+	*
+	* @param status the status of this song
+	*/
+	@Override
+	public void setStatus(int status) {
+		_song.setStatus(status);
+	}
+
+	/**
+	* Returns the status by user ID of this song.
+	*
+	* @return the status by user ID of this song
+	*/
+	@Override
+	public long getStatusByUserId() {
+		return _song.getStatusByUserId();
+	}
+
+	/**
+	* Sets the status by user ID of this song.
+	*
+	* @param statusByUserId the status by user ID of this song
+	*/
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_song.setStatusByUserId(statusByUserId);
+	}
+
+	/**
+	* Returns the status by user uuid of this song.
+	*
+	* @return the status by user uuid of this song
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public java.lang.String getStatusByUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _song.getStatusByUserUuid();
+	}
+
+	/**
+	* Sets the status by user uuid of this song.
+	*
+	* @param statusByUserUuid the status by user uuid of this song
+	*/
+	@Override
+	public void setStatusByUserUuid(java.lang.String statusByUserUuid) {
+		_song.setStatusByUserUuid(statusByUserUuid);
+	}
+
+	/**
+	* Returns the status by user name of this song.
+	*
+	* @return the status by user name of this song
+	*/
+	@Override
+	public java.lang.String getStatusByUserName() {
+		return _song.getStatusByUserName();
+	}
+
+	/**
+	* Sets the status by user name of this song.
+	*
+	* @param statusByUserName the status by user name of this song
+	*/
+	@Override
+	public void setStatusByUserName(java.lang.String statusByUserName) {
+		_song.setStatusByUserName(statusByUserName);
+	}
+
+	/**
+	* Returns the status date of this song.
+	*
+	* @return the status date of this song
+	*/
+	@Override
+	public java.util.Date getStatusDate() {
+		return _song.getStatusDate();
+	}
+
+	/**
+	* Sets the status date of this song.
+	*
+	* @param statusDate the status date of this song
+	*/
+	@Override
+	public void setStatusDate(java.util.Date statusDate) {
+		_song.setStatusDate(statusDate);
+	}
+
+	/**
+	* Returns the trash entry created when this song was moved to the Recycle Bin. The trash entry may belong to one of the ancestors of this song.
+	*
+	* @return the trash entry created when this song was moved to the Recycle Bin
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public com.liferay.portlet.trash.model.TrashEntry getTrashEntry()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _song.getTrashEntry();
+	}
+
+	/**
+	* Returns the class primary key of the trash entry for this song.
+	*
+	* @return the class primary key of the trash entry for this song
+	*/
+	@Override
+	public long getTrashEntryClassPK() {
+		return _song.getTrashEntryClassPK();
+	}
+
+	/**
+	* Returns the trash handler for this song.
+	*
+	* @return the trash handler for this song
+	*/
+	@Override
+	public com.liferay.portal.kernel.trash.TrashHandler getTrashHandler() {
+		return _song.getTrashHandler();
+	}
+
+	/**
+	* Returns <code>true</code> if this song is in the Recycle Bin.
+	*
+	* @return <code>true</code> if this song is in the Recycle Bin; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isInTrash() {
+		return _song.isInTrash();
+	}
+
+	/**
+	* Returns <code>true</code> if the parent of this song is in the Recycle Bin.
+	*
+	* @return <code>true</code> if the parent of this song is in the Recycle Bin; <code>false</code> otherwise
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public boolean isInTrashContainer() {
+		return _song.isInTrashContainer();
+	}
+
+	/**
+	* @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	*/
+	@Override
+	public boolean getApproved() {
+		return _song.getApproved();
+	}
+
+	/**
+	* Returns <code>true</code> if this song is approved.
+	*
+	* @return <code>true</code> if this song is approved; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isApproved() {
+		return _song.isApproved();
+	}
+
+	/**
+	* Returns <code>true</code> if this song is denied.
+	*
+	* @return <code>true</code> if this song is denied; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDenied() {
+		return _song.isDenied();
+	}
+
+	/**
+	* Returns <code>true</code> if this song is a draft.
+	*
+	* @return <code>true</code> if this song is a draft; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDraft() {
+		return _song.isDraft();
+	}
+
+	/**
+	* Returns <code>true</code> if this song is expired.
+	*
+	* @return <code>true</code> if this song is expired; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isExpired() {
+		return _song.isExpired();
+	}
+
+	/**
+	* Returns <code>true</code> if this song is inactive.
+	*
+	* @return <code>true</code> if this song is inactive; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isInactive() {
+		return _song.isInactive();
+	}
+
+	/**
+	* Returns <code>true</code> if this song is incomplete.
+	*
+	* @return <code>true</code> if this song is incomplete; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isIncomplete() {
+		return _song.isIncomplete();
+	}
+
+	/**
+	* Returns <code>true</code> if this song is pending.
+	*
+	* @return <code>true</code> if this song is pending; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isPending() {
+		return _song.isPending();
+	}
+
+	/**
+	* Returns <code>true</code> if this song is scheduled.
+	*
+	* @return <code>true</code> if this song is scheduled; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isScheduled() {
+		return _song.isScheduled();
 	}
 
 	@Override

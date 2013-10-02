@@ -58,6 +58,10 @@ public class ArtistWrapper implements Artist, ModelWrapper<Artist> {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("status", getStatus());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 		attributes.put("name", getName());
 
 		return attributes;
@@ -111,6 +115,30 @@ public class ArtistWrapper implements Artist, ModelWrapper<Artist> {
 
 		if (modifiedDate != null) {
 			setModifiedDate(modifiedDate);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
 		}
 
 		String name = (String)attributes.get("name");
@@ -323,6 +351,108 @@ public class ArtistWrapper implements Artist, ModelWrapper<Artist> {
 	}
 
 	/**
+	* Returns the status of this artist.
+	*
+	* @return the status of this artist
+	*/
+	@Override
+	public int getStatus() {
+		return _artist.getStatus();
+	}
+
+	/**
+	* Sets the status of this artist.
+	*
+	* @param status the status of this artist
+	*/
+	@Override
+	public void setStatus(int status) {
+		_artist.setStatus(status);
+	}
+
+	/**
+	* Returns the status by user ID of this artist.
+	*
+	* @return the status by user ID of this artist
+	*/
+	@Override
+	public long getStatusByUserId() {
+		return _artist.getStatusByUserId();
+	}
+
+	/**
+	* Sets the status by user ID of this artist.
+	*
+	* @param statusByUserId the status by user ID of this artist
+	*/
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_artist.setStatusByUserId(statusByUserId);
+	}
+
+	/**
+	* Returns the status by user uuid of this artist.
+	*
+	* @return the status by user uuid of this artist
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public java.lang.String getStatusByUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _artist.getStatusByUserUuid();
+	}
+
+	/**
+	* Sets the status by user uuid of this artist.
+	*
+	* @param statusByUserUuid the status by user uuid of this artist
+	*/
+	@Override
+	public void setStatusByUserUuid(java.lang.String statusByUserUuid) {
+		_artist.setStatusByUserUuid(statusByUserUuid);
+	}
+
+	/**
+	* Returns the status by user name of this artist.
+	*
+	* @return the status by user name of this artist
+	*/
+	@Override
+	public java.lang.String getStatusByUserName() {
+		return _artist.getStatusByUserName();
+	}
+
+	/**
+	* Sets the status by user name of this artist.
+	*
+	* @param statusByUserName the status by user name of this artist
+	*/
+	@Override
+	public void setStatusByUserName(java.lang.String statusByUserName) {
+		_artist.setStatusByUserName(statusByUserName);
+	}
+
+	/**
+	* Returns the status date of this artist.
+	*
+	* @return the status date of this artist
+	*/
+	@Override
+	public java.util.Date getStatusDate() {
+		return _artist.getStatusDate();
+	}
+
+	/**
+	* Sets the status date of this artist.
+	*
+	* @param statusDate the status date of this artist
+	*/
+	@Override
+	public void setStatusDate(java.util.Date statusDate) {
+		_artist.setStatusDate(statusDate);
+	}
+
+	/**
 	* Returns the name of this artist.
 	*
 	* @return the name of this artist
@@ -340,6 +470,148 @@ public class ArtistWrapper implements Artist, ModelWrapper<Artist> {
 	@Override
 	public void setName(java.lang.String name) {
 		_artist.setName(name);
+	}
+
+	/**
+	* Returns the trash entry created when this artist was moved to the Recycle Bin. The trash entry may belong to one of the ancestors of this artist.
+	*
+	* @return the trash entry created when this artist was moved to the Recycle Bin
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public com.liferay.portlet.trash.model.TrashEntry getTrashEntry()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _artist.getTrashEntry();
+	}
+
+	/**
+	* Returns the class primary key of the trash entry for this artist.
+	*
+	* @return the class primary key of the trash entry for this artist
+	*/
+	@Override
+	public long getTrashEntryClassPK() {
+		return _artist.getTrashEntryClassPK();
+	}
+
+	/**
+	* Returns the trash handler for this artist.
+	*
+	* @return the trash handler for this artist
+	*/
+	@Override
+	public com.liferay.portal.kernel.trash.TrashHandler getTrashHandler() {
+		return _artist.getTrashHandler();
+	}
+
+	/**
+	* Returns <code>true</code> if this artist is in the Recycle Bin.
+	*
+	* @return <code>true</code> if this artist is in the Recycle Bin; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isInTrash() {
+		return _artist.isInTrash();
+	}
+
+	/**
+	* Returns <code>true</code> if the parent of this artist is in the Recycle Bin.
+	*
+	* @return <code>true</code> if the parent of this artist is in the Recycle Bin; <code>false</code> otherwise
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public boolean isInTrashContainer() {
+		return _artist.isInTrashContainer();
+	}
+
+	/**
+	* @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	*/
+	@Override
+	public boolean getApproved() {
+		return _artist.getApproved();
+	}
+
+	/**
+	* Returns <code>true</code> if this artist is approved.
+	*
+	* @return <code>true</code> if this artist is approved; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isApproved() {
+		return _artist.isApproved();
+	}
+
+	/**
+	* Returns <code>true</code> if this artist is denied.
+	*
+	* @return <code>true</code> if this artist is denied; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDenied() {
+		return _artist.isDenied();
+	}
+
+	/**
+	* Returns <code>true</code> if this artist is a draft.
+	*
+	* @return <code>true</code> if this artist is a draft; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDraft() {
+		return _artist.isDraft();
+	}
+
+	/**
+	* Returns <code>true</code> if this artist is expired.
+	*
+	* @return <code>true</code> if this artist is expired; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isExpired() {
+		return _artist.isExpired();
+	}
+
+	/**
+	* Returns <code>true</code> if this artist is inactive.
+	*
+	* @return <code>true</code> if this artist is inactive; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isInactive() {
+		return _artist.isInactive();
+	}
+
+	/**
+	* Returns <code>true</code> if this artist is incomplete.
+	*
+	* @return <code>true</code> if this artist is incomplete; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isIncomplete() {
+		return _artist.isIncomplete();
+	}
+
+	/**
+	* Returns <code>true</code> if this artist is pending.
+	*
+	* @return <code>true</code> if this artist is pending; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isPending() {
+		return _artist.isPending();
+	}
+
+	/**
+	* Returns <code>true</code> if this artist is scheduled.
+	*
+	* @return <code>true</code> if this artist is scheduled; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isScheduled() {
+		return _artist.isScheduled();
 	}
 
 	@Override

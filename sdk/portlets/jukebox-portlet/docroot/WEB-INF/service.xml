@@ -5,7 +5,7 @@
 	<service-builder package-path="org.liferay.jukebox">
 	<author>Julio Camarero</author>
 	<namespace>jukebox</namespace>
-	<entity name="Artist" local-service="true" remote-service="true" uuid="true">
+	<entity name="Artist" local-service="true" remote-service="true" uuid="true" trash-enabled="true">
 
 		<!-- Primary key column -->
 
@@ -19,6 +19,10 @@
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
 
 		<!-- Other columns -->
 
@@ -48,7 +52,7 @@
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 	</entity>
-	<entity name="Album" local-service="true" remote-service="true" uuid="true">
+	<entity name="Album" local-service="true" remote-service="true" uuid="true" trash-enabled="true">
 
 		<!-- Primary key column -->
 
@@ -69,6 +73,10 @@
 
 		<column name="name" type="String" />
 		<column name="year" type="int" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
 
 		<!-- Finder Methods Standard -->
 
@@ -101,7 +109,7 @@
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 	</entity>
-	<entity name="Song" local-service="true" remote-service="true" uuid="true">
+	<entity name="Song" local-service="true" remote-service="true" uuid="true" trash-enabled="true">
 
 		<!-- Primary key column -->
 
@@ -123,6 +131,10 @@
 		<!-- Other columns -->
 
 		<column name="name" type="String" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
 
 		<!-- Finder Methods Standard -->
 
