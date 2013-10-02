@@ -95,9 +95,9 @@
 			<portlet-name>Songs</portlet-name>
 		</portlet-ref>
 		<supports>
-			<action-key>ADD_ARTISTS</action-key>
-			<action-key>ADD_ALBUMS</action-key>
-			<action-key>ADD_SONGS</action-key>
+			<action-key>ADD_ARTIST</action-key>
+			<action-key>ADD_ALBUM</action-key>
+			<action-key>ADD_SONG</action-key>
 			<action-key>PERMISSIONS</action-key>
 		</supports>
 		<site-member-defaults/>
