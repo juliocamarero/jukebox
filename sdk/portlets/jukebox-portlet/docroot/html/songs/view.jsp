@@ -24,7 +24,6 @@ long albumId = ParamUtil.getLong(renderRequest, "albumId");
 <liferay-ui:success key="songUpdated" message="the-song-was-updated-successfully" />
 <liferay-ui:success key="songDeleted" message="the-song-was-deleted-successfully" />
 
-
 <%
 List<Song> songs = null;
 
