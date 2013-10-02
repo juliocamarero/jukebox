@@ -19,7 +19,7 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-long artistId = ParamUtil.getLong(request, "artisId");
+long artistId = ParamUtil.getLong(request, "artistId");
 
 Artist artist = null;
 
