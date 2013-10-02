@@ -17,43 +17,59 @@
 <%@ include file="../init.jsp" %>
 
 <%
-long artistId = ParamUtil.getLong(renderRequest, "artistId");
-boolean showToolbar = ParamUtil.getBoolean(request, "showToolbar", true);
+String redirect = ParamUtil.getString(request, "redirect");
+
+String keywords = ParamUtil.getString(request, "keywords");
+
+Indexer indexer = IndexerRegistryUtil.getIndexer(Album.class);
+
+SearchContext searchContext = SearchContextFactory.getInstance(request);
+
+searchContext.setIncludeDiscussions(true);
+searchContext.setKeywords(keywords);
+
+Hits hits = indexer.search(searchContext);
+
+List<Album> albums = new ArrayList<Album>();
+
+for (int i = 0; i < hits.getDocs().length; i++) {
+	Document doc = hits.doc(i);
+
+	long albumId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+
+	Album album = null;
+
+	try {
+		album = AlbumLocalServiceUtil.getAlbum(albumId);
+
+		album = album.toEscapedModel();
+	}
+	catch (Exception e) {
+		continue;
+	}
+
+	albums.add(album);
+}
 %>
 
-<liferay-ui:success key="albumAdded" message="the-album-was-added-successfully" />
-<liferay-ui:success key="albumUpdated" message="the-album-was-updated-successfully" />
-<liferay-ui:success key="albumDeleted" message="the-album-was-deleted-successfully" />
+<liferay-ui:header
+	backURL="<%= redirect %>"
+	title="search"
+/>
 
-<%
-List<Album> albums = null;
+<portlet:renderURL var="searchURL">
+	<portlet:param name="jspPage" value="/html/albums/view_search.jsp" />
+	<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
+</portlet:renderURL>
 
-if (artistId > 0) {
-	albums = AlbumLocalServiceUtil.getAlbumsByArtistId(artistId);
-}
-else {
-	albums = AlbumServiceUtil.getAlbums(scopeGroupId);
-}
-%>
-
-<c:if test="<%= (artistId <= 0) && showToolbar %>">
-	<portlet:renderURL var="searchURL">
-		<portlet:param name="jspPage" value="/html/albums/view_search.jsp" />
-		<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
-	</portlet:renderURL>
-	
-	<aui:form action="<%= searchURL %>" method="post" name="fm">
-		<jsp:include page="/html/albums/toolbar.jsp" />
-	</aui:form>
-</c:if>
+<aui:form action="<%= searchURL %>" method="post" name="fm">
+	<jsp:include page="/html/albums/toolbar.jsp" />
+</aui:form>
 
 <c:choose>
 	<c:when test="<%= albums.isEmpty() %>">
 		<div class="alert alert-info">
 			<c:choose>
-				<c:when test="<%= artistId > 0 %>">
-					<liferay-ui:message key="this-artist-does-not-have-any-album" />
-				</c:when>
 				<c:otherwise>
 					<liferay-ui:message key="there-are-no-albums" />
 				</c:otherwise>

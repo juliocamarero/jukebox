@@ -16,13 +16,46 @@
 
 <%@ include file="../init.jsp" %>
 
-<liferay-ui:success key="artistAdded" message="the-artist-was-added-successfully" />
-<liferay-ui:success key="artistUpdated" message="the-artist-was-updated-successfully" />
-<liferay-ui:success key="artistDeleted" message="the-artist-was-deleted-successfully" />
-
 <%
-List<Artist> artists = ArtistServiceUtil.getArtists(scopeGroupId);
+String redirect = ParamUtil.getString(request, "redirect");
+
+String keywords = ParamUtil.getString(request, "keywords");
+
+Indexer indexer = IndexerRegistryUtil.getIndexer(Artist.class);
+
+SearchContext searchContext = SearchContextFactory.getInstance(request);
+
+searchContext.setIncludeDiscussions(true);
+searchContext.setKeywords(keywords);
+
+Hits hits = indexer.search(searchContext);
+
+List<Artist> artists = new ArrayList<Artist>();
+
+for (int i = 0; i < hits.getDocs().length; i++) {
+	Document doc = hits.doc(i);
+
+	long artistId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+
+	Artist artist = null;
+
+	try {
+		artist = ArtistLocalServiceUtil.getArtist(artistId);
+
+		artist = artist.toEscapedModel();
+	}
+	catch (Exception e) {
+		continue;
+	}
+
+	artists.add(artist);
+}
 %>
+
+<liferay-ui:header
+	backURL="<%= redirect %>"
+	title="search"
+/>
 
 <portlet:renderURL var="searchURL">
 	<portlet:param name="jspPage" value="/html/artists/view_search.jsp" />
