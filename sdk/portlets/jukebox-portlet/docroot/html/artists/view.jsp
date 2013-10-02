@@ -40,6 +40,14 @@ List<Artist> artists = ArtistServiceUtil.getArtists(scopeGroupId);
 			%>
 
 			<li>
+				<portlet:renderURL var="viewArtistURL">
+					<portlet:param name="jspPage" value="/html/artists/view_artist.jsp" />
+					<portlet:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
+					<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
+				</portlet:renderURL>
+
+				<aui:a href="<%= viewArtistURL %>" label="<%= artist.getName() %>" />
+
 				<%= artist.getName() %>
 
 				<c:if test="<%= ArtistPermission.contains(permissionChecker, artist.getArtistId(), ActionKeys.UPDATE) %>">
