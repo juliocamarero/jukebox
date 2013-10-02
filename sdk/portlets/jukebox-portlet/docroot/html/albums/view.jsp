@@ -52,7 +52,13 @@ List<Album> albums = AlbumServiceUtil.getAlbums(scopeGroupId);
 				Artist artist = ArtistLocalServiceUtil.getArtist(album.getArtistId());
 				%>
 
-				<%= album.getName() %>, <%= artist.getName() %>, <%= album.getYear() %>
+				<portlet:renderURL var="viewAlbumURL">
+					<portlet:param name="jspPage" value="/html/albums/view_album.jsp" />
+					<portlet:param name="albumId" value="<%= String.valueOf(album.getAlbumId())%>" />
+					<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
+				</portlet:renderURL>
+
+				<aui:a href="<%= viewAlbumURL %>" label="<%= album.getName() %>" />, <%= artist.getName() %>, <%= album.getYear() %>
 
 				<c:if test='<%= AlbumPermission.contains(permissionChecker, album.getAlbumId(), ActionKeys.UPDATE) %>'>
 					<portlet:renderURL var="editAlbumURL">

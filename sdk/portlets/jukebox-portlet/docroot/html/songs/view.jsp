@@ -54,7 +54,13 @@ List<Song> songs = SongServiceUtil.getSongs(scopeGroupId);
 					Album album = AlbumLocalServiceUtil.getAlbum(song.getAlbumId());
 					%>
 
-					<%= song.getName() %>, <%= artist.getName() %>, <%= album.getName() %>
+					<portlet:renderURL var="viewSongURL">
+						<portlet:param name="jspPage" value="/html/songs/view_song.jsp" />
+						<portlet:param name="songId" value="<%= String.valueOf(song.getSongId())%>" />
+						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
+					</portlet:renderURL>
+
+					<aui:a href="<%= viewSongURL %>" label="<%= song.getName() %>" />, <%= artist.getName() %>, <%= album.getName() %>
 
 					<c:if test='<%= SongPermission.contains(permissionChecker, song.getSongId(), ActionKeys.UPDATE) %>'>
 						<portlet:renderURL var="editSongURL">
