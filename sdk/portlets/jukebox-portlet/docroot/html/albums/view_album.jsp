@@ -21,17 +21,28 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 long albumId = ParamUtil.getLong(request, "albumId");
 
-Album album = AlbumLocalServiceUtil.getAlbum(albumId);
+Album album = null;
+
+if (albumId > 0) {
+	album = AlbumLocalServiceUtil.getAlbum(albumId);
+}
+else {
+	album = (Album)request.getAttribute("jukebox_album");
+}
 
 Artist artist = ArtistLocalServiceUtil.getArtist(album.getArtistId());
 
-List<Song> songs = SongServiceUtil.getSongs(albumId);
+List<Song> songs = SongLocalServiceUtil.getSongsByAlbumId(album.getAlbumId());
+
+boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 %>
 
-<liferay-ui:header
-	backURL="<%= redirect %>"
-	title="<%= album.getName() %>"
-/>
+<c:if test="<%= showHeader %>">
+	<liferay-ui:header
+		backURL="<%= redirect %>"
+		title="<%= album.getName() %>"
+	/>
+</c:if>
 
 <div class="album-artist">
 	<%= artist.getName() %>
@@ -41,8 +52,9 @@ List<Song> songs = SongServiceUtil.getSongs(albumId);
 	<div class="album-songs-number"><liferay-ui:message arguments="<%= songs.size() %>" key="x-songs" /></div>
 </div>
 
-<c:if test="<%= songs.isEmpty() %>">
+<c:if test="<%= !songs.isEmpty() %>">
 	<jsp:include page="/html/songs/view.jsp">
-		<jsp:param name="albumId" value="<%= String.valueOf(albumId) %>" />
+		<jsp:param name="albumId" value="<%= String.valueOf(album.getAlbumId()) %>" />
+		<jsp:param name="showToolbar" value="<%= String.valueOf(false) %>" />
 	</jsp:include>
 </c:if>

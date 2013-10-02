@@ -180,12 +180,10 @@ public class SongAssetRenderer extends BaseAssetRenderer {
 			String template)
 		throws Exception {
 
-		if (template.equals(TEMPLATE_ABSTRACT) ||
-			template.equals(TEMPLATE_FULL_CONTENT)) {
-
+		if (template.equals(TEMPLATE_FULL_CONTENT)) {
 			renderRequest.setAttribute("jukebox_song", _song);
 
-			return "/html/songs/asset" + template + ".jsp";
+			return "/html/songs/asset/" + template + ".jsp";
 		}
 		else {
 			return null;

@@ -18,6 +18,7 @@
 
 <%
 long artistId = ParamUtil.getLong(renderRequest, "artistId");
+boolean showToolbar = ParamUtil.getBoolean(request, "showToolbar", true);
 %>
 
 <liferay-ui:success key="albumAdded" message="the-album-was-added-successfully" />
@@ -67,7 +68,7 @@ else {
 }
 %>
 
-<c:if test="<%= artistId <= 0 %>">
+<c:if test="<%= (artistId <= 0) && showToolbar %>">
 	<liferay-portlet:renderURL varImpl="searchURL" />
 	
 	<aui:form action="<%= searchURL.toString() %>" method="get" name="fm">

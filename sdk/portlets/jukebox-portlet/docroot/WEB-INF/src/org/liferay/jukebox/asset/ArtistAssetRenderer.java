@@ -181,13 +181,10 @@ public class ArtistAssetRenderer extends BaseAssetRenderer {
 			RenderRequest renderRequest, RenderResponse renderResponse,
 			String template)
 		throws Exception {
-
-		if (template.equals(TEMPLATE_ABSTRACT) ||
-			template.equals(TEMPLATE_FULL_CONTENT)) {
-
+		if (template.equals(TEMPLATE_FULL_CONTENT)) {
 			renderRequest.setAttribute("jukebox_artist", _artist);
 
-			return "/html/artists/asset" + template + ".jsp";
+			return "/html/artists/asset/" + template + ".jsp";
 		}
 		else {
 			return null;

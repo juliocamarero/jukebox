@@ -21,17 +21,29 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 long songId = ParamUtil.getLong(request, "songId");
 
-Song song = SongLocalServiceUtil.getSong(songId);
+Song song = null;
+
+if (songId > 0) {
+	 song = SongLocalServiceUtil.getSong(songId);
+}
+else {
+	song = (Song)request.getAttribute("jukebox_song");
+}
 
 Album album = AlbumLocalServiceUtil.getAlbum(song.getAlbumId());
 
 Artist artist = ArtistLocalServiceUtil.getArtist(song.getArtistId());
+
+boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 %>
 
-<liferay-ui:header
-	backURL="<%= redirect %>"
-	title="<%= song.getName() %>"
-/>
+<c:if test="<%= showHeader %>">
+	<liferay-ui:header
+		backURL="<%= redirect %>"
+		title="<%= song.getName() %>"
+	/>
+</c:if>
+
 
 <div class="song-artist">
 	<%= artist.getName() %>
