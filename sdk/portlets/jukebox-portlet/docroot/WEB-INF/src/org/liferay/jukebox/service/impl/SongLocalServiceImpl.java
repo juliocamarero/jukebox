@@ -132,6 +132,10 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		return songPersistence.findByGroupId(groupId, start, end);
 	}
 
+	public List<Song> getSongsByAlbumId(long albumId) throws SystemException {
+		return songPersistence.findByAlbumId(albumId);
+	}
+
 	public int getSongsCount(long groupId) throws SystemException {
 		return songPersistence.countByGroupId(groupId);
 	}
