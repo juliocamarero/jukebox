@@ -406,7 +406,7 @@ public class ArtistWrapper implements Artist, ModelWrapper<Artist> {
 	}
 
 	@Override
-	public int compareTo(org.liferay.jukebox.model.Artist artist) {
+	public int compareTo(Artist artist) {
 		return _artist.compareTo(artist);
 	}
 
@@ -416,17 +416,17 @@ public class ArtistWrapper implements Artist, ModelWrapper<Artist> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<org.liferay.jukebox.model.Artist> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<Artist> toCacheModel() {
 		return _artist.toCacheModel();
 	}
 
 	@Override
-	public org.liferay.jukebox.model.Artist toEscapedModel() {
+	public Artist toEscapedModel() {
 		return new ArtistWrapper(_artist.toEscapedModel());
 	}
 
 	@Override
-	public org.liferay.jukebox.model.Artist toUnescapedModel() {
+	public Artist toUnescapedModel() {
 		return new ArtistWrapper(_artist.toUnescapedModel());
 	}
 

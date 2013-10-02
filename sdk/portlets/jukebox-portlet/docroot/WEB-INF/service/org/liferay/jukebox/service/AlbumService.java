@@ -71,14 +71,19 @@ public interface AlbumService extends BaseService, InvokableService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<org.liferay.jukebox.model.Album> getAlbums(
-		long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public org.liferay.jukebox.model.Album deleteAlbum(long albumId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<org.liferay.jukebox.model.Album> getAlbums(
 		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<org.liferay.jukebox.model.Album> getAlbums(
+		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -87,11 +92,6 @@ public interface AlbumService extends BaseService, InvokableService {
 
 	public org.liferay.jukebox.model.Album updateAlbum(long albumId,
 		long artistId, java.lang.String name, int year,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public org.liferay.jukebox.model.Album deleteAlbum(long albumId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

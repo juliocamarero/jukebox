@@ -66,10 +66,11 @@ public class AlbumServiceWrapper implements AlbumService,
 	}
 
 	@Override
-	public java.util.List<org.liferay.jukebox.model.Album> getAlbums(
-		long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _albumService.getAlbums(groupId);
+	public org.liferay.jukebox.model.Album deleteAlbum(long albumId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _albumService.deleteAlbum(albumId, serviceContext);
 	}
 
 	@Override
@@ -77,6 +78,13 @@ public class AlbumServiceWrapper implements AlbumService,
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _albumService.getAlbums(groupId, start, end);
+	}
+
+	@Override
+	public java.util.List<org.liferay.jukebox.model.Album> getAlbums(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _albumService.getAlbums(groupId);
 	}
 
 	@Override
@@ -93,14 +101,6 @@ public class AlbumServiceWrapper implements AlbumService,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _albumService.updateAlbum(albumId, artistId, name, year,
 			serviceContext);
-	}
-
-	@Override
-	public org.liferay.jukebox.model.Album deleteAlbum(long albumId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _albumService.deleteAlbum(albumId, serviceContext);
 	}
 
 	/**

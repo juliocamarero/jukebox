@@ -65,6 +65,14 @@ public class ArtistServiceWrapper implements ArtistService,
 	}
 
 	@Override
+	public org.liferay.jukebox.model.Artist deleteArtist(long artistId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _artistService.deleteArtist(artistId, serviceContext);
+	}
+
+	@Override
 	public java.util.List<org.liferay.jukebox.model.Artist> getArtists(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -91,14 +99,6 @@ public class ArtistServiceWrapper implements ArtistService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _artistService.updateArtist(artistId, name, serviceContext);
-	}
-
-	@Override
-	public org.liferay.jukebox.model.Artist deleteArtist(long artistId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _artistService.deleteArtist(artistId, serviceContext);
 	}
 
 	/**

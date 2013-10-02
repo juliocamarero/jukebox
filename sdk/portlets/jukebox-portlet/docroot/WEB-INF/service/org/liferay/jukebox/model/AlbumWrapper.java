@@ -460,7 +460,7 @@ public class AlbumWrapper implements Album, ModelWrapper<Album> {
 	}
 
 	@Override
-	public int compareTo(org.liferay.jukebox.model.Album album) {
+	public int compareTo(Album album) {
 		return _album.compareTo(album);
 	}
 
@@ -470,17 +470,17 @@ public class AlbumWrapper implements Album, ModelWrapper<Album> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<org.liferay.jukebox.model.Album> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<Album> toCacheModel() {
 		return _album.toCacheModel();
 	}
 
 	@Override
-	public org.liferay.jukebox.model.Album toEscapedModel() {
+	public Album toEscapedModel() {
 		return new AlbumWrapper(_album.toEscapedModel());
 	}
 
 	@Override
-	public org.liferay.jukebox.model.Album toUnescapedModel() {
+	public Album toUnescapedModel() {
 		return new AlbumWrapper(_album.toUnescapedModel());
 	}
 

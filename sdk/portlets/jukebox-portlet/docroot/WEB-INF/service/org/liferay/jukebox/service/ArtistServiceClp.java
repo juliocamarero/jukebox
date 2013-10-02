@@ -38,29 +38,29 @@ public class ArtistServiceClp implements ArtistService {
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName4 = "getArtists";
+		_methodName4 = "deleteArtist";
 
-		_methodParameterTypes4 = new String[] { "long" };
+		_methodParameterTypes4 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName5 = "getArtists";
 
-		_methodParameterTypes5 = new String[] { "long", "int", "int" };
+		_methodParameterTypes5 = new String[] { "long" };
 
-		_methodName6 = "getArtistsCount";
+		_methodName6 = "getArtists";
 
-		_methodParameterTypes6 = new String[] { "long" };
+		_methodParameterTypes6 = new String[] { "long", "int", "int" };
 
-		_methodName7 = "updateArtist";
+		_methodName7 = "getArtistsCount";
 
-		_methodParameterTypes7 = new String[] {
-				"long", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes7 = new String[] { "long" };
 
-		_methodName8 = "deleteArtist";
+		_methodName8 = "updateArtist";
 
 		_methodParameterTypes8 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"long", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -154,14 +154,53 @@ public class ArtistServiceClp implements ArtistService {
 	}
 
 	@Override
+	public org.liferay.jukebox.model.Artist deleteArtist(long artistId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName4,
+					_methodParameterTypes4,
+					new Object[] {
+						artistId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (org.liferay.jukebox.model.Artist)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public java.util.List<org.liferay.jukebox.model.Artist> getArtists(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName4,
-					_methodParameterTypes4, new Object[] { groupId });
+			returnObj = _invokableService.invokeMethod(_methodName5,
+					_methodParameterTypes5, new Object[] { groupId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -189,8 +228,8 @@ public class ArtistServiceClp implements ArtistService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName5,
-					_methodParameterTypes5, new Object[] { groupId, start, end });
+			returnObj = _invokableService.invokeMethod(_methodName6,
+					_methodParameterTypes6, new Object[] { groupId, start, end });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -217,8 +256,8 @@ public class ArtistServiceClp implements ArtistService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6, new Object[] { groupId });
+			returnObj = _invokableService.invokeMethod(_methodName7,
+					_methodParameterTypes7, new Object[] { groupId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -248,51 +287,12 @@ public class ArtistServiceClp implements ArtistService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7,
-					new Object[] {
-						artistId,
-						
-					ClpSerializer.translateInput(name),
-						
-					ClpSerializer.translateInput(serviceContext)
-					});
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
-				throw (com.liferay.portal.kernel.exception.PortalException)t;
-			}
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (org.liferay.jukebox.model.Artist)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public org.liferay.jukebox.model.Artist deleteArtist(long artistId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		try {
 			returnObj = _invokableService.invokeMethod(_methodName8,
 					_methodParameterTypes8,
 					new Object[] {
 						artistId,
+						
+					ClpSerializer.translateInput(name),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

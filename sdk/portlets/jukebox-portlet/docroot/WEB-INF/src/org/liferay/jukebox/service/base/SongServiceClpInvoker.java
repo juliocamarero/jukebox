@@ -39,29 +39,29 @@ public class SongServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName67 = "getSongs";
+		_methodName67 = "deleteSong";
 
-		_methodParameterTypes67 = new String[] { "long" };
+		_methodParameterTypes67 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName68 = "getSongs";
 
 		_methodParameterTypes68 = new String[] { "long", "int", "int" };
 
-		_methodName69 = "getSongsCount";
+		_methodName69 = "getSongs";
 
 		_methodParameterTypes69 = new String[] { "long" };
 
-		_methodName70 = "updateSong";
+		_methodName70 = "getSongsCount";
 
-		_methodParameterTypes70 = new String[] {
-				"long", "long", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes70 = new String[] { "long" };
 
-		_methodName71 = "deleteSong";
+		_methodName71 = "updateSong";
 
 		_methodParameterTypes71 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"long", "long", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -88,7 +88,8 @@ public class SongServiceClpInvoker {
 
 		if (_methodName67.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
-			return SongServiceUtil.getSongs(((Long)arguments[0]).longValue());
+			return SongServiceUtil.deleteSong(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName68.equals(name) &&
@@ -100,21 +101,20 @@ public class SongServiceClpInvoker {
 
 		if (_methodName69.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
-			return SongServiceUtil.getSongsCount(((Long)arguments[0]).longValue());
+			return SongServiceUtil.getSongs(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName70.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
-			return SongServiceUtil.updateSong(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue(),
-				(java.lang.String)arguments[2],
-				(com.liferay.portal.service.ServiceContext)arguments[3]);
+			return SongServiceUtil.getSongsCount(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName71.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
-			return SongServiceUtil.deleteSong(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
+			return SongServiceUtil.updateSong(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				(java.lang.String)arguments[2],
+				(com.liferay.portal.service.ServiceContext)arguments[3]);
 		}
 
 		throw new UnsupportedOperationException();

@@ -39,29 +39,29 @@ public class SongServiceClp implements SongService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName4 = "getSongs";
+		_methodName4 = "deleteSong";
 
-		_methodParameterTypes4 = new String[] { "long" };
+		_methodParameterTypes4 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName5 = "getSongs";
 
 		_methodParameterTypes5 = new String[] { "long", "int", "int" };
 
-		_methodName6 = "getSongsCount";
+		_methodName6 = "getSongs";
 
 		_methodParameterTypes6 = new String[] { "long" };
 
-		_methodName7 = "updateSong";
+		_methodName7 = "getSongsCount";
 
-		_methodParameterTypes7 = new String[] {
-				"long", "long", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes7 = new String[] { "long" };
 
-		_methodName8 = "deleteSong";
+		_methodName8 = "updateSong";
 
 		_methodParameterTypes8 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"long", "long", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -158,16 +158,27 @@ public class SongServiceClp implements SongService {
 	}
 
 	@Override
-	public java.util.List<org.liferay.jukebox.model.Song> getSongs(long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public org.liferay.jukebox.model.Song deleteSong(long songId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName4,
-					_methodParameterTypes4, new Object[] { groupId });
+					_methodParameterTypes4,
+					new Object[] {
+						songId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
 
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
@@ -182,7 +193,7 @@ public class SongServiceClp implements SongService {
 			}
 		}
 
-		return (java.util.List<org.liferay.jukebox.model.Song>)ClpSerializer.translateOutput(returnObj);
+		return (org.liferay.jukebox.model.Song)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -215,13 +226,41 @@ public class SongServiceClp implements SongService {
 	}
 
 	@Override
-	public int getSongsCount(long groupId)
+	public java.util.List<org.liferay.jukebox.model.Song> getSongs(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName6,
 					_methodParameterTypes6, new Object[] { groupId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<org.liferay.jukebox.model.Song>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public int getSongsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName7,
+					_methodParameterTypes7, new Object[] { groupId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -251,53 +290,14 @@ public class SongServiceClp implements SongService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7,
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8,
 					new Object[] {
 						songId,
 						
 					albumId,
 						
 					ClpSerializer.translateInput(name),
-						
-					ClpSerializer.translateInput(serviceContext)
-					});
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
-				throw (com.liferay.portal.kernel.exception.PortalException)t;
-			}
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (org.liferay.jukebox.model.Song)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public org.liferay.jukebox.model.Song deleteSong(long songId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableService.invokeMethod(_methodName8,
-					_methodParameterTypes8,
-					new Object[] {
-						songId,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

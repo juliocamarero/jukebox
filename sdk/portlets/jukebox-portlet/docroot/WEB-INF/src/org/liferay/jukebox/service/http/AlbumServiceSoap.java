@@ -79,12 +79,14 @@ public class AlbumServiceSoap {
 		}
 	}
 
-	public static org.liferay.jukebox.model.AlbumSoap[] getAlbums(long groupId)
+	public static org.liferay.jukebox.model.AlbumSoap deleteAlbum(
+		long albumId, com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			java.util.List<org.liferay.jukebox.model.Album> returnValue = AlbumServiceUtil.getAlbums(groupId);
+			org.liferay.jukebox.model.Album returnValue = AlbumServiceUtil.deleteAlbum(albumId,
+					serviceContext);
 
-			return org.liferay.jukebox.model.AlbumSoap.toSoapModels(returnValue);
+			return org.liferay.jukebox.model.AlbumSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -98,6 +100,20 @@ public class AlbumServiceSoap {
 		try {
 			java.util.List<org.liferay.jukebox.model.Album> returnValue = AlbumServiceUtil.getAlbums(groupId,
 					start, end);
+
+			return org.liferay.jukebox.model.AlbumSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static org.liferay.jukebox.model.AlbumSoap[] getAlbums(long groupId)
+		throws RemoteException {
+		try {
+			java.util.List<org.liferay.jukebox.model.Album> returnValue = AlbumServiceUtil.getAlbums(groupId);
 
 			return org.liferay.jukebox.model.AlbumSoap.toSoapModels(returnValue);
 		}
@@ -128,22 +144,6 @@ public class AlbumServiceSoap {
 		try {
 			org.liferay.jukebox.model.Album returnValue = AlbumServiceUtil.updateAlbum(albumId,
 					artistId, name, year, serviceContext);
-
-			return org.liferay.jukebox.model.AlbumSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static org.liferay.jukebox.model.AlbumSoap deleteAlbum(
-		long albumId, com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			org.liferay.jukebox.model.Album returnValue = AlbumServiceUtil.deleteAlbum(albumId,
-					serviceContext);
 
 			return org.liferay.jukebox.model.AlbumSoap.toSoapModel(returnValue);
 		}
