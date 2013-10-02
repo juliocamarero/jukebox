@@ -24,8 +24,6 @@ long artistId = ParamUtil.getLong(renderRequest, "artistId");
 <liferay-ui:success key="albumUpdated" message="the-album-was-updated-successfully" />
 <liferay-ui:success key="albumDeleted" message="the-album-was-deleted-successfully" />
 
-<jsp:include page="/html/albums/toolbar.jsp" />
-
 <%
 List<Album> albums = null;
 
@@ -36,6 +34,10 @@ else {
 	albums = AlbumServiceUtil.getAlbums(scopeGroupId);
 }
 %>
+
+<c:if test="<%= artistId <= 0 %>">
+	<jsp:include page="/html/albums/toolbar.jsp" />
+</c:if>
 
 <c:choose>
 	<c:when test="<%= albums.isEmpty() %>">

@@ -24,16 +24,6 @@ long albumId = ParamUtil.getLong(renderRequest, "albumId");
 <liferay-ui:success key="songUpdated" message="the-song-was-updated-successfully" />
 <liferay-ui:success key="songDeleted" message="the-song-was-deleted-successfully" />
 
-<jsp:include page="/html/songs/toolbar.jsp" />
-
-<c:if test='<%= JukeBoxPermission.contains(permissionChecker, scopeGroupId, "ADD_SONG") %>'>
-	<portlet:renderURL var="editSongURL">
-		<portlet:param name="jspPage" value="/html/songs/edit_song.jsp" />
-		<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
-	</portlet:renderURL>
-
-	<liferay-ui:icon image="add" label="<%= true %>" message="add-song" url="<%= editSongURL %>" />
-</c:if>
 
 <%
 List<Song> songs = null;
@@ -45,6 +35,10 @@ else {
 	songs = SongServiceUtil.getSongs(scopeGroupId);
 }
 %>
+
+<c:if test="<%= albumId <= 0 %>">
+	<jsp:include page="/html/songs/toolbar.jsp" />
+</c:if>
 
 <c:choose>
 	<c:when test="<%= songs.isEmpty() %>">

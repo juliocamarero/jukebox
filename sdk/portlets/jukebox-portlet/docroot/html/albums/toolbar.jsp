@@ -28,7 +28,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem");
 				<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 			</portlet:renderURL>
 
-			<aui:nav-item href="<%= editAlbumURL %>" iconClass="icon-plus" label="add" selected='<%= toolbarItem.equals("add") %>' />
+			<aui:nav-item href="<%= editAlbumURL %>" iconClass="icon-plus" label="add-album" selected='<%= toolbarItem.equals("add") %>' />
 		</c:if>
 	</aui:nav>
 
