@@ -52,12 +52,14 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 	<div class="song-year">(<%= album.getYear() %>)</div>
 </div>
 
-<portlet:actionURL name="invokeTaglibDiscussion" var="discussionURL" />
+<c:if test="<%= showHeader %>">
+	<portlet:actionURL name="invokeTaglibDiscussion" var="discussionURL" />
 
-<liferay-ui:discussion
-	className="<%= Song.class.getName() %>"
-	classPK="<%= song.getSongId() %>"
-	formAction="<%= discussionURL %>"
-	formName="fm2"
-	userId="<%= song.getUserId() %>"
-/>
+	<liferay-ui:discussion
+		className="<%= Song.class.getName() %>"
+		classPK="<%= song.getSongId() %>"
+		formAction="<%= discussionURL %>"
+		formName="fm2"
+		userId="<%= song.getUserId() %>"
+	/>
+</c:if>
