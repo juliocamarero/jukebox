@@ -39,6 +39,7 @@
 <%@ page import="org.liferay.jukebox.service.permission.AlbumPermission" %>
 <%@ page import="org.liferay.jukebox.service.permission.SongPermission" %>
 
+<%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 
 <%@ page import="com.liferay.portal.security.permission.ActionKeys" %>

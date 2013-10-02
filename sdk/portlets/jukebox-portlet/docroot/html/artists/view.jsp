@@ -20,14 +20,7 @@
 <liferay-ui:success key="artistUpdated" message="the-artist-was-updated-successfully" />
 <liferay-ui:success key="artistDeleted" message="the-artist-was-deleted-successfully" />
 
-<c:if test='<%= JukeBoxPermission.contains(permissionChecker, scopeGroupId, "ADD_ARTIST") %>'>
-	<portlet:renderURL var="editArtistURL">
-		<portlet:param name="jspPage" value="/html/artists/edit_artist.jsp" />
-		<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
-	</portlet:renderURL>
-
-	<liferay-ui:icon image="add" label="<%= true %>" message="add-artist" url="<%= editArtistURL %>" />
-</c:if>
+<jsp:include page="/html/artists/toolbar.jsp" />
 
 <%
 List<Artist> artists = ArtistServiceUtil.getArtists(scopeGroupId);

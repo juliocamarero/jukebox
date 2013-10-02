@@ -16,13 +16,15 @@
 
 <%@ include file="../init.jsp" %>
 
+<%
+long albumId = ParamUtil.getLong(renderRequest, "albumId");
+%>
+
 <liferay-ui:success key="songAdded" message="the-song-was-added-successfully" />
 <liferay-ui:success key="songUpdated" message="the-song-was-updated-successfully" />
 <liferay-ui:success key="songDeleted" message="the-song-was-deleted-successfully" />
 
-<%
-long albumId = ParamUtil.getLong(renderRequest, "albumId");
-%>
+<jsp:include page="/html/songs/toolbar.jsp" />
 
 <c:if test='<%= JukeBoxPermission.contains(permissionChecker, scopeGroupId, "ADD_SONG") %>'>
 	<portlet:renderURL var="editSongURL">

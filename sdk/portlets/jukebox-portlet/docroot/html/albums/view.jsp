@@ -24,14 +24,7 @@ long artistId = ParamUtil.getLong(renderRequest, "artistId");
 <liferay-ui:success key="albumUpdated" message="the-album-was-updated-successfully" />
 <liferay-ui:success key="albumDeleted" message="the-album-was-deleted-successfully" />
 
-<c:if test='<%= JukeBoxPermission.contains(permissionChecker, scopeGroupId, "ADD_ALBUM") %>'>
-	<portlet:renderURL var="editAlbumURL">
-		<portlet:param name="jspPage" value="/html/albums/edit_album.jsp" />
-		<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
-	</portlet:renderURL>
-
-	<liferay-ui:icon image="add" label="<%= true %>" message="add-album" url="<%= editAlbumURL %>" />
-</c:if>
+<jsp:include page="/html/albums/toolbar.jsp" />
 
 <%
 List<Album> albums = null;
