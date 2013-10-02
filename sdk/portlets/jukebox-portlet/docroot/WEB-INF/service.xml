@@ -5,7 +5,7 @@
 	<service-builder package-path="org.liferay.jukebox">
 	<author>Julio Camarero</author>
 	<namespace>jukebox</namespace>
-	<entity name="Artist" local-service="true" remote-service="true" uuid="true">
+	<entity name="Artist" local-service="true" remote-service="true" uuid="true" trash-enabled="true">
 
 		<!-- Primary key column -->
 
@@ -52,7 +52,7 @@
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 	</entity>
-	<entity name="Album" local-service="true" remote-service="true" uuid="true">
+	<entity name="Album" local-service="true" remote-service="true" uuid="true" trash-enabled="true">
 
 		<!-- Primary key column -->
 
@@ -109,7 +109,7 @@
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 	</entity>
-	<entity name="Song" local-service="true" remote-service="true" uuid="true">
+	<entity name="Song" local-service="true" remote-service="true" uuid="true" trash-enabled="true">
 
 		<!-- Primary key column -->
 
