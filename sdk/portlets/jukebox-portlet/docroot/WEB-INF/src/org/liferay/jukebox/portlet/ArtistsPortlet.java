@@ -113,4 +113,7 @@ public class ArtistsPortlet extends MVCPortlet {
 			}
 		}
 	}
+
+	public final static String PORTLET_ID = "artists_WAR_jukeboxportlet";
+
 }

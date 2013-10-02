@@ -20,18 +20,19 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-import org.liferay.jukebox.SongNameException;
-import org.liferay.jukebox.model.Song;
-import org.liferay.jukebox.service.SongServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+
+import org.liferay.jukebox.SongNameException;
+import org.liferay.jukebox.model.Song;
+import org.liferay.jukebox.service.SongServiceUtil;
 
 /**
  * @author Julio Camarero
  */
 public class SongsPortlet extends MVCPortlet {
-	
+
 	public void addSong(ActionRequest request, ActionResponse response)
 		throws Exception {
 
@@ -94,8 +95,7 @@ public class SongsPortlet extends MVCPortlet {
 			Song.class.getName(), request);
 
 		try {
-			SongServiceUtil.updateSong(
-				songId, albumId, name, serviceContext);
+			SongServiceUtil.updateSong(songId, albumId, name, serviceContext);
 
 			SessionMessages.add(request, "songUpdated");
 
@@ -115,4 +115,7 @@ public class SongsPortlet extends MVCPortlet {
 			}
 		}
 	}
+
+	public final static String PORTLET_ID = "songs_WAR_jukeboxportlet";
+
 }

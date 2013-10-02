@@ -5,6 +5,7 @@
 	<portlet>
 		<portlet-name>artists</portlet-name>
 		<icon>/icons/artists.png</icon>
+		<asset-renderer-factory>org.liferay.jukebox.asset.ArtistAssetRendererFactory</asset-renderer-factory>
 		<instanceable>false</instanceable>
 		<scopeable>true</scopeable>
 		<header-portlet-css>/css/artists.css</header-portlet-css>
@@ -14,6 +15,7 @@
 	<portlet>
 		<portlet-name>albums</portlet-name>
 		<icon>/icons/albums.png</icon>
+		<asset-renderer-factory>org.liferay.jukebox.asset.AlbumAssetRendererFactory</asset-renderer-factory>
 		<instanceable>false</instanceable>
 		<scopeable>true</scopeable>
 		<header-portlet-css>/css/albums.css</header-portlet-css>
@@ -23,6 +25,7 @@
 	<portlet>
 		<portlet-name>songs</portlet-name>
 		<icon>/icons/songs.png</icon>
+		<asset-renderer-factory>org.liferay.jukebox.asset.SongAssetRendererFactory</asset-renderer-factory>
 		<instanceable>false</instanceable>
 		<scopeable>true</scopeable>
 		<header-portlet-css>/css/songs.css</header-portlet-css>

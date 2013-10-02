@@ -16,6 +16,7 @@ package org.liferay.jukebox.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 
 import java.util.List;
@@ -55,7 +56,7 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 	public Song deleteSong(long songId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		SongPermission.check(getPermissionChecker(), songId, "DELETE");
+		SongPermission.check(getPermissionChecker(), songId, ActionKeys.DELETE);
 
 		return songLocalService.deleteSong(songId);
 	} public List<Song> getSongs(long groupId, int start, int end)
@@ -77,7 +78,7 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		SongPermission.check(getPermissionChecker(), songId, "UPDATE");
+		SongPermission.check(getPermissionChecker(), songId, ActionKeys.UPDATE);
 
 		return songLocalService.updateSong(
 			getUserId(), songId, albumId, name, serviceContext);

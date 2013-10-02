@@ -16,6 +16,7 @@ package org.liferay.jukebox.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 
 import java.util.List;
@@ -55,7 +56,8 @@ public class AlbumServiceImpl extends AlbumServiceBaseImpl {
 	public Album deleteAlbum(long albumId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		AlbumPermission.check(getPermissionChecker(), albumId, "DELETE");
+		AlbumPermission.check(
+			getPermissionChecker(), albumId, ActionKeys.DELETE);
 
 		return albumLocalService.deleteAlbum(albumId);
 	} public List<Album> getAlbums(long groupId, int start, int end)
@@ -77,7 +79,8 @@ public class AlbumServiceImpl extends AlbumServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		AlbumPermission.check(getPermissionChecker(), albumId, "UPDATE");
+		AlbumPermission.check(
+			getPermissionChecker(), albumId, ActionKeys.UPDATE);
 
 		return albumLocalService.updateAlbum(
 			getUserId(), albumId, artistId, name, year, serviceContext);

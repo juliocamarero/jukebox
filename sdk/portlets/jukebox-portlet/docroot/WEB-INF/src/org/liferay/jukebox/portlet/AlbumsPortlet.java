@@ -20,12 +20,13 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-import org.liferay.jukebox.AlbumNameException;
-import org.liferay.jukebox.model.Album;
-import org.liferay.jukebox.service.AlbumServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+
+import org.liferay.jukebox.AlbumNameException;
+import org.liferay.jukebox.model.Album;
+import org.liferay.jukebox.service.AlbumServiceUtil;
 
 /**
  * @author Julio Camarero
@@ -117,4 +118,7 @@ public class AlbumsPortlet extends MVCPortlet {
 			}
 		}
 	}
+
+	public final static String PORTLET_ID = "albums_WAR_jukeboxportlet";
+
 }

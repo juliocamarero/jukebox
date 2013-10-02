@@ -16,6 +16,7 @@ package org.liferay.jukebox.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 
 import java.util.List;
@@ -54,7 +55,8 @@ public class ArtistServiceImpl extends ArtistServiceBaseImpl {
 	public Artist deleteArtist(long artistId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		ArtistPermission.check(getPermissionChecker(), artistId, "DELETE");
+		ArtistPermission.check(
+			getPermissionChecker(), artistId, ActionKeys.DELETE);
 
 		return artistLocalService.deleteArtist(artistId);
 	}
@@ -77,7 +79,8 @@ public class ArtistServiceImpl extends ArtistServiceBaseImpl {
 			long artistId, String name, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		ArtistPermission.check(getPermissionChecker(), artistId, "UPDATE");
+		ArtistPermission.check(
+			getPermissionChecker(), artistId, ActionKeys.UPDATE);
 
 		return artistLocalService.updateArtist(
 			getUserId(), artistId, name, serviceContext);
