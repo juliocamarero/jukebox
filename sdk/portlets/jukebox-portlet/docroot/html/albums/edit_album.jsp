@@ -41,7 +41,7 @@ if (albumId > 0) {
 	<aui:input name="albumId" type="hidden" value="<%= albumId %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-	<aui:select label="artis" name="artistId">
+	<aui:select label="artist" name="artistId">
 
 		<%
 		List<Artist> artists = ArtistLocalServiceUtil.getArtists(scopeGroupId);
