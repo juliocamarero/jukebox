@@ -16,6 +16,8 @@ package org.liferay.jukebox.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
@@ -66,6 +68,7 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 			guestPermissions);
 	}
 
+	@Indexable(type = IndexableType.REINDEX)
 	public Song addSong(
 			long userId, long albumId, String name,
 			ServiceContext serviceContext)
@@ -153,6 +156,7 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 			null, null, 0, 0, null, false);
 	}
 
+	@Indexable(type = IndexableType.REINDEX)
 	public Song updateSong(
 			long userId, long songId, long albumId, String name,
 			ServiceContext serviceContext)

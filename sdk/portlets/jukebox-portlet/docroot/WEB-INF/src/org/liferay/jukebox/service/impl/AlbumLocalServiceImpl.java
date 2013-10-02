@@ -16,6 +16,8 @@ package org.liferay.jukebox.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
@@ -44,6 +46,7 @@ import org.liferay.jukebox.service.base.AlbumLocalServiceBaseImpl;
  */
 public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 
+	@Indexable(type = IndexableType.REINDEX)
 	public Album addAlbum(
 			long userId, long artistId, String name, int year,
 			ServiceContext serviceContext)
@@ -138,6 +141,7 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 		return albumPersistence.countByGroupId(groupId);
 	}
 
+	@Indexable(type = IndexableType.REINDEX)
 	public Album updateAlbum(
 			long userId, long albumId, long artistId, String name, int year,
 			ServiceContext serviceContext)
