@@ -384,6 +384,13 @@ public class SongLocalServiceWrapper implements SongLocalService,
 	}
 
 	@Override
+	public java.util.List<org.liferay.jukebox.model.Song> getSongsByAlbumId(
+		long albumId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _songLocalService.getSongsByAlbumId(albumId);
+	}
+
+	@Override
 	public int getSongsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _songLocalService.getSongsCount(groupId);

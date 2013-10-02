@@ -152,20 +152,24 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 
 		_methodParameterTypes27 = new String[] { "long", "int", "int" };
 
-		_methodName28 = "getAlbumsCount";
+		_methodName28 = "getAlbumsByArtistId";
 
 		_methodParameterTypes28 = new String[] { "long" };
 
-		_methodName29 = "updateAlbum";
+		_methodName29 = "getAlbumsCount";
 
-		_methodParameterTypes29 = new String[] {
+		_methodParameterTypes29 = new String[] { "long" };
+
+		_methodName30 = "updateAlbum";
+
+		_methodParameterTypes30 = new String[] {
 				"long", "long", "long", "java.lang.String", "int",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName30 = "updateAsset";
+		_methodName31 = "updateAsset";
 
-		_methodParameterTypes30 = new String[] {
+		_methodParameterTypes31 = new String[] {
 				"long", "org.liferay.jukebox.model.Album", "long[][]",
 				"java.lang.String[][]"
 			};
@@ -1027,13 +1031,42 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 	}
 
 	@Override
-	public int getAlbumsCount(long groupId)
+	public java.util.List<org.liferay.jukebox.model.Album> getAlbumsByArtistId(
+		long artistId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName28,
-					_methodParameterTypes28, new Object[] { groupId });
+					_methodParameterTypes28, new Object[] { artistId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<org.liferay.jukebox.model.Album>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public int getAlbumsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName29,
+					_methodParameterTypes29, new Object[] { groupId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1063,8 +1096,8 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName29,
-					_methodParameterTypes29,
+			returnObj = _invokableLocalService.invokeMethod(_methodName30,
+					_methodParameterTypes30,
 					new Object[] {
 						userId,
 						
@@ -1108,8 +1141,8 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			_invokableLocalService.invokeMethod(_methodName30,
-				_methodParameterTypes30,
+			_invokableLocalService.invokeMethod(_methodName31,
+				_methodParameterTypes31,
 				new Object[] {
 					userId,
 					
@@ -1202,4 +1235,6 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 	private String[] _methodParameterTypes29;
 	private String _methodName30;
 	private String[] _methodParameterTypes30;
+	private String _methodName31;
+	private String[] _methodParameterTypes31;
 }

@@ -366,6 +366,12 @@ public class SongLocalServiceUtil {
 		return getService().getSongs(groupId, start, end);
 	}
 
+	public static java.util.List<org.liferay.jukebox.model.Song> getSongsByAlbumId(
+		long albumId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getSongsByAlbumId(albumId);
+	}
+
 	public static int getSongsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getSongsCount(groupId);

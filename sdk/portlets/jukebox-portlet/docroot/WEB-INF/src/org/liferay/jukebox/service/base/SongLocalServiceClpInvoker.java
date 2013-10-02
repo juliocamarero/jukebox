@@ -152,20 +152,24 @@ public class SongLocalServiceClpInvoker {
 
 		_methodParameterTypes90 = new String[] { "long", "int", "int" };
 
-		_methodName91 = "getSongsCount";
+		_methodName91 = "getSongsByAlbumId";
 
 		_methodParameterTypes91 = new String[] { "long" };
 
-		_methodName92 = "updateAsset";
+		_methodName92 = "getSongsCount";
 
-		_methodParameterTypes92 = new String[] {
+		_methodParameterTypes92 = new String[] { "long" };
+
+		_methodName93 = "updateAsset";
+
+		_methodParameterTypes93 = new String[] {
 				"long", "org.liferay.jukebox.model.Song", "long[][]",
 				"java.lang.String[][]"
 			};
 
-		_methodName93 = "updateSong";
+		_methodName94 = "updateSong";
 
-		_methodParameterTypes93 = new String[] {
+		_methodParameterTypes94 = new String[] {
 				"long", "long", "long", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
@@ -336,11 +340,16 @@ public class SongLocalServiceClpInvoker {
 
 		if (_methodName91.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
-			return SongLocalServiceUtil.getSongsCount(((Long)arguments[0]).longValue());
+			return SongLocalServiceUtil.getSongsByAlbumId(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName92.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes92, parameterTypes)) {
+			return SongLocalServiceUtil.getSongsCount(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName93.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes93, parameterTypes)) {
 			SongLocalServiceUtil.updateAsset(((Long)arguments[0]).longValue(),
 				(org.liferay.jukebox.model.Song)arguments[1],
 				(long[])arguments[2], (java.lang.String[])arguments[3]);
@@ -348,8 +357,8 @@ public class SongLocalServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName93.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes93, parameterTypes)) {
+		if (_methodName94.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes94, parameterTypes)) {
 			return SongLocalServiceUtil.updateSong(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
@@ -420,4 +429,6 @@ public class SongLocalServiceClpInvoker {
 	private String[] _methodParameterTypes92;
 	private String _methodName93;
 	private String[] _methodParameterTypes93;
+	private String _methodName94;
+	private String[] _methodParameterTypes94;
 }

@@ -387,6 +387,13 @@ public class AlbumLocalServiceWrapper implements AlbumLocalService,
 	}
 
 	@Override
+	public java.util.List<org.liferay.jukebox.model.Album> getAlbumsByArtistId(
+		long artistId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _albumLocalService.getAlbumsByArtistId(artistId);
+	}
+
+	@Override
 	public int getAlbumsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _albumLocalService.getAlbumsCount(groupId);
