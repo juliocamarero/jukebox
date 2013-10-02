@@ -45,5 +45,13 @@ if (artistId > 0) {
 
 	<aui:button-row>
 		<aui:button type="submit" />
+
+		<c:if test="<%= artist != null %>">
+			<portlet:actionURL name="deleteArtist" var="deleteArtistURL">
+				<portlet:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
+			</portlet:actionURL>
+
+			<aui:button cssClass="btn-danger" href="<%= deleteArtistURL %>" value="delete" />
+		</c:if>
 	</aui:button-row>
 </aui:form>

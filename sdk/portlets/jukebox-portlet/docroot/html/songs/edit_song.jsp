@@ -41,9 +41,7 @@ if (songId > 0) {
 	<aui:input name="songId" type="hidden" value="<%= songId %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-	<aui:input name="name" />
-
-	<aui:select name="albumId">
+	<aui:select label="album" name="albumId">
 
 		<%
 		List<Album> albums = AlbumLocalServiceUtil.getAlbums(scopeGroupId);
@@ -59,7 +57,17 @@ if (songId > 0) {
 
 	</aui:select>
 
+	<aui:input name="name" />
+
 	<aui:button-row>
 		<aui:button type="submit" />
+
+		<c:if test="<%= song != null %>">
+			<portlet:actionURL name="deleteSong" var="deleteSongURL">
+				<portlet:param name="songId" value="<%= String.valueOf(song.getSongId()) %>" />
+			</portlet:actionURL>
+
+			<aui:button cssClass="btn-danger" href="<%= deleteSongURL %>" value="delete" />
+		</c:if>
 	</aui:button-row>
 </aui:form>
