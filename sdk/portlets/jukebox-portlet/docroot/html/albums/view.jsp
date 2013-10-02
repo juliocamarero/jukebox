@@ -16,6 +16,10 @@
 
 <%@ include file="../init.jsp" %>
 
+<%
+long artistId = ParamUtil.getLong(renderRequest, "artistId");
+%>
+
 <liferay-ui:success key="albumAdded" message="the-album-was-added-successfully" />
 <liferay-ui:success key="albumUpdated" message="the-album-was-updated-successfully" />
 <liferay-ui:success key="albumDeleted" message="the-album-was-deleted-successfully" />
@@ -30,13 +34,27 @@
 </c:if>
 
 <%
-List<Album> albums = AlbumServiceUtil.getAlbums(scopeGroupId);
+List<Album> albums = null;
+
+if (artistId > 0) {
+	albums = AlbumLocalServiceUtil.getAlbumsByArtistId(artistId);
+}
+else {
+	albums = AlbumServiceUtil.getAlbums(scopeGroupId);
+}
 %>
 
 <c:choose>
 	<c:when test="<%= albums.isEmpty() %>">
 		<div class="alert alert-info">
-			<liferay-ui:message key="there-are-no-albums" />
+			<c:choose>
+				<c:when test="<%= artistId > 0 %>">
+					<liferay-ui:message key="this-artist-does-not-have-any-album" />
+				</c:when>
+				<c:otherwise>
+					<liferay-ui:message key="there-are-no-albums" />
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</c:when>
 	<c:otherwise>

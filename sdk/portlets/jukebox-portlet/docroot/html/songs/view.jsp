@@ -20,6 +20,10 @@
 <liferay-ui:success key="songUpdated" message="the-song-was-updated-successfully" />
 <liferay-ui:success key="songDeleted" message="the-song-was-deleted-successfully" />
 
+<%
+long albumId = ParamUtil.getLong(renderRequest, "albumId");
+%>
+
 <c:if test='<%= JukeBoxPermission.contains(permissionChecker, scopeGroupId, "ADD_SONG") %>'>
 	<portlet:renderURL var="editSongURL">
 		<portlet:param name="jspPage" value="/html/songs/edit_song.jsp" />
@@ -30,13 +34,27 @@
 </c:if>
 
 <%
-List<Song> songs = SongServiceUtil.getSongs(scopeGroupId);
+List<Song> songs = null;
+
+if (albumId > 0) {
+	songs = SongLocalServiceUtil.getSongsByAlbumId(albumId);
+}
+else {
+	songs = SongServiceUtil.getSongs(scopeGroupId);
+}
 %>
 
 <c:choose>
 	<c:when test="<%= songs.isEmpty() %>">
 		<div class="alert alert-info">
-			<liferay-ui:message key="there-are-no-songs" />
+			<c:choose>
+				<c:when test="<%= albumId > 0 %>">
+					<liferay-ui:message key="this-album-does-not-have-any-song" />
+				</c:when>
+				<c:otherwise>
+					<liferay-ui:message key="there-are-no-songs" />
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</c:when>
 	<c:otherwise>
