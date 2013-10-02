@@ -16,6 +16,10 @@
 
 <%@ include file="../init.jsp" %>
 
+<liferay-ui:success key="artistAdded" message="the-artist-was-added-successfully" />
+<liferay-ui:success key="artistUpdated" message="the-artist-was-updated-successfully" />
+<liferay-ui:success key="artistDeleted" message="the-artist-was-deleted-successfully" />
+
 <c:if test='<%= JukeBoxPermission.contains(permissionChecker, scopeGroupId, "ADD_ARTIST") %>'>
 	<portlet:renderURL var="editArtistURL">
 		<portlet:param name="jspPage" value="/html/artists/edit_artist.jsp" />

@@ -16,6 +16,10 @@
 
 <%@ include file="../init.jsp" %>
 
+<liferay-ui:success key="songAdded" message="the-song-was-added-successfully" />
+<liferay-ui:success key="songUpdated" message="the-song-was-updated-successfully" />
+<liferay-ui:success key="songDeleted" message="the-song-was-deleted-successfully" />
+
 <c:if test='<%= JukeBoxPermission.contains(permissionChecker, scopeGroupId, "ADD_SONG") %>'>
 	<portlet:renderURL var="editSongURL">
 		<portlet:param name="jspPage" value="/html/songs/edit_song.jsp" />
