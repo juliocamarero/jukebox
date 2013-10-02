@@ -39,3 +39,13 @@ Artist artist = ArtistLocalServiceUtil.getArtist(song.getArtistId());
 	<div class="song-album">(<%= album.getName() %>)</div>
 	<div class="song-year">(<%= album.getYear() %>)</div>
 </div>
+
+<portlet:actionURL name="invokeTaglibDiscussion" var="discussionURL" />
+
+<liferay-ui:discussion
+	className="<%= Song.class.getName() %>"
+	classPK="<%= song.getSongId() %>"
+	formAction="<%= discussionURL %>"
+	formName="fm2"
+	userId="<%= song.getUserId() %>"
+/>

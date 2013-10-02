@@ -40,3 +40,13 @@ List<Album> albums = AlbumServiceUtil.getAlbums(artistId);
 		<jsp:param name="artistId" value="<%= String.valueOf(artistId) %>" />
 	</jsp:include>
 </c:if>
+
+<portlet:actionURL name="invokeTaglibDiscussion" var="discussionURL" />
+
+<liferay-ui:discussion
+	className="<%= Artist.class.getName() %>"
+	classPK="<%= artist.getArtistId() %>"
+	formAction="<%= discussionURL %>"
+	formName="fm2"
+	userId="<%= artist.getUserId() %>"
+/>
