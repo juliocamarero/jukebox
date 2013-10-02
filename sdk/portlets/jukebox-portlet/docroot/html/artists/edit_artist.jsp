@@ -33,7 +33,7 @@ if (artistId > 0) {
 	title='<%= (artist != null) ? artist.getName() : "new-artist" %>'
 />
 
-<portlet:actionURL name="addArtist" var="addArtistURL" />
+<portlet:actionURL name='<%= (artist != null) ? "updateArtist" : "addArtist" %>' var="addArtistURL" />
 
 <aui:form action="<%= addArtistURL %>" method="post" name="fm">
 	<aui:model-context bean="<%= artist %>" model="<%= Artist.class %>" />
