@@ -42,6 +42,8 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 	/>
 </c:if>
 
+<%= artist.getBio() %>
+
 <%
 String imageURL = artist.getImageURL(themeDisplay);
 %>

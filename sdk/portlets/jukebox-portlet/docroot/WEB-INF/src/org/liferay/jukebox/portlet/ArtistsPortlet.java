@@ -48,13 +48,15 @@ public class ArtistsPortlet extends MVCPortlet {
 
 		String name = ParamUtil.getString(uploadPortletRequest, "name");
 
+		String bio = ParamUtil.getString(uploadPortletRequest, "bio");
+
 		InputStream inputStream = uploadPortletRequest.getFileAsStream("file");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Artist.class.getName(), uploadPortletRequest);
 
 		try {
-			ArtistServiceUtil.addArtist(name, inputStream, serviceContext);
+			ArtistServiceUtil.addArtist(name, bio, inputStream, serviceContext);
 
 			SessionMessages.add(uploadPortletRequest, "artistAdded");
 

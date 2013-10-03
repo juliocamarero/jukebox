@@ -47,7 +47,8 @@ import org.liferay.jukebox.service.permission.JukeBoxPermission;
 public class ArtistServiceImpl extends ArtistServiceBaseImpl {
 
 	public Artist addArtist(
-			String name, InputStream inputStream, ServiceContext serviceContext)
+			String name, String bio, InputStream inputStream,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		JukeBoxPermission.check(
@@ -55,7 +56,7 @@ public class ArtistServiceImpl extends ArtistServiceBaseImpl {
 			"ADD_ARTIST");
 
 		return artistLocalService.addArtist(
-			getUserId(), name, inputStream, serviceContext);
+			getUserId(), name, bio, inputStream, serviceContext);
 	}
 
 	public Artist deleteArtist(long artistId, ServiceContext serviceContext)

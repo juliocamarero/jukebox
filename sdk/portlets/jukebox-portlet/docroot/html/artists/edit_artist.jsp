@@ -43,6 +43,8 @@ if (artistId > 0) {
 
 	<aui:input name="name" />
 
+	<aui:input name="bio" />
+
 	<aui:input name="file" type="file" />
 
 	<aui:button-row>
