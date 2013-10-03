@@ -61,9 +61,14 @@ else {
 		</div>
 	</c:when>
 	<c:otherwise>
-		<ul>
 
-			<%
+		<div id="sm2-container">
+		  <!-- SM2 flash goes here -->
+		 </div>
+
+		 <ul class="graphic">
+
+			 <%
 			for (Song song : songs) {
 			%>
 
@@ -75,6 +80,7 @@ else {
 					Album album = AlbumLocalServiceUtil.getAlbum(song.getAlbumId());
 					%>
 
+					<%--
 					<portlet:renderURL var="viewSongURL">
 						<portlet:param name="jspPage" value="/html/songs/view_song.jsp" />
 						<portlet:param name="songId" value="<%= String.valueOf(song.getSongId()) %>" />
@@ -82,6 +88,9 @@ else {
 					</portlet:renderURL>
 
 					<aui:a href="<%= viewSongURL %>" label="<%= song.getName() %>" />, <%= artist.getName() %>, <%= album.getName() %>
+					--%>
+
+			 		<a class="song-link" href="<%= song.getSongURL(themeDisplay, "mp3") %>"><%= song.getName() %></a>
 
 					<c:if test="<%= SongPermission.contains(permissionChecker, song.getSongId(), ActionKeys.UPDATE) %>">
 						<portlet:renderURL var="editSongURL">
@@ -90,14 +99,13 @@ else {
 							<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 						</portlet:renderURL>
 
-						<liferay-ui:icon image="edit" label="<%= true %>" message="edit" url="<%= editSongURL %>" />
+						<liferay-ui:icon image="edit" message="edit" url="<%= editSongURL %>" />
 					</c:if>
 				</li>
 
 			<%
 			}
-			%>
+			 %>
 
-		</ul>
 	</c:otherwise>
 </c:choose>

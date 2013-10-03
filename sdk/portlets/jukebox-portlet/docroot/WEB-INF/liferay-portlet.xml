@@ -10,6 +10,10 @@
 		<instanceable>false</instanceable>
 		<scopeable>true</scopeable>
 		<header-portlet-css>/css/artists.css</header-portlet-css>
+		<header-portlet-css>/css/inlineplayer.css</header-portlet-css>
+		<header-portlet-css>/css/flashblock.css</header-portlet-css>
+		<header-portlet-javascript>/js/soundmanager2-jsmin.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/inlineplayer.js</header-portlet-javascript>
 		<footer-portlet-javascript>/js/artists.js</footer-portlet-javascript>
 		<css-class-wrapper>artists-portlet</css-class-wrapper>
 	</portlet>
@@ -21,6 +25,10 @@
 		<instanceable>false</instanceable>
 		<scopeable>true</scopeable>
 		<header-portlet-css>/css/albums.css</header-portlet-css>
+		<header-portlet-css>/css/inlineplayer.css</header-portlet-css>
+		<header-portlet-css>/css/flashblock.css</header-portlet-css>
+		<header-portlet-javascript>/js/soundmanager2-jsmin.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/inlineplayer.js</header-portlet-javascript>
 		<footer-portlet-javascript>/js/albums.js</footer-portlet-javascript>
 		<css-class-wrapper>albums-portlet</css-class-wrapper>
 	</portlet>
@@ -32,6 +40,10 @@
 		<instanceable>false</instanceable>
 		<scopeable>true</scopeable>
 		<header-portlet-css>/css/songs.css</header-portlet-css>
+		<header-portlet-css>/css/inlineplayer.css</header-portlet-css>
+		<header-portlet-css>/css/flashblock.css</header-portlet-css>
+		<header-portlet-javascript>/js/soundmanager2-jsmin.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/inlineplayer.js</header-portlet-javascript>
 		<footer-portlet-javascript>/js/songs.js</footer-portlet-javascript>
 		<css-class-wrapper>songs-portlet</css-class-wrapper>
 	</portlet>
