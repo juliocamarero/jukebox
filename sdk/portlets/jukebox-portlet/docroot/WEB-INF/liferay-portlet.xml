@@ -5,6 +5,7 @@
 	<portlet>
 		<portlet-name>artists</portlet-name>
 		<icon>/icons/artists.png</icon>
+		<configuration-action-class>com.liferay.portal.kernel.portlet.DefaultConfigurationAction</configuration-action-class>
 		<indexer-class>org.liferay.jukebox.util.ArtistIndexer</indexer-class>
 		<template-handler>org.liferay.jukebox.template.ArtistsPortletDisplayTemplateHandler</template-handler>
 		<asset-renderer-factory>org.liferay.jukebox.asset.ArtistAssetRendererFactory</asset-renderer-factory>
@@ -17,6 +18,7 @@
 	<portlet>
 		<portlet-name>albums</portlet-name>
 		<icon>/icons/albums.png</icon>
+		<configuration-action-class>com.liferay.portal.kernel.portlet.DefaultConfigurationAction</configuration-action-class>
 		<indexer-class>org.liferay.jukebox.util.AlbumIndexer</indexer-class>
 		<template-handler>org.liferay.jukebox.template.AlbumsPortletDisplayTemplateHandler</template-handler>
 		<asset-renderer-factory>org.liferay.jukebox.asset.AlbumAssetRendererFactory</asset-renderer-factory>
@@ -29,6 +31,7 @@
 	<portlet>
 		<portlet-name>songs</portlet-name>
 		<icon>/icons/songs.png</icon>
+		<configuration-action-class>com.liferay.portal.kernel.portlet.DefaultConfigurationAction</configuration-action-class>
 		<indexer-class>org.liferay.jukebox.util.SongIndexer</indexer-class>
 		<template-handler>org.liferay.jukebox.template.SongsPortletDisplayTemplateHandler</template-handler>
 		<asset-renderer-factory>org.liferay.jukebox.asset.SongAssetRendererFactory</asset-renderer-factory>

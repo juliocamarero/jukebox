@@ -6,6 +6,10 @@
 		<display-name>Artists</display-name>
 		<portlet-class>org.liferay.jukebox.portlet.ArtistsPortlet</portlet-class>
 		<init-param>
+			<name>config-template</name>
+			<value>/html/artists/configuration.jsp</value>
+		</init-param>
+		<init-param>
 			<name>view-jsp</name>
 			<value>/html/artists/view.jsp</value>
 		</init-param>
@@ -38,6 +42,10 @@
 		<display-name>Albums</display-name>
 		<portlet-class>org.liferay.jukebox.portlet.AlbumsPortlet</portlet-class>
 		<init-param>
+			<name>config-template</name>
+			<value>/html/albums/configuration.jsp</value>
+		</init-param>
+		<init-param>
 			<name>view-jsp</name>
 			<value>/html/albums/view.jsp</value>
 		</init-param>
@@ -69,6 +77,10 @@
 		<portlet-name>songs</portlet-name>
 		<display-name>Songs</display-name>
 		<portlet-class>org.liferay.jukebox.portlet.SongsPortlet</portlet-class>
+		<init-param>
+			<name>config-template</name>
+			<value>/html/songs/configuration.jsp</value>
+		</init-param>
 		<init-param>
 			<name>view-jsp</name>
 			<value>/html/songs/view.jsp</value>

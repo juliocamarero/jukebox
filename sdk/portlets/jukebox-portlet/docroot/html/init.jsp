@@ -46,6 +46,8 @@
 <%@ page import="org.liferay.jukebox.service.permission.SongPermission" %>
 
 <%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
+<%@ page import="com.liferay.portal.kernel.template.TemplateHandler" %>
+<%@ page import="com.liferay.portal.kernel.template.TemplateHandlerRegistryUtil" %>
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.Field" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
@@ -56,6 +58,7 @@
 <%@ page import="com.liferay.portal.kernel.search.SearchResult" %>
 <%@ page import="com.liferay.portal.kernel.search.SearchResultUtil" %>
 <%@ page import="com.liferay.portal.kernel.search.Summary" %>
+<%@ page import="com.liferay.portal.kernel.util.Constants" %>
 <%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.MathUtil" %>
@@ -65,7 +68,6 @@
 
 <%@ page import="com.liferay.portal.security.permission.ActionKeys" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
-
 
 <%@ page import="java.text.Format" %>
 <%@ page import="java.text.DateFormat" %>
