@@ -35,13 +35,15 @@ if (artistId > 0) {
 
 <portlet:actionURL name='<%= (artist != null) ? "updateArtist" : "addArtist" %>' var="addArtistURL" />
 
-<aui:form action="<%= addArtistURL %>" method="post" name="fm">
+<aui:form action="<%= addArtistURL %>" enctype="multipart/form-data" method="post" name="fm">
 	<aui:model-context bean="<%= artist %>" model="<%= Artist.class %>" />
 
 	<aui:input name="artistId" type="hidden" value="<%= artistId %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 	<aui:input name="name" />
+
+	<aui:input name="file" type="file" />
 
 	<aui:button-row>
 		<aui:button type="submit" />

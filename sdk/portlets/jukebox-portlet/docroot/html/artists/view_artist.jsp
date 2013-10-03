@@ -1,3 +1,5 @@
+<%@ page
+	import="com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil" %>
 <%--
 /**
  * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
@@ -42,6 +44,14 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 	/>
 </c:if>
 
+<%
+String profileURL = artist.getImageURL(themeDisplay);
+%>
+
+<c:if test="<%= Validator.isNotNull(profileURL) %>">
+	<img src="<%= profileURL %>" />
+</c:if>
+
 <div class="album-artist">
 	<div class="album-songs-number"><liferay-ui:message arguments="<%= albums.size() %>" key="x-albums" /></div>
 </div>
@@ -52,7 +62,6 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 		<jsp:param name="showToolbar" value="<%= String.valueOf(false) %>" />
 	</jsp:include>
 </c:if>
-
 
 <c:if test="<%= showHeader %>">
 	<portlet:actionURL name="invokeTaglibDiscussion" var="discussionURL" />

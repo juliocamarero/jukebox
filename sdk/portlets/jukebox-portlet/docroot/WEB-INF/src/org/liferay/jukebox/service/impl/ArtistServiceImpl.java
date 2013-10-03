@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 
+import java.io.InputStream;
+
 import java.util.List;
 
 import org.liferay.jukebox.model.Artist;
@@ -37,19 +39,23 @@ import org.liferay.jukebox.service.permission.JukeBoxPermission;
  * </p>
  *
  * @author Julio Camarero
+ * @author Sergio González
+ * @author Eudaldo Alonso
  * @see org.liferay.jukebox.service.base.ArtistServiceBaseImpl
  * @see org.liferay.jukebox.service.ArtistServiceUtil
  */
 public class ArtistServiceImpl extends ArtistServiceBaseImpl {
 
-	public Artist addArtist(String name, ServiceContext serviceContext)
+	public Artist addArtist(
+			String name, InputStream inputStream, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		JukeBoxPermission.check(
 			getPermissionChecker(), serviceContext.getScopeGroupId(),
 			"ADD_ARTIST");
 
-		return artistLocalService.addArtist(getUserId(), name, serviceContext);
+		return artistLocalService.addArtist(
+			getUserId(), name, inputStream, serviceContext);
 	}
 
 	public Artist deleteArtist(long artistId, ServiceContext serviceContext)
@@ -76,14 +82,15 @@ public class ArtistServiceImpl extends ArtistServiceBaseImpl {
 	}
 
 	public Artist updateArtist(
-			long artistId, String name, ServiceContext serviceContext)
+			long artistId, String name, InputStream inputStream,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		ArtistPermission.check(
 			getPermissionChecker(), artistId, ActionKeys.UPDATE);
 
 		return artistLocalService.updateArtist(
-			getUserId(), artistId, name, serviceContext);
+			getUserId(), artistId, name, inputStream, serviceContext);
 	}
 
 }

@@ -15,11 +15,15 @@ package org.liferay.jukebox.portlet;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+
+import java.io.InputStream;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -30,21 +34,28 @@ import org.liferay.jukebox.service.ArtistServiceUtil;
 
 /**
  * @author Julio Camarero
+ * @author Sergio González
+ * @author Eudaldo Alonso
  */
 public class ArtistsPortlet extends MVCPortlet {
 
 	public void addArtist(ActionRequest request, ActionResponse response)
 		throws Exception {
 
-		String name = ParamUtil.getString(request, "name");
+		UploadPortletRequest uploadPortletRequest =
+			PortalUtil.getUploadPortletRequest(request);
+
+		String name = ParamUtil.getString(uploadPortletRequest, "name");
+
+		InputStream inputStream = uploadPortletRequest.getFileAsStream("file");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			Artist.class.getName(), request);
+			Artist.class.getName(), uploadPortletRequest);
 
 		try {
-			ArtistServiceUtil.addArtist(name, serviceContext);
+			ArtistServiceUtil.addArtist(name, inputStream, serviceContext);
 
-			SessionMessages.add(request, "artistAdded");
+			SessionMessages.add(uploadPortletRequest, "artistAdded");
 
 			sendRedirect(request, response);
 		}
@@ -52,7 +63,7 @@ public class ArtistsPortlet extends MVCPortlet {
 			if (e instanceof ArtistNameException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(request, e.getClass().getName());
+				SessionErrors.add(uploadPortletRequest, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/artists/edit_artist.jsp");
@@ -86,16 +97,22 @@ public class ArtistsPortlet extends MVCPortlet {
 	public void updateArtist(ActionRequest request, ActionResponse response)
 		throws Exception {
 
-		long artistId = ParamUtil.getLong(request, "artistId");
-		String name = ParamUtil.getString(request, "name");
+		UploadPortletRequest uploadPortletRequest =
+			PortalUtil.getUploadPortletRequest(request);
+
+		long artistId = ParamUtil.getLong(uploadPortletRequest, "artistId");
+		String name = ParamUtil.getString(uploadPortletRequest, "name");
+
+		InputStream inputStream = uploadPortletRequest.getFileAsStream("file");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			Artist.class.getName(), request);
+			Artist.class.getName(), uploadPortletRequest);
 
 		try {
-			ArtistServiceUtil.updateArtist(artistId, name, serviceContext);
+			ArtistServiceUtil.updateArtist(artistId, name, inputStream,
+				serviceContext);
 
-			SessionMessages.add(request, "artistUpdated");
+			SessionMessages.add(uploadPortletRequest, "artistUpdated");
 
 			sendRedirect(request, response);
 		}
@@ -103,7 +120,7 @@ public class ArtistsPortlet extends MVCPortlet {
 			if (e instanceof ArtistNameException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(request, e.getClass().getName());
+				SessionErrors.add(uploadPortletRequest, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/artists/edit_artist.jsp");

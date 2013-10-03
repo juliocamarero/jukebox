@@ -19,9 +19,15 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.User;
+import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+
+import java.io.InputStream;
 
 import java.util.Date;
 import java.util.List;
@@ -41,6 +47,8 @@ import org.liferay.jukebox.service.base.ArtistLocalServiceBaseImpl;
  * </p>
  *
  * @author Julio Camarero
+ * @author Sergio González
+ * @author Eudaldo Alonso
  * @see org.liferay.jukebox.service.base.ArtistLocalServiceBaseImpl
  * @see org.liferay.jukebox.service.ArtistLocalServiceUtil
  */
@@ -48,8 +56,11 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 
 	@Indexable(type = IndexableType.REINDEX)
 	public Artist addArtist(
-			long userId, String name, ServiceContext serviceContext)
+			long userId, String name, InputStream inputStream,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
+
+		long groupId = serviceContext.getScopeGroupId();
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
@@ -62,7 +73,7 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 		Artist artist = artistPersistence.create(artistId);
 
 		artist.setUuid(serviceContext.getUuid());
-		artist.setGroupId(serviceContext.getScopeGroupId());
+		artist.setGroupId(groupId);
 		artist.setCompanyId(user.getCompanyId());
 		artist.setUserId(user.getUserId());
 		artist.setUserName(user.getFullName());
@@ -72,6 +83,14 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 		artist.setExpandoBridgeAttributes(serviceContext);
 
 		artistPersistence.update(artist);
+
+		if (inputStream != null) {
+			PortletFileRepositoryUtil.addPortletFileEntry(
+				groupId, userId, Artist.class.getName(), artist.getArtistId(),
+				"Jukebox", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				inputStream, String.valueOf(artist.getArtistId()),
+				StringPool.BLANK, true);
+		}
 
 		// Resources
 
@@ -136,7 +155,7 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 
 	@Indexable(type = IndexableType.REINDEX)
 	public Artist updateArtist(
-			long userId, long artistId, String name,
+			long userId, long artistId, String name, InputStream inputStream,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -153,6 +172,23 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 		artist.setExpandoBridgeAttributes(serviceContext);
 
 		artistPersistence.update(artist);
+
+		if (inputStream != null) {
+			Repository repository =
+				PortletFileRepositoryUtil.getPortletRepository(
+					serviceContext.getScopeGroupId(), "Jukebox");
+
+			PortletFileRepositoryUtil.deletePortletFileEntry(
+				repository.getRepositoryId(),
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				String.valueOf(artist.getArtistId()));
+
+			PortletFileRepositoryUtil.addPortletFileEntry(
+				serviceContext.getScopeGroupId(), userId,
+				Artist.class.getName(), artist.getArtistId(), "Jukebox",
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, inputStream,
+				String.valueOf(artist.getArtistId()), StringPool.BLANK, true);
+		}
 
 		// Asset
 

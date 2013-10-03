@@ -14,6 +14,16 @@
 
 package org.liferay.jukebox.model.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Repository;
+import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.documentlibrary.util.DLUtil;
+
 /**
  * The extended model implementation for the Artist service. Represents a row in the &quot;jukebox_Artist&quot; database table, with each column mapped to a property of this class.
  *
@@ -22,8 +32,25 @@ package org.liferay.jukebox.model.impl;
  * </p>
  *
  * @author Julio Camarero
+ * @author Sergio González
+ * @author Eudaldo Alonso
  */
 public class ArtistImpl extends ArtistBaseImpl {
-	public ArtistImpl() {
+
+	public String getImageURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		Repository repository = PortletFileRepositoryUtil.getPortletRepository(
+			getGroupId(), "Jukebox");
+
+		FileEntry fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
+			repository.getRepositoryId(),
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			String.valueOf(getArtistId()));
+
+		return DLUtil.getPreviewURL(
+			fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
+			StringPool.BLANK);
 	}
+
 }
