@@ -39,20 +39,24 @@ import org.liferay.jukebox.util.PortletKeys;
  */
 public class AlbumImpl extends AlbumBaseImpl {
 
-	public String getImageURL(ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+	public String getImageURL(ThemeDisplay themeDisplay) {
+		try {
+			Repository repository =
+				PortletFileRepositoryUtil.getPortletRepository(
+					getGroupId(), PortletKeys.JUKEBOX);
 
-		Repository repository = PortletFileRepositoryUtil.getPortletRepository(
-			getGroupId(), PortletKeys.JUKEBOX);
+			FileEntry fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
+				repository.getRepositoryId(),
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				String.valueOf(getAlbumId()));
 
-		FileEntry fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
-			repository.getRepositoryId(),
-			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			String.valueOf(getAlbumId()));
-
-		return DLUtil.getPreviewURL(
-			fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
-			StringPool.BLANK);
+			return DLUtil.getPreviewURL(
+				fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
+				StringPool.BLANK);
+		}
+		catch (Exception e) {
+			return StringPool.BLANK;
+		}
 	}
 
 }

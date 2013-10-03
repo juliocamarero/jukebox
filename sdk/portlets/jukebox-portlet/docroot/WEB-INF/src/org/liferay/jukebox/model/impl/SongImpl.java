@@ -83,30 +83,35 @@ public class SongImpl extends SongBaseImpl {
 	}
 
 	protected FileEntry getFileEntry(
-			ThemeDisplay themeDisplay, String folderName)
-		throws PortalException, SystemException {
+		ThemeDisplay themeDisplay, String folderName) {
 
-		Repository repository = PortletFileRepositoryUtil.getPortletRepository(
-			getGroupId(), PortletKeys.JUKEBOX);
+		try {
+			Repository repository =
+				PortletFileRepositoryUtil.getPortletRepository(
+					getGroupId(), PortletKeys.JUKEBOX);
 
-		Folder folder = PortletFileRepositoryUtil.getPortletFolder(
-			0, repository.getRepositoryId(),
-			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			String.valueOf(getSongId()), null);
+			Folder folder = PortletFileRepositoryUtil.getPortletFolder(
+				0, repository.getRepositoryId(),
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				String.valueOf(getSongId()), null);
 
-		Folder songFolder = PortletFileRepositoryUtil.getPortletFolder(
-			0, repository.getRepositoryId(), folder.getFolderId(), folderName,
-			null);
+			Folder songFolder = PortletFileRepositoryUtil.getPortletFolder(
+				0, repository.getRepositoryId(), folder.getFolderId(),
+				folderName, null);
 
-		List<FileEntry> fileEntries =
-			PortletFileRepositoryUtil.getPortletFileEntries(
-				themeDisplay.getScopeGroupId(), songFolder.getFolderId());
+			List<FileEntry> fileEntries =
+				PortletFileRepositoryUtil.getPortletFileEntries(
+					themeDisplay.getScopeGroupId(), songFolder.getFolderId());
 
-		if (fileEntries.isEmpty()) {
+			if (fileEntries.isEmpty()) {
+				return null;
+			}
+
+			return fileEntries.get(0);
+		}
+		catch (Exception e) {
 			return null;
 		}
-
-		return fileEntries.get(0);
 	}
 
 }
