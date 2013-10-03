@@ -69,6 +69,8 @@
 <%@ page import="com.liferay.portal.security.permission.ActionKeys" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 
+<%@ page import="com.liferay.portlet.portletdisplaytemplate.util.PortletDisplayTemplateUtil" %>
+
 <%@ page import="java.text.Format" %>
 <%@ page import="java.text.DateFormat" %>
 

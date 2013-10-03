@@ -16,6 +16,13 @@
 
 <%@ include file="../init.jsp" %>
 
+<%
+String displayStyle = GetterUtil.getString(portletPreferences.getValue("displayStyle", StringPool.BLANK));
+long displayStyleGroupId = GetterUtil.getLong(portletPreferences.getValue("displayStyleGroupId", null), scopeGroupId);
+
+long portletDisplayDDMTemplateId = PortletDisplayTemplateUtil.getPortletDisplayTemplateDDMTemplateId(displayStyleGroupId, displayStyle);
+%>
+
 <liferay-ui:success key="artistAdded" message="the-artist-was-added-successfully" />
 <liferay-ui:success key="artistUpdated" message="the-artist-was-updated-successfully" />
 <liferay-ui:success key="artistDeleted" message="the-artist-was-deleted-successfully" />
@@ -34,6 +41,9 @@ List<Artist> artists = ArtistServiceUtil.getArtists(scopeGroupId);
 </aui:form>
 
 <c:choose>
+	<c:when test="<%= portletDisplayDDMTemplateId > 0 %>">
+		<%= PortletDisplayTemplateUtil.renderDDMTemplate(pageContext, portletDisplayDDMTemplateId, artists) %>
+	</c:when>
 	<c:when test="<%= artists.isEmpty() %>">
 		<div class="alert alert-info">
 			<liferay-ui:message key="there-are-no-artists" />

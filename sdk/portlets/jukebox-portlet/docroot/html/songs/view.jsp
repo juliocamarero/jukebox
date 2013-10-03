@@ -19,6 +19,11 @@
 <%
 long albumId = ParamUtil.getLong(renderRequest, "albumId");
 boolean showToolbar = ParamUtil.getBoolean(request, "showToolbar", true);
+
+String displayStyle = GetterUtil.getString(portletPreferences.getValue("displayStyle", StringPool.BLANK));
+long displayStyleGroupId = GetterUtil.getLong(portletPreferences.getValue("displayStyleGroupId", null), scopeGroupId);
+
+long portletDisplayDDMTemplateId = PortletDisplayTemplateUtil.getPortletDisplayTemplateDDMTemplateId(displayStyleGroupId, displayStyle);
 %>
 
 <liferay-ui:success key="songAdded" message="the-song-was-added-successfully" />
@@ -48,6 +53,9 @@ else {
 </c:if>
 
 <c:choose>
+	<c:when test="<%= portletDisplayDDMTemplateId > 0 %>">
+		<%= PortletDisplayTemplateUtil.renderDDMTemplate(pageContext, portletDisplayDDMTemplateId, songs) %>
+	</c:when>
 	<c:when test="<%= songs.isEmpty() %>">
 		<div class="alert alert-info">
 			<c:choose>
