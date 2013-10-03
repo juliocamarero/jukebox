@@ -44,20 +44,20 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 	/>
 </c:if>
 
-<%
-String imageURL = album.getImageURL(themeDisplay);
-%>
+<div class="album-detail">
+	<div class="container">
+		<img alt="" class="img-rounded album-image" src="<%= album.getImageURL(themeDisplay) %>" />
 
-<c:if test="<%= Validator.isNotNull(imageURL) %>">
-	<img src="<%= imageURL %>" />
-</c:if>
+		<div class="album-artist">
+			<%= artist.getName() %>
 
-<div class="album-artist">
-	<%= artist.getName() %>
+			<span class="album-year">(<%= album.getYear() %>)</span>
 
-	<div class="album-year">(<%= album.getYear() %>)</div>
-
-	<div class="album-songs-number"><liferay-ui:message arguments="<%= songs.size() %>" key="x-songs" /></div>
+			<div class="album-songs-number">
+				<liferay-ui:message arguments="<%= songs.size() %>" key="x-songs" />
+			</div>
+		</div>
+	</div>
 </div>
 
 <c:if test="<%= !songs.isEmpty() %>">
@@ -78,3 +78,4 @@ String imageURL = album.getImageURL(themeDisplay);
 		userId="<%= album.getUserId() %>"
 	/>
 </c:if>
+</div>
