@@ -30,7 +30,7 @@ create table jukebox_Artist (
 	statusByUserName VARCHAR(75) null,
 	statusDate DATE null,
 	name VARCHAR(75) null,
-	bio VARCHAR(75) null
+	bio STRING null
 );
 
 create table jukebox_Song (

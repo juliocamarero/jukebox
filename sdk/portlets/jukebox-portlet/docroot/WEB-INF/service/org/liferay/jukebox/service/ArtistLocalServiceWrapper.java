@@ -395,11 +395,12 @@ public class ArtistLocalServiceWrapper implements ArtistLocalService,
 
 	@Override
 	public org.liferay.jukebox.model.Artist updateArtist(long userId,
-		long artistId, java.lang.String name, java.io.InputStream inputStream,
+		long artistId, java.lang.String name, java.lang.String bio,
+		java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _artistLocalService.updateArtist(userId, artistId, name,
+		return _artistLocalService.updateArtist(userId, artistId, name, bio,
 			inputStream, serviceContext);
 	}
 

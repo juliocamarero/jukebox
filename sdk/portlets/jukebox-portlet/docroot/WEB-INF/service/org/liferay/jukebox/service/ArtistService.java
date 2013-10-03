@@ -91,7 +91,8 @@ public interface ArtistService extends BaseService, InvokableService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public org.liferay.jukebox.model.Artist updateArtist(long artistId,
-		java.lang.String name, java.io.InputStream inputStream,
+		java.lang.String name, java.lang.String bio,
+		java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

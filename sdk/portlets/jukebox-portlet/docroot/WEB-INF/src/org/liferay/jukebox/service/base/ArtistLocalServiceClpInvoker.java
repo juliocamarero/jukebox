@@ -166,7 +166,8 @@ public class ArtistLocalServiceClpInvoker {
 		_methodName93 = "updateArtist";
 
 		_methodParameterTypes93 = new String[] {
-				"long", "long", "java.lang.String", "java.io.InputStream",
+				"long", "long", "java.lang.String", "java.lang.String",
+				"java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -355,9 +356,9 @@ public class ArtistLocalServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes93, parameterTypes)) {
 			return ArtistLocalServiceUtil.updateArtist(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
-				(java.lang.String)arguments[2],
-				(java.io.InputStream)arguments[3],
-				(com.liferay.portal.service.ServiceContext)arguments[4]);
+				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
+				(java.io.InputStream)arguments[4],
+				(com.liferay.portal.service.ServiceContext)arguments[5]);
 		}
 
 		if (_methodName94.equals(name) &&
