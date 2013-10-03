@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 
+import java.io.InputStream;
+
 import java.util.List;
 
 import org.liferay.jukebox.model.Album;
@@ -37,12 +39,15 @@ import org.liferay.jukebox.service.permission.JukeBoxPermission;
  * </p>
  *
  * @author Julio Camarero
+ * @author Sergio González
+ * @author Eudaldo Alonso
  * @see org.liferay.jukebox.service.base.AlbumServiceBaseImpl
  * @see org.liferay.jukebox.service.AlbumServiceUtil
  */
 public class AlbumServiceImpl extends AlbumServiceBaseImpl {
 	public Album addAlbum(
-			long artistId, String name, int year, ServiceContext serviceContext)
+			long artistId, String name, int year, InputStream inputStream,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		JukeBoxPermission.check(
@@ -50,7 +55,7 @@ public class AlbumServiceImpl extends AlbumServiceBaseImpl {
 			"ADD_ALBUM");
 
 		return albumLocalService.addAlbum(
-			getUserId(), artistId, name, year, serviceContext);
+			getUserId(), artistId, name, year, inputStream, serviceContext);
 	}
 
 	public Album deleteAlbum(long albumId, ServiceContext serviceContext)
@@ -76,14 +81,15 @@ public class AlbumServiceImpl extends AlbumServiceBaseImpl {
 
 	public Album updateAlbum(
 			long albumId, long artistId, String name, int year,
-			ServiceContext serviceContext)
+			InputStream inputStream, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		AlbumPermission.check(
 			getPermissionChecker(), albumId, ActionKeys.UPDATE);
 
 		return albumLocalService.updateAlbum(
-			getUserId(), albumId, artistId, name, year, serviceContext);
+			getUserId(), albumId, artistId, name, year, inputStream,
+			serviceContext);
 	}
 
 }

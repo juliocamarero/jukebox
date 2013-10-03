@@ -15,11 +15,15 @@ package org.liferay.jukebox.portlet;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+
+import java.io.InputStream;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -30,23 +34,31 @@ import org.liferay.jukebox.service.AlbumServiceUtil;
 
 /**
  * @author Julio Camarero
+ * @author Sergio González
+ * @author Eudaldo Alonso
  */
 public class AlbumsPortlet extends MVCPortlet {
 
 	public void addAlbum(ActionRequest request, ActionResponse response)
 		throws Exception {
 
-		long artistId = ParamUtil.getLong(request, "artistId");
-		String name = ParamUtil.getString(request, "name");
-		int year = ParamUtil.getInteger(request, "year");
+		UploadPortletRequest uploadPortletRequest =
+			PortalUtil.getUploadPortletRequest(request);
+
+		long artistId = ParamUtil.getLong(uploadPortletRequest, "artistId");
+		String name = ParamUtil.getString(uploadPortletRequest, "name");
+		int year = ParamUtil.getInteger(uploadPortletRequest, "year");
+
+		InputStream inputStream = uploadPortletRequest.getFileAsStream("file");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			Album.class.getName(), request);
+			Album.class.getName(), uploadPortletRequest);
 
 		try {
-			AlbumServiceUtil.addAlbum(artistId, name, year, serviceContext);
+			AlbumServiceUtil.addAlbum(
+				artistId, name, year, inputStream, serviceContext);
 
-			SessionMessages.add(request, "albumAdded");
+			SessionMessages.add(uploadPortletRequest, "albumAdded");
 
 			sendRedirect(request, response);
 		}
@@ -54,7 +66,7 @@ public class AlbumsPortlet extends MVCPortlet {
 			if (e instanceof AlbumNameException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(request, e.getClass().getName());
+				SessionErrors.add(uploadPortletRequest, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/albums/edit_album.jsp");
@@ -88,19 +100,24 @@ public class AlbumsPortlet extends MVCPortlet {
 	public void updateAlbum(ActionRequest request, ActionResponse response)
 		throws Exception {
 
-		long albumId = ParamUtil.getLong(request, "albumId");
-		long artistId = ParamUtil.getLong(request, "artistId");
-		String name = ParamUtil.getString(request, "name");
-		int year = ParamUtil.getInteger(request, "year");
+		UploadPortletRequest uploadPortletRequest =
+			PortalUtil.getUploadPortletRequest(request);
+
+		long albumId = ParamUtil.getLong(uploadPortletRequest, "albumId");
+		long artistId = ParamUtil.getLong(uploadPortletRequest, "artistId");
+		String name = ParamUtil.getString(uploadPortletRequest, "name");
+		int year = ParamUtil.getInteger(uploadPortletRequest, "year");
+
+		InputStream inputStream = uploadPortletRequest.getFileAsStream("file");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			Album.class.getName(), request);
+			Album.class.getName(), uploadPortletRequest);
 
 		try {
 			AlbumServiceUtil.updateAlbum(
-				albumId, artistId, name, year, serviceContext);
+				albumId, artistId, name, year, inputStream, serviceContext);
 
-			SessionMessages.add(request, "albumUpdated");
+			SessionMessages.add(uploadPortletRequest, "albumUpdated");
 
 			sendRedirect(request, response);
 		}
@@ -108,7 +125,7 @@ public class AlbumsPortlet extends MVCPortlet {
 			if (e instanceof AlbumNameException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(request, e.getClass().getName());
+				SessionErrors.add(uploadPortletRequest, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/albums/edit_album.jsp");

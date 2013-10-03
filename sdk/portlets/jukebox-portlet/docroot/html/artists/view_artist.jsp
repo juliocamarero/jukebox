@@ -1,5 +1,3 @@
-<%@ page
-	import="com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil" %>
 <%--
 /**
  * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
@@ -45,11 +43,11 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 </c:if>
 
 <%
-String profileURL = artist.getImageURL(themeDisplay);
+String imageURL = artist.getImageURL(themeDisplay);
 %>
 
-<c:if test="<%= Validator.isNotNull(profileURL) %>">
-	<img src="<%= profileURL %>" />
+<c:if test="<%= Validator.isNotNull(imageURL) %>">
+	<img src="<%= imageURL %>" />
 </c:if>
 
 <div class="album-artist">

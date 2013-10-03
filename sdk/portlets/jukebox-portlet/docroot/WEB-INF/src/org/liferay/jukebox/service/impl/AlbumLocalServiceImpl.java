@@ -19,9 +19,15 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.User;
+import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+
+import java.io.InputStream;
 
 import java.util.Date;
 import java.util.List;
@@ -41,6 +47,8 @@ import org.liferay.jukebox.service.base.AlbumLocalServiceBaseImpl;
  * </p>
  *
  * @author Julio Camarero
+ * @author Sergio González
+ * @author Eudaldo Alonso
  * @see org.liferay.jukebox.service.base.AlbumLocalServiceBaseImpl
  * @see org.liferay.jukebox.service.AlbumLocalServiceUtil
  */
@@ -49,8 +57,10 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 	@Indexable(type = IndexableType.REINDEX)
 	public Album addAlbum(
 			long userId, long artistId, String name, int year,
-			ServiceContext serviceContext)
+			InputStream inputStream, ServiceContext serviceContext)
 		throws PortalException, SystemException {
+
+		long groupId = serviceContext.getScopeGroupId();
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
@@ -63,7 +73,7 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 		Album album = albumPersistence.create(albumId);
 
 		album.setUuid(serviceContext.getUuid());
-		album.setGroupId(serviceContext.getScopeGroupId());
+		album.setGroupId(groupId);
 		album.setCompanyId(user.getCompanyId());
 		album.setUserId(user.getUserId());
 		album.setUserName(user.getFullName());
@@ -75,6 +85,14 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 		album.setExpandoBridgeAttributes(serviceContext);
 
 		albumPersistence.update(album);
+
+		if (inputStream != null) {
+			PortletFileRepositoryUtil.addPortletFileEntry(
+				groupId, userId, Album.class.getName(), album.getAlbumId(),
+				"Jukebox", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				inputStream, String.valueOf(album.getAlbumId()),
+				StringPool.BLANK, true);
+		}
 
 		// Resources
 
@@ -144,7 +162,7 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 	@Indexable(type = IndexableType.REINDEX)
 	public Album updateAlbum(
 			long userId, long albumId, long artistId, String name, int year,
-			ServiceContext serviceContext)
+			InputStream inputStream, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Event
@@ -162,6 +180,23 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 		album.setExpandoBridgeAttributes(serviceContext);
 
 		albumPersistence.update(album);
+
+		if (inputStream != null) {
+			Repository repository =
+				PortletFileRepositoryUtil.getPortletRepository(
+					serviceContext.getScopeGroupId(), "Jukebox");
+
+			PortletFileRepositoryUtil.deletePortletFileEntry(
+				repository.getRepositoryId(),
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				String.valueOf(album.getAlbumId()));
+
+			PortletFileRepositoryUtil.addPortletFileEntry(
+				serviceContext.getScopeGroupId(), userId, Album.class.getName(),
+				album.getAlbumId(), "Jukebox",
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, inputStream,
+				String.valueOf(album.getAlbumId()), StringPool.BLANK, true);
+		}
 
 		// Asset
 

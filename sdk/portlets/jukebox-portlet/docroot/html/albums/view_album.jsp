@@ -44,6 +44,14 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 	/>
 </c:if>
 
+<%
+String imageURL = album.getImageURL(themeDisplay);
+%>
+
+<c:if test="<%= Validator.isNotNull(imageURL) %>">
+	<img src="<%= imageURL %>" />
+</c:if>
+
 <div class="album-artist">
 	<%= artist.getName() %>
 
@@ -58,7 +66,6 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 		<jsp:param name="showToolbar" value="<%= String.valueOf(false) %>" />
 	</jsp:include>
 </c:if>
-
 
 <c:if test="<%= showHeader %>">
 	<portlet:actionURL name="invokeTaglibDiscussion" var="discussionURL" />

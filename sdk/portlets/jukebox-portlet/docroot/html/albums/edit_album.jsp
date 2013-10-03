@@ -35,7 +35,7 @@ if (albumId > 0) {
 
 <portlet:actionURL name='<%= (album != null) ? "updateAlbum" : "addAlbum" %>' var="addAlbumURL" />
 
-<aui:form action="<%= addAlbumURL %>" method="post" name="fm">
+<aui:form action="<%= addAlbumURL %>" enctype="multipart/form-data" method="post" name="fm">
 	<aui:model-context bean="<%= album %>" model="<%= Album.class %>" />
 
 	<aui:input name="albumId" type="hidden" value="<%= albumId %>" />
@@ -60,6 +60,8 @@ if (albumId > 0) {
 	<aui:input name="name" />
 
 	<aui:input name="year" />
+
+	<aui:input name="file" type="file" />
 
 	<aui:button-row>
 		<aui:button type="submit" />
