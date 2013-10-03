@@ -14,8 +14,6 @@
 
 package org.liferay.jukebox.model.impl;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Repository;
