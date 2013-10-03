@@ -99,7 +99,6 @@ else {
 					<%= artist.getName() %>
 				</div>
 
-
 			</li>
 
 			<%

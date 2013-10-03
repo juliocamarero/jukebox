@@ -68,14 +68,14 @@ public class AlbumServiceImpl extends AlbumServiceBaseImpl {
 		return albumLocalService.deleteAlbum(albumId);
 	}
 
+	public List<Album> getAlbums(long groupId) throws SystemException {
+		return albumPersistence.filterFindByGroupId(groupId);
+	}
+
 	public List<Album> getAlbums(long groupId, int start, int end)
 		throws SystemException {
 
 		return albumPersistence.filterFindByGroupId(groupId, start, end);
-	}
-
-	public List<Album> getAlbums(long groupId) throws SystemException {
-		return albumPersistence.filterFindByGroupId(groupId);
 	}
 
 	public int getAlbumsCount(long groupId) throws SystemException {

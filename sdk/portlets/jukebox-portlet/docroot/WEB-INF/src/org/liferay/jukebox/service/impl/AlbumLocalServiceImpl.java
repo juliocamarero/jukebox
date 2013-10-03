@@ -230,9 +230,8 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 			}
 
 			PortletFileRepositoryUtil.addPortletFileEntry(
-				serviceContext.getScopeGroupId(), userId,
-				Album.class.getName(), album.getAlbumId(),
-				Constants.JUKEBOX_PORTLET_REPOSITORY,
+				serviceContext.getScopeGroupId(), userId, Album.class.getName(),
+				album.getAlbumId(), Constants.JUKEBOX_PORTLET_REPOSITORY,
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, inputStream,
 				String.valueOf(album.getAlbumId()), StringPool.BLANK, true);
 		}

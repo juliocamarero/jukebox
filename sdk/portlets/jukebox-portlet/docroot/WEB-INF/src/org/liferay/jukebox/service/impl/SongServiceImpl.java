@@ -69,14 +69,14 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 		return songLocalService.deleteSong(songId);
 	}
 
+	public List<Song> getSongs(long groupId) throws SystemException {
+		return songPersistence.filterFindByGroupId(groupId);
+	}
+
 	public List<Song> getSongs(long groupId, int start, int end)
 		throws SystemException {
 
 		return songPersistence.filterFindByGroupId(groupId, start, end);
-	}
-
-	public List<Song> getSongs(long groupId) throws SystemException {
-		return songPersistence.filterFindByGroupId(groupId);
 	}
 
 	public int getSongsCount(long groupId) throws SystemException {
