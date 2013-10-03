@@ -14,6 +14,23 @@
 
 package org.liferay.jukebox.model.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Repository;
+import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.documentlibrary.util.AudioProcessorUtil;
+import com.liferay.portlet.documentlibrary.util.DLUtil;
+
+import java.util.List;
+
+import org.liferay.jukebox.util.PortletKeys;
+
 /**
  * The extended model implementation for the Song service. Represents a row in the &quot;jukebox_Song&quot; database table, with each column mapped to a property of this class.
  *
@@ -22,10 +39,74 @@ package org.liferay.jukebox.model.impl;
  * </p>
  *
  * @author Julio Camarero
+ * @author Sergio González
+ * @author Eudaldo Alonso
  */
 public class SongImpl extends SongBaseImpl {
 
-	public SongImpl() {
+	public String getLyricsURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		FileEntry fileEntry = getFileEntry(themeDisplay, "Lyrics");
+
+		if (fileEntry == null) {
+			return StringPool.BLANK;
+		}
+
+		return DLUtil.getPreviewURL(
+			fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
+			StringPool.BLANK);
+	}
+
+	public String getSongURL(ThemeDisplay themeDisplay, String audioContainer)
+		throws PortalException, SystemException {
+
+		FileEntry fileEntry = getFileEntry(themeDisplay, "Song");
+
+		if (fileEntry == null) {
+			return StringPool.BLANK;
+		}
+
+		if (!AudioProcessorUtil.hasAudio(fileEntry.getLatestFileVersion())) {
+			return StringPool.BLANK;
+		}
+
+		if (Validator.isNull(audioContainer)) {
+			audioContainer = "mp3";
+		}
+
+		String queryString = "&audioPreview=1&type=" + audioContainer;
+
+		return DLUtil.getPreviewURL(
+			fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
+			queryString);
+	}
+
+	protected FileEntry getFileEntry(
+			ThemeDisplay themeDisplay, String folderName)
+		throws PortalException, SystemException {
+
+		Repository repository = PortletFileRepositoryUtil.getPortletRepository(
+			getGroupId(), PortletKeys.JUKEBOX);
+
+		Folder folder = PortletFileRepositoryUtil.getPortletFolder(
+			0, repository.getRepositoryId(),
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			String.valueOf(getSongId()), null);
+
+		Folder songFolder = PortletFileRepositoryUtil.getPortletFolder(
+			0, repository.getRepositoryId(), folder.getFolderId(), folderName,
+			null);
+
+		List<FileEntry> fileEntries =
+			PortletFileRepositoryUtil.getPortletFileEntries(
+				themeDisplay.getScopeGroupId(), songFolder.getFolderId());
+
+		if (fileEntries.isEmpty()) {
+			return null;
+		}
+
+		return fileEntries.get(0);
 	}
 
 }
