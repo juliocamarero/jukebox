@@ -82,6 +82,19 @@ public class AlbumIndexer extends BaseIndexer {
 	}
 
 	@Override
+	public void postProcessSearchQuery(
+			BooleanQuery searchQuery, SearchContext searchContext)
+		throws Exception {
+
+		if (searchContext.getAttributes() == null) {
+			return;
+		}
+
+		addSearchTerm(searchQuery, searchContext, Field.TITLE, true);
+		addSearchTerm(searchQuery, searchContext, "year", false);
+	}
+
+	@Override
 	protected void doDelete(Object obj) throws Exception {
 		Album album = (Album)obj;
 
@@ -96,6 +109,7 @@ public class AlbumIndexer extends BaseIndexer {
 
 		document.addDate(Field.MODIFIED_DATE, album.getModifiedDate());
 		document.addText(Field.TITLE, album.getName());
+		document.addKeyword("year", album.getYear());
 
 		return document;
 	}

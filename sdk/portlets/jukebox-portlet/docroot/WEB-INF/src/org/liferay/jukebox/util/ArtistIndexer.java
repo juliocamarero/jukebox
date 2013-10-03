@@ -82,6 +82,19 @@ public class ArtistIndexer extends BaseIndexer {
 	}
 
 	@Override
+	public void postProcessSearchQuery(
+			BooleanQuery searchQuery, SearchContext searchContext)
+			throws Exception {
+
+		if (searchContext.getAttributes() == null) {
+			return;
+		}
+
+		addSearchTerm(searchQuery, searchContext, Field.TITLE, true);
+		addSearchTerm(searchQuery, searchContext, "bio", true);
+	}
+
+	@Override
 	protected void doDelete(Object obj) throws Exception {
 		Artist artist = (Artist)obj;
 
@@ -96,6 +109,7 @@ public class ArtistIndexer extends BaseIndexer {
 
 		document.addDate(Field.MODIFIED_DATE, artist.getModifiedDate());
 		document.addText(Field.TITLE, artist.getName());
+		document.addText("bio", artist.getBio());
 
 		return document;
 	}
