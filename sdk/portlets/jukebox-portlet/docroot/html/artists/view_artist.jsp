@@ -41,6 +41,7 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 		title="<%= artist.getName() %>"
 	/>
 </c:if>
+
 <div class="artist-detail">
 	<div class="container">
 		<img alt="" class="img-circle artist-image" src="<%= artist.getImageURL(themeDisplay) %>" />
