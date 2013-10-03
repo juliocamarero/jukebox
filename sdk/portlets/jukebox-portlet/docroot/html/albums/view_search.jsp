@@ -48,11 +48,7 @@ Hits hits = indexer.search(searchContext);
 <c:choose>
 	<c:when test="<%= hits.getLength() <= 0 %>">
 		<div class="alert alert-info">
-			<c:choose>
-				<c:otherwise>
-					<liferay-ui:message key="there-are-no-albums" />
-				</c:otherwise>
-			</c:choose>
+			<liferay-ui:message key="there-are-no-albums" />
 		</div>
 	</c:when>
 	<c:otherwise>
