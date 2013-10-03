@@ -72,7 +72,7 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 
 		validate(name);
 
-		long albumId = counterLocalService.increment(Album.class.getName());
+		long albumId = counterLocalService.increment();
 
 		Album album = albumPersistence.create(albumId);
 

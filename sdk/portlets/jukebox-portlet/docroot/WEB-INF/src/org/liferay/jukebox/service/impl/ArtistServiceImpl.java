@@ -83,7 +83,7 @@ public class ArtistServiceImpl extends ArtistServiceBaseImpl {
 	}
 
 	public Artist updateArtist(
-			long artistId, String name, InputStream inputStream,
+			long artistId, String name, String bio, InputStream inputStream,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -91,7 +91,7 @@ public class ArtistServiceImpl extends ArtistServiceBaseImpl {
 			getPermissionChecker(), artistId, ActionKeys.UPDATE);
 
 		return artistLocalService.updateArtist(
-			getUserId(), artistId, name, inputStream, serviceContext);
+			getUserId(), artistId, name, bio, inputStream, serviceContext);
 	}
 
 }

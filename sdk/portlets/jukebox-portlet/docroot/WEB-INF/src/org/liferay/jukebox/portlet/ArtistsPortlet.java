@@ -105,6 +105,7 @@ public class ArtistsPortlet extends MVCPortlet {
 
 		long artistId = ParamUtil.getLong(uploadPortletRequest, "artistId");
 		String name = ParamUtil.getString(uploadPortletRequest, "name");
+		String bio = ParamUtil.getString(uploadPortletRequest, "bio");
 
 		InputStream inputStream = uploadPortletRequest.getFileAsStream("file");
 
@@ -113,7 +114,7 @@ public class ArtistsPortlet extends MVCPortlet {
 
 		try {
 			ArtistServiceUtil.updateArtist(
-				artistId, name, inputStream, serviceContext);
+				artistId, name, bio, inputStream, serviceContext);
 
 			SessionMessages.add(uploadPortletRequest, "artistUpdated");
 

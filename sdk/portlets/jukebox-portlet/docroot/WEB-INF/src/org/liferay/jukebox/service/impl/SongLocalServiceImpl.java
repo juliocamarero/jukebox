@@ -98,7 +98,7 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 
 		validate(name);
 
-		long songId = counterLocalService.increment(Song.class.getName());
+		long songId = counterLocalService.increment();
 
 		Song song = songPersistence.create(songId);
 

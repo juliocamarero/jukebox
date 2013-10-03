@@ -71,7 +71,7 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 
 		validate(name);
 
-		long artistId = counterLocalService.increment(Artist.class.getName());
+		long artistId = counterLocalService.increment();
 
 		Artist artist = artistPersistence.create(artistId);
 
@@ -175,8 +175,8 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 
 	@Indexable(type = IndexableType.REINDEX)
 	public Artist updateArtist(
-			long userId, long artistId, String name, InputStream inputStream,
-			ServiceContext serviceContext)
+			long userId, long artistId, String name, String bio,
+			InputStream inputStream, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Event
@@ -189,6 +189,7 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 
 		artist.setModifiedDate(serviceContext.getModifiedDate(null));
 		artist.setName(name);
+		artist.setBio(bio);
 		artist.setExpandoBridgeAttributes(serviceContext);
 
 		artistPersistence.update(artist);
