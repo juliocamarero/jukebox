@@ -773,6 +773,23 @@ public class SongWrapper implements Song, ModelWrapper<Song> {
 	}
 
 	@Override
+	public java.lang.String getLyricsURL(
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _song.getLyricsURL(themeDisplay);
+	}
+
+	@Override
+	public java.lang.String getSongURL(
+		com.liferay.portal.theme.ThemeDisplay themeDisplay,
+		java.lang.String audioContainer)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _song.getSongURL(themeDisplay, audioContainer);
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

@@ -565,6 +565,52 @@ public class SongClp extends BaseModelImpl<Song> implements Song {
 	}
 
 	@Override
+	public java.lang.String getSongURL(
+		com.liferay.portal.theme.ThemeDisplay themeDisplay,
+		java.lang.String audioContainer) {
+		try {
+			String methodName = "getSongURL";
+
+			Class<?>[] parameterTypes = new Class<?>[] {
+					com.liferay.portal.theme.ThemeDisplay.class,
+					java.lang.String.class
+				};
+
+			Object[] parameterValues = new Object[] { themeDisplay, audioContainer };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public java.lang.String getLyricsURL(
+		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
+		try {
+			String methodName = "getLyricsURL";
+
+			Class<?>[] parameterTypes = new Class<?>[] {
+					com.liferay.portal.theme.ThemeDisplay.class
+				};
+
+			Object[] parameterValues = new Object[] { themeDisplay };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(PortalUtil.getClassNameId(
 				Song.class.getName()));
