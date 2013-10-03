@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.transaction.TransactionCommitCallbackRegistryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -34,6 +35,7 @@ import java.io.InputStream;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import org.liferay.jukebox.SongNameException;
 import org.liferay.jukebox.model.Album;
@@ -275,7 +277,7 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 						PortletKeys.JUKEBOX, songFolder.getFolderId(),
 						songInputStream, songFileName, StringPool.BLANK, true);
 
-				DLProcessorRegistryUtil.trigger(fileEntry, null, true);
+				triggerDLProcessors(fileEntry);
 			}
 
 			if (lyricsInputStream != null) {
@@ -303,7 +305,7 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 						lyricsInputStream, lyricsFileName, StringPool.BLANK,
 						true);
 
-				DLProcessorRegistryUtil.trigger(fileEntry, null, true);
+				triggerDLProcessors(fileEntry);
 			}
 		}
 
@@ -314,6 +316,20 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 			serviceContext.getAssetTagNames());
 
 		return song;
+	}
+
+	protected void triggerDLProcessors(final FileEntry fileEntry) {
+		TransactionCommitCallbackRegistryUtil.registerCallback(
+			new Callable<Void>() {
+
+				@Override
+				public Void call() throws Exception {
+					DLProcessorRegistryUtil.trigger(fileEntry, null, true);
+
+					return null;
+				}
+
+			});
 	}
 
 	protected void validate(String name) throws PortalException {
