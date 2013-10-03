@@ -363,11 +363,14 @@ public class SongLocalServiceWrapper implements SongLocalService,
 
 	@Override
 	public org.liferay.jukebox.model.Song addSong(long userId, long albumId,
-		java.lang.String name,
+		java.lang.String name, java.lang.String songFileName,
+		java.io.InputStream songInputStream, java.lang.String lyricsFileName,
+		java.io.InputStream lyricsInputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _songLocalService.addSong(userId, albumId, name, serviceContext);
+		return _songLocalService.addSong(userId, albumId, name, songFileName,
+			songInputStream, lyricsFileName, lyricsInputStream, serviceContext);
 	}
 
 	@Override
@@ -407,11 +410,14 @@ public class SongLocalServiceWrapper implements SongLocalService,
 
 	@Override
 	public org.liferay.jukebox.model.Song updateSong(long userId, long songId,
-		long albumId, java.lang.String name,
+		long albumId, java.lang.String name, java.lang.String songFileName,
+		java.io.InputStream songInputStream, java.lang.String lyricsFileName,
+		java.io.InputStream lyricsInputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _songLocalService.updateSong(userId, songId, albumId, name,
+			songFileName, songInputStream, lyricsFileName, lyricsInputStream,
 			serviceContext);
 	}
 

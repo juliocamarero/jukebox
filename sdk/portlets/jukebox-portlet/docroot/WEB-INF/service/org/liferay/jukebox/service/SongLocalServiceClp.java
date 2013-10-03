@@ -140,7 +140,8 @@ public class SongLocalServiceClp implements SongLocalService {
 		_methodName25 = "addSong";
 
 		_methodParameterTypes25 = new String[] {
-				"long", "long", "java.lang.String",
+				"long", "long", "java.lang.String", "java.lang.String",
+				"java.io.InputStream", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -170,7 +171,8 @@ public class SongLocalServiceClp implements SongLocalService {
 		_methodName31 = "updateSong";
 
 		_methodParameterTypes31 = new String[] {
-				"long", "long", "long", "java.lang.String",
+				"long", "long", "long", "java.lang.String", "java.lang.String",
+				"java.io.InputStream", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -926,7 +928,9 @@ public class SongLocalServiceClp implements SongLocalService {
 
 	@Override
 	public org.liferay.jukebox.model.Song addSong(long userId, long albumId,
-		java.lang.String name,
+		java.lang.String name, java.lang.String songFileName,
+		java.io.InputStream songInputStream, java.lang.String lyricsFileName,
+		java.io.InputStream lyricsInputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -941,6 +945,14 @@ public class SongLocalServiceClp implements SongLocalService {
 					albumId,
 						
 					ClpSerializer.translateInput(name),
+						
+					ClpSerializer.translateInput(songFileName),
+						
+					ClpSerializer.translateInput(songInputStream),
+						
+					ClpSerializer.translateInput(lyricsFileName),
+						
+					ClpSerializer.translateInput(lyricsInputStream),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -1124,7 +1136,9 @@ public class SongLocalServiceClp implements SongLocalService {
 
 	@Override
 	public org.liferay.jukebox.model.Song updateSong(long userId, long songId,
-		long albumId, java.lang.String name,
+		long albumId, java.lang.String name, java.lang.String songFileName,
+		java.io.InputStream songInputStream, java.lang.String lyricsFileName,
+		java.io.InputStream lyricsInputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -1141,6 +1155,14 @@ public class SongLocalServiceClp implements SongLocalService {
 					albumId,
 						
 					ClpSerializer.translateInput(name),
+						
+					ClpSerializer.translateInput(songFileName),
+						
+					ClpSerializer.translateInput(songInputStream),
+						
+					ClpSerializer.translateInput(lyricsFileName),
+						
+					ClpSerializer.translateInput(lyricsInputStream),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

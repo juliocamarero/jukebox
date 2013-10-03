@@ -35,7 +35,8 @@ public class SongServiceClpInvoker {
 		_methodName66 = "addSong";
 
 		_methodParameterTypes66 = new String[] {
-				"long", "java.lang.String",
+				"long", "java.lang.String", "java.lang.String",
+				"java.io.InputStream", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -60,7 +61,8 @@ public class SongServiceClpInvoker {
 		_methodName71 = "updateSong";
 
 		_methodParameterTypes71 = new String[] {
-				"long", "long", "java.lang.String",
+				"long", "long", "java.lang.String", "java.lang.String",
+				"java.io.InputStream", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -82,8 +84,11 @@ public class SongServiceClpInvoker {
 		if (_methodName66.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
 			return SongServiceUtil.addSong(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1],
-				(com.liferay.portal.service.ServiceContext)arguments[2]);
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.io.InputStream)arguments[3],
+				(java.lang.String)arguments[4],
+				(java.io.InputStream)arguments[5],
+				(com.liferay.portal.service.ServiceContext)arguments[6]);
 		}
 
 		if (_methodName67.equals(name) &&
@@ -113,8 +118,11 @@ public class SongServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
 			return SongServiceUtil.updateSong(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
-				(java.lang.String)arguments[2],
-				(com.liferay.portal.service.ServiceContext)arguments[3]);
+				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
+				(java.io.InputStream)arguments[4],
+				(java.lang.String)arguments[5],
+				(java.io.InputStream)arguments[6],
+				(com.liferay.portal.service.ServiceContext)arguments[7]);
 		}
 
 		throw new UnsupportedOperationException();

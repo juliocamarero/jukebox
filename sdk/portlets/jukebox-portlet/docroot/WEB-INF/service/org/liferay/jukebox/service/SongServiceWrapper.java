@@ -58,11 +58,14 @@ public class SongServiceWrapper implements SongService,
 
 	@Override
 	public org.liferay.jukebox.model.Song addSong(long albumId,
-		java.lang.String name,
+		java.lang.String name, java.lang.String songFileName,
+		java.io.InputStream songInputStream, java.lang.String lyricsFileName,
+		java.io.InputStream lyricsInputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _songService.addSong(albumId, name, serviceContext);
+		return _songService.addSong(albumId, name, songFileName,
+			songInputStream, lyricsFileName, lyricsInputStream, serviceContext);
 	}
 
 	@Override
@@ -94,11 +97,14 @@ public class SongServiceWrapper implements SongService,
 
 	@Override
 	public org.liferay.jukebox.model.Song updateSong(long songId, long albumId,
-		java.lang.String name,
+		java.lang.String name, java.lang.String songFileName,
+		java.io.InputStream songInputStream, java.lang.String lyricsFileName,
+		java.io.InputStream lyricsInputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _songService.updateSong(songId, albumId, name, serviceContext);
+		return _songService.updateSong(songId, albumId, name, songFileName,
+			songInputStream, lyricsFileName, lyricsInputStream, serviceContext);
 	}
 
 	/**

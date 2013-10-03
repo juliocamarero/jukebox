@@ -62,23 +62,6 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class SongServiceSoap {
-	public static org.liferay.jukebox.model.SongSoap addSong(long albumId,
-		java.lang.String name,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			org.liferay.jukebox.model.Song returnValue = SongServiceUtil.addSong(albumId,
-					name, serviceContext);
-
-			return org.liferay.jukebox.model.SongSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static org.liferay.jukebox.model.SongSoap deleteSong(long songId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
@@ -129,23 +112,6 @@ public class SongServiceSoap {
 			int returnValue = SongServiceUtil.getSongsCount(groupId);
 
 			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static org.liferay.jukebox.model.SongSoap updateSong(long songId,
-		long albumId, java.lang.String name,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			org.liferay.jukebox.model.Song returnValue = SongServiceUtil.updateSong(songId,
-					albumId, name, serviceContext);
-
-			return org.liferay.jukebox.model.SongSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -35,7 +35,8 @@ public class SongServiceClp implements SongService {
 		_methodName3 = "addSong";
 
 		_methodParameterTypes3 = new String[] {
-				"long", "java.lang.String",
+				"long", "java.lang.String", "java.lang.String",
+				"java.io.InputStream", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -60,7 +61,8 @@ public class SongServiceClp implements SongService {
 		_methodName8 = "updateSong";
 
 		_methodParameterTypes8 = new String[] {
-				"long", "long", "java.lang.String",
+				"long", "long", "java.lang.String", "java.lang.String",
+				"java.io.InputStream", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -117,7 +119,9 @@ public class SongServiceClp implements SongService {
 
 	@Override
 	public org.liferay.jukebox.model.Song addSong(long albumId,
-		java.lang.String name,
+		java.lang.String name, java.lang.String songFileName,
+		java.io.InputStream songInputStream, java.lang.String lyricsFileName,
+		java.io.InputStream lyricsInputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -130,6 +134,14 @@ public class SongServiceClp implements SongService {
 						albumId,
 						
 					ClpSerializer.translateInput(name),
+						
+					ClpSerializer.translateInput(songFileName),
+						
+					ClpSerializer.translateInput(songInputStream),
+						
+					ClpSerializer.translateInput(lyricsFileName),
+						
+					ClpSerializer.translateInput(lyricsInputStream),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -283,7 +295,9 @@ public class SongServiceClp implements SongService {
 
 	@Override
 	public org.liferay.jukebox.model.Song updateSong(long songId, long albumId,
-		java.lang.String name,
+		java.lang.String name, java.lang.String songFileName,
+		java.io.InputStream songInputStream, java.lang.String lyricsFileName,
+		java.io.InputStream lyricsInputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -298,6 +312,14 @@ public class SongServiceClp implements SongService {
 					albumId,
 						
 					ClpSerializer.translateInput(name),
+						
+					ClpSerializer.translateInput(songFileName),
+						
+					ClpSerializer.translateInput(songInputStream),
+						
+					ClpSerializer.translateInput(lyricsFileName),
+						
+					ClpSerializer.translateInput(lyricsInputStream),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

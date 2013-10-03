@@ -347,11 +347,15 @@ public class SongLocalServiceUtil {
 	}
 
 	public static org.liferay.jukebox.model.Song addSong(long userId,
-		long albumId, java.lang.String name,
+		long albumId, java.lang.String name, java.lang.String songFileName,
+		java.io.InputStream songInputStream, java.lang.String lyricsFileName,
+		java.io.InputStream lyricsInputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().addSong(userId, albumId, name, serviceContext);
+		return getService()
+				   .addSong(userId, albumId, name, songFileName,
+			songInputStream, lyricsFileName, lyricsInputStream, serviceContext);
 	}
 
 	public static java.util.List<org.liferay.jukebox.model.Song> getSongs(
@@ -387,11 +391,14 @@ public class SongLocalServiceUtil {
 
 	public static org.liferay.jukebox.model.Song updateSong(long userId,
 		long songId, long albumId, java.lang.String name,
+		java.lang.String songFileName, java.io.InputStream songInputStream,
+		java.lang.String lyricsFileName, java.io.InputStream lyricsInputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateSong(userId, songId, albumId, name, serviceContext);
+				   .updateSong(userId, songId, albumId, name, songFileName,
+			songInputStream, lyricsFileName, lyricsInputStream, serviceContext);
 	}
 
 	public static void clearService() {
