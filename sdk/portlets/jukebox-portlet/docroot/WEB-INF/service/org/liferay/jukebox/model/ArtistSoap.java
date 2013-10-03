@@ -44,6 +44,7 @@ public class ArtistSoap implements Serializable {
 		soapModel.setStatusByUserName(model.getStatusByUserName());
 		soapModel.setStatusDate(model.getStatusDate());
 		soapModel.setName(model.getName());
+		soapModel.setBio(model.getBio());
 
 		return soapModel;
 	}
@@ -200,6 +201,14 @@ public class ArtistSoap implements Serializable {
 		_name = name;
 	}
 
+	public String getBio() {
+		return _bio;
+	}
+
+	public void setBio(String bio) {
+		_bio = bio;
+	}
+
 	private String _uuid;
 	private long _artistId;
 	private long _companyId;
@@ -213,4 +222,5 @@ public class ArtistSoap implements Serializable {
 	private String _statusByUserName;
 	private Date _statusDate;
 	private String _name;
+	private String _bio;
 }

@@ -37,7 +37,7 @@ import java.util.Date;
 public class ArtistCacheModel implements CacheModel<Artist>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -65,6 +65,8 @@ public class ArtistCacheModel implements CacheModel<Artist>, Externalizable {
 		sb.append(statusDate);
 		sb.append(", name=");
 		sb.append(name);
+		sb.append(", bio=");
+		sb.append(bio);
 		sb.append("}");
 
 		return sb.toString();
@@ -131,6 +133,13 @@ public class ArtistCacheModel implements CacheModel<Artist>, Externalizable {
 			artistImpl.setName(name);
 		}
 
+		if (bio == null) {
+			artistImpl.setBio(StringPool.BLANK);
+		}
+		else {
+			artistImpl.setBio(bio);
+		}
+
 		artistImpl.resetOriginalValues();
 
 		return artistImpl;
@@ -151,6 +160,7 @@ public class ArtistCacheModel implements CacheModel<Artist>, Externalizable {
 		statusByUserName = objectInput.readUTF();
 		statusDate = objectInput.readLong();
 		name = objectInput.readUTF();
+		bio = objectInput.readUTF();
 	}
 
 	@Override
@@ -195,6 +205,13 @@ public class ArtistCacheModel implements CacheModel<Artist>, Externalizable {
 		else {
 			objectOutput.writeUTF(name);
 		}
+
+		if (bio == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(bio);
+		}
 	}
 
 	public String uuid;
@@ -210,4 +227,5 @@ public class ArtistCacheModel implements CacheModel<Artist>, Externalizable {
 	public String statusByUserName;
 	public long statusDate;
 	public String name;
+	public String bio;
 }

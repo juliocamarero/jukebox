@@ -88,9 +88,10 @@ public class ArtistModelImpl extends BaseModelImpl<Artist>
 			{ "statusByUserId", Types.BIGINT },
 			{ "statusByUserName", Types.VARCHAR },
 			{ "statusDate", Types.TIMESTAMP },
-			{ "name", Types.VARCHAR }
+			{ "name", Types.VARCHAR },
+			{ "bio", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table jukebox_Artist (uuid_ VARCHAR(75) null,artistId LONG not null primary key,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,name VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table jukebox_Artist (uuid_ VARCHAR(75) null,artistId LONG not null primary key,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,name VARCHAR(75) null,bio VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table jukebox_Artist";
 	public static final String ORDER_BY_JPQL = " ORDER BY artist.artistId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY jukebox_Artist.artistId ASC";
@@ -138,6 +139,7 @@ public class ArtistModelImpl extends BaseModelImpl<Artist>
 		model.setStatusByUserName(soapModel.getStatusByUserName());
 		model.setStatusDate(soapModel.getStatusDate());
 		model.setName(soapModel.getName());
+		model.setBio(soapModel.getBio());
 
 		return model;
 	}
@@ -215,6 +217,7 @@ public class ArtistModelImpl extends BaseModelImpl<Artist>
 		attributes.put("statusByUserName", getStatusByUserName());
 		attributes.put("statusDate", getStatusDate());
 		attributes.put("name", getName());
+		attributes.put("bio", getBio());
 
 		return attributes;
 	}
@@ -297,6 +300,12 @@ public class ArtistModelImpl extends BaseModelImpl<Artist>
 
 		if (name != null) {
 			setName(name);
+		}
+
+		String bio = (String)attributes.get("bio");
+
+		if (bio != null) {
+			setBio(bio);
 		}
 	}
 
@@ -528,6 +537,22 @@ public class ArtistModelImpl extends BaseModelImpl<Artist>
 		_name = name;
 	}
 
+	@JSON
+	@Override
+	public String getBio() {
+		if (_bio == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _bio;
+		}
+	}
+
+	@Override
+	public void setBio(String bio) {
+		_bio = bio;
+	}
+
 	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(PortalUtil.getClassNameId(
@@ -750,6 +775,7 @@ public class ArtistModelImpl extends BaseModelImpl<Artist>
 		artistImpl.setStatusByUserName(getStatusByUserName());
 		artistImpl.setStatusDate(getStatusDate());
 		artistImpl.setName(getName());
+		artistImpl.setBio(getBio());
 
 		artistImpl.resetOriginalValues();
 
@@ -894,12 +920,20 @@ public class ArtistModelImpl extends BaseModelImpl<Artist>
 			artistCacheModel.name = null;
 		}
 
+		artistCacheModel.bio = getBio();
+
+		String bio = artistCacheModel.bio;
+
+		if ((bio != null) && (bio.length() == 0)) {
+			artistCacheModel.bio = null;
+		}
+
 		return artistCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -927,6 +961,8 @@ public class ArtistModelImpl extends BaseModelImpl<Artist>
 		sb.append(getStatusDate());
 		sb.append(", name=");
 		sb.append(getName());
+		sb.append(", bio=");
+		sb.append(getBio());
 		sb.append("}");
 
 		return sb.toString();
@@ -934,7 +970,7 @@ public class ArtistModelImpl extends BaseModelImpl<Artist>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("org.liferay.jukebox.model.Artist");
@@ -992,6 +1028,10 @@ public class ArtistModelImpl extends BaseModelImpl<Artist>
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bio</column-name><column-value><![CDATA[");
+		sb.append(getBio());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1022,6 +1062,7 @@ public class ArtistModelImpl extends BaseModelImpl<Artist>
 	private String _statusByUserName;
 	private Date _statusDate;
 	private String _name;
+	private String _bio;
 	private long _columnBitmask;
 	private Artist _escapedModel;
 }

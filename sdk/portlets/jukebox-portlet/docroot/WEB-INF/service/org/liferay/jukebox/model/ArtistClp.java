@@ -98,6 +98,7 @@ public class ArtistClp extends BaseModelImpl<Artist> implements Artist {
 		attributes.put("statusByUserName", getStatusByUserName());
 		attributes.put("statusDate", getStatusDate());
 		attributes.put("name", getName());
+		attributes.put("bio", getBio());
 
 		return attributes;
 	}
@@ -180,6 +181,12 @@ public class ArtistClp extends BaseModelImpl<Artist> implements Artist {
 
 		if (name != null) {
 			setName(name);
+		}
+
+		String bio = (String)attributes.get("bio");
+
+		if (bio != null) {
+			setBio(bio);
 		}
 	}
 
@@ -505,6 +512,29 @@ public class ArtistClp extends BaseModelImpl<Artist> implements Artist {
 	}
 
 	@Override
+	public String getBio() {
+		return _bio;
+	}
+
+	@Override
+	public void setBio(String bio) {
+		_bio = bio;
+
+		if (_artistRemoteModel != null) {
+			try {
+				Class<?> clazz = _artistRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setBio", String.class);
+
+				method.invoke(_artistRemoteModel, bio);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public java.lang.String getImageURL(
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
 		try {
@@ -786,6 +816,7 @@ public class ArtistClp extends BaseModelImpl<Artist> implements Artist {
 		clone.setStatusByUserName(getStatusByUserName());
 		clone.setStatusDate(getStatusDate());
 		clone.setName(getName());
+		clone.setBio(getBio());
 
 		return clone;
 	}
@@ -834,7 +865,7 @@ public class ArtistClp extends BaseModelImpl<Artist> implements Artist {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -862,6 +893,8 @@ public class ArtistClp extends BaseModelImpl<Artist> implements Artist {
 		sb.append(getStatusDate());
 		sb.append(", name=");
 		sb.append(getName());
+		sb.append(", bio=");
+		sb.append(getBio());
 		sb.append("}");
 
 		return sb.toString();
@@ -869,7 +902,7 @@ public class ArtistClp extends BaseModelImpl<Artist> implements Artist {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("org.liferay.jukebox.model.Artist");
@@ -927,6 +960,10 @@ public class ArtistClp extends BaseModelImpl<Artist> implements Artist {
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bio</column-name><column-value><![CDATA[");
+		sb.append(getBio());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -948,5 +985,6 @@ public class ArtistClp extends BaseModelImpl<Artist> implements Artist {
 	private String _statusByUserName;
 	private Date _statusDate;
 	private String _name;
+	private String _bio;
 	private BaseModel<?> _artistRemoteModel;
 }

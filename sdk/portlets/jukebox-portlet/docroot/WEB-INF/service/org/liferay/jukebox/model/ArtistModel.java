@@ -310,6 +310,21 @@ public interface ArtistModel extends BaseModel<Artist>, StagedGroupedModel,
 	public void setName(String name);
 
 	/**
+	 * Returns the bio of this artist.
+	 *
+	 * @return the bio of this artist
+	 */
+	@AutoEscape
+	public String getBio();
+
+	/**
+	 * Sets the bio of this artist.
+	 *
+	 * @param bio the bio of this artist
+	 */
+	public void setBio(String bio);
+
+	/**
 	 * Returns the trash entry created when this artist was moved to the Recycle Bin. The trash entry may belong to one of the ancestors of this artist.
 	 *
 	 * @return the trash entry created when this artist was moved to the Recycle Bin

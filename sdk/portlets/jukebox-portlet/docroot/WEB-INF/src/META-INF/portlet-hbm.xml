@@ -42,6 +42,7 @@
 		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="statusDate" type="org.hibernate.type.TimestampType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bio" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="org.liferay.jukebox.model.impl.SongImpl" table="jukebox_Song">
 		<cache usage="read-write" />

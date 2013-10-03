@@ -29,7 +29,8 @@ create table jukebox_Artist (
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
 	statusDate DATE null,
-	name VARCHAR(75) null
+	name VARCHAR(75) null,
+	bio VARCHAR(75) null
 );
 
 create table jukebox_Song (

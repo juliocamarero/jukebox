@@ -63,6 +63,7 @@ public class ArtistWrapper implements Artist, ModelWrapper<Artist> {
 		attributes.put("statusByUserName", getStatusByUserName());
 		attributes.put("statusDate", getStatusDate());
 		attributes.put("name", getName());
+		attributes.put("bio", getBio());
 
 		return attributes;
 	}
@@ -145,6 +146,12 @@ public class ArtistWrapper implements Artist, ModelWrapper<Artist> {
 
 		if (name != null) {
 			setName(name);
+		}
+
+		String bio = (String)attributes.get("bio");
+
+		if (bio != null) {
+			setBio(bio);
 		}
 	}
 
@@ -470,6 +477,26 @@ public class ArtistWrapper implements Artist, ModelWrapper<Artist> {
 	@Override
 	public void setName(java.lang.String name) {
 		_artist.setName(name);
+	}
+
+	/**
+	* Returns the bio of this artist.
+	*
+	* @return the bio of this artist
+	*/
+	@Override
+	public java.lang.String getBio() {
+		return _artist.getBio();
+	}
+
+	/**
+	* Sets the bio of this artist.
+	*
+	* @param bio the bio of this artist
+	*/
+	@Override
+	public void setBio(java.lang.String bio) {
+		_artist.setBio(bio);
 	}
 
 	/**
