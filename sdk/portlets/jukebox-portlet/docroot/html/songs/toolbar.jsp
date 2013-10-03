@@ -34,7 +34,30 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem");
 
 	<aui:nav-bar-search cssClass="pull-right">
 		<div class="form-search">
-			<liferay-ui:input-search autoFocus="<%= liferayPortletRequest.getWindowState().equals(WindowState.MAXIMIZED) %>" id="keywords1" name="keywords" placeholder='<%= LanguageUtil.get(locale, "keywords") %>' />
+
+			<%
+			PortletURL portletURL = renderResponse.createRenderURL();
+
+			portletURL.setParameter("jspPage", "/html/songs/view_search.jsp");
+			portletURL.setParameter("redirect", PortalUtil.getCurrentURL(renderRequest));
+
+			SongSearch searchContainer = new SongSearch(renderRequest, portletURL);
+
+			SongDisplayTerms displayTerms = (SongDisplayTerms)searchContainer.getDisplayTerms();
+			%>
+
+			<liferay-ui:search-toggle
+				autoFocus="<%= liferayPortletRequest.getWindowState().equals(WindowState.MAXIMIZED) %>"
+				buttonLabel="search"
+				displayTerms="<%= displayTerms %>"
+				id="<%= renderResponse.getNamespace() %>"
+			>
+				<aui:fieldset>
+					<aui:input name="<%= displayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>" />
+
+					<aui:input name="<%= displayTerms.ARTIST %>" size="20" type="text" value="<%= displayTerms.getArtist() %>" />
+				</aui:fieldset>
+			</liferay-ui:search-toggle>
 		</div>
 	</aui:nav-bar-search>
 </aui:nav-bar>

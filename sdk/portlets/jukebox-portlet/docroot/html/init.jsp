@@ -25,6 +25,12 @@
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
+<%@ page import="org.liferay.jukebox.search.AlbumDisplayTerms" %>
+<%@ page import="org.liferay.jukebox.search.AlbumSearch" %>
+<%@ page import="org.liferay.jukebox.search.ArtistDisplayTerms" %>
+<%@ page import="org.liferay.jukebox.search.ArtistSearch" %>
+<%@ page import="org.liferay.jukebox.search.SongDisplayTerms" %>
+<%@ page import="org.liferay.jukebox.search.SongSearch" %>
 <%@ page import="org.liferay.jukebox.service.ArtistServiceUtil" %>
 <%@ page import="org.liferay.jukebox.service.AlbumServiceUtil" %>
 <%@ page import="org.liferay.jukebox.service.SongServiceUtil" %>

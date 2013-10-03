@@ -19,14 +19,27 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-String keywords = ParamUtil.getString(request, "keywords");
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setParameter("jspPage", "/html/albums/view_search.jsp");
+portletURL.setParameter("redirect", PortalUtil.getCurrentURL(renderRequest));
+
+AlbumSearch searchContainer = new AlbumSearch(renderRequest, portletURL);
+
+AlbumDisplayTerms displayTerms = (AlbumDisplayTerms)searchContainer.getDisplayTerms();
 
 Indexer indexer = IndexerRegistryUtil.getIndexer(Album.class);
 
 SearchContext searchContext = SearchContextFactory.getInstance(request);
 
+searchContext.setAndSearch(displayTerms.isAndOperator());
+
+if (displayTerms.isAdvancedSearch()) {
+	searchContext.setAttribute(Field.TITLE, displayTerms.getTitle());
+	searchContext.setAttribute("year", String.valueOf(displayTerms.getYear()));
+}
+
 searchContext.setIncludeDiscussions(true);
-searchContext.setKeywords(keywords);
 
 Hits hits = indexer.search(searchContext);
 %>

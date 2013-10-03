@@ -19,14 +19,27 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-String keywords = ParamUtil.getString(request, "keywords");
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setParameter("jspPage", "/html/artists/view_search.jsp");
+portletURL.setParameter("redirect", PortalUtil.getCurrentURL(renderRequest));
+
+ArtistSearch searchContainer = new ArtistSearch(renderRequest, portletURL);
+
+ArtistDisplayTerms displayTerms = (ArtistDisplayTerms)searchContainer.getDisplayTerms();
 
 Indexer indexer = IndexerRegistryUtil.getIndexer(Artist.class);
 
 SearchContext searchContext = SearchContextFactory.getInstance(request);
 
+searchContext.setAndSearch(displayTerms.isAndOperator());
+
+if (displayTerms.isAdvancedSearch()) {
+	searchContext.setAttribute(Field.TITLE, displayTerms.getTitle());
+	searchContext.setAttribute("bio", String.valueOf(displayTerms.getBio()));
+}
+
 searchContext.setIncludeDiscussions(true);
-searchContext.setKeywords(keywords);
 
 Hits hits = indexer.search(searchContext);
 %>
