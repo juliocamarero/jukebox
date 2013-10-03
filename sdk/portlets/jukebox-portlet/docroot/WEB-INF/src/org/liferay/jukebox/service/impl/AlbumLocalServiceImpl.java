@@ -16,6 +16,8 @@ package org.liferay.jukebox.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -186,18 +188,28 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 
 		if (inputStream != null) {
 			Repository repository =
-				PortletFileRepositoryUtil.getPortletRepository(
+				PortletFileRepositoryUtil.fetchPortletRepository(
 					serviceContext.getScopeGroupId(),
 					Constants.JUKEBOX_PORTLET_REPOSITORY);
 
-			PortletFileRepositoryUtil.deletePortletFileEntry(
-				repository.getRepositoryId(),
-				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-				String.valueOf(album.getAlbumId()));
+			if (repository != null) {
+				try {
+					PortletFileRepositoryUtil.deletePortletFileEntry(
+						repository.getRepositoryId(),
+						DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+						String.valueOf(album.getAlbumId()));
+				}
+				catch (Exception e) {
+					if (_log.isDebugEnabled()) {
+						_log.debug("Cannot delete album cover");
+					}
+				}
+			}
 
 			PortletFileRepositoryUtil.addPortletFileEntry(
-				serviceContext.getScopeGroupId(), userId, Album.class.getName(),
-				album.getAlbumId(), Constants.JUKEBOX_PORTLET_REPOSITORY,
+				serviceContext.getScopeGroupId(), userId,
+				Album.class.getName(), album.getAlbumId(),
+				Constants.JUKEBOX_PORTLET_REPOSITORY,
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, inputStream,
 				String.valueOf(album.getAlbumId()), StringPool.BLANK, true);
 		}
@@ -229,5 +241,8 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 			throw new AlbumNameException();
 		}
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		AlbumLocalServiceImpl.class);
 
 }

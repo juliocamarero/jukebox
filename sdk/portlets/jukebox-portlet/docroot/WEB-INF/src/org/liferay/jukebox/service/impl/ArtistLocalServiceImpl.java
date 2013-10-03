@@ -16,6 +16,8 @@ package org.liferay.jukebox.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -177,14 +179,23 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 
 		if (inputStream != null) {
 			Repository repository =
-				PortletFileRepositoryUtil.getPortletRepository(
+				PortletFileRepositoryUtil.fetchPortletRepository(
 					serviceContext.getScopeGroupId(),
 					Constants.JUKEBOX_PORTLET_REPOSITORY);
 
-			PortletFileRepositoryUtil.deletePortletFileEntry(
-				repository.getRepositoryId(),
-				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-				String.valueOf(artist.getArtistId()));
+			if (repository != null) {
+				try {
+					PortletFileRepositoryUtil.deletePortletFileEntry(
+						repository.getRepositoryId(),
+						DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+						String.valueOf(artist.getArtistId()));
+				}
+				catch (Exception e) {
+					if (_log.isDebugEnabled()) {
+						_log.debug("Cannot delete artist image");
+					}
+				}
+			}
 
 			PortletFileRepositoryUtil.addPortletFileEntry(
 				serviceContext.getScopeGroupId(), userId,
@@ -221,5 +232,8 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 			throw new ArtistNameException();
 		}
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		ArtistLocalServiceImpl.class);
 
 }

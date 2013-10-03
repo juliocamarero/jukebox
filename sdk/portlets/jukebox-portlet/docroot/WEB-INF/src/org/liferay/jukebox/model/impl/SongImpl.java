@@ -85,13 +85,18 @@ public class SongImpl extends SongBaseImpl {
 	}
 
 	protected FileEntry getFileEntry(
-		ThemeDisplay themeDisplay, String folderName) {
+			ThemeDisplay themeDisplay, String folderName)
+		throws SystemException {
+
+		Repository repository =
+			PortletFileRepositoryUtil.fetchPortletRepository(
+				getGroupId(), Constants.JUKEBOX_PORTLET_REPOSITORY);
+
+		if (repository == null) {
+			return null;
+		}
 
 		try {
-			Repository repository =
-				PortletFileRepositoryUtil.getPortletRepository(
-					getGroupId(), Constants.JUKEBOX_PORTLET_REPOSITORY);
-
 			Folder folder = PortletFileRepositoryUtil.getPortletFolder(
 				0, repository.getRepositoryId(),
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,

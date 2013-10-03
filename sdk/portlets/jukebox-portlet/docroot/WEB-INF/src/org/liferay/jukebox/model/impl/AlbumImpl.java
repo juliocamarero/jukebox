@@ -14,6 +14,7 @@
 
 package org.liferay.jukebox.model.impl;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Repository;
@@ -37,12 +38,18 @@ import org.liferay.jukebox.util.Constants;
  */
 public class AlbumImpl extends AlbumBaseImpl {
 
-	public String getImageURL(ThemeDisplay themeDisplay) {
-		try {
-			Repository repository =
-				PortletFileRepositoryUtil.getPortletRepository(
-					getGroupId(), Constants.JUKEBOX_PORTLET_REPOSITORY);
+	public String getImageURL(ThemeDisplay themeDisplay)
+		throws SystemException {
 
+		Repository repository =
+			PortletFileRepositoryUtil.fetchPortletRepository(
+				getGroupId(), Constants.JUKEBOX_PORTLET_REPOSITORY);
+
+		if (repository == null) {
+			return StringPool.BLANK;
+		}
+
+		try {
 			FileEntry fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
 				repository.getRepositoryId(),
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
