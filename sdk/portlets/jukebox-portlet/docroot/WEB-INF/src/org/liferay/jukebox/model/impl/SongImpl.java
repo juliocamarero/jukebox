@@ -24,6 +24,8 @@ package org.liferay.jukebox.model.impl;
  * @author Julio Camarero
  */
 public class SongImpl extends SongBaseImpl {
+
 	public SongImpl() {
 	}
+
 }

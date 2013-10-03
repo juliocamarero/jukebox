@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package org.liferay.jukebox.portlet;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -109,8 +110,8 @@ public class ArtistsPortlet extends MVCPortlet {
 			Artist.class.getName(), uploadPortletRequest);
 
 		try {
-			ArtistServiceUtil.updateArtist(artistId, name, inputStream,
-				serviceContext);
+			ArtistServiceUtil.updateArtist(
+				artistId, name, inputStream, serviceContext);
 
 			SessionMessages.add(uploadPortletRequest, "artistUpdated");
 

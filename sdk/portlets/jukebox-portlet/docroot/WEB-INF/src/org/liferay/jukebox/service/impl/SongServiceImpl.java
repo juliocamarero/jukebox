@@ -41,6 +41,7 @@ import org.liferay.jukebox.service.permission.SongPermission;
  * @see org.liferay.jukebox.service.SongServiceUtil
  */
 public class SongServiceImpl extends SongServiceBaseImpl {
+
 	public Song addSong(
 			long albumId, String name, ServiceContext serviceContext)
 		throws PortalException, SystemException {

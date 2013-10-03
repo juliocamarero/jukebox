@@ -44,7 +44,6 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 	/>
 </c:if>
 
-
 <div class="song-artist">
 	<%= artist.getName() %>
 

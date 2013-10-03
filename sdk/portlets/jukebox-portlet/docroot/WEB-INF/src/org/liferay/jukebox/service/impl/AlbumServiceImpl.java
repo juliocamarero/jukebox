@@ -45,6 +45,7 @@ import org.liferay.jukebox.service.permission.JukeBoxPermission;
  * @see org.liferay.jukebox.service.AlbumServiceUtil
  */
 public class AlbumServiceImpl extends AlbumServiceBaseImpl {
+
 	public Album addAlbum(
 			long artistId, String name, int year, InputStream inputStream,
 			ServiceContext serviceContext)

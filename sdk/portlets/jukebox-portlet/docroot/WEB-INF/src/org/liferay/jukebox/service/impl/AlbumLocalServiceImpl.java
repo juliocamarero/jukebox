@@ -151,7 +151,9 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 		return albumPersistence.findByGroupId(groupId, start, end);
 	}
 
-	public List<Album> getAlbumsByArtistId(long artistId) throws SystemException {
+	public List<Album> getAlbumsByArtistId(long artistId)
+		throws SystemException {
+
 		return albumPersistence.findByArtistId(artistId);
 	}
 
@@ -225,4 +227,5 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 			throw new AlbumNameException();
 		}
 	}
+
 }

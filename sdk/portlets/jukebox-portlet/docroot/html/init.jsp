@@ -25,56 +25,6 @@
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
-<%@ page import="org.liferay.jukebox.service.ArtistServiceUtil" %>
-<%@ page import="org.liferay.jukebox.service.AlbumServiceUtil" %>
-<%@ page import="org.liferay.jukebox.service.SongServiceUtil" %>
-<%@ page import="org.liferay.jukebox.service.ArtistLocalServiceUtil" %>
-<%@ page import="org.liferay.jukebox.service.AlbumLocalServiceUtil" %>
-<%@ page import="org.liferay.jukebox.service.SongLocalServiceUtil" %>
-<%@ page import="org.liferay.jukebox.model.Artist" %>
-<%@ page import="org.liferay.jukebox.model.Album" %>
-<%@ page import="org.liferay.jukebox.model.Song" %>
-<%@ page import="org.liferay.jukebox.service.permission.JukeBoxPermission" %>
-<%@ page import="org.liferay.jukebox.service.permission.ArtistPermission" %>
-<%@ page import="org.liferay.jukebox.service.permission.AlbumPermission" %>
-<%@ page import="org.liferay.jukebox.service.permission.SongPermission" %>
-
-<%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
-<%@ page import="com.liferay.portal.kernel.search.Document" %>
-<%@ page import="com.liferay.portal.kernel.search.Field" %>
-<%@ page import="com.liferay.portal.kernel.search.Hits" %>
-<%@ page import="com.liferay.portal.kernel.search.Indexer" %>
-<%@ page import="com.liferay.portal.kernel.search.IndexerRegistryUtil" %>
-<%@ page import="com.liferay.portal.kernel.search.SearchContext" %>
-<%@ page import="com.liferay.portal.kernel.search.SearchContextFactory" %>
-<%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.Validator" %>
-
-<%@ page import="com.liferay.portal.security.permission.ActionKeys" %>
-<%@ page import="com.liferay.portal.util.PortalUtil" %>
-
-
-<%@ page import="java.text.Format" %>
-<%@ page import="java.text.DateFormat" %>
-
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Calendar" %>
-<%@ page import="java.util.Comparator" %>
-<%@ page import="java.util.Date" %>
-<%@ page import="java.util.GregorianCalendar" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.TimeZone" %>
-
-<%@ page import="javax.portlet.PortletURL" %>
-
-<%@ page import="javax.portlet.PortletMode" %>
-<%@ page import="javax.portlet.PortletRequest" %>
-<%@ page import="javax.portlet.PortletPreferences" %>
-<%@ page import="javax.portlet.WindowState" %>
-
 <portlet:defineObjects />
 
 <liferay-theme:defineObjects />

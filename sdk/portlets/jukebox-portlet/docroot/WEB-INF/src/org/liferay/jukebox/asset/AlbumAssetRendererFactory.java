@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package org.liferay.jukebox.asset;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -68,4 +69,5 @@ public class AlbumAssetRendererFactory extends BaseAssetRendererFactory {
 	}
 
 	private static final boolean _LINKABLE = true;
+
 }

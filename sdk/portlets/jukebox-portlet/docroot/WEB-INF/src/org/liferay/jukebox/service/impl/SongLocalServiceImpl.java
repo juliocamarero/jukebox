@@ -46,6 +46,7 @@ import org.liferay.jukebox.service.base.SongLocalServiceBaseImpl;
  * @see org.liferay.jukebox.service.SongLocalServiceUtil
  */
 public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
+
 	@Override
 	public void addEntryResources(
 			Song song, boolean addGroupPermissions, boolean addGuestPermissions)
@@ -196,4 +197,5 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 			throw new SongNameException();
 		}
 	}
+
 }

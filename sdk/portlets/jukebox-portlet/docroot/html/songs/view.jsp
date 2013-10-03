@@ -71,7 +71,7 @@ else {
 
 <c:if test="<%= (albumId <= 0) && showToolbar %>">
 	<liferay-portlet:renderURL varImpl="searchURL" />
-	
+
 	<aui:form action="<%= searchURL.toString() %>" method="get" name="fm">
 		<jsp:include page="/html/songs/toolbar.jsp" />
 	</aui:form>

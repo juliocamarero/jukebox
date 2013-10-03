@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package org.liferay.jukebox.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -45,4 +46,5 @@ public class ArtistPermission {
 			artist.getGroupId(), Artist.class.getName(), artist.getArtistId(),
 			actionId);
 	}
+
 }
