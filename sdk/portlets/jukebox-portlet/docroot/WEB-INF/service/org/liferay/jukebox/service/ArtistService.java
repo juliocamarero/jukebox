@@ -66,6 +66,7 @@ public interface ArtistService extends BaseService, InvokableService {
 		throws java.lang.Throwable;
 
 	public org.liferay.jukebox.model.Artist addArtist(java.lang.String name,
+		java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -90,7 +91,7 @@ public interface ArtistService extends BaseService, InvokableService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public org.liferay.jukebox.model.Artist updateArtist(long artistId,
-		java.lang.String name,
+		java.lang.String name, java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

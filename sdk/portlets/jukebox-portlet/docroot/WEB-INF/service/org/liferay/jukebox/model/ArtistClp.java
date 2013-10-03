@@ -505,6 +505,28 @@ public class ArtistClp extends BaseModelImpl<Artist> implements Artist {
 	}
 
 	@Override
+	public java.lang.String getImageURL(
+		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
+		try {
+			String methodName = "getImageURL";
+
+			Class<?>[] parameterTypes = new Class<?>[] {
+					com.liferay.portal.theme.ThemeDisplay.class
+				};
+
+			Object[] parameterValues = new Object[] { themeDisplay };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(PortalUtil.getClassNameId(
 				Artist.class.getName()));

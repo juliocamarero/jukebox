@@ -129,7 +129,7 @@ public class ArtistLocalServiceClp implements ArtistLocalService {
 		_methodName23 = "addArtist";
 
 		_methodParameterTypes23 = new String[] {
-				"long", "java.lang.String",
+				"long", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -161,7 +161,7 @@ public class ArtistLocalServiceClp implements ArtistLocalService {
 		_methodName29 = "updateArtist";
 
 		_methodParameterTypes29 = new String[] {
-				"long", "long", "java.lang.String",
+				"long", "long", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -851,7 +851,7 @@ public class ArtistLocalServiceClp implements ArtistLocalService {
 
 	@Override
 	public org.liferay.jukebox.model.Artist addArtist(long userId,
-		java.lang.String name,
+		java.lang.String name, java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -864,6 +864,8 @@ public class ArtistLocalServiceClp implements ArtistLocalService {
 						userId,
 						
 					ClpSerializer.translateInput(name),
+						
+					ClpSerializer.translateInput(inputStream),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -1054,7 +1056,7 @@ public class ArtistLocalServiceClp implements ArtistLocalService {
 
 	@Override
 	public org.liferay.jukebox.model.Artist updateArtist(long userId,
-		long artistId, java.lang.String name,
+		long artistId, java.lang.String name, java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -1069,6 +1071,8 @@ public class ArtistLocalServiceClp implements ArtistLocalService {
 					artistId,
 						
 					ClpSerializer.translateInput(name),
+						
+					ClpSerializer.translateInput(inputStream),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

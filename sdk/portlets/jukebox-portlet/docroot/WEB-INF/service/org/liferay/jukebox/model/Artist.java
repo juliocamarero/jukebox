@@ -31,4 +31,8 @@ public interface Artist extends ArtistModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link org.liferay.jukebox.model.impl.ArtistImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public java.lang.String getImageURL(
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

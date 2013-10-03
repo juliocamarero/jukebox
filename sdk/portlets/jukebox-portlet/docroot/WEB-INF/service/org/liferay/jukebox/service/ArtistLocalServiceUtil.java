@@ -332,11 +332,11 @@ public class ArtistLocalServiceUtil {
 	}
 
 	public static org.liferay.jukebox.model.Artist addArtist(long userId,
-		java.lang.String name,
+		java.lang.String name, java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().addArtist(userId, name, serviceContext);
+		return getService().addArtist(userId, name, inputStream, serviceContext);
 	}
 
 	public static void addEntryResources(
@@ -375,11 +375,13 @@ public class ArtistLocalServiceUtil {
 	}
 
 	public static org.liferay.jukebox.model.Artist updateArtist(long userId,
-		long artistId, java.lang.String name,
+		long artistId, java.lang.String name, java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateArtist(userId, artistId, name, serviceContext);
+		return getService()
+				   .updateArtist(userId, artistId, name, inputStream,
+			serviceContext);
 	}
 
 	public static void updateAsset(long userId,

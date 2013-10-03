@@ -35,7 +35,8 @@ public class ArtistServiceClpInvoker {
 		_methodName66 = "addArtist";
 
 		_methodParameterTypes66 = new String[] {
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "java.io.InputStream",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName67 = "deleteArtist";
@@ -59,7 +60,7 @@ public class ArtistServiceClpInvoker {
 		_methodName71 = "updateArtist";
 
 		_methodParameterTypes71 = new String[] {
-				"long", "java.lang.String",
+				"long", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -81,7 +82,8 @@ public class ArtistServiceClpInvoker {
 		if (_methodName66.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
 			return ArtistServiceUtil.addArtist((java.lang.String)arguments[0],
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
+				(java.io.InputStream)arguments[1],
+				(com.liferay.portal.service.ServiceContext)arguments[2]);
 		}
 
 		if (_methodName67.equals(name) &&
@@ -111,7 +113,8 @@ public class ArtistServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
 			return ArtistServiceUtil.updateArtist(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1],
-				(com.liferay.portal.service.ServiceContext)arguments[2]);
+				(java.io.InputStream)arguments[2],
+				(com.liferay.portal.service.ServiceContext)arguments[3]);
 		}
 
 		throw new UnsupportedOperationException();

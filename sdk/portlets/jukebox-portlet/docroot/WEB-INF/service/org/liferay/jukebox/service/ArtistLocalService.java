@@ -302,7 +302,7 @@ public interface ArtistLocalService extends BaseLocalService,
 		throws java.lang.Throwable;
 
 	public org.liferay.jukebox.model.Artist addArtist(long userId,
-		java.lang.String name,
+		java.lang.String name, java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -332,7 +332,7 @@ public interface ArtistLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public org.liferay.jukebox.model.Artist updateArtist(long userId,
-		long artistId, java.lang.String name,
+		long artistId, java.lang.String name, java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
