@@ -64,11 +64,12 @@ public class AlbumServiceUtil {
 	}
 
 	public static org.liferay.jukebox.model.Album addAlbum(long artistId,
-		java.lang.String name, int year,
+		java.lang.String name, int year, java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().addAlbum(artistId, name, year, serviceContext);
+		return getService()
+				   .addAlbum(artistId, name, year, inputStream, serviceContext);
 	}
 
 	public static org.liferay.jukebox.model.Album deleteAlbum(long albumId,
@@ -97,11 +98,13 @@ public class AlbumServiceUtil {
 
 	public static org.liferay.jukebox.model.Album updateAlbum(long albumId,
 		long artistId, java.lang.String name, int year,
+		java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateAlbum(albumId, artistId, name, year, serviceContext);
+				   .updateAlbum(albumId, artistId, name, year, inputStream,
+			serviceContext);
 	}
 
 	public static void clearService() {

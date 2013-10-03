@@ -35,7 +35,7 @@ public class AlbumServiceClpInvoker {
 		_methodName66 = "addAlbum";
 
 		_methodParameterTypes66 = new String[] {
-				"long", "java.lang.String", "int",
+				"long", "java.lang.String", "int", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -60,7 +60,7 @@ public class AlbumServiceClpInvoker {
 		_methodName71 = "updateAlbum";
 
 		_methodParameterTypes71 = new String[] {
-				"long", "long", "java.lang.String", "int",
+				"long", "long", "java.lang.String", "int", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -84,7 +84,8 @@ public class AlbumServiceClpInvoker {
 			return AlbumServiceUtil.addAlbum(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1],
 				((Integer)arguments[2]).intValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[3]);
+				(java.io.InputStream)arguments[3],
+				(com.liferay.portal.service.ServiceContext)arguments[4]);
 		}
 
 		if (_methodName67.equals(name) &&
@@ -116,7 +117,8 @@ public class AlbumServiceClpInvoker {
 				((Long)arguments[1]).longValue(),
 				(java.lang.String)arguments[2],
 				((Integer)arguments[3]).intValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[4]);
+				(java.io.InputStream)arguments[4],
+				(com.liferay.portal.service.ServiceContext)arguments[5]);
 		}
 
 		throw new UnsupportedOperationException();

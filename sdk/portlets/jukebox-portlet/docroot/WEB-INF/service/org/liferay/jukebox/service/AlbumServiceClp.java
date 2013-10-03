@@ -35,7 +35,7 @@ public class AlbumServiceClp implements AlbumService {
 		_methodName3 = "addAlbum";
 
 		_methodParameterTypes3 = new String[] {
-				"long", "java.lang.String", "int",
+				"long", "java.lang.String", "int", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -60,7 +60,7 @@ public class AlbumServiceClp implements AlbumService {
 		_methodName8 = "updateAlbum";
 
 		_methodParameterTypes8 = new String[] {
-				"long", "long", "java.lang.String", "int",
+				"long", "long", "java.lang.String", "int", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -117,7 +117,7 @@ public class AlbumServiceClp implements AlbumService {
 
 	@Override
 	public org.liferay.jukebox.model.Album addAlbum(long artistId,
-		java.lang.String name, int year,
+		java.lang.String name, int year, java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -132,6 +132,8 @@ public class AlbumServiceClp implements AlbumService {
 					ClpSerializer.translateInput(name),
 						
 					year,
+						
+					ClpSerializer.translateInput(inputStream),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -287,6 +289,7 @@ public class AlbumServiceClp implements AlbumService {
 	@Override
 	public org.liferay.jukebox.model.Album updateAlbum(long albumId,
 		long artistId, java.lang.String name, int year,
+		java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -303,6 +306,8 @@ public class AlbumServiceClp implements AlbumService {
 					ClpSerializer.translateInput(name),
 						
 					year,
+						
+					ClpSerializer.translateInput(inputStream),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

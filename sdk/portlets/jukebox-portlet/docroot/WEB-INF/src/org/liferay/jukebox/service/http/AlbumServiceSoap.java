@@ -62,23 +62,6 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class AlbumServiceSoap {
-	public static org.liferay.jukebox.model.AlbumSoap addAlbum(long artistId,
-		java.lang.String name, int year,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			org.liferay.jukebox.model.Album returnValue = AlbumServiceUtil.addAlbum(artistId,
-					name, year, serviceContext);
-
-			return org.liferay.jukebox.model.AlbumSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static org.liferay.jukebox.model.AlbumSoap deleteAlbum(
 		long albumId, com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
@@ -129,23 +112,6 @@ public class AlbumServiceSoap {
 			int returnValue = AlbumServiceUtil.getAlbumsCount(groupId);
 
 			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static org.liferay.jukebox.model.AlbumSoap updateAlbum(
-		long albumId, long artistId, java.lang.String name, int year,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			org.liferay.jukebox.model.Album returnValue = AlbumServiceUtil.updateAlbum(albumId,
-					artistId, name, year, serviceContext);
-
-			return org.liferay.jukebox.model.AlbumSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

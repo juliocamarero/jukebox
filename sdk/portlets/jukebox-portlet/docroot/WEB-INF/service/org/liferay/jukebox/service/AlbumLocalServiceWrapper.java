@@ -346,12 +346,12 @@ public class AlbumLocalServiceWrapper implements AlbumLocalService,
 
 	@Override
 	public org.liferay.jukebox.model.Album addAlbum(long userId, long artistId,
-		java.lang.String name, int year,
+		java.lang.String name, int year, java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _albumLocalService.addAlbum(userId, artistId, name, year,
-			serviceContext);
+			inputStream, serviceContext);
 	}
 
 	@Override
@@ -402,11 +402,12 @@ public class AlbumLocalServiceWrapper implements AlbumLocalService,
 	@Override
 	public org.liferay.jukebox.model.Album updateAlbum(long userId,
 		long albumId, long artistId, java.lang.String name, int year,
+		java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _albumLocalService.updateAlbum(userId, albumId, artistId, name,
-			year, serviceContext);
+			year, inputStream, serviceContext);
 	}
 
 	@Override

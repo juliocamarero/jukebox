@@ -66,7 +66,7 @@ public interface AlbumService extends BaseService, InvokableService {
 		throws java.lang.Throwable;
 
 	public org.liferay.jukebox.model.Album addAlbum(long artistId,
-		java.lang.String name, int year,
+		java.lang.String name, int year, java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -92,6 +92,7 @@ public interface AlbumService extends BaseService, InvokableService {
 
 	public org.liferay.jukebox.model.Album updateAlbum(long albumId,
 		long artistId, java.lang.String name, int year,
+		java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

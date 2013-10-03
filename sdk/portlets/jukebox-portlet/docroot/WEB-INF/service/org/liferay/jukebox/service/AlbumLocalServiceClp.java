@@ -127,7 +127,7 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 		_methodName23 = "addAlbum";
 
 		_methodParameterTypes23 = new String[] {
-				"long", "long", "java.lang.String", "int",
+				"long", "long", "java.lang.String", "int", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -164,6 +164,7 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 
 		_methodParameterTypes30 = new String[] {
 				"long", "long", "long", "java.lang.String", "int",
+				"java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -853,7 +854,7 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 
 	@Override
 	public org.liferay.jukebox.model.Album addAlbum(long userId, long artistId,
-		java.lang.String name, int year,
+		java.lang.String name, int year, java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -870,6 +871,8 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 					ClpSerializer.translateInput(name),
 						
 					year,
+						
+					ClpSerializer.translateInput(inputStream),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -1090,6 +1093,7 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 	@Override
 	public org.liferay.jukebox.model.Album updateAlbum(long userId,
 		long albumId, long artistId, java.lang.String name, int year,
+		java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -1108,6 +1112,8 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 					ClpSerializer.translateInput(name),
 						
 					year,
+						
+					ClpSerializer.translateInput(inputStream),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

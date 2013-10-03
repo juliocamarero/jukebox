@@ -58,11 +58,12 @@ public class AlbumServiceWrapper implements AlbumService,
 
 	@Override
 	public org.liferay.jukebox.model.Album addAlbum(long artistId,
-		java.lang.String name, int year,
+		java.lang.String name, int year, java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _albumService.addAlbum(artistId, name, year, serviceContext);
+		return _albumService.addAlbum(artistId, name, year, inputStream,
+			serviceContext);
 	}
 
 	@Override
@@ -96,11 +97,12 @@ public class AlbumServiceWrapper implements AlbumService,
 	@Override
 	public org.liferay.jukebox.model.Album updateAlbum(long albumId,
 		long artistId, java.lang.String name, int year,
+		java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _albumService.updateAlbum(albumId, artistId, name, year,
-			serviceContext);
+			inputStream, serviceContext);
 	}
 
 	/**

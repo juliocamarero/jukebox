@@ -127,7 +127,7 @@ public class AlbumLocalServiceClpInvoker {
 		_methodName86 = "addAlbum";
 
 		_methodParameterTypes86 = new String[] {
-				"long", "long", "java.lang.String", "int",
+				"long", "long", "java.lang.String", "int", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -164,6 +164,7 @@ public class AlbumLocalServiceClpInvoker {
 
 		_methodParameterTypes93 = new String[] {
 				"long", "long", "long", "java.lang.String", "int",
+				"java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -306,7 +307,8 @@ public class AlbumLocalServiceClpInvoker {
 				((Long)arguments[1]).longValue(),
 				(java.lang.String)arguments[2],
 				((Integer)arguments[3]).intValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[4]);
+				(java.io.InputStream)arguments[4],
+				(com.liferay.portal.service.ServiceContext)arguments[5]);
 		}
 
 		if (_methodName87.equals(name) &&
@@ -356,7 +358,8 @@ public class AlbumLocalServiceClpInvoker {
 				((Long)arguments[2]).longValue(),
 				(java.lang.String)arguments[3],
 				((Integer)arguments[4]).intValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[5]);
+				(java.io.InputStream)arguments[5],
+				(com.liferay.portal.service.ServiceContext)arguments[6]);
 		}
 
 		if (_methodName94.equals(name) &&

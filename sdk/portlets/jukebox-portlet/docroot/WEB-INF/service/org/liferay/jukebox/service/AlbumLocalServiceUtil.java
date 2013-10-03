@@ -333,11 +333,13 @@ public class AlbumLocalServiceUtil {
 
 	public static org.liferay.jukebox.model.Album addAlbum(long userId,
 		long artistId, java.lang.String name, int year,
+		java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addAlbum(userId, artistId, name, year, serviceContext);
+				   .addAlbum(userId, artistId, name, year, inputStream,
+			serviceContext);
 	}
 
 	public static void addEntryResources(
@@ -382,12 +384,13 @@ public class AlbumLocalServiceUtil {
 
 	public static org.liferay.jukebox.model.Album updateAlbum(long userId,
 		long albumId, long artistId, java.lang.String name, int year,
+		java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateAlbum(userId, albumId, artistId, name, year,
-			serviceContext);
+			inputStream, serviceContext);
 	}
 
 	public static void updateAsset(long userId,

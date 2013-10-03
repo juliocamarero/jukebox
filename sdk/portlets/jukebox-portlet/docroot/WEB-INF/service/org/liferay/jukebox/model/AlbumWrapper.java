@@ -773,6 +773,14 @@ public class AlbumWrapper implements Album, ModelWrapper<Album> {
 	}
 
 	@Override
+	public java.lang.String getImageURL(
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _album.getImageURL(themeDisplay);
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
