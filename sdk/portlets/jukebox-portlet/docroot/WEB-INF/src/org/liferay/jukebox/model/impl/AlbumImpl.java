@@ -22,7 +22,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 
-import org.liferay.jukebox.util.PortletKeys;
+import org.liferay.jukebox.util.Constants;
 
 /**
  * The extended model implementation for the Album service. Represents a row in the &quot;jukebox_Album&quot; database table, with each column mapped to a property of this class.
@@ -41,7 +41,7 @@ public class AlbumImpl extends AlbumBaseImpl {
 		try {
 			Repository repository =
 				PortletFileRepositoryUtil.getPortletRepository(
-					getGroupId(), PortletKeys.JUKEBOX);
+					getGroupId(), Constants.JUKEBOX_PORTLET_REPOSITORY);
 
 			FileEntry fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
 				repository.getRepositoryId(),

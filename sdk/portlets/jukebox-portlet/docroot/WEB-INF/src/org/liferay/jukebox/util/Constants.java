@@ -15,14 +15,15 @@
 package org.liferay.jukebox.util;
 
 /**
- * @author Eudaldo Alonso
+ * @author Sergio González
  */
-public class PortletKeys extends com.liferay.portal.util.PortletKeys {
+public class Constants {
 
-	public static final String ALBUMS = "albums_WAR_jukeboxportlet";
+	public static final String JUKEBOX_PORTLET_REPOSITORY =
+		"JukeboxPortletRepository";
 
-	public static final String ARTISTS = "artists_WAR_jukeboxportlet";
+	public static final String LYRICS_FOLDER_NAME = "Lyrics";
 
-	public static final String SONGS = "songs_WAR_jukeboxportlet";
+	public static final String SONGS_FOLDER_NAME = "Songs";
 
 }

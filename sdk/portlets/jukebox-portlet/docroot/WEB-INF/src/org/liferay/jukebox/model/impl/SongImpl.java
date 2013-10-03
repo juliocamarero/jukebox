@@ -29,7 +29,7 @@ import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.util.List;
 
-import org.liferay.jukebox.util.PortletKeys;
+import org.liferay.jukebox.util.Constants;
 
 /**
  * The extended model implementation for the Song service. Represents a row in the &quot;jukebox_Song&quot; database table, with each column mapped to a property of this class.
@@ -47,7 +47,8 @@ public class SongImpl extends SongBaseImpl {
 	public String getLyricsURL(ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		FileEntry fileEntry = getFileEntry(themeDisplay, "Lyrics");
+		FileEntry fileEntry = getFileEntry(
+			themeDisplay, Constants.LYRICS_FOLDER_NAME);
 
 		if (fileEntry == null) {
 			return StringPool.BLANK;
@@ -61,7 +62,8 @@ public class SongImpl extends SongBaseImpl {
 	public String getSongURL(ThemeDisplay themeDisplay, String audioContainer)
 		throws PortalException, SystemException {
 
-		FileEntry fileEntry = getFileEntry(themeDisplay, "Song");
+		FileEntry fileEntry = getFileEntry(
+			themeDisplay, Constants.SONGS_FOLDER_NAME);
 
 		if (fileEntry == null) {
 			return StringPool.BLANK;
@@ -88,7 +90,7 @@ public class SongImpl extends SongBaseImpl {
 		try {
 			Repository repository =
 				PortletFileRepositoryUtil.getPortletRepository(
-					getGroupId(), PortletKeys.JUKEBOX);
+					getGroupId(), Constants.JUKEBOX_PORTLET_REPOSITORY);
 
 			Folder folder = PortletFileRepositoryUtil.getPortletFolder(
 				0, repository.getRepositoryId(),

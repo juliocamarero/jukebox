@@ -41,7 +41,7 @@ import org.liferay.jukebox.SongNameException;
 import org.liferay.jukebox.model.Album;
 import org.liferay.jukebox.model.Song;
 import org.liferay.jukebox.service.base.SongLocalServiceBaseImpl;
-import org.liferay.jukebox.util.PortletKeys;
+import org.liferay.jukebox.util.Constants;
 
 /**
  * The implementation of the song local service.
@@ -122,7 +122,8 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		if ((songInputStream != null) || (lyricsInputStream != null)) {
 			Repository repository =
 				PortletFileRepositoryUtil.addPortletRepository(
-					groupId, PortletKeys.JUKEBOX, serviceContext);
+					groupId, Constants.JUKEBOX_PORTLET_REPOSITORY,
+					serviceContext);
 
 			Folder folder = PortletFileRepositoryUtil.addPortletFolder(
 				userId, repository.getRepositoryId(),
@@ -132,13 +133,14 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 			if (songInputStream != null) {
 				Folder songFolder = PortletFileRepositoryUtil.addPortletFolder(
 					userId, repository.getRepositoryId(), folder.getFolderId(),
-					"Song", serviceContext);
+					Constants.SONGS_FOLDER_NAME, serviceContext);
 
 				FileEntry fileEntry =
 					PortletFileRepositoryUtil.addPortletFileEntry(
 						groupId, userId, Song.class.getName(), song.getSongId(),
-						PortletKeys.JUKEBOX, songFolder.getFolderId(),
-						songInputStream, songFileName, StringPool.BLANK, true);
+						Constants.JUKEBOX_PORTLET_REPOSITORY,
+						songFolder.getFolderId(), songInputStream, songFileName,
+						StringPool.BLANK, true);
 
 				DLProcessorRegistryUtil.trigger(fileEntry, null, true);
 			}
@@ -147,14 +149,15 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 				Folder lyricsFolder =
 					PortletFileRepositoryUtil.addPortletFolder(
 						userId, repository.getRepositoryId(),
-						folder.getFolderId(), "Lyrics", serviceContext);
+						folder.getFolderId(), Constants.LYRICS_FOLDER_NAME,
+						serviceContext);
 
 				FileEntry fileEntry =
 					PortletFileRepositoryUtil.addPortletFileEntry(
 						groupId, userId, Song.class.getName(), song.getSongId(),
-						PortletKeys.JUKEBOX, lyricsFolder.getFolderId(),
-						lyricsInputStream, lyricsFileName, StringPool.BLANK,
-						true);
+						Constants.JUKEBOX_PORTLET_REPOSITORY,
+						lyricsFolder.getFolderId(), lyricsInputStream,
+						lyricsFileName, StringPool.BLANK, true);
 
 				DLProcessorRegistryUtil.trigger(fileEntry, null, true);
 			}
@@ -246,8 +249,8 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		if ((songInputStream != null) || (lyricsInputStream != null)) {
 			Repository repository =
 				PortletFileRepositoryUtil.addPortletRepository(
-					serviceContext.getScopeGroupId(), PortletKeys.JUKEBOX,
-					serviceContext);
+					serviceContext.getScopeGroupId(),
+					Constants.JUKEBOX_PORTLET_REPOSITORY, serviceContext);
 
 			Folder folder = PortletFileRepositoryUtil.addPortletFolder(
 				userId, repository.getRepositoryId(),
@@ -257,7 +260,7 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 			if (songInputStream != null) {
 				Folder songFolder = PortletFileRepositoryUtil.addPortletFolder(
 					userId, repository.getRepositoryId(), folder.getFolderId(),
-					"Song", serviceContext);
+					Constants.SONGS_FOLDER_NAME, serviceContext);
 
 				List<FileEntry> fileEntries =
 					PortletFileRepositoryUtil.getPortletFileEntries(
@@ -275,8 +278,9 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 					PortletFileRepositoryUtil.addPortletFileEntry(
 						serviceContext.getScopeGroupId(), userId,
 						Song.class.getName(), song.getSongId(),
-						PortletKeys.JUKEBOX, songFolder.getFolderId(),
-						songInputStream, songFileName, StringPool.BLANK, true);
+						Constants.JUKEBOX_PORTLET_REPOSITORY,
+						songFolder.getFolderId(), songInputStream, songFileName,
+						StringPool.BLANK, true);
 
 				triggerDLProcessors(fileEntry);
 			}
@@ -285,7 +289,8 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 				Folder lyricsFolder =
 					PortletFileRepositoryUtil.addPortletFolder(
 						userId, repository.getRepositoryId(),
-						folder.getFolderId(), "Lyrics", serviceContext);
+						folder.getFolderId(), Constants.LYRICS_FOLDER_NAME,
+						serviceContext);
 
 				List<FileEntry> fileEntries =
 					PortletFileRepositoryUtil.getPortletFileEntries(
@@ -303,9 +308,9 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 					PortletFileRepositoryUtil.addPortletFileEntry(
 						serviceContext.getScopeGroupId(), userId,
 						Song.class.getName(), song.getSongId(),
-						PortletKeys.JUKEBOX, lyricsFolder.getFolderId(),
-						lyricsInputStream, lyricsFileName, StringPool.BLANK,
-						true);
+						Constants.JUKEBOX_PORTLET_REPOSITORY,
+						lyricsFolder.getFolderId(), lyricsInputStream,
+						lyricsFileName, StringPool.BLANK, true);
 
 				triggerDLProcessors(fileEntry);
 			}
