@@ -144,9 +144,10 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 			}
 
 			if (lyricsInputStream != null) {
-				Folder lyricsFolder = PortletFileRepositoryUtil.addPortletFolder(
-					userId, repository.getRepositoryId(), folder.getFolderId(),
-					"Lyrics", serviceContext);
+				Folder lyricsFolder =
+					PortletFileRepositoryUtil.addPortletFolder(
+						userId, repository.getRepositoryId(),
+						folder.getFolderId(), "Lyrics", serviceContext);
 
 				FileEntry fileEntry =
 					PortletFileRepositoryUtil.addPortletFileEntry(
@@ -281,9 +282,10 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 			}
 
 			if (lyricsInputStream != null) {
-				Folder lyricsFolder = PortletFileRepositoryUtil.addPortletFolder(
-					userId, repository.getRepositoryId(), folder.getFolderId(),
-					"Lyrics", serviceContext);
+				Folder lyricsFolder =
+					PortletFileRepositoryUtil.addPortletFolder(
+						userId, repository.getRepositoryId(),
+						folder.getFolderId(), "Lyrics", serviceContext);
 
 				List<FileEntry> fileEntries =
 					PortletFileRepositoryUtil.getPortletFileEntries(
