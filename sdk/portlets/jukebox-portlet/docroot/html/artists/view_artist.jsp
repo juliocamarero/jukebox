@@ -41,36 +41,35 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 		title="<%= artist.getName() %>"
 	/>
 </c:if>
+<div class="artist-detail">
+	<div class="container">
+		<img alt="" class="img-circle artist-image" src="<%= artist.getImageURL(themeDisplay) %>" />
 
-<%= artist.getBio() %>
+		<div class="artist-bio">
+			<%= artist.getBio() %>
+		</div>
 
-<%
-String imageURL = artist.getImageURL(themeDisplay);
-%>
+		<div class="album-songs-number">
+			<liferay-ui:message arguments="<%= albums.size() %>" key="x-albums" />
+		</div>
+	</div>
 
-<c:if test="<%= Validator.isNotNull(imageURL) %>">
-	<img src="<%= imageURL %>" />
-</c:if>
+	<c:if test="<%= !albums.isEmpty() %>">
+		<jsp:include page="/html/albums/view.jsp">
+			<jsp:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
+			<jsp:param name="showToolbar" value="<%= String.valueOf(false) %>" />
+		</jsp:include>
+	</c:if>
 
-<div class="album-artist">
-	<div class="album-songs-number"><liferay-ui:message arguments="<%= albums.size() %>" key="x-albums" /></div>
+	<c:if test="<%= showHeader %>">
+		<portlet:actionURL name="invokeTaglibDiscussion" var="discussionURL" />
+
+		<liferay-ui:discussion
+			className="<%= Artist.class.getName() %>"
+			classPK="<%= artist.getArtistId() %>"
+			formAction="<%= discussionURL %>"
+			formName="fm2"
+			userId="<%= artist.getUserId() %>"
+		/>
+	</c:if>
 </div>
-
-<c:if test="<%= !albums.isEmpty() %>">
-	<jsp:include page="/html/albums/view.jsp">
-		<jsp:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
-		<jsp:param name="showToolbar" value="<%= String.valueOf(false) %>" />
-	</jsp:include>
-</c:if>
-
-<c:if test="<%= showHeader %>">
-	<portlet:actionURL name="invokeTaglibDiscussion" var="discussionURL" />
-
-	<liferay-ui:discussion
-		className="<%= Artist.class.getName() %>"
-		classPK="<%= artist.getArtistId() %>"
-		formAction="<%= discussionURL %>"
-		formName="fm2"
-		userId="<%= artist.getUserId() %>"
-	/>
-</c:if>

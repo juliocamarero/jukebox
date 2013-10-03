@@ -18,3 +18,25 @@
 
 	}
 }
+
+.artist-detail {
+	margin-top: 3em;
+
+	.artist-image {
+		@include box-shadow(0px 3px 5px #CCC);
+		display: block;
+		float: left;
+		margin-right: 3em;
+		width: 250px;
+		height: 250px;
+	}
+
+	.artist-bio {
+		font-style: italic;
+		margin-bottom: 2em;
+	}
+
+	.container {
+		margin-bottom: 2em;
+	}
+}
