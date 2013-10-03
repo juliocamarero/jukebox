@@ -29,27 +29,6 @@ searchContext.setIncludeDiscussions(true);
 searchContext.setKeywords(keywords);
 
 Hits hits = indexer.search(searchContext);
-
-List<Album> albums = new ArrayList<Album>();
-
-for (int i = 0; i < hits.getDocs().length; i++) {
-	Document doc = hits.doc(i);
-
-	long albumId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
-
-	Album album = null;
-
-	try {
-		album = AlbumLocalServiceUtil.getAlbum(albumId);
-
-		album = album.toEscapedModel();
-	}
-	catch (Exception e) {
-		continue;
-	}
-
-	albums.add(album);
-}
 %>
 
 <liferay-ui:header
@@ -67,7 +46,7 @@ for (int i = 0; i < hits.getDocs().length; i++) {
 </aui:form>
 
 <c:choose>
-	<c:when test="<%= albums.isEmpty() %>">
+	<c:when test="<%= hits.getLength() <= 0 %>">
 		<div class="alert alert-info">
 			<c:choose>
 				<c:otherwise>
@@ -80,14 +59,23 @@ for (int i = 0; i < hits.getDocs().length; i++) {
 		<ul>
 
 			<%
-			for (Album album : albums) {
+			PortletURL hitURL = liferayPortletResponse.createRenderURL();
+
+			List<SearchResult> searchResultsList = SearchResultUtil.getSearchResults(hits, locale, hitURL);
+
+			for (int i = 0; i < searchResultsList.size(); i++) {
+				SearchResult searchResult = searchResultsList.get(i);
+
+				Summary summary = searchResult.getSummary();
+
+				List<String> versions = searchResult.getVersions();
+
+				Collections.sort(versions);
+
+				Album album = AlbumLocalServiceUtil.getAlbum(searchResult.getClassPK());
 			%>
 
 			<li>
-
-				<%
-				Artist artist = ArtistLocalServiceUtil.getArtist(album.getArtistId());
-				%>
 
 				<portlet:renderURL var="viewAlbumURL">
 					<portlet:param name="jspPage" value="/html/albums/view_album.jsp" />
@@ -95,17 +83,16 @@ for (int i = 0; i < hits.getDocs().length; i++) {
 					<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 				</portlet:renderURL>
 
-				<aui:a href="<%= viewAlbumURL %>" label="<%= album.getName() %>" />, <%= artist.getName() %>, <%= album.getYear() %>
-
-				<c:if test="<%= AlbumPermission.contains(permissionChecker, album.getAlbumId(), ActionKeys.UPDATE) %>">
-					<portlet:renderURL var="editAlbumURL">
-						<portlet:param name="jspPage" value="/html/albums/edit_album.jsp" />
-						<portlet:param name="albumId" value="<%= String.valueOf(album.getAlbumId()) %>" />
-						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
-					</portlet:renderURL>
-
-					<liferay-ui:icon image="edit" label="<%= true %>" message="edit" url="<%= editAlbumURL %>" />
-				</c:if>
+				<liferay-ui:app-view-search-entry
+					cssClass='<%= MathUtil.isEven(i) ? "alt" : StringPool.BLANK %>'
+					description="<%= (summary != null) ? HtmlUtil.escape(summary.getContent()) : StringPool.BLANK %>"
+					mbMessages="<%= searchResult.getMBMessages() %>"
+					queryTerms="<%= hits.getQueryTerms() %>"
+					showCheckbox="<%= false %>"
+					title="<%= (summary != null) ? HtmlUtil.escape(summary.getTitle()) : album.getName() %>"
+					url="<%= viewAlbumURL %>"
+					versions="<%= versions %>"
+				/>
 			</li>
 
 			<%

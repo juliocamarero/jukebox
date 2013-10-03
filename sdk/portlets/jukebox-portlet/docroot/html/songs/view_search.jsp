@@ -29,27 +29,6 @@ searchContext.setIncludeDiscussions(true);
 searchContext.setKeywords(keywords);
 
 Hits hits = indexer.search(searchContext);
-
-List<Song> songs = new ArrayList<Song>();
-
-for (int i = 0; i < hits.getDocs().length; i++) {
-	Document doc = hits.doc(i);
-
-	long songId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
-
-	Song song = null;
-
-	try {
-		song = SongLocalServiceUtil.getSong(songId);
-
-		song = song.toEscapedModel();
-	}
-	catch (Exception e) {
-		continue;
-	}
-
-	songs.add(song);
-}
 %>
 
 <liferay-ui:header
@@ -67,7 +46,7 @@ for (int i = 0; i < hits.getDocs().length; i++) {
 </aui:form>
 
 <c:choose>
-	<c:when test="<%= songs.isEmpty() %>">
+	<c:when test="<%= hits.getLength() <= 0 %>">
 		<div class="alert alert-info">
 			<liferay-ui:message key="there-are-no-songs" />
 		</div>
@@ -76,34 +55,39 @@ for (int i = 0; i < hits.getDocs().length; i++) {
 		<ul>
 
 			<%
-			for (Song song : songs) {
+			PortletURL hitURL = liferayPortletResponse.createRenderURL();
+
+			List<SearchResult> searchResultsList = SearchResultUtil.getSearchResults(hits, locale, hitURL);
+
+			for (int i = 0; i < searchResultsList.size(); i++) {
+				SearchResult searchResult = searchResultsList.get(i);
+
+				Summary summary = searchResult.getSummary();
+
+				List<String> versions = searchResult.getVersions();
+
+				Collections.sort(versions);
+
+				Song song = SongLocalServiceUtil.getSong(searchResult.getClassPK());
 			%>
 
 				<li>
-
-					<%
-					Artist artist = ArtistLocalServiceUtil.getArtist(song.getArtistId());
-
-					Album album = AlbumLocalServiceUtil.getAlbum(song.getAlbumId());
-					%>
-
 					<portlet:renderURL var="viewSongURL">
 						<portlet:param name="jspPage" value="/html/songs/view_song.jsp" />
 						<portlet:param name="songId" value="<%= String.valueOf(song.getSongId()) %>" />
 						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 					</portlet:renderURL>
 
-					<aui:a href="<%= viewSongURL %>" label="<%= song.getName() %>" />, <%= artist.getName() %>, <%= album.getName() %>
-
-					<c:if test="<%= SongPermission.contains(permissionChecker, song.getSongId(), ActionKeys.UPDATE) %>">
-						<portlet:renderURL var="editSongURL">
-							<portlet:param name="jspPage" value="/html/songs/edit_song.jsp" />
-							<portlet:param name="songId" value="<%= String.valueOf(song.getSongId()) %>" />
-							<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
-						</portlet:renderURL>
-
-						<liferay-ui:icon image="edit" label="<%= true %>" message="edit" url="<%= editSongURL %>" />
-					</c:if>
+					<liferay-ui:app-view-search-entry
+						cssClass='<%= MathUtil.isEven(i) ? "alt" : StringPool.BLANK %>'
+						description="<%= (summary != null) ? HtmlUtil.escape(summary.getContent()) : StringPool.BLANK %>"
+						mbMessages="<%= searchResult.getMBMessages() %>"
+						queryTerms="<%= hits.getQueryTerms() %>"
+						showCheckbox="<%= false %>"
+						title="<%= (summary != null) ? HtmlUtil.escape(summary.getTitle()) : song.getName() %>"
+						url="<%= viewSongURL %>"
+						versions="<%= versions %>"
+					/>
 				</li>
 
 			<%

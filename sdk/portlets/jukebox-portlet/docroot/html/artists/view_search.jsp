@@ -29,27 +29,6 @@ searchContext.setIncludeDiscussions(true);
 searchContext.setKeywords(keywords);
 
 Hits hits = indexer.search(searchContext);
-
-List<Artist> artists = new ArrayList<Artist>();
-
-for (int i = 0; i < hits.getDocs().length; i++) {
-	Document doc = hits.doc(i);
-
-	long artistId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
-
-	Artist artist = null;
-
-	try {
-		artist = ArtistLocalServiceUtil.getArtist(artistId);
-
-		artist = artist.toEscapedModel();
-	}
-	catch (Exception e) {
-		continue;
-	}
-
-	artists.add(artist);
-}
 %>
 
 <liferay-ui:header
@@ -67,7 +46,7 @@ for (int i = 0; i < hits.getDocs().length; i++) {
 </aui:form>
 
 <c:choose>
-	<c:when test="<%= artists.isEmpty() %>">
+	<c:when test="<%= hits.getLength() <= 0 %>">
 		<div class="alert alert-info">
 			<liferay-ui:message key="there-are-no-artists" />
 		</div>
@@ -76,7 +55,20 @@ for (int i = 0; i < hits.getDocs().length; i++) {
 		<ul>
 
 			<%
-			for (Artist artist : artists) {
+			PortletURL hitURL = liferayPortletResponse.createRenderURL();
+
+			List<SearchResult> searchResultsList = SearchResultUtil.getSearchResults(hits, locale, hitURL);
+
+			for (int i = 0; i < searchResultsList.size(); i++) {
+				SearchResult searchResult = searchResultsList.get(i);
+
+				Summary summary = searchResult.getSummary();
+
+				List<String> versions = searchResult.getVersions();
+
+				Collections.sort(versions);
+
+				Artist artist = ArtistLocalServiceUtil.getArtist(searchResult.getClassPK());
 			%>
 
 			<li>
@@ -86,19 +78,16 @@ for (int i = 0; i < hits.getDocs().length; i++) {
 					<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 				</portlet:renderURL>
 
-				<aui:a href="<%= viewArtistURL %>" label="<%= artist.getName() %>" />
-
-				<%= artist.getName() %>
-
-				<c:if test="<%= ArtistPermission.contains(permissionChecker, artist.getArtistId(), ActionKeys.UPDATE) %>">
-					<portlet:renderURL var="editArtistURL">
-						<portlet:param name="jspPage" value="/html/artists/edit_artist.jsp" />
-						<portlet:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
-						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
-					</portlet:renderURL>
-
-					<liferay-ui:icon image="edit" label="<%= true %>" message="edit" url="<%= editArtistURL %>" />
-				</c:if>
+				<liferay-ui:app-view-search-entry
+					cssClass='<%= MathUtil.isEven(i) ? "alt" : StringPool.BLANK %>'
+					description="<%= (summary != null) ? HtmlUtil.escape(summary.getContent()) : StringPool.BLANK %>"
+					mbMessages="<%= searchResult.getMBMessages() %>"
+					queryTerms="<%= hits.getQueryTerms() %>"
+					showCheckbox="<%= false %>"
+					title="<%= (summary != null) ? HtmlUtil.escape(summary.getTitle()) : artist.getName() %>"
+					url="<%= viewArtistURL %>"
+					versions="<%= versions %>"
+				/>
 			</li>
 
 			<%
