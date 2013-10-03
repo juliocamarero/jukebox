@@ -16,11 +16,15 @@ package org.liferay.jukebox.portlet;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+
+import java.io.InputStream;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -31,22 +35,37 @@ import org.liferay.jukebox.service.SongServiceUtil;
 
 /**
  * @author Julio Camarero
+ * @author Sergio González
+ * @author Eudaldo Alonso
  */
 public class SongsPortlet extends MVCPortlet {
 
 	public void addSong(ActionRequest request, ActionResponse response)
 		throws Exception {
 
-		long albumId = ParamUtil.getLong(request, "albumId");
-		String name = ParamUtil.getString(request, "name");
+		UploadPortletRequest uploadPortletRequest =
+			PortalUtil.getUploadPortletRequest(request);
+
+		long albumId = ParamUtil.getLong(uploadPortletRequest, "albumId");
+		String name = ParamUtil.getString(uploadPortletRequest, "name");
+
+		InputStream songInputStream = uploadPortletRequest.getFileAsStream(
+			"songFile");
+		String songFileName = uploadPortletRequest.getFileName("songFile");
+
+		InputStream lyricsInputStream = uploadPortletRequest.getFileAsStream(
+			"lyricsFile");
+		String lyricsFileName = uploadPortletRequest.getFileName("lyricsFile");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			Song.class.getName(), request);
+			Song.class.getName(), uploadPortletRequest);
 
 		try {
-			SongServiceUtil.addSong(albumId, name, serviceContext);
+			SongServiceUtil.addSong(
+				albumId, name, songFileName, songInputStream, lyricsFileName,
+				lyricsInputStream, serviceContext);
 
-			SessionMessages.add(request, "songAdded");
+			SessionMessages.add(uploadPortletRequest, "songAdded");
 
 			sendRedirect(request, response);
 		}
@@ -54,7 +73,7 @@ public class SongsPortlet extends MVCPortlet {
 			if (e instanceof SongNameException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(request, e.getClass().getName());
+				SessionErrors.add(uploadPortletRequest, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/songs/edit_song.jsp");
@@ -88,17 +107,30 @@ public class SongsPortlet extends MVCPortlet {
 	public void updateSong(ActionRequest request, ActionResponse response)
 		throws Exception {
 
-		long albumId = ParamUtil.getLong(request, "albumId");
-		long songId = ParamUtil.getLong(request, "songId");
-		String name = ParamUtil.getString(request, "name");
+		UploadPortletRequest uploadPortletRequest =
+			PortalUtil.getUploadPortletRequest(request);
+
+		long albumId = ParamUtil.getLong(uploadPortletRequest, "albumId");
+		long songId = ParamUtil.getLong(uploadPortletRequest, "songId");
+		String name = ParamUtil.getString(uploadPortletRequest, "name");
+
+		InputStream songInputStream = uploadPortletRequest.getFileAsStream(
+			"songFile");
+		String songFileName = uploadPortletRequest.getFileName("songFile");
+
+		InputStream lyricsInputStream = uploadPortletRequest.getFileAsStream(
+			"lyricsFile");
+		String lyricsFileName = uploadPortletRequest.getFileName("lyricsFile");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			Song.class.getName(), request);
+			Song.class.getName(), uploadPortletRequest);
 
 		try {
-			SongServiceUtil.updateSong(songId, albumId, name, serviceContext);
+			SongServiceUtil.updateSong(
+				songId, albumId, name, songFileName, songInputStream,
+				lyricsFileName, lyricsInputStream, serviceContext);
 
-			SessionMessages.add(request, "songUpdated");
+			SessionMessages.add(uploadPortletRequest, "songUpdated");
 
 			sendRedirect(request, response);
 		}
@@ -106,7 +138,7 @@ public class SongsPortlet extends MVCPortlet {
 			if (e instanceof SongNameException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(request, e.getClass().getName());
+				SessionErrors.add(uploadPortletRequest, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/songs/edit_song.jsp");

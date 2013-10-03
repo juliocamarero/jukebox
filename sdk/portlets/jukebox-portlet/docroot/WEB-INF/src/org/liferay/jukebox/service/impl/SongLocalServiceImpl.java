@@ -16,12 +16,21 @@ package org.liferay.jukebox.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.User;
+import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.documentlibrary.util.DLProcessorRegistryUtil;
+
+import java.io.InputStream;
 
 import java.util.Date;
 import java.util.List;
@@ -30,6 +39,7 @@ import org.liferay.jukebox.SongNameException;
 import org.liferay.jukebox.model.Album;
 import org.liferay.jukebox.model.Song;
 import org.liferay.jukebox.service.base.SongLocalServiceBaseImpl;
+import org.liferay.jukebox.util.PortletKeys;
 
 /**
  * The implementation of the song local service.
@@ -42,6 +52,8 @@ import org.liferay.jukebox.service.base.SongLocalServiceBaseImpl;
  * </p>
  *
  * @author Julio Camarero
+ * @author Sergio González
+ * @author Eudaldo Alonso
  * @see org.liferay.jukebox.service.base.SongLocalServiceBaseImpl
  * @see org.liferay.jukebox.service.SongLocalServiceUtil
  */
@@ -71,9 +83,12 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 
 	@Indexable(type = IndexableType.REINDEX)
 	public Song addSong(
-			long userId, long albumId, String name,
-			ServiceContext serviceContext)
+			long userId, long albumId, String name, String songFileName,
+			InputStream songInputStream, String lyricsFileName,
+			InputStream lyricsInputStream, ServiceContext serviceContext)
 		throws PortalException, SystemException {
+
+		long groupId = serviceContext.getScopeGroupId();
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
@@ -86,7 +101,7 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		Song song = songPersistence.create(songId);
 
 		song.setUuid(serviceContext.getUuid());
-		song.setGroupId(serviceContext.getScopeGroupId());
+		song.setGroupId(groupId);
 		song.setCompanyId(user.getCompanyId());
 		song.setUserId(user.getUserId());
 		song.setUserName(user.getFullName());
@@ -101,6 +116,46 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		song.setExpandoBridgeAttributes(serviceContext);
 
 		songPersistence.update(song);
+
+		if ((songInputStream != null) || (lyricsInputStream != null)) {
+			Repository repository =
+				PortletFileRepositoryUtil.addPortletRepository(
+					groupId, PortletKeys.JUKEBOX, serviceContext);
+
+			Folder folder = PortletFileRepositoryUtil.addPortletFolder(
+				userId, repository.getRepositoryId(),
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				String.valueOf(song.getSongId()), serviceContext);
+
+			if (songInputStream != null) {
+				Folder songFolder = PortletFileRepositoryUtil.addPortletFolder(
+					userId, repository.getRepositoryId(), folder.getFolderId(),
+					"Song", serviceContext);
+
+				FileEntry fileEntry =
+					PortletFileRepositoryUtil.addPortletFileEntry(
+						groupId, userId, Song.class.getName(), song.getSongId(),
+						PortletKeys.JUKEBOX, songFolder.getFolderId(),
+						songInputStream, songFileName, StringPool.BLANK, true);
+
+				DLProcessorRegistryUtil.trigger(fileEntry, null, true);
+			}
+
+			if (lyricsInputStream != null) {
+				Folder lyricsFolder = PortletFileRepositoryUtil.addPortletFolder(
+					userId, repository.getRepositoryId(), folder.getFolderId(),
+					"Lyrics", serviceContext);
+
+				FileEntry fileEntry =
+					PortletFileRepositoryUtil.addPortletFileEntry(
+						groupId, userId, Song.class.getName(), song.getSongId(),
+						PortletKeys.JUKEBOX, lyricsFolder.getFolderId(),
+						lyricsInputStream, lyricsFileName, StringPool.BLANK,
+						true);
+
+				DLProcessorRegistryUtil.trigger(fileEntry, null, true);
+			}
+		}
 
 		// Resources
 
@@ -160,6 +215,8 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 	@Indexable(type = IndexableType.REINDEX)
 	public Song updateSong(
 			long userId, long songId, long albumId, String name,
+			String songFileName, InputStream songInputStream,
+			String lyricsFileName, InputStream lyricsInputStream,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -182,6 +239,73 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		song.setExpandoBridgeAttributes(serviceContext);
 
 		songPersistence.update(song);
+
+		if ((songInputStream != null) || (lyricsInputStream != null)) {
+			Repository repository =
+				PortletFileRepositoryUtil.addPortletRepository(
+					serviceContext.getScopeGroupId(), PortletKeys.JUKEBOX,
+					serviceContext);
+
+			Folder folder = PortletFileRepositoryUtil.addPortletFolder(
+				userId, repository.getRepositoryId(),
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				String.valueOf(song.getSongId()), serviceContext);
+
+			if (songInputStream != null) {
+				Folder songFolder = PortletFileRepositoryUtil.addPortletFolder(
+					userId, repository.getRepositoryId(), folder.getFolderId(),
+					"Song", serviceContext);
+
+				List<FileEntry> fileEntries =
+					PortletFileRepositoryUtil.getPortletFileEntries(
+						serviceContext.getScopeGroupId(),
+						songFolder.getFolderId());
+
+				for (FileEntry fileEntry : fileEntries) {
+					PortletFileRepositoryUtil.deletePortletFileEntry(
+						fileEntry.getFileEntryId());
+
+					DLProcessorRegistryUtil.cleanUp(fileEntry);
+				}
+
+				FileEntry fileEntry =
+					PortletFileRepositoryUtil.addPortletFileEntry(
+						serviceContext.getScopeGroupId(), userId,
+						Song.class.getName(), song.getSongId(),
+						PortletKeys.JUKEBOX, songFolder.getFolderId(),
+						songInputStream, songFileName, StringPool.BLANK, true);
+
+				DLProcessorRegistryUtil.trigger(fileEntry, null, true);
+			}
+
+			if (lyricsInputStream != null) {
+				Folder lyricsFolder = PortletFileRepositoryUtil.addPortletFolder(
+					userId, repository.getRepositoryId(), folder.getFolderId(),
+					"Lyrics", serviceContext);
+
+				List<FileEntry> fileEntries =
+					PortletFileRepositoryUtil.getPortletFileEntries(
+						serviceContext.getScopeGroupId(),
+						lyricsFolder.getFolderId());
+
+				for (FileEntry fileEntry : fileEntries) {
+					PortletFileRepositoryUtil.deletePortletFileEntry(
+						fileEntry.getFileEntryId());
+
+					DLProcessorRegistryUtil.cleanUp(fileEntry);
+				}
+
+				FileEntry fileEntry =
+					PortletFileRepositoryUtil.addPortletFileEntry(
+						serviceContext.getScopeGroupId(), userId,
+						Song.class.getName(), song.getSongId(),
+						PortletKeys.JUKEBOX, lyricsFolder.getFolderId(),
+						lyricsInputStream, lyricsFileName, StringPool.BLANK,
+						true);
+
+				DLProcessorRegistryUtil.trigger(fileEntry, null, true);
+			}
+		}
 
 		// Asset
 

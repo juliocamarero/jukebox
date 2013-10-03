@@ -35,7 +35,7 @@ if (songId > 0) {
 
 <portlet:actionURL name='<%= (song != null) ? "updateSong" : "addSong" %>' var="addSongURL" />
 
-<aui:form action="<%= addSongURL %>" method="post" name="fm">
+<aui:form action="<%= addSongURL %>" enctype="multipart/form-data" method="post" name="fm">
 	<aui:model-context bean="<%= song %>" model="<%= Song.class %>" />
 
 	<aui:input name="songId" type="hidden" value="<%= songId %>" />
@@ -58,6 +58,10 @@ if (songId > 0) {
 	</aui:select>
 
 	<aui:input name="name" />
+
+	<aui:input label="song-file" name="songFile" type="file" />
+
+	<aui:input label="lyrics-file" name="lyricsFile" type="file" />
 
 	<aui:button-row>
 		<aui:button type="submit" />

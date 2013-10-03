@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 
+import java.io.InputStream;
+
 import java.util.List;
 
 import org.liferay.jukebox.model.Song;
@@ -37,13 +39,17 @@ import org.liferay.jukebox.service.permission.SongPermission;
  * </p>
  *
  * @author Julio Camarero
+ * @author Sergio González
+ * @author Eudaldo Alonso
  * @see org.liferay.jukebox.service.base.SongServiceBaseImpl
  * @see org.liferay.jukebox.service.SongServiceUtil
  */
 public class SongServiceImpl extends SongServiceBaseImpl {
 
 	public Song addSong(
-			long albumId, String name, ServiceContext serviceContext)
+			long albumId, String name, String songFileName,
+			InputStream songInputStream, String lyricsFileName,
+			InputStream lyricsInputStream, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		JukeBoxPermission.check(
@@ -51,7 +57,8 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 			"ADD_SONG");
 
 		return songLocalService.addSong(
-			getUserId(), albumId, name, serviceContext);
+			getUserId(), albumId, name, songFileName, songInputStream,
+			lyricsFileName, lyricsInputStream, serviceContext);
 	}
 
 	public Song deleteSong(long songId, ServiceContext serviceContext)
@@ -75,14 +82,16 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 	}
 
 	public Song updateSong(
-			long songId, long albumId, String name,
-			ServiceContext serviceContext)
+			long songId, long albumId, String name, String songFileName,
+			InputStream songInputStream, String lyricsFileName,
+			InputStream lyricsInputStream, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		SongPermission.check(getPermissionChecker(), songId, ActionKeys.UPDATE);
 
 		return songLocalService.updateSong(
-			getUserId(), songId, albumId, name, serviceContext);
+			getUserId(), songId, albumId, name, songFileName, songInputStream,
+			lyricsFileName, lyricsInputStream, serviceContext);
 	}
 
 }
