@@ -143,6 +143,22 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 			guestPermissions);
 	}
 
+	public Artist deleteArtist(long artistId)
+		throws PortalException, SystemException {
+
+		Artist artist = artistPersistence.findByPrimaryKey(artistId);
+
+		try {
+			PortletFileRepositoryUtil.deletePortletFileEntry(
+				artist.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				String.valueOf(artistId));
+		}
+		catch (Exception e) {
+		}
+
+		return artistPersistence.remove(artistId);
+	}
+
 	public List<Artist> getArtists(long groupId) throws SystemException {
 		return artistPersistence.findByGroupId(groupId);
 	}

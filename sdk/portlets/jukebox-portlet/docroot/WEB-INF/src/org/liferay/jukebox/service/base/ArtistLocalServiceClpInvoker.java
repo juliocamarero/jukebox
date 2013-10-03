@@ -147,28 +147,32 @@ public class ArtistLocalServiceClpInvoker {
 				"java.lang.String[][]"
 			};
 
-		_methodName89 = "getArtists";
+		_methodName89 = "deleteArtist";
 
 		_methodParameterTypes89 = new String[] { "long" };
 
 		_methodName90 = "getArtists";
 
-		_methodParameterTypes90 = new String[] { "long", "int", "int" };
+		_methodParameterTypes90 = new String[] { "long" };
 
-		_methodName91 = "getArtistsCount";
+		_methodName91 = "getArtists";
 
-		_methodParameterTypes91 = new String[] { "long" };
+		_methodParameterTypes91 = new String[] { "long", "int", "int" };
 
-		_methodName92 = "updateArtist";
+		_methodName92 = "getArtistsCount";
 
-		_methodParameterTypes92 = new String[] {
+		_methodParameterTypes92 = new String[] { "long" };
+
+		_methodName93 = "updateArtist";
+
+		_methodParameterTypes93 = new String[] {
 				"long", "long", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName93 = "updateAsset";
+		_methodName94 = "updateAsset";
 
-		_methodParameterTypes93 = new String[] {
+		_methodParameterTypes94 = new String[] {
 				"long", "org.liferay.jukebox.model.Artist", "long[][]",
 				"java.lang.String[][]"
 			};
@@ -327,23 +331,28 @@ public class ArtistLocalServiceClpInvoker {
 
 		if (_methodName89.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes89, parameterTypes)) {
-			return ArtistLocalServiceUtil.getArtists(((Long)arguments[0]).longValue());
+			return ArtistLocalServiceUtil.deleteArtist(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName90.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
+			return ArtistLocalServiceUtil.getArtists(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName91.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
 			return ArtistLocalServiceUtil.getArtists(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName91.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
+		if (_methodName92.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes92, parameterTypes)) {
 			return ArtistLocalServiceUtil.getArtistsCount(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName92.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes92, parameterTypes)) {
+		if (_methodName93.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes93, parameterTypes)) {
 			return ArtistLocalServiceUtil.updateArtist(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				(java.lang.String)arguments[2],
@@ -351,8 +360,8 @@ public class ArtistLocalServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[4]);
 		}
 
-		if (_methodName93.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes93, parameterTypes)) {
+		if (_methodName94.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes94, parameterTypes)) {
 			ArtistLocalServiceUtil.updateAsset(((Long)arguments[0]).longValue(),
 				(org.liferay.jukebox.model.Artist)arguments[1],
 				(long[])arguments[2], (java.lang.String[])arguments[3]);
@@ -423,4 +432,6 @@ public class ArtistLocalServiceClpInvoker {
 	private String[] _methodParameterTypes92;
 	private String _methodName93;
 	private String[] _methodParameterTypes93;
+	private String _methodName94;
+	private String[] _methodParameterTypes94;
 }
