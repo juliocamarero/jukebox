@@ -27,6 +27,7 @@
 		<!-- Other columns -->
 
 		<column name="name" type="String" />
+		<column name="bio" type="String" />
 
 		<!-- Finder Methods Standard -->
 
