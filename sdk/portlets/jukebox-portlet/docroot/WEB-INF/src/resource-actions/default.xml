@@ -6,6 +6,7 @@
 		<portlet-name>artists</portlet-name>
 		<permissions>
 			<supports>
+				<action-key>ADD_PORTLET_DISPLAY_TEMPLATE</action-key>
 				<action-key>CONFIGURATION</action-key>
 				<action-key>VIEW</action-key>
 			</supports>
@@ -15,13 +16,17 @@
 			<guest-defaults>
 				<action-key>VIEW</action-key>
 			</guest-defaults>
-			<guest-unsupported/>
+			<guest-unsupported>
+				<action-key>ADD_PORTLET_DISPLAY_TEMPLATE</action-key>
+				<action-key>CONFIGURATION</action-key>
+			</guest-unsupported>
 		</permissions>
 	</portlet-resource>
 	<portlet-resource>
 		<portlet-name>albums</portlet-name>
 		<permissions>
 			<supports>
+				<action-key>ADD_PORTLET_DISPLAY_TEMPLATE</action-key>
 				<action-key>CONFIGURATION</action-key>
 				<action-key>VIEW</action-key>
 			</supports>
@@ -31,13 +36,17 @@
 			<guest-defaults>
 				<action-key>VIEW</action-key>
 			</guest-defaults>
-			<guest-unsupported/>
+			<guest-unsupported>
+				<action-key>ADD_PORTLET_DISPLAY_TEMPLATE</action-key>
+				<action-key>CONFIGURATION</action-key>
+			</guest-unsupported>
 		</permissions>
 	</portlet-resource>
 	<portlet-resource>
 		<portlet-name>songs</portlet-name>
 		<permissions>
 			<supports>
+				<action-key>ADD_PORTLET_DISPLAY_TEMPLATE</action-key>
 				<action-key>CONFIGURATION</action-key>
 				<action-key>VIEW</action-key>
 			</supports>
@@ -47,7 +56,10 @@
 			<guest-defaults>
 				<action-key>VIEW</action-key>
 			</guest-defaults>
-			<guest-unsupported/>
+			<guest-unsupported>
+				<action-key>ADD_PORTLET_DISPLAY_TEMPLATE</action-key>
+				<action-key>CONFIGURATION</action-key>
+			</guest-unsupported>
 		</permissions>
 	</portlet-resource>
 	<model-resource>
