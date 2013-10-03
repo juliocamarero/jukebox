@@ -35,6 +35,7 @@ import java.util.List;
 import org.liferay.jukebox.ArtistNameException;
 import org.liferay.jukebox.model.Artist;
 import org.liferay.jukebox.service.base.ArtistLocalServiceBaseImpl;
+import org.liferay.jukebox.util.PortletKeys;
 
 /**
  * The implementation of the artist local service.
@@ -87,7 +88,7 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 		if (inputStream != null) {
 			PortletFileRepositoryUtil.addPortletFileEntry(
 				groupId, userId, Artist.class.getName(), artist.getArtistId(),
-				"Jukebox", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				PortletKeys.JUKEBOX, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 				inputStream, String.valueOf(artist.getArtistId()),
 				StringPool.BLANK, true);
 		}
@@ -176,7 +177,7 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 		if (inputStream != null) {
 			Repository repository =
 				PortletFileRepositoryUtil.getPortletRepository(
-					serviceContext.getScopeGroupId(), "Jukebox");
+					serviceContext.getScopeGroupId(), PortletKeys.JUKEBOX);
 
 			PortletFileRepositoryUtil.deletePortletFileEntry(
 				repository.getRepositoryId(),
@@ -185,9 +186,10 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 
 			PortletFileRepositoryUtil.addPortletFileEntry(
 				serviceContext.getScopeGroupId(), userId,
-				Artist.class.getName(), artist.getArtistId(), "Jukebox",
-				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, inputStream,
-				String.valueOf(artist.getArtistId()), StringPool.BLANK, true);
+				Artist.class.getName(), artist.getArtistId(),
+				PortletKeys.JUKEBOX, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				inputStream, String.valueOf(artist.getArtistId()),
+				StringPool.BLANK, true);
 		}
 
 		// Asset

@@ -23,6 +23,8 @@ public class PortletKeys extends com.liferay.portal.util.PortletKeys {
 
 	public static final String ARTISTS = "artists_WAR_jukeboxportlet";
 
+	public static final String JUKEBOX = "JukeboxPortlet";
+
 	public static final String SONGS = "songs_WAR_jukeboxportlet";
 
 }

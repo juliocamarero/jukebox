@@ -24,6 +24,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 
+import org.liferay.jukebox.util.PortletKeys;
+
 /**
  * The extended model implementation for the Artist service. Represents a row in the &quot;jukebox_Artist&quot; database table, with each column mapped to a property of this class.
  *
@@ -41,7 +43,7 @@ public class ArtistImpl extends ArtistBaseImpl {
 		throws PortalException, SystemException {
 
 		Repository repository = PortletFileRepositoryUtil.getPortletRepository(
-			getGroupId(), "Jukebox");
+			getGroupId(), PortletKeys.JUKEBOX);
 
 		FileEntry fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
 			repository.getRepositoryId(),

@@ -35,6 +35,7 @@ import java.util.List;
 import org.liferay.jukebox.AlbumNameException;
 import org.liferay.jukebox.model.Album;
 import org.liferay.jukebox.service.base.AlbumLocalServiceBaseImpl;
+import org.liferay.jukebox.util.PortletKeys;
 
 /**
  * The implementation of the album local service.
@@ -89,7 +90,7 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 		if (inputStream != null) {
 			PortletFileRepositoryUtil.addPortletFileEntry(
 				groupId, userId, Album.class.getName(), album.getAlbumId(),
-				"Jukebox", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				PortletKeys.JUKEBOX, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 				inputStream, String.valueOf(album.getAlbumId()),
 				StringPool.BLANK, true);
 		}
@@ -186,7 +187,7 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 		if (inputStream != null) {
 			Repository repository =
 				PortletFileRepositoryUtil.getPortletRepository(
-					serviceContext.getScopeGroupId(), "Jukebox");
+					serviceContext.getScopeGroupId(), PortletKeys.JUKEBOX);
 
 			PortletFileRepositoryUtil.deletePortletFileEntry(
 				repository.getRepositoryId(),
@@ -195,7 +196,7 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 
 			PortletFileRepositoryUtil.addPortletFileEntry(
 				serviceContext.getScopeGroupId(), userId, Album.class.getName(),
-				album.getAlbumId(), "Jukebox",
+				album.getAlbumId(), PortletKeys.JUKEBOX,
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, inputStream,
 				String.valueOf(album.getAlbumId()), StringPool.BLANK, true);
 		}
