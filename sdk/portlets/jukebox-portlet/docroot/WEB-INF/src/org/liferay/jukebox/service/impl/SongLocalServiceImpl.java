@@ -187,6 +187,31 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		return song;
 	}
 
+	public Song deleteSong(long songId)
+		throws PortalException, SystemException {
+
+		Song song = songPersistence.findByPrimaryKey(songId);
+
+		Repository repository =
+			PortletFileRepositoryUtil.fetchPortletRepository(
+				song.getGroupId(), Constants.JUKEBOX_PORTLET_REPOSITORY);
+
+		if (repository != null) {
+			try {
+				Folder folder = PortletFileRepositoryUtil.getPortletFolder(
+					0, repository.getRepositoryId(),
+					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+					String.valueOf(songId), null);
+
+				PortletFileRepositoryUtil.deleteFolder(folder.getFolderId());
+			}
+			catch (Exception e) {
+			}
+		}
+
+		return songPersistence.remove(songId);
+	}
+
 	public List<Song> getSongs(long groupId) throws SystemException {
 		return songPersistence.findByGroupId(groupId);
 	}

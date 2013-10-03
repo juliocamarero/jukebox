@@ -36,6 +36,7 @@ import java.util.List;
 
 import org.liferay.jukebox.AlbumNameException;
 import org.liferay.jukebox.model.Album;
+import org.liferay.jukebox.model.Song;
 import org.liferay.jukebox.service.base.AlbumLocalServiceBaseImpl;
 import org.liferay.jukebox.util.Constants;
 
@@ -142,6 +143,28 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 			album.getCompanyId(), album.getGroupId(), album.getUserId(),
 			Album.class.getName(), album.getAlbumId(), groupPermissions,
 			guestPermissions);
+	}
+
+	public Album deleteAlbum(long albumId)
+		throws PortalException, SystemException {
+
+		Album album = albumPersistence.findByPrimaryKey(albumId);
+
+		List<Song> songs = songLocalService.getSongsByAlbumId(albumId);
+
+		for (Song song : songs) {
+			songLocalService.deleteSong(song.getSongId());
+		}
+
+		try {
+			PortletFileRepositoryUtil.deletePortletFileEntry(
+				album.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				String.valueOf(albumId));
+		}
+		catch (Exception e) {
+		}
+
+		return albumPersistence.remove(albumId);
 	}
 
 	public List<Album> getAlbums(long groupId) throws SystemException {

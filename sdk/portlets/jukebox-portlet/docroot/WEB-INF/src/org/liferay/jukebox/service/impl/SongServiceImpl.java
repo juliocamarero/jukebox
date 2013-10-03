@@ -67,7 +67,9 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 		SongPermission.check(getPermissionChecker(), songId, ActionKeys.DELETE);
 
 		return songLocalService.deleteSong(songId);
-	} public List<Song> getSongs(long groupId, int start, int end)
+	}
+
+	public List<Song> getSongs(long groupId, int start, int end)
 		throws SystemException {
 
 		return songPersistence.filterFindByGroupId(groupId, start, end);

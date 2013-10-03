@@ -66,7 +66,9 @@ public class AlbumServiceImpl extends AlbumServiceBaseImpl {
 			getPermissionChecker(), albumId, ActionKeys.DELETE);
 
 		return albumLocalService.deleteAlbum(albumId);
-	} public List<Album> getAlbums(long groupId, int start, int end)
+	}
+
+	public List<Album> getAlbums(long groupId, int start, int end)
 		throws SystemException {
 
 		return albumPersistence.filterFindByGroupId(groupId, start, end);
