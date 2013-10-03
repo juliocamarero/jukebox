@@ -129,7 +129,8 @@ public class ArtistLocalServiceClp implements ArtistLocalService {
 		_methodName23 = "addArtist";
 
 		_methodParameterTypes23 = new String[] {
-				"long", "java.lang.String", "java.io.InputStream",
+				"long", "java.lang.String", "java.lang.String",
+				"java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -851,7 +852,8 @@ public class ArtistLocalServiceClp implements ArtistLocalService {
 
 	@Override
 	public org.liferay.jukebox.model.Artist addArtist(long userId,
-		java.lang.String name, java.io.InputStream inputStream,
+		java.lang.String name, java.lang.String bio,
+		java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -864,6 +866,8 @@ public class ArtistLocalServiceClp implements ArtistLocalService {
 						userId,
 						
 					ClpSerializer.translateInput(name),
+						
+					ClpSerializer.translateInput(bio),
 						
 					ClpSerializer.translateInput(inputStream),
 						

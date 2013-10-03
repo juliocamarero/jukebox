@@ -64,11 +64,12 @@ public class ArtistServiceUtil {
 	}
 
 	public static org.liferay.jukebox.model.Artist addArtist(
-		java.lang.String name, java.io.InputStream inputStream,
+		java.lang.String name, java.lang.String bio,
+		java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().addArtist(name, inputStream, serviceContext);
+		return getService().addArtist(name, bio, inputStream, serviceContext);
 	}
 
 	public static org.liferay.jukebox.model.Artist deleteArtist(long artistId,

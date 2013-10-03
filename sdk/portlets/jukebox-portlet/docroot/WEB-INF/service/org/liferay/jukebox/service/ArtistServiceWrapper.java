@@ -58,11 +58,11 @@ public class ArtistServiceWrapper implements ArtistService,
 
 	@Override
 	public org.liferay.jukebox.model.Artist addArtist(java.lang.String name,
-		java.io.InputStream inputStream,
+		java.lang.String bio, java.io.InputStream inputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _artistService.addArtist(name, inputStream, serviceContext);
+		return _artistService.addArtist(name, bio, inputStream, serviceContext);
 	}
 
 	@Override

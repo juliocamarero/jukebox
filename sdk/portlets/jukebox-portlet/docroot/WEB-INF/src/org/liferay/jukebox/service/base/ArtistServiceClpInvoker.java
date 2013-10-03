@@ -35,7 +35,7 @@ public class ArtistServiceClpInvoker {
 		_methodName66 = "addArtist";
 
 		_methodParameterTypes66 = new String[] {
-				"java.lang.String", "java.io.InputStream",
+				"java.lang.String", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -82,8 +82,9 @@ public class ArtistServiceClpInvoker {
 		if (_methodName66.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
 			return ArtistServiceUtil.addArtist((java.lang.String)arguments[0],
-				(java.io.InputStream)arguments[1],
-				(com.liferay.portal.service.ServiceContext)arguments[2]);
+				(java.lang.String)arguments[1],
+				(java.io.InputStream)arguments[2],
+				(com.liferay.portal.service.ServiceContext)arguments[3]);
 		}
 
 		if (_methodName67.equals(name) &&
