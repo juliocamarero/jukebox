@@ -47,6 +47,14 @@ if (artistId > 0) {
 
 	<aui:input name="file" type="file" />
 
+	<c:if test="<%= (artist == null) %>">
+		<aui:field-wrapper label="permissions">
+			<liferay-ui:input-permissions
+				modelName="<%= Artist.class.getName() %>"
+				/>
+		</aui:field-wrapper>
+	</c:if>
+
 	<aui:button-row>
 		<aui:button type="submit" />
 
