@@ -41,7 +41,7 @@ else {
 		<portlet:param name="jspPage" value="/html/albums/view_search.jsp" />
 		<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 	</portlet:renderURL>
-	
+
 	<aui:form action="<%= searchURL %>" method="post" name="fm">
 		<jsp:include page="/html/albums/toolbar.jsp" />
 	</aui:form>
