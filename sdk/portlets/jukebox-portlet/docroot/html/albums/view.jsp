@@ -61,13 +61,13 @@ else {
 		</div>
 	</c:when>
 	<c:otherwise>
-		<ul>
+		<ul class="unstyled albums-list">
 
 			<%
 			for (Album album : albums) {
 			%>
 
-			<li>
+			<li class="album">
 
 				<%
 				Artist artist = ArtistLocalServiceUtil.getArtist(album.getArtistId());
@@ -79,7 +79,11 @@ else {
 					<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 				</portlet:renderURL>
 
-				<aui:a href="<%= viewAlbumURL %>" label="<%= album.getName() %>" />, <%= artist.getName() %>, <%= album.getYear() %>
+				<aui:a href="<%= viewAlbumURL %>">
+					<img alt="" class="album-image img-rounded" src="<%= album.getImageURL(themeDisplay) %>" />
+
+					<%= album.getName() %>
+				</aui:a>
 
 				<c:if test="<%= AlbumPermission.contains(permissionChecker, album.getAlbumId(), ActionKeys.UPDATE) %>">
 					<portlet:renderURL var="editAlbumURL">
@@ -88,8 +92,14 @@ else {
 						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 					</portlet:renderURL>
 
-					<liferay-ui:icon image="edit" label="<%= true %>" message="edit" url="<%= editAlbumURL %>" />
+					<liferay-ui:icon image="edit" message="edit" url="<%= editAlbumURL %>" />
 				</c:if>
+
+				<div class="album-artist-name">
+					<%= artist.getName() %>
+				</div>
+
+
 			</li>
 
 			<%

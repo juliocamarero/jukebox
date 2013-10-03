@@ -60,7 +60,8 @@ public class AlbumImpl extends AlbumBaseImpl {
 				StringPool.BLANK);
 		}
 		catch (Exception e) {
-			return StringPool.BLANK;
+			return themeDisplay.getPortalURL() +
+				"/jukebox-portlet/images/vinilo.png";
 		}
 	}
 

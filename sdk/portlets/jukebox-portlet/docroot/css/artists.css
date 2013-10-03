@@ -1,0 +1,20 @@
+@import "compass";
+
+.artists-list {
+	overflow: auto;
+
+	.artist {
+		display: block;
+		float: left;
+		padding: 2em;
+		text-align: center;
+
+		.artist-image {
+			@include box-shadow(0px 3px 5px #CCC);
+			display: block;
+			width: 150px;
+			height: 150px;
+		}
+
+	}
+}

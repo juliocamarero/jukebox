@@ -60,7 +60,8 @@ public class ArtistImpl extends ArtistBaseImpl {
 				StringPool.BLANK);
 		}
 		catch (Exception e) {
-			return StringPool.BLANK;
+			return themeDisplay.getPortalURL() +
+				"/jukebox-portlet/images/singer2.jpeg";
 		}
 	}
 

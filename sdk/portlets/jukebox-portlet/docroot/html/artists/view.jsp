@@ -40,22 +40,24 @@ List<Artist> artists = ArtistServiceUtil.getArtists(scopeGroupId);
 		</div>
 	</c:when>
 	<c:otherwise>
-		<ul>
+		<ul class="artists-list unstyled">
 
 			<%
 			for (Artist artist : artists) {
 			%>
 
-			<li>
+			<li class="artist">
 				<portlet:renderURL var="viewArtistURL">
 					<portlet:param name="jspPage" value="/html/artists/view_artist.jsp" />
 					<portlet:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
 					<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 				</portlet:renderURL>
 
-				<aui:a href="<%= viewArtistURL %>" label="<%= artist.getName() %>" />
+				<aui:a href="<%= viewArtistURL %>">
+					<img alt="" class="artist-image img-circle" src="<%= artist.getImageURL(themeDisplay) %>" />
 
-				<%= artist.getName() %>
+					<%= artist.getName() %>
+				</aui:a>
 
 				<c:if test="<%= ArtistPermission.contains(permissionChecker, artist.getArtistId(), ActionKeys.UPDATE) %>">
 					<portlet:renderURL var="editArtistURL">
@@ -64,7 +66,7 @@ List<Artist> artists = ArtistServiceUtil.getArtists(scopeGroupId);
 						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 					</portlet:renderURL>
 
-					<liferay-ui:icon image="edit" label="<%= true %>" message="edit" url="<%= editArtistURL %>" />
+					<liferay-ui:icon image="edit" message="edit" url="<%= editArtistURL %>" />
 				</c:if>
 			</li>
 
