@@ -115,6 +115,7 @@ public class SongIndexer extends BaseIndexer {
 		Artist artist = ArtistLocalServiceUtil.getArtist(song.getArtistId());
 
 		document.addText("artist", artist.getName());
+		document.addKeyword("artistId", artist.getArtistId());
 
 		return document;
 	}

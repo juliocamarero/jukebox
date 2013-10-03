@@ -36,7 +36,9 @@ import java.util.Locale;
 import javax.portlet.PortletURL;
 
 import org.liferay.jukebox.model.Album;
+import org.liferay.jukebox.model.Artist;
 import org.liferay.jukebox.service.AlbumLocalServiceUtil;
+import org.liferay.jukebox.service.ArtistLocalServiceUtil;
 import org.liferay.jukebox.service.permission.AlbumPermission;
 import org.liferay.jukebox.service.persistence.AlbumActionableDynamicQuery;
 
@@ -110,6 +112,11 @@ public class AlbumIndexer extends BaseIndexer {
 		document.addDate(Field.MODIFIED_DATE, album.getModifiedDate());
 		document.addText(Field.TITLE, album.getName());
 		document.addKeyword("year", album.getYear());
+
+		Artist artist = ArtistLocalServiceUtil.getArtist(album.getArtistId());
+
+		document.addText("artist", artist.getName());
+		document.addKeyword("artistId", artist.getArtistId());
 
 		return document;
 	}
