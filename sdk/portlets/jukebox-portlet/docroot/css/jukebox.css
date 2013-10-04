@@ -114,3 +114,24 @@
 		}
 	}
 }
+
+.song-details {
+	overflow: auto;
+	margin: 0 4em 4em 0;
+
+	.song-info {
+		float: left;
+
+		.song-artist {
+			overflow: auto;
+			margin-bottom: 2em;
+		}
+
+		.album-image, .artist-image {
+			float: left;
+			width: 50px;
+			height: 50px;
+			margin-right: 1em;
+		}
+	}
+}

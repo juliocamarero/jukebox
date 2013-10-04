@@ -44,11 +44,31 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 	/>
 </c:if>
 
-<div class="song-artist">
-	<%= artist.getName() %>
+<div class="song-details">
+	<div class="song-info">
+		<div class="song-artist">
+			<img alt="" class="img-circle artist-image" src="<%= artist.getImageURL(themeDisplay) %>" />
 
-	<div class="song-album">(<%= album.getName() %>)</div>
-	<div class="song-year">(<%= album.getYear() %>)</div>
+			<%= artist.getName() %>
+		</div>
+
+		<div class="song-album">
+			<img alt="" class="img-rounded album-image" src="<%= album.getImageURL(themeDisplay) %>" />
+
+			<%= album.getName() %>
+			<span class="song-year">(<%= album.getYear() %>)</span>
+		</div>
+	</div>
+
+	<div class="song-player">
+		<ul class="songs-list graphic">
+			<li class="song">
+				<a class="song-link" href="<%= song.getSongURL(themeDisplay, "mp3") %>" type="audio/mpeg">
+					<%= song.getName() %>
+				</a>
+			</li>
+		</ul>
+	</div>
 </div>
 
 <c:if test="<%= showHeader %>">
