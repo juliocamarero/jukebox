@@ -32,11 +32,14 @@ Indexer indexer = IndexerRegistryUtil.getIndexer(Artist.class);
 
 SearchContext searchContext = SearchContextFactory.getInstance(request);
 
-searchContext.setAndSearch(displayTerms.isAndOperator());
 
 if (displayTerms.isAdvancedSearch()) {
+	searchContext.setAndSearch(displayTerms.isAndOperator());
 	searchContext.setAttribute(Field.TITLE, displayTerms.getTitle());
 	searchContext.setAttribute("bio", String.valueOf(displayTerms.getBio()));
+}
+else {
+	searchContext.setKeywords(displayTerms.getKeywords());
 }
 
 searchContext.setIncludeDiscussions(true);

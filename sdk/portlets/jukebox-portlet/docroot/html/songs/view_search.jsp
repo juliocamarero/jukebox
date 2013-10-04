@@ -32,11 +32,13 @@ Indexer indexer = IndexerRegistryUtil.getIndexer(Song.class);
 
 SearchContext searchContext = SearchContextFactory.getInstance(request);
 
-searchContext.setAndSearch(displayTerms.isAndOperator());
-
 if (displayTerms.isAdvancedSearch()) {
+	searchContext.setAndSearch(displayTerms.isAndOperator());
 	searchContext.setAttribute(Field.TITLE, displayTerms.getTitle());
 	searchContext.setAttribute("artist", String.valueOf(displayTerms.getArtist()));
+}
+else {
+	searchContext.setKeywords(displayTerms.getKeywords());
 }
 
 searchContext.setIncludeDiscussions(true);
