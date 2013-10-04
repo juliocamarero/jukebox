@@ -68,7 +68,7 @@ Hits hits = indexer.search(searchContext);
 		</div>
 	</c:when>
 	<c:otherwise>
-		<ul>
+		<ul class="search-result">
 
 			<%
 			PortletURL hitURL = liferayPortletResponse.createRenderURL();
@@ -87,7 +87,7 @@ Hits hits = indexer.search(searchContext);
 				Song song = SongLocalServiceUtil.getSong(searchResult.getClassPK());
 			%>
 
-				<li>
+				<li class="search-result-info">
 					<portlet:renderURL var="viewSongURL">
 						<portlet:param name="jspPage" value="/html/songs/view_song.jsp" />
 						<portlet:param name="songId" value="<%= String.valueOf(song.getSongId()) %>" />
@@ -95,15 +95,13 @@ Hits hits = indexer.search(searchContext);
 					</portlet:renderURL>
 
 					<liferay-ui:app-view-search-entry
-						cssClass='<%= MathUtil.isEven(i) ? "alt" : StringPool.BLANK %>'
 						description="<%= (summary != null) ? HtmlUtil.escape(summary.getContent()) : StringPool.BLANK %>"
 						fileEntryTuples="<%= searchResult.getFileEntryTuples() %>"
 						mbMessages="<%= searchResult.getMBMessages() %>"
 						queryTerms="<%= hits.getQueryTerms() %>"
-						showCheckbox="<%= false %>"
 						title="<%= (summary != null) ? HtmlUtil.escape(summary.getTitle()) : song.getName() %>"
+						thumbnailSrc="<%= song.getImageURL(themeDisplay) %>"
 						url="<%= viewSongURL %>"
-						versions="<%= versions %>"
 					/>
 				</li>
 

@@ -133,3 +133,18 @@
 		}
 	}
 }
+
+// Search
+
+.search-result {
+	.search-result-info {
+		display: block;
+
+		.entry-thumbnail {
+   			img {
+				max-height: 128px;
+				max-width: 100%;
+   			}
+		}
+	}
+}

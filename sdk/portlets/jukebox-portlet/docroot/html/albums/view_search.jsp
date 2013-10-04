@@ -68,7 +68,7 @@ Hits hits = indexer.search(searchContext);
 		</div>
 	</c:when>
 	<c:otherwise>
-		<ul>
+		<ul class="search-result">
 
 			<%
 			PortletURL hitURL = liferayPortletResponse.createRenderURL();
@@ -87,8 +87,7 @@ Hits hits = indexer.search(searchContext);
 				Album album = AlbumLocalServiceUtil.getAlbum(searchResult.getClassPK());
 			%>
 
-			<li>
-
+			<li class="search-result-info">
 				<portlet:renderURL var="viewAlbumURL">
 					<portlet:param name="jspPage" value="/html/albums/view_album.jsp" />
 					<portlet:param name="albumId" value="<%= String.valueOf(album.getAlbumId()) %>" />
@@ -96,15 +95,13 @@ Hits hits = indexer.search(searchContext);
 				</portlet:renderURL>
 
 				<liferay-ui:app-view-search-entry
-					cssClass='<%= MathUtil.isEven(i) ? "alt" : StringPool.BLANK %>'
 					description="<%= (summary != null) ? HtmlUtil.escape(summary.getContent()) : StringPool.BLANK %>"
 					fileEntryTuples="<%= searchResult.getFileEntryTuples() %>"
 					mbMessages="<%= searchResult.getMBMessages() %>"
 					queryTerms="<%= hits.getQueryTerms() %>"
-					showCheckbox="<%= false %>"
+					thumbnailSrc="<%= album.getImageURL(themeDisplay) %>"
 					title="<%= (summary != null) ? HtmlUtil.escape(summary.getTitle()) : album.getName() %>"
 					url="<%= viewAlbumURL %>"
-					versions="<%= versions %>"
 				/>
 			</li>
 

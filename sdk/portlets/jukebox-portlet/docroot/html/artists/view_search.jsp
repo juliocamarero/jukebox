@@ -68,7 +68,7 @@ Hits hits = indexer.search(searchContext);
 		</div>
 	</c:when>
 	<c:otherwise>
-		<ul>
+		<ul class="search-result">
 
 			<%
 			PortletURL hitURL = liferayPortletResponse.createRenderURL();
@@ -87,7 +87,7 @@ Hits hits = indexer.search(searchContext);
 				Artist artist = ArtistLocalServiceUtil.getArtist(searchResult.getClassPK());
 			%>
 
-			<li>
+			<li class="search-result-info">
 				<portlet:renderURL var="viewArtistURL">
 					<portlet:param name="jspPage" value="/html/artists/view_artist.jsp" />
 					<portlet:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
@@ -95,15 +95,13 @@ Hits hits = indexer.search(searchContext);
 				</portlet:renderURL>
 
 				<liferay-ui:app-view-search-entry
-					cssClass='<%= MathUtil.isEven(i) ? "alt" : StringPool.BLANK %>'
 					description="<%= (summary != null) ? HtmlUtil.escape(summary.getContent()) : StringPool.BLANK %>"
 					fileEntryTuples="<%= searchResult.getFileEntryTuples() %>"
 					mbMessages="<%= searchResult.getMBMessages() %>"
 					queryTerms="<%= hits.getQueryTerms() %>"
-					showCheckbox="<%= false %>"
+					thumbnailSrc="<%= artist.getImageURL(themeDisplay) %>"
 					title="<%= (summary != null) ? HtmlUtil.escape(summary.getTitle()) : artist.getName() %>"
 					url="<%= viewArtistURL %>"
-					versions="<%= versions %>"
 				/>
 			</li>
 
