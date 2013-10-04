@@ -29,6 +29,7 @@ long portletDisplayDDMTemplateId = PortletDisplayTemplateUtil.getPortletDisplayT
 <liferay-ui:success key="songAdded" message="the-song-was-added-successfully" />
 <liferay-ui:success key="songUpdated" message="the-song-was-updated-successfully" />
 <liferay-ui:success key="songDeleted" message="the-song-was-deleted-successfully" />
+<liferay-ui:success key="songMovedToTrash" message="the-song-was-moved-to-trash-successfully" />
 
 <%
 List<Song> songs = null;

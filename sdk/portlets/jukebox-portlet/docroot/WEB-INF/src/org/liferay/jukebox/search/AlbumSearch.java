@@ -48,6 +48,8 @@ public class AlbumSearch extends SearchContainer<AssetEntry> {
 		AlbumDisplayTerms displayTerms = (AlbumDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
+			AlbumDisplayTerms.ARTIST, displayTerms.getTitle());
+		iteratorURL.setParameter(
 			AlbumDisplayTerms.TITLE, displayTerms.getTitle());
 		iteratorURL.setParameter(
 			AlbumDisplayTerms.YEAR, String.valueOf(displayTerms.getYear()));

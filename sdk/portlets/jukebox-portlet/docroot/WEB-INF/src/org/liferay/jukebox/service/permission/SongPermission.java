@@ -24,6 +24,8 @@ import org.liferay.jukebox.service.SongLocalServiceUtil;
 
 /**
  * @author Julio Camarero
+ * @author Sergio González
+ * @author Eudaldo Alonso
  */
 public class SongPermission {
 
@@ -36,11 +38,29 @@ public class SongPermission {
 		}
 	}
 
+	public static void check(
+			PermissionChecker permissionChecker, Song song, String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, song, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
 	public static boolean contains(
 			PermissionChecker permissionChecker, long songId, String actionId)
 		throws PortalException, SystemException {
 
 		Song song = SongLocalServiceUtil.getSong(songId);
+
+		return permissionChecker.hasPermission(
+			song.getGroupId(), Song.class.getName(), song.getSongId(),
+			actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, Song song, String actionId)
+		throws PortalException, SystemException {
 
 		return permissionChecker.hasPermission(
 			song.getGroupId(), Song.class.getName(), song.getSongId(),

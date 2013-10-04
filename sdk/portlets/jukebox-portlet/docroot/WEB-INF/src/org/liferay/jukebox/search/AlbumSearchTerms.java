@@ -27,6 +27,7 @@ public class AlbumSearchTerms extends AlbumDisplayTerms {
 	public AlbumSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
+		artist = ParamUtil.getString(portletRequest, ARTIST);
 		groupId = ParamUtil.getLong(portletRequest, GROUP_ID);
 		title = DAOParamUtil.getString(portletRequest, TITLE);
 		year = ParamUtil.getInteger(portletRequest, YEAR);

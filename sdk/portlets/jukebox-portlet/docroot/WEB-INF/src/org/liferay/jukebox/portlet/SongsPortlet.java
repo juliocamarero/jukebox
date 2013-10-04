@@ -89,13 +89,22 @@ public class SongsPortlet extends MVCPortlet {
 
 		long songId = ParamUtil.getLong(request, "songId");
 
+		boolean moveToTrash = ParamUtil.getBoolean(request, "moveToTrash");
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Song.class.getName(), request);
 
 		try {
-			SongServiceUtil.deleteSong(songId, serviceContext);
+			if (moveToTrash) {
+				SongServiceUtil.moveSongToTrash(songId);
 
-			SessionMessages.add(request, "songDeleted");
+				SessionMessages.add(request, "songMovedToTrash");
+			}
+			else {
+				SongServiceUtil.deleteSong(songId, serviceContext);
+
+				SessionMessages.add(request, "songDeleted");
+			}
 
 			sendRedirect(request, response);
 		}

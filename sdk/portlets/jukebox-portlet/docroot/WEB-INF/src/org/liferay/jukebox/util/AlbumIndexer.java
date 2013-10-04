@@ -111,6 +111,7 @@ public class AlbumIndexer extends BaseIndexer {
 		}
 
 		addSearchTerm(searchQuery, searchContext, Field.TITLE, true);
+		addSearchTerm(searchQuery, searchContext, "artist", true);
 		addSearchTerm(searchQuery, searchContext, "year", false);
 	}
 
