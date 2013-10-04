@@ -92,11 +92,11 @@ public class SongServiceSoap {
 		}
 	}
 
-	public static org.liferay.jukebox.model.SongSoap[] getSongsByAlbumId(
-		long groupId, long albumId) throws RemoteException {
+	public static org.liferay.jukebox.model.SongSoap[] getSongs(long groupId,
+		int start, int end) throws RemoteException {
 		try {
-			java.util.List<org.liferay.jukebox.model.Song> returnValue = SongServiceUtil.getSongsByAlbumId(groupId,
-					albumId);
+			java.util.List<org.liferay.jukebox.model.Song> returnValue = SongServiceUtil.getSongs(groupId,
+					start, end);
 
 			return org.liferay.jukebox.model.SongSoap.toSoapModels(returnValue);
 		}
@@ -107,11 +107,11 @@ public class SongServiceSoap {
 		}
 	}
 
-	public static org.liferay.jukebox.model.SongSoap[] getSongs(long groupId,
-		int start, int end) throws RemoteException {
+	public static org.liferay.jukebox.model.SongSoap[] getSongsByAlbumId(
+		long groupId, long albumId) throws RemoteException {
 		try {
-			java.util.List<org.liferay.jukebox.model.Song> returnValue = SongServiceUtil.getSongs(groupId,
-					start, end);
+			java.util.List<org.liferay.jukebox.model.Song> returnValue = SongServiceUtil.getSongsByAlbumId(groupId,
+					albumId);
 
 			return org.liferay.jukebox.model.SongSoap.toSoapModels(returnValue);
 		}

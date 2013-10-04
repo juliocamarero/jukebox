@@ -50,13 +50,13 @@ public class SongServiceClp implements SongService {
 
 		_methodParameterTypes5 = new String[] { "long" };
 
-		_methodName6 = "getSongsByAlbumId";
+		_methodName6 = "getSongs";
 
-		_methodParameterTypes6 = new String[] { "long", "long" };
+		_methodParameterTypes6 = new String[] { "long", "int", "int" };
 
-		_methodName7 = "getSongs";
+		_methodName7 = "getSongsByAlbumId";
 
-		_methodParameterTypes7 = new String[] { "long", "int", "int" };
+		_methodParameterTypes7 = new String[] { "long", "long" };
 
 		_methodName8 = "getSongsCount";
 
@@ -245,14 +245,14 @@ public class SongServiceClp implements SongService {
 	}
 
 	@Override
-	public java.util.List<org.liferay.jukebox.model.Song> getSongsByAlbumId(
-		long groupId, long albumId)
+	public java.util.List<org.liferay.jukebox.model.Song> getSongs(
+		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6, new Object[] { groupId, albumId });
+					_methodParameterTypes6, new Object[] { groupId, start, end });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -274,14 +274,14 @@ public class SongServiceClp implements SongService {
 	}
 
 	@Override
-	public java.util.List<org.liferay.jukebox.model.Song> getSongs(
-		long groupId, int start, int end)
+	public java.util.List<org.liferay.jukebox.model.Song> getSongsByAlbumId(
+		long groupId, long albumId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7, new Object[] { groupId, start, end });
+					_methodParameterTypes7, new Object[] { groupId, albumId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
