@@ -31,6 +31,10 @@ public interface Song extends SongModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link org.liferay.jukebox.model.impl.SongImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public java.lang.String getImageURL(
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.lang.String getLyricsURL(
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.kernel.exception.PortalException,

@@ -773,6 +773,13 @@ public class SongWrapper implements Song, ModelWrapper<Song> {
 	}
 
 	@Override
+	public java.lang.String getImageURL(
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _song.getImageURL(themeDisplay);
+	}
+
+	@Override
 	public java.lang.String getLyricsURL(
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.kernel.exception.PortalException,

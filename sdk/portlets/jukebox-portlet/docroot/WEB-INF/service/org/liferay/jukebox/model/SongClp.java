@@ -589,6 +589,28 @@ public class SongClp extends BaseModelImpl<Song> implements Song {
 	}
 
 	@Override
+	public java.lang.String getImageURL(
+		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
+		try {
+			String methodName = "getImageURL";
+
+			Class<?>[] parameterTypes = new Class<?>[] {
+					com.liferay.portal.theme.ThemeDisplay.class
+				};
+
+			Object[] parameterValues = new Object[] { themeDisplay };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
 	public java.lang.String getLyricsURL(
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
 		try {
