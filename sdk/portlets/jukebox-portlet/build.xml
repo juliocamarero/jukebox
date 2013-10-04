@@ -3,4 +3,10 @@
 
 <project name="jukebox-portlet" basedir="." default="deploy">
 	<import file="../build-common-portlet.xml" />
+
+	<copy
+		file="${sdk.dir}/portlets/jukebox-portlet/docroot/WEB-INF/lib/jukebox-portlet-service.jar"
+		todir="${app.server.lib.global.dir}"
+		overwrite="true"
+	/>
 </project>
