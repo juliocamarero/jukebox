@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,8 +37,6 @@ import java.util.Locale;
 
 import javax.portlet.PortletURL;
 
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import org.liferay.jukebox.model.Artist;
 import org.liferay.jukebox.model.Song;
 import org.liferay.jukebox.service.ArtistLocalServiceUtil;
@@ -58,6 +58,22 @@ public class SongIndexer extends BaseIndexer {
 	}
 
 	@Override
+	public void addRelatedEntryFields(Document document, Object obj)
+			throws Exception {
+
+		DLFileEntry dlFileEntry = (DLFileEntry)obj;
+
+		Song song = SongLocalServiceUtil.getSong(
+			GetterUtil.getLong(dlFileEntry.getTitle()));
+
+		document.addKeyword(
+			Field.CLASS_NAME_ID,
+			PortalUtil.getClassNameId(Song.class.getName()));
+		document.addKeyword(Field.CLASS_PK, song.getSongId());
+		document.addKeyword(Field.RELATED_ENTRY, true);
+	}
+
+	@Override
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}
@@ -75,22 +91,6 @@ public class SongIndexer extends BaseIndexer {
 
 		return SongPermission.contains(
 			permissionChecker, entryClassPK, ActionKeys.VIEW);
-	}
-
-	@Override
-	public void addRelatedEntryFields(Document document, Object obj)
-			throws Exception {
-
-		DLFileEntry dlFileEntry = (DLFileEntry)obj;
-
-		Song song = SongLocalServiceUtil.getSong(
-			GetterUtil.getLong(dlFileEntry.getTitle()));
-
-		document.addKeyword(
-			Field.CLASS_NAME_ID,
-			PortalUtil.getClassNameId(Song.class.getName()));
-		document.addKeyword(Field.CLASS_PK, song.getSongId());
-		document.addKeyword(Field.RELATED_ENTRY, true);
 	}
 
 	@Override

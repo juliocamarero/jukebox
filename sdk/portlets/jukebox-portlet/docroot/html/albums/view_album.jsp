@@ -82,4 +82,3 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 		/>
 	</c:if>
 </div>
-
