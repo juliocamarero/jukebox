@@ -98,6 +98,7 @@ Hits hits = indexer.search(searchContext);
 				<liferay-ui:app-view-search-entry
 					cssClass='<%= MathUtil.isEven(i) ? "alt" : StringPool.BLANK %>'
 					description="<%= (summary != null) ? HtmlUtil.escape(summary.getContent()) : StringPool.BLANK %>"
+					fileEntryTuples="<%= searchResult.getFileEntryTuples() %>"
 					mbMessages="<%= searchResult.getMBMessages() %>"
 					queryTerms="<%= hits.getQueryTerms() %>"
 					showCheckbox="<%= false %>"
