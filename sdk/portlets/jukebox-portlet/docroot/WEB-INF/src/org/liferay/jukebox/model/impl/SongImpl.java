@@ -44,6 +44,13 @@ import org.liferay.jukebox.util.Constants;
  */
 public class SongImpl extends SongBaseImpl {
 
+	public String getImageURL(ThemeDisplay themeDisplay)
+		throws SystemException {
+
+		return themeDisplay.getPortalURL() +
+			"/jukebox-portlet/images/song.png";
+	}
+
 	public String getLyricsURL(ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
