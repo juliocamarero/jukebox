@@ -171,16 +171,20 @@ public class SongLocalServiceClpInvoker {
 				"long", "org.liferay.jukebox.model.Song"
 			};
 
-		_methodName101 = "updateAsset";
+		_methodName101 = "restoreSongFromTrash";
 
-		_methodParameterTypes101 = new String[] {
+		_methodParameterTypes101 = new String[] { "long", "long" };
+
+		_methodName102 = "updateAsset";
+
+		_methodParameterTypes102 = new String[] {
 				"long", "org.liferay.jukebox.model.Song", "long[][]",
 				"java.lang.String[][]"
 			};
 
-		_methodName102 = "updateSong";
+		_methodName103 = "updateSong";
 
-		_methodParameterTypes102 = new String[] {
+		_methodParameterTypes103 = new String[] {
 				"long", "long", "long", "java.lang.String", "java.lang.String",
 				"java.io.InputStream", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
@@ -376,6 +380,14 @@ public class SongLocalServiceClpInvoker {
 
 		if (_methodName101.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
+			SongLocalServiceUtil.restoreSongFromTrash(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+
+			return null;
+		}
+
+		if (_methodName102.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes102, parameterTypes)) {
 			SongLocalServiceUtil.updateAsset(((Long)arguments[0]).longValue(),
 				(org.liferay.jukebox.model.Song)arguments[1],
 				(long[])arguments[2], (java.lang.String[])arguments[3]);
@@ -383,8 +395,8 @@ public class SongLocalServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName102.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes102, parameterTypes)) {
+		if (_methodName103.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes103, parameterTypes)) {
 			return SongLocalServiceUtil.updateSong(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
@@ -464,4 +476,6 @@ public class SongLocalServiceClpInvoker {
 	private String[] _methodParameterTypes101;
 	private String _methodName102;
 	private String[] _methodParameterTypes102;
+	private String _methodName103;
+	private String[] _methodParameterTypes103;
 }

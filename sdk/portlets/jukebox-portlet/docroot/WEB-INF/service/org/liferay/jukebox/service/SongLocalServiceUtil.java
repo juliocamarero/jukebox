@@ -388,6 +388,12 @@ public class SongLocalServiceUtil {
 		return getService().moveSongToTrash(userId, song);
 	}
 
+	public static void restoreSongFromTrash(long userId, long songId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().restoreSongFromTrash(userId, songId);
+	}
+
 	public static void updateAsset(long userId,
 		org.liferay.jukebox.model.Song song, long[] assetCategoryIds,
 		java.lang.String[] assetTagNames)
