@@ -83,6 +83,17 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 		return songPersistence.filterCountByGroupId(groupId);
 	}
 
+	@Override
+	public Song moveSongToTrash(long songId)
+		throws PortalException, SystemException {
+
+		Song song = songPersistence.findByPrimaryKey(songId);
+
+		SongPermission.check(getPermissionChecker(), song, ActionKeys.DELETE);
+
+		return songLocalService.moveSongToTrash(getUserId(), song);
+	}
+
 	public Song updateSong(
 			long songId, long albumId, String name, String songFileName,
 			InputStream songInputStream, String lyricsFileName,
