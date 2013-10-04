@@ -38,6 +38,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import com.liferay.portlet.trash.model.TrashEntry;
 import org.liferay.jukebox.SongNameException;
 import org.liferay.jukebox.model.Album;
 import org.liferay.jukebox.model.Song;
@@ -250,6 +251,8 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		song.setStatusByUserName(user.getFullName());
 		song.setStatusDate(serviceContext.getModifiedDate(now));
 
+		songPersistence.update(song);
+
 		// Asset
 
 		assetEntryLocalService.updateVisible(
@@ -266,7 +269,7 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public void restoreSongFromTrash(long userId, long songId)
+	public Song restoreSongFromTrash(long userId, long songId)
 		throws PortalException, SystemException {
 
 		ServiceContext serviceContext = new ServiceContext();
@@ -276,10 +279,13 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
+		TrashEntry trashEntry = trashEntryLocalService.getEntry(
+			Song.class.getName(), songId);
+
 		Song song = songPersistence.findByPrimaryKey(songId);
 
 		song.setModifiedDate(serviceContext.getModifiedDate(now));
-		song.setStatus(WorkflowConstants.STATUS_APPROVED);
+		song.setStatus(trashEntry.getStatus());
 		song.setStatusByUserId(user.getUserId());
 		song.setStatusByUserName(user.getFullName());
 		song.setStatusDate(serviceContext.getModifiedDate(now));
@@ -290,6 +296,8 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 			Song.class.getName(), song.getSongId(), true);
 
 		trashEntryLocalService.deleteEntry(Song.class.getName(), songId);
+
+		return song;
 	}
 
 	public void updateAsset(
