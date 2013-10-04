@@ -55,6 +55,8 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem");
 				<aui:fieldset>
 					<aui:input name="<%= displayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>" />
 
+					<aui:input name="<%= displayTerms.ARTIST %>" size="20" type="text" value="<%= displayTerms.getArtist() %>" />
+
 					<aui:input name="<%= displayTerms.YEAR %>" size="20" type="text" value="<%= displayTerms.getYear() %>" />
 				</aui:fieldset>
 			</liferay-ui:search-toggle>

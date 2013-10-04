@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 
@@ -142,7 +144,18 @@ public class ArtistIndexer extends BaseIndexer {
 
 		summary.setMaxContentLength(200);
 
-		return summary;
+		String title = document.get(Field.TITLE);
+
+		String content = snippet;
+
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(document.get("bio"), 200);
+		}
+
+		portletURL.setParameter("jspPage", "/html/artists/view_artist.jsp");
+		portletURL.setParameter("artistId", document.get(Field.CLASS_PK));
+
+		return new Summary(title, content, portletURL);
 	}
 
 	@Override
