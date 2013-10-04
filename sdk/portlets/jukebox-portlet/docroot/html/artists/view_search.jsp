@@ -32,7 +32,6 @@ Indexer indexer = IndexerRegistryUtil.getIndexer(Artist.class);
 
 SearchContext searchContext = SearchContextFactory.getInstance(request);
 
-
 if (displayTerms.isAdvancedSearch()) {
 	searchContext.setAndSearch(displayTerms.isAndOperator());
 	searchContext.setAttribute(Field.TITLE, displayTerms.getTitle());

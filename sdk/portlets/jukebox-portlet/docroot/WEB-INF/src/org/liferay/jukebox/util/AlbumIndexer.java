@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,8 +37,6 @@ import java.util.Locale;
 
 import javax.portlet.PortletURL;
 
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import org.liferay.jukebox.model.Album;
 import org.liferay.jukebox.model.Artist;
 import org.liferay.jukebox.service.AlbumLocalServiceUtil;
@@ -55,6 +55,22 @@ public class AlbumIndexer extends BaseIndexer {
 
 	public AlbumIndexer() {
 		setPermissionAware(true);
+	}
+
+	@Override
+	public void addRelatedEntryFields(Document document, Object obj)
+			throws Exception {
+
+		DLFileEntry dlFileEntry = (DLFileEntry)obj;
+
+		Album album = AlbumLocalServiceUtil.getAlbum(
+			GetterUtil.getLong(dlFileEntry.getTitle()));
+
+		document.addKeyword(
+			Field.CLASS_NAME_ID,
+			PortalUtil.getClassNameId(Album.class.getName()));
+		document.addKeyword(Field.CLASS_PK, album.getAlbumId());
+		document.addKeyword(Field.RELATED_ENTRY, true);
 	}
 
 	@Override
@@ -83,22 +99,6 @@ public class AlbumIndexer extends BaseIndexer {
 		throws Exception {
 
 		addStatus(contextQuery, searchContext);
-	}
-
-	@Override
-	public void addRelatedEntryFields(Document document, Object obj)
-			throws Exception {
-
-		DLFileEntry dlFileEntry = (DLFileEntry)obj;
-
-		Album album = AlbumLocalServiceUtil.getAlbum(
-			GetterUtil.getLong(dlFileEntry.getTitle()));
-
-		document.addKeyword(
-			Field.CLASS_NAME_ID,
-			PortalUtil.getClassNameId(Album.class.getName()));
-		document.addKeyword(Field.CLASS_PK, album.getAlbumId());
-		document.addKeyword(Field.RELATED_ENTRY, true);
 	}
 
 	@Override
