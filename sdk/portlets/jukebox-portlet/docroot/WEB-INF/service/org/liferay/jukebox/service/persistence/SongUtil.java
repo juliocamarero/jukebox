@@ -1408,6 +1408,273 @@ public class SongUtil {
 	}
 
 	/**
+	* Returns all the songs where groupId = &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @return the matching songs
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<org.liferay.jukebox.model.Song> findByG_S(
+		long groupId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByG_S(groupId, status);
+	}
+
+	/**
+	* Returns a range of all the songs where groupId = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.SongModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @param start the lower bound of the range of songs
+	* @param end the upper bound of the range of songs (not inclusive)
+	* @return the range of matching songs
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<org.liferay.jukebox.model.Song> findByG_S(
+		long groupId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByG_S(groupId, status, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the songs where groupId = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.SongModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @param start the lower bound of the range of songs
+	* @param end the upper bound of the range of songs (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching songs
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<org.liferay.jukebox.model.Song> findByG_S(
+		long groupId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByG_S(groupId, status, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns the first song in the ordered set where groupId = &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching song
+	* @throws org.liferay.jukebox.NoSuchSongException if a matching song could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static org.liferay.jukebox.model.Song findByG_S_First(long groupId,
+		int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchSongException {
+		return getPersistence()
+				   .findByG_S_First(groupId, status, orderByComparator);
+	}
+
+	/**
+	* Returns the first song in the ordered set where groupId = &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching song, or <code>null</code> if a matching song could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static org.liferay.jukebox.model.Song fetchByG_S_First(
+		long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByG_S_First(groupId, status, orderByComparator);
+	}
+
+	/**
+	* Returns the last song in the ordered set where groupId = &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching song
+	* @throws org.liferay.jukebox.NoSuchSongException if a matching song could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static org.liferay.jukebox.model.Song findByG_S_Last(long groupId,
+		int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchSongException {
+		return getPersistence()
+				   .findByG_S_Last(groupId, status, orderByComparator);
+	}
+
+	/**
+	* Returns the last song in the ordered set where groupId = &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching song, or <code>null</code> if a matching song could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static org.liferay.jukebox.model.Song fetchByG_S_Last(long groupId,
+		int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByG_S_Last(groupId, status, orderByComparator);
+	}
+
+	/**
+	* Returns the songs before and after the current song in the ordered set where groupId = &#63; and status = &#63;.
+	*
+	* @param songId the primary key of the current song
+	* @param groupId the group ID
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next song
+	* @throws org.liferay.jukebox.NoSuchSongException if a song with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static org.liferay.jukebox.model.Song[] findByG_S_PrevAndNext(
+		long songId, long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchSongException {
+		return getPersistence()
+				   .findByG_S_PrevAndNext(songId, groupId, status,
+			orderByComparator);
+	}
+
+	/**
+	* Returns all the songs that the user has permission to view where groupId = &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @return the matching songs that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<org.liferay.jukebox.model.Song> filterFindByG_S(
+		long groupId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_S(groupId, status);
+	}
+
+	/**
+	* Returns a range of all the songs that the user has permission to view where groupId = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.SongModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @param start the lower bound of the range of songs
+	* @param end the upper bound of the range of songs (not inclusive)
+	* @return the range of matching songs that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<org.liferay.jukebox.model.Song> filterFindByG_S(
+		long groupId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_S(groupId, status, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the songs that the user has permissions to view where groupId = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.SongModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @param start the lower bound of the range of songs
+	* @param end the upper bound of the range of songs (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching songs that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<org.liferay.jukebox.model.Song> filterFindByG_S(
+		long groupId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_S(groupId, status, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the songs before and after the current song in the ordered set of songs that the user has permission to view where groupId = &#63; and status = &#63;.
+	*
+	* @param songId the primary key of the current song
+	* @param groupId the group ID
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next song
+	* @throws org.liferay.jukebox.NoSuchSongException if a song with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static org.liferay.jukebox.model.Song[] filterFindByG_S_PrevAndNext(
+		long songId, long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchSongException {
+		return getPersistence()
+				   .filterFindByG_S_PrevAndNext(songId, groupId, status,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the songs where groupId = &#63; and status = &#63; from the database.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByG_S(long groupId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByG_S(groupId, status);
+	}
+
+	/**
+	* Returns the number of songs where groupId = &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @return the number of matching songs
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByG_S(long groupId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByG_S(groupId, status);
+	}
+
+	/**
+	* Returns the number of songs that the user has permission to view where groupId = &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @return the number of matching songs that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByG_S(long groupId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_S(groupId, status);
+	}
+
+	/**
 	* Returns all the songs where groupId = &#63; and albumId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
