@@ -66,9 +66,13 @@ public class SongServiceClpInvoker {
 
 		_methodParameterTypes78 = new String[] { "long", "long" };
 
-		_methodName79 = "updateSong";
+		_methodName79 = "moveSongToTrash";
 
-		_methodParameterTypes79 = new String[] {
+		_methodParameterTypes79 = new String[] { "long" };
+
+		_methodName80 = "updateSong";
+
+		_methodParameterTypes80 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String",
 				"java.io.InputStream", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
@@ -136,6 +140,11 @@ public class SongServiceClpInvoker {
 
 		if (_methodName79.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+			return SongServiceUtil.moveSongToTrash(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName80.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
 			return SongServiceUtil.updateSong(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
@@ -168,4 +177,6 @@ public class SongServiceClpInvoker {
 	private String[] _methodParameterTypes78;
 	private String _methodName79;
 	private String[] _methodParameterTypes79;
+	private String _methodName80;
+	private String[] _methodParameterTypes80;
 }

@@ -100,6 +100,10 @@ public interface SongService extends BaseService, InvokableService {
 	public int getSongsCountByAlbumId(long groupId, long albumId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public org.liferay.jukebox.model.Song moveSongToTrash(long songId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public org.liferay.jukebox.model.Song updateSong(long songId, long albumId,
 		java.lang.String name, java.lang.String songFileName,
 		java.io.InputStream songInputStream, java.lang.String lyricsFileName,

@@ -150,5 +150,19 @@ public class SongServiceSoap {
 		}
 	}
 
+	public static org.liferay.jukebox.model.SongSoap moveSongToTrash(
+		long songId) throws RemoteException {
+		try {
+			org.liferay.jukebox.model.Song returnValue = SongServiceUtil.moveSongToTrash(songId);
+
+			return org.liferay.jukebox.model.SongSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(SongServiceSoap.class);
 }

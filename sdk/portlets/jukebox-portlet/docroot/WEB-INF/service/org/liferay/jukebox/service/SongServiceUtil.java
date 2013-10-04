@@ -110,6 +110,12 @@ public class SongServiceUtil {
 		return getService().getSongsCountByAlbumId(groupId, albumId);
 	}
 
+	public static org.liferay.jukebox.model.Song moveSongToTrash(long songId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().moveSongToTrash(songId);
+	}
+
 	public static org.liferay.jukebox.model.Song updateSong(long songId,
 		long albumId, java.lang.String name, java.lang.String songFileName,
 		java.io.InputStream songInputStream, java.lang.String lyricsFileName,

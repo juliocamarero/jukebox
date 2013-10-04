@@ -109,6 +109,13 @@ public class SongServiceWrapper implements SongService,
 	}
 
 	@Override
+	public org.liferay.jukebox.model.Song moveSongToTrash(long songId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _songService.moveSongToTrash(songId);
+	}
+
+	@Override
 	public org.liferay.jukebox.model.Song updateSong(long songId, long albumId,
 		java.lang.String name, java.lang.String songFileName,
 		java.io.InputStream songInputStream, java.lang.String lyricsFileName,

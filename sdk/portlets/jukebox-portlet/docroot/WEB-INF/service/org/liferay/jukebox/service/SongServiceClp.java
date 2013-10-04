@@ -66,9 +66,13 @@ public class SongServiceClp implements SongService {
 
 		_methodParameterTypes9 = new String[] { "long", "long" };
 
-		_methodName10 = "updateSong";
+		_methodName10 = "moveSongToTrash";
 
-		_methodParameterTypes10 = new String[] {
+		_methodParameterTypes10 = new String[] { "long" };
+
+		_methodName11 = "updateSong";
+
+		_methodParameterTypes11 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String",
 				"java.io.InputStream", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
@@ -359,6 +363,39 @@ public class SongServiceClp implements SongService {
 	}
 
 	@Override
+	public org.liferay.jukebox.model.Song moveSongToTrash(long songId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName10,
+					_methodParameterTypes10, new Object[] { songId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (org.liferay.jukebox.model.Song)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public org.liferay.jukebox.model.Song updateSong(long songId, long albumId,
 		java.lang.String name, java.lang.String songFileName,
 		java.io.InputStream songInputStream, java.lang.String lyricsFileName,
@@ -369,8 +406,8 @@ public class SongServiceClp implements SongService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName10,
-					_methodParameterTypes10,
+			returnObj = _invokableService.invokeMethod(_methodName11,
+					_methodParameterTypes11,
 					new Object[] {
 						songId,
 						
@@ -433,4 +470,6 @@ public class SongServiceClp implements SongService {
 	private String[] _methodParameterTypes9;
 	private String _methodName10;
 	private String[] _methodParameterTypes10;
+	private String _methodName11;
+	private String[] _methodParameterTypes11;
 }
