@@ -67,7 +67,10 @@ public class SongsPortlet extends MVCPortlet {
 
 			SessionMessages.add(request, "songAdded");
 
-			sendRedirect(request, response);
+			String redirect =
+				ParamUtil.getString(uploadPortletRequest, "redirect");
+
+			response.sendRedirect(redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof SongNameException ||
@@ -141,7 +144,10 @@ public class SongsPortlet extends MVCPortlet {
 
 			SessionMessages.add(request, "songUpdated");
 
-			sendRedirect(request, response);
+			String redirect =
+				ParamUtil.getString(uploadPortletRequest, "redirect");
+
+			response.sendRedirect(redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof SongNameException ||

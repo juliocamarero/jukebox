@@ -61,7 +61,10 @@ public class AlbumsPortlet extends MVCPortlet {
 
 			SessionMessages.add(request, "albumAdded");
 
-			sendRedirect(request, response);
+			String redirect =
+				ParamUtil.getString(uploadPortletRequest, "redirect");
+
+			response.sendRedirect(redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof AlbumNameException ||
@@ -120,7 +123,10 @@ public class AlbumsPortlet extends MVCPortlet {
 
 			SessionMessages.add(request, "albumUpdated");
 
-			sendRedirect(request, response);
+			String redirect =
+					ParamUtil.getString(uploadPortletRequest, "redirect");
+
+				response.sendRedirect(redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof AlbumNameException ||
