@@ -17,11 +17,12 @@ package org.liferay.jukebox.trash;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.trash.BaseTrashHandler;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 import javax.portlet.PortletRequest;
 
+import com.liferay.portal.theme.ThemeDisplay;
 import org.liferay.jukebox.model.Song;
 import org.liferay.jukebox.service.SongLocalServiceUtil;
 import org.liferay.jukebox.service.permission.SongPermission;
@@ -49,7 +50,10 @@ public class SongTrashHandler extends BaseTrashHandler {
 	public String getRestoreMessage(
 		PortletRequest portletRequest, long classPK) {
 
-		return StringPool.BLANK;
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		return themeDisplay.translate("songs");
 	}
 
 	@Override
@@ -62,7 +66,10 @@ public class SongTrashHandler extends BaseTrashHandler {
 	}
 
 	@Override
-	public void restoreTrashEntry(long userId, long classPK) {
+	public void restoreTrashEntry(long userId, long classPK)
+		throws PortalException, SystemException {
+
+		SongLocalServiceUtil.restoreSongFromTrash(userId, classPK);
 	}
 
 	@Override

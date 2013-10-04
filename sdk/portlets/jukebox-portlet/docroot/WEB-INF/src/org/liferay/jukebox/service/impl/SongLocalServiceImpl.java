@@ -264,6 +264,34 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		return song;
 	}
 
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public void restoreSongFromTrash(long userId, long songId)
+		throws PortalException, SystemException {
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		// Entry
+
+		User user = userPersistence.findByPrimaryKey(userId);
+		Date now = new Date();
+
+		Song song = songPersistence.findByPrimaryKey(songId);
+
+		song.setModifiedDate(serviceContext.getModifiedDate(now));
+		song.setStatus(WorkflowConstants.STATUS_APPROVED);
+		song.setStatusByUserId(user.getUserId());
+		song.setStatusByUserName(user.getFullName());
+		song.setStatusDate(serviceContext.getModifiedDate(now));
+
+		songPersistence.update(song);
+
+		assetEntryLocalService.updateVisible(
+			Song.class.getName(), song.getSongId(), true);
+
+		trashEntryLocalService.deleteEntry(Song.class.getName(), songId);
+	}
+
 	public void updateAsset(
 			long userId, Song song, long[] assetCategoryIds,
 			String[] assetTagNames)
