@@ -400,6 +400,14 @@ public class SongLocalServiceWrapper implements SongLocalService,
 	}
 
 	@Override
+	public org.liferay.jukebox.model.Song moveSongToTrash(long userId,
+		org.liferay.jukebox.model.Song song)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _songLocalService.moveSongToTrash(userId, song);
+	}
+
+	@Override
 	public void updateAsset(long userId, org.liferay.jukebox.model.Song song,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)
 		throws com.liferay.portal.kernel.exception.PortalException,

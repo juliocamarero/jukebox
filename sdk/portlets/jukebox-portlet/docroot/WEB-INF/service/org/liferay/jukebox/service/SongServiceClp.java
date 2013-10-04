@@ -48,19 +48,23 @@ public class SongServiceClp implements SongService {
 
 		_methodName5 = "getSongs";
 
-		_methodParameterTypes5 = new String[] { "long", "int", "int" };
+		_methodParameterTypes5 = new String[] { "long" };
 
 		_methodName6 = "getSongs";
 
-		_methodParameterTypes6 = new String[] { "long" };
+		_methodParameterTypes6 = new String[] { "long", "int", "int" };
 
 		_methodName7 = "getSongsCount";
 
 		_methodParameterTypes7 = new String[] { "long" };
 
-		_methodName8 = "updateSong";
+		_methodName8 = "moveSongToTrash";
 
-		_methodParameterTypes8 = new String[] {
+		_methodParameterTypes8 = new String[] { "long" };
+
+		_methodName9 = "updateSong";
+
+		_methodParameterTypes9 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String",
 				"java.io.InputStream", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
@@ -209,14 +213,13 @@ public class SongServiceClp implements SongService {
 	}
 
 	@Override
-	public java.util.List<org.liferay.jukebox.model.Song> getSongs(
-		long groupId, int start, int end)
+	public java.util.List<org.liferay.jukebox.model.Song> getSongs(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName5,
-					_methodParameterTypes5, new Object[] { groupId, start, end });
+					_methodParameterTypes5, new Object[] { groupId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -238,13 +241,14 @@ public class SongServiceClp implements SongService {
 	}
 
 	@Override
-	public java.util.List<org.liferay.jukebox.model.Song> getSongs(long groupId)
+	public java.util.List<org.liferay.jukebox.model.Song> getSongs(
+		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6, new Object[] { groupId });
+					_methodParameterTypes6, new Object[] { groupId, start, end });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -294,6 +298,39 @@ public class SongServiceClp implements SongService {
 	}
 
 	@Override
+	public org.liferay.jukebox.model.Song moveSongToTrash(long songId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8, new Object[] { songId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (org.liferay.jukebox.model.Song)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public org.liferay.jukebox.model.Song updateSong(long songId, long albumId,
 		java.lang.String name, java.lang.String songFileName,
 		java.io.InputStream songInputStream, java.lang.String lyricsFileName,
@@ -304,8 +341,8 @@ public class SongServiceClp implements SongService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName8,
-					_methodParameterTypes8,
+			returnObj = _invokableService.invokeMethod(_methodName9,
+					_methodParameterTypes9,
 					new Object[] {
 						songId,
 						
@@ -364,4 +401,6 @@ public class SongServiceClp implements SongService {
 	private String[] _methodParameterTypes7;
 	private String _methodName8;
 	private String[] _methodParameterTypes8;
+	private String _methodName9;
+	private String[] _methodParameterTypes9;
 }
