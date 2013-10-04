@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -25,6 +26,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -99,9 +102,29 @@ public class SongsPortlet extends MVCPortlet {
 
 		try {
 			if (moveToTrash) {
-				SongServiceUtil.moveSongToTrash(songId);
+				Song song = SongServiceUtil.moveSongToTrash(songId);
 
 				SessionMessages.add(request, "songMovedToTrash");
+
+				Map<String, String[]> data = new HashMap<String, String[]>();
+
+				data.put(
+					"deleteEntryClassName",
+					new String[] {Song.class.getName()});
+				data.put("deleteEntryTitle", new String[] {song.getName()});
+				data.put(
+					"restoreEntryIds", new String[] {String.valueOf(songId)});
+
+				SessionMessages.add(
+					request,
+					PortalUtil.getPortletId(request) +
+						SessionMessages.KEY_SUFFIX_DELETE_SUCCESS_DATA, data);
+
+				SessionMessages.add(
+					request,
+					PortalUtil.getPortletId(request) +
+						SessionMessages.
+							KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
 			}
 			else {
 				SongServiceUtil.deleteSong(songId, serviceContext);
@@ -113,6 +136,17 @@ public class SongsPortlet extends MVCPortlet {
 		}
 		catch (Exception e) {
 			response.setRenderParameter("jspPage", "/html/error.jsp");
+		}
+	}
+
+	public void restoreSong(ActionRequest request, ActionResponse response)
+		throws Exception {
+
+		long[] restoreEntryIds = StringUtil.split(
+			ParamUtil.getString(request, "restoreEntryIds"), 0L);
+
+		for (long restoreEntryId : restoreEntryIds) {
+			SongServiceUtil.restoreSongFromTrash(restoreEntryId);
 		}
 	}
 

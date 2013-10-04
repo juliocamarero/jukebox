@@ -126,6 +126,16 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 		return songLocalService.moveSongToTrash(getUserId(), song);
 	}
 
+	@Override
+	public Song restoreSongFromTrash(long songId)
+		throws PortalException, SystemException {
+
+		SongPermission.check(
+			getPermissionChecker(), songId, ActionKeys.DELETE);
+
+		return songLocalService.restoreSongFromTrash(getUserId(), songId);
+	}
+
 	public Song updateSong(
 			long songId, long albumId, String name, String songFileName,
 			InputStream songInputStream, String lyricsFileName,
