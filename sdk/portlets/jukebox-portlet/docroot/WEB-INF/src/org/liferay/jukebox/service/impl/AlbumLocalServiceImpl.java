@@ -145,6 +145,7 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 			guestPermissions);
 	}
 
+	@Indexable(type = IndexableType.DELETE)
 	public Album deleteAlbum(long albumId)
 		throws PortalException, SystemException {
 

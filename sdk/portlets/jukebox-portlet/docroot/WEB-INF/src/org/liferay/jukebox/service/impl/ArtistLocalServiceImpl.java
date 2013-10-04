@@ -143,6 +143,7 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 			guestPermissions);
 	}
 
+	@Indexable(type = IndexableType.DELETE)
 	public Artist deleteArtist(long artistId)
 		throws PortalException, SystemException {
 

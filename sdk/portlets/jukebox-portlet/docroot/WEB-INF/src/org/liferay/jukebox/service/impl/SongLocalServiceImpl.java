@@ -189,6 +189,7 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		return song;
 	}
 
+	@Indexable(type = IndexableType.DELETE)
 	public Song deleteSong(long songId)
 		throws PortalException, SystemException {
 
