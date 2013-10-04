@@ -4657,43 +4657,52 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 
 	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "album.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_USERID_2 = "album.userId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_A = new FinderPath(AlbumModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_A_S = new FinderPath(AlbumModelImpl.ENTITY_CACHE_ENABLED,
 			AlbumModelImpl.FINDER_CACHE_ENABLED, AlbumImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_A",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_A_S",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A = new FinderPath(AlbumModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A_S = new FinderPath(AlbumModelImpl.ENTITY_CACHE_ENABLED,
 			AlbumModelImpl.FINDER_CACHE_ENABLED, AlbumImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_A",
-			new String[] { Long.class.getName(), Long.class.getName() },
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_A_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			},
 			AlbumModelImpl.GROUPID_COLUMN_BITMASK |
-			AlbumModelImpl.ARTISTID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_A = new FinderPath(AlbumModelImpl.ENTITY_CACHE_ENABLED,
+			AlbumModelImpl.ARTISTID_COLUMN_BITMASK |
+			AlbumModelImpl.STATUS_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_A_S = new FinderPath(AlbumModelImpl.ENTITY_CACHE_ENABLED,
 			AlbumModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_A",
-			new String[] { Long.class.getName(), Long.class.getName() });
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_A_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			});
 
 	/**
-	 * Returns all the albums where groupId = &#63; and artistId = &#63;.
+	 * Returns all the albums where groupId = &#63; and artistId = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
 	 * @param artistId the artist ID
+	 * @param status the status
 	 * @return the matching albums
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Album> findByG_A(long groupId, long artistId)
+	public List<Album> findByG_A_S(long groupId, long artistId, int status)
 		throws SystemException {
-		return findByG_A(groupId, artistId, QueryUtil.ALL_POS,
+		return findByG_A_S(groupId, artistId, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the albums where groupId = &#63; and artistId = &#63;.
+	 * Returns a range of all the albums where groupId = &#63; and artistId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.AlbumModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -4701,19 +4710,20 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 	 *
 	 * @param groupId the group ID
 	 * @param artistId the artist ID
+	 * @param status the status
 	 * @param start the lower bound of the range of albums
 	 * @param end the upper bound of the range of albums (not inclusive)
 	 * @return the range of matching albums
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Album> findByG_A(long groupId, long artistId, int start, int end)
-		throws SystemException {
-		return findByG_A(groupId, artistId, start, end, null);
+	public List<Album> findByG_A_S(long groupId, long artistId, int status,
+		int start, int end) throws SystemException {
+		return findByG_A_S(groupId, artistId, status, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the albums where groupId = &#63; and artistId = &#63;.
+	 * Returns an ordered range of all the albums where groupId = &#63; and artistId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.AlbumModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -4721,6 +4731,7 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 	 *
 	 * @param groupId the group ID
 	 * @param artistId the artist ID
+	 * @param status the status
 	 * @param start the lower bound of the range of albums
 	 * @param end the upper bound of the range of albums (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -4728,8 +4739,9 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Album> findByG_A(long groupId, long artistId, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<Album> findByG_A_S(long groupId, long artistId, int status,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -4737,13 +4749,13 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A;
-			finderArgs = new Object[] { groupId, artistId };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A_S;
+			finderArgs = new Object[] { groupId, artistId, status };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_A;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_A_S;
 			finderArgs = new Object[] {
-					groupId, artistId,
+					groupId, artistId, status,
 					
 					start, end, orderByComparator
 				};
@@ -4755,7 +4767,8 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 		if ((list != null) && !list.isEmpty()) {
 			for (Album album : list) {
 				if ((groupId != album.getGroupId()) ||
-						(artistId != album.getArtistId())) {
+						(artistId != album.getArtistId()) ||
+						(status != album.getStatus())) {
 					list = null;
 
 					break;
@@ -4767,18 +4780,20 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(4 +
+				query = new StringBundler(5 +
 						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
-				query = new StringBundler(4);
+				query = new StringBundler(5);
 			}
 
 			query.append(_SQL_SELECT_ALBUM_WHERE);
 
-			query.append(_FINDER_COLUMN_G_A_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_A_S_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_G_A_ARTISTID_2);
+			query.append(_FINDER_COLUMN_G_A_S_ARTISTID_2);
+
+			query.append(_FINDER_COLUMN_G_A_S_STATUS_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -4803,6 +4818,8 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 				qPos.add(groupId);
 
 				qPos.add(artistId);
+
+				qPos.add(status);
 
 				if (!pagination) {
 					list = (List<Album>)QueryUtil.list(q, getDialect(), start,
@@ -4835,26 +4852,28 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 	}
 
 	/**
-	 * Returns the first album in the ordered set where groupId = &#63; and artistId = &#63;.
+	 * Returns the first album in the ordered set where groupId = &#63; and artistId = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
 	 * @param artistId the artist ID
+	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching album
 	 * @throws org.liferay.jukebox.NoSuchAlbumException if a matching album could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Album findByG_A_First(long groupId, long artistId,
+	public Album findByG_A_S_First(long groupId, long artistId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchAlbumException, SystemException {
-		Album album = fetchByG_A_First(groupId, artistId, orderByComparator);
+		Album album = fetchByG_A_S_First(groupId, artistId, status,
+				orderByComparator);
 
 		if (album != null) {
 			return album;
 		}
 
-		StringBundler msg = new StringBundler(6);
+		StringBundler msg = new StringBundler(8);
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
@@ -4864,86 +4883,28 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 		msg.append(", artistId=");
 		msg.append(artistId);
 
+		msg.append(", status=");
+		msg.append(status);
+
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 		throw new NoSuchAlbumException(msg.toString());
 	}
 
 	/**
-	 * Returns the first album in the ordered set where groupId = &#63; and artistId = &#63;.
+	 * Returns the first album in the ordered set where groupId = &#63; and artistId = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
 	 * @param artistId the artist ID
+	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching album, or <code>null</code> if a matching album could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Album fetchByG_A_First(long groupId, long artistId,
+	public Album fetchByG_A_S_First(long groupId, long artistId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
-		List<Album> list = findByG_A(groupId, artistId, 0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last album in the ordered set where groupId = &#63; and artistId = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param artistId the artist ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching album
-	 * @throws org.liferay.jukebox.NoSuchAlbumException if a matching album could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public Album findByG_A_Last(long groupId, long artistId,
-		OrderByComparator orderByComparator)
-		throws NoSuchAlbumException, SystemException {
-		Album album = fetchByG_A_Last(groupId, artistId, orderByComparator);
-
-		if (album != null) {
-			return album;
-		}
-
-		StringBundler msg = new StringBundler(6);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("groupId=");
-		msg.append(groupId);
-
-		msg.append(", artistId=");
-		msg.append(artistId);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchAlbumException(msg.toString());
-	}
-
-	/**
-	 * Returns the last album in the ordered set where groupId = &#63; and artistId = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param artistId the artist ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching album, or <code>null</code> if a matching album could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public Album fetchByG_A_Last(long groupId, long artistId,
-		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByG_A(groupId, artistId);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<Album> list = findByG_A(groupId, artistId, count - 1, count,
+		List<Album> list = findByG_A_S(groupId, artistId, status, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -4954,19 +4915,89 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 	}
 
 	/**
-	 * Returns the albums before and after the current album in the ordered set where groupId = &#63; and artistId = &#63;.
+	 * Returns the last album in the ordered set where groupId = &#63; and artistId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param artistId the artist ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching album
+	 * @throws org.liferay.jukebox.NoSuchAlbumException if a matching album could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Album findByG_A_S_Last(long groupId, long artistId, int status,
+		OrderByComparator orderByComparator)
+		throws NoSuchAlbumException, SystemException {
+		Album album = fetchByG_A_S_Last(groupId, artistId, status,
+				orderByComparator);
+
+		if (album != null) {
+			return album;
+		}
+
+		StringBundler msg = new StringBundler(8);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", artistId=");
+		msg.append(artistId);
+
+		msg.append(", status=");
+		msg.append(status);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchAlbumException(msg.toString());
+	}
+
+	/**
+	 * Returns the last album in the ordered set where groupId = &#63; and artistId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param artistId the artist ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching album, or <code>null</code> if a matching album could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Album fetchByG_A_S_Last(long groupId, long artistId, int status,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByG_A_S(groupId, artistId, status);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Album> list = findByG_A_S(groupId, artistId, status, count - 1,
+				count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the albums before and after the current album in the ordered set where groupId = &#63; and artistId = &#63; and status = &#63;.
 	 *
 	 * @param albumId the primary key of the current album
 	 * @param groupId the group ID
 	 * @param artistId the artist ID
+	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next album
 	 * @throws org.liferay.jukebox.NoSuchAlbumException if a album with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Album[] findByG_A_PrevAndNext(long albumId, long groupId,
-		long artistId, OrderByComparator orderByComparator)
+	public Album[] findByG_A_S_PrevAndNext(long albumId, long groupId,
+		long artistId, int status, OrderByComparator orderByComparator)
 		throws NoSuchAlbumException, SystemException {
 		Album album = findByPrimaryKey(albumId);
 
@@ -4977,13 +5008,13 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 
 			Album[] array = new AlbumImpl[3];
 
-			array[0] = getByG_A_PrevAndNext(session, album, groupId, artistId,
-					orderByComparator, true);
+			array[0] = getByG_A_S_PrevAndNext(session, album, groupId,
+					artistId, status, orderByComparator, true);
 
 			array[1] = album;
 
-			array[2] = getByG_A_PrevAndNext(session, album, groupId, artistId,
-					orderByComparator, false);
+			array[2] = getByG_A_S_PrevAndNext(session, album, groupId,
+					artistId, status, orderByComparator, false);
 
 			return array;
 		}
@@ -4995,9 +5026,9 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 		}
 	}
 
-	protected Album getByG_A_PrevAndNext(Session session, Album album,
-		long groupId, long artistId, OrderByComparator orderByComparator,
-		boolean previous) {
+	protected Album getByG_A_S_PrevAndNext(Session session, Album album,
+		long groupId, long artistId, int status,
+		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -5010,9 +5041,11 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 
 		query.append(_SQL_SELECT_ALBUM_WHERE);
 
-		query.append(_FINDER_COLUMN_G_A_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_A_S_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_A_ARTISTID_2);
+		query.append(_FINDER_COLUMN_G_A_S_ARTISTID_2);
+
+		query.append(_FINDER_COLUMN_G_A_S_STATUS_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -5086,6 +5119,8 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 
 		qPos.add(artistId);
 
+		qPos.add(status);
+
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(album);
 
@@ -5105,22 +5140,23 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 	}
 
 	/**
-	 * Returns all the albums that the user has permission to view where groupId = &#63; and artistId = &#63;.
+	 * Returns all the albums that the user has permission to view where groupId = &#63; and artistId = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
 	 * @param artistId the artist ID
+	 * @param status the status
 	 * @return the matching albums that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Album> filterFindByG_A(long groupId, long artistId)
+	public List<Album> filterFindByG_A_S(long groupId, long artistId, int status)
 		throws SystemException {
-		return filterFindByG_A(groupId, artistId, QueryUtil.ALL_POS,
+		return filterFindByG_A_S(groupId, artistId, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the albums that the user has permission to view where groupId = &#63; and artistId = &#63;.
+	 * Returns a range of all the albums that the user has permission to view where groupId = &#63; and artistId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.AlbumModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -5128,19 +5164,20 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 	 *
 	 * @param groupId the group ID
 	 * @param artistId the artist ID
+	 * @param status the status
 	 * @param start the lower bound of the range of albums
 	 * @param end the upper bound of the range of albums (not inclusive)
 	 * @return the range of matching albums that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Album> filterFindByG_A(long groupId, long artistId, int start,
-		int end) throws SystemException {
-		return filterFindByG_A(groupId, artistId, start, end, null);
+	public List<Album> filterFindByG_A_S(long groupId, long artistId,
+		int status, int start, int end) throws SystemException {
+		return filterFindByG_A_S(groupId, artistId, status, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the albums that the user has permissions to view where groupId = &#63; and artistId = &#63;.
+	 * Returns an ordered range of all the albums that the user has permissions to view where groupId = &#63; and artistId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.AlbumModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -5148,6 +5185,7 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 	 *
 	 * @param groupId the group ID
 	 * @param artistId the artist ID
+	 * @param status the status
 	 * @param start the lower bound of the range of albums
 	 * @param end the upper bound of the range of albums (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -5155,20 +5193,22 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Album> filterFindByG_A(long groupId, long artistId, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<Album> filterFindByG_A_S(long groupId, long artistId,
+		int status, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByG_A(groupId, artistId, start, end, orderByComparator);
+			return findByG_A_S(groupId, artistId, status, start, end,
+				orderByComparator);
 		}
 
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
+			query = new StringBundler(5 +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
-			query = new StringBundler(4);
+			query = new StringBundler(5);
 		}
 
 		if (getDB().isSupportsInlineDistinct()) {
@@ -5178,9 +5218,11 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 			query.append(_FILTER_SQL_SELECT_ALBUM_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		query.append(_FINDER_COLUMN_G_A_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_A_S_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_A_ARTISTID_2);
+		query.append(_FINDER_COLUMN_G_A_S_ARTISTID_2);
+
+		query.append(_FINDER_COLUMN_G_A_S_STATUS_2);
 
 		if (!getDB().isSupportsInlineDistinct()) {
 			query.append(_FILTER_SQL_SELECT_ALBUM_NO_INLINE_DISTINCT_WHERE_2);
@@ -5229,6 +5271,8 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 
 			qPos.add(artistId);
 
+			qPos.add(status);
+
 			return (List<Album>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
@@ -5240,22 +5284,23 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 	}
 
 	/**
-	 * Returns the albums before and after the current album in the ordered set of albums that the user has permission to view where groupId = &#63; and artistId = &#63;.
+	 * Returns the albums before and after the current album in the ordered set of albums that the user has permission to view where groupId = &#63; and artistId = &#63; and status = &#63;.
 	 *
 	 * @param albumId the primary key of the current album
 	 * @param groupId the group ID
 	 * @param artistId the artist ID
+	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next album
 	 * @throws org.liferay.jukebox.NoSuchAlbumException if a album with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Album[] filterFindByG_A_PrevAndNext(long albumId, long groupId,
-		long artistId, OrderByComparator orderByComparator)
+	public Album[] filterFindByG_A_S_PrevAndNext(long albumId, long groupId,
+		long artistId, int status, OrderByComparator orderByComparator)
 		throws NoSuchAlbumException, SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByG_A_PrevAndNext(albumId, groupId, artistId,
+			return findByG_A_S_PrevAndNext(albumId, groupId, artistId, status,
 				orderByComparator);
 		}
 
@@ -5268,13 +5313,13 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 
 			Album[] array = new AlbumImpl[3];
 
-			array[0] = filterGetByG_A_PrevAndNext(session, album, groupId,
-					artistId, orderByComparator, true);
+			array[0] = filterGetByG_A_S_PrevAndNext(session, album, groupId,
+					artistId, status, orderByComparator, true);
 
 			array[1] = album;
 
-			array[2] = filterGetByG_A_PrevAndNext(session, album, groupId,
-					artistId, orderByComparator, false);
+			array[2] = filterGetByG_A_S_PrevAndNext(session, album, groupId,
+					artistId, status, orderByComparator, false);
 
 			return array;
 		}
@@ -5286,9 +5331,9 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 		}
 	}
 
-	protected Album filterGetByG_A_PrevAndNext(Session session, Album album,
-		long groupId, long artistId, OrderByComparator orderByComparator,
-		boolean previous) {
+	protected Album filterGetByG_A_S_PrevAndNext(Session session, Album album,
+		long groupId, long artistId, int status,
+		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -5306,9 +5351,11 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 			query.append(_FILTER_SQL_SELECT_ALBUM_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		query.append(_FINDER_COLUMN_G_A_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_A_S_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_A_ARTISTID_2);
+		query.append(_FINDER_COLUMN_G_A_S_ARTISTID_2);
+
+		query.append(_FINDER_COLUMN_G_A_S_STATUS_2);
 
 		if (!getDB().isSupportsInlineDistinct()) {
 			query.append(_FILTER_SQL_SELECT_ALBUM_NO_INLINE_DISTINCT_WHERE_2);
@@ -5412,6 +5459,8 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 
 		qPos.add(artistId);
 
+		qPos.add(status);
+
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(album);
 
@@ -5431,47 +5480,51 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 	}
 
 	/**
-	 * Removes all the albums where groupId = &#63; and artistId = &#63; from the database.
+	 * Removes all the albums where groupId = &#63; and artistId = &#63; and status = &#63; from the database.
 	 *
 	 * @param groupId the group ID
 	 * @param artistId the artist ID
+	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByG_A(long groupId, long artistId)
+	public void removeByG_A_S(long groupId, long artistId, int status)
 		throws SystemException {
-		for (Album album : findByG_A(groupId, artistId, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
+		for (Album album : findByG_A_S(groupId, artistId, status,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(album);
 		}
 	}
 
 	/**
-	 * Returns the number of albums where groupId = &#63; and artistId = &#63;.
+	 * Returns the number of albums where groupId = &#63; and artistId = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
 	 * @param artistId the artist ID
+	 * @param status the status
 	 * @return the number of matching albums
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByG_A(long groupId, long artistId)
+	public int countByG_A_S(long groupId, long artistId, int status)
 		throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_A;
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_A_S;
 
-		Object[] finderArgs = new Object[] { groupId, artistId };
+		Object[] finderArgs = new Object[] { groupId, artistId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
 				this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(3);
+			StringBundler query = new StringBundler(4);
 
 			query.append(_SQL_COUNT_ALBUM_WHERE);
 
-			query.append(_FINDER_COLUMN_G_A_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_A_S_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_G_A_ARTISTID_2);
+			query.append(_FINDER_COLUMN_G_A_S_ARTISTID_2);
+
+			query.append(_FINDER_COLUMN_G_A_S_STATUS_2);
 
 			String sql = query.toString();
 
@@ -5487,6 +5540,8 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 				qPos.add(groupId);
 
 				qPos.add(artistId);
+
+				qPos.add(status);
 
 				count = (Long)q.uniqueResult();
 
@@ -5506,27 +5561,30 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 	}
 
 	/**
-	 * Returns the number of albums that the user has permission to view where groupId = &#63; and artistId = &#63;.
+	 * Returns the number of albums that the user has permission to view where groupId = &#63; and artistId = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
 	 * @param artistId the artist ID
+	 * @param status the status
 	 * @return the number of matching albums that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int filterCountByG_A(long groupId, long artistId)
+	public int filterCountByG_A_S(long groupId, long artistId, int status)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return countByG_A(groupId, artistId);
+			return countByG_A_S(groupId, artistId, status);
 		}
 
-		StringBundler query = new StringBundler(3);
+		StringBundler query = new StringBundler(4);
 
 		query.append(_FILTER_SQL_COUNT_ALBUM_WHERE);
 
-		query.append(_FINDER_COLUMN_G_A_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_A_S_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_A_ARTISTID_2);
+		query.append(_FINDER_COLUMN_G_A_S_ARTISTID_2);
+
+		query.append(_FINDER_COLUMN_G_A_S_STATUS_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
 				Album.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN,
@@ -5548,6 +5606,8 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 
 			qPos.add(artistId);
 
+			qPos.add(status);
+
 			Long count = (Long)q.uniqueResult();
 
 			return count.intValue();
@@ -5560,8 +5620,9 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 		}
 	}
 
-	private static final String _FINDER_COLUMN_G_A_GROUPID_2 = "album.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_A_ARTISTID_2 = "album.artistId = ?";
+	private static final String _FINDER_COLUMN_G_A_S_GROUPID_2 = "album.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_A_S_ARTISTID_2 = "album.artistId = ? AND ";
+	private static final String _FINDER_COLUMN_G_A_S_STATUS_2 = "album.status = ?";
 
 	public AlbumPersistenceImpl() {
 		setModelClass(Album.class);
@@ -5966,23 +6027,24 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 			}
 
 			if ((albumModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A_S.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						albumModelImpl.getOriginalGroupId(),
-						albumModelImpl.getOriginalArtistId()
+						albumModelImpl.getOriginalArtistId(),
+						albumModelImpl.getOriginalStatus()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_A, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_A_S, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A_S,
 					args);
 
 				args = new Object[] {
 						albumModelImpl.getGroupId(),
-						albumModelImpl.getArtistId()
+						albumModelImpl.getArtistId(), albumModelImpl.getStatus()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_A, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_A_S, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A_S,
 					args);
 			}
 		}

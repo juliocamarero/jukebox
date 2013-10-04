@@ -4235,70 +4235,81 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 	}
 
 	private static final String _FINDER_COLUMN_ALBUMID_ALBUMID_2 = "song.albumId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_U = new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_A_S = new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
 			SongModelImpl.FINDER_CACHE_ENABLED, SongImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_U",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_A_S",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_U = new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A_S = new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
 			SongModelImpl.FINDER_CACHE_ENABLED, SongImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_U",
-			new String[] { Long.class.getName(), Long.class.getName() },
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_A_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			},
 			SongModelImpl.GROUPID_COLUMN_BITMASK |
-			SongModelImpl.USERID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_U = new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
+			SongModelImpl.ALBUMID_COLUMN_BITMASK |
+			SongModelImpl.STATUS_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_A_S = new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
 			SongModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_U",
-			new String[] { Long.class.getName(), Long.class.getName() });
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_A_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			});
 
 	/**
-	 * Returns all the songs where groupId = &#63; and userId = &#63;.
+	 * Returns all the songs where groupId = &#63; and albumId = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param userId the user ID
+	 * @param albumId the album ID
+	 * @param status the status
 	 * @return the matching songs
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Song> findByG_U(long groupId, long userId)
+	public List<Song> findByG_A_S(long groupId, long albumId, int status)
 		throws SystemException {
-		return findByG_U(groupId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+		return findByG_A_S(groupId, albumId, status, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the songs where groupId = &#63; and userId = &#63;.
+	 * Returns a range of all the songs where groupId = &#63; and albumId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.SongModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
-	 * @param userId the user ID
+	 * @param albumId the album ID
+	 * @param status the status
 	 * @param start the lower bound of the range of songs
 	 * @param end the upper bound of the range of songs (not inclusive)
 	 * @return the range of matching songs
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Song> findByG_U(long groupId, long userId, int start, int end)
-		throws SystemException {
-		return findByG_U(groupId, userId, start, end, null);
+	public List<Song> findByG_A_S(long groupId, long albumId, int status,
+		int start, int end) throws SystemException {
+		return findByG_A_S(groupId, albumId, status, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the songs where groupId = &#63; and userId = &#63;.
+	 * Returns an ordered range of all the songs where groupId = &#63; and albumId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.SongModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
-	 * @param userId the user ID
+	 * @param albumId the album ID
+	 * @param status the status
 	 * @param start the lower bound of the range of songs
 	 * @param end the upper bound of the range of songs (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -4306,8 +4317,9 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Song> findByG_U(long groupId, long userId, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+	public List<Song> findByG_A_S(long groupId, long albumId, int status,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -4315,13 +4327,13 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_U;
-			finderArgs = new Object[] { groupId, userId };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A_S;
+			finderArgs = new Object[] { groupId, albumId, status };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_U;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_A_S;
 			finderArgs = new Object[] {
-					groupId, userId,
+					groupId, albumId, status,
 					
 					start, end, orderByComparator
 				};
@@ -4333,7 +4345,8 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 		if ((list != null) && !list.isEmpty()) {
 			for (Song song : list) {
 				if ((groupId != song.getGroupId()) ||
-						(userId != song.getUserId())) {
+						(albumId != song.getAlbumId()) ||
+						(status != song.getStatus())) {
 					list = null;
 
 					break;
@@ -4345,18 +4358,20 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(4 +
+				query = new StringBundler(5 +
 						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
-				query = new StringBundler(4);
+				query = new StringBundler(5);
 			}
 
 			query.append(_SQL_SELECT_SONG_WHERE);
 
-			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_A_S_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_G_U_USERID_2);
+			query.append(_FINDER_COLUMN_G_A_S_ALBUMID_2);
+
+			query.append(_FINDER_COLUMN_G_A_S_STATUS_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -4380,7 +4395,9 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 
 				qPos.add(groupId);
 
-				qPos.add(userId);
+				qPos.add(albumId);
+
+				qPos.add(status);
 
 				if (!pagination) {
 					list = (List<Song>)QueryUtil.list(q, getDialect(), start,
@@ -4413,34 +4430,39 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 	}
 
 	/**
-	 * Returns the first song in the ordered set where groupId = &#63; and userId = &#63;.
+	 * Returns the first song in the ordered set where groupId = &#63; and albumId = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param userId the user ID
+	 * @param albumId the album ID
+	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching song
 	 * @throws org.liferay.jukebox.NoSuchSongException if a matching song could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Song findByG_U_First(long groupId, long userId,
+	public Song findByG_A_S_First(long groupId, long albumId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchSongException, SystemException {
-		Song song = fetchByG_U_First(groupId, userId, orderByComparator);
+		Song song = fetchByG_A_S_First(groupId, albumId, status,
+				orderByComparator);
 
 		if (song != null) {
 			return song;
 		}
 
-		StringBundler msg = new StringBundler(6);
+		StringBundler msg = new StringBundler(8);
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
 		msg.append("groupId=");
 		msg.append(groupId);
 
-		msg.append(", userId=");
-		msg.append(userId);
+		msg.append(", albumId=");
+		msg.append(albumId);
+
+		msg.append(", status=");
+		msg.append(status);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -4448,80 +4470,19 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 	}
 
 	/**
-	 * Returns the first song in the ordered set where groupId = &#63; and userId = &#63;.
+	 * Returns the first song in the ordered set where groupId = &#63; and albumId = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param userId the user ID
+	 * @param albumId the album ID
+	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching song, or <code>null</code> if a matching song could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Song fetchByG_U_First(long groupId, long userId,
+	public Song fetchByG_A_S_First(long groupId, long albumId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
-		List<Song> list = findByG_U(groupId, userId, 0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last song in the ordered set where groupId = &#63; and userId = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param userId the user ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching song
-	 * @throws org.liferay.jukebox.NoSuchSongException if a matching song could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public Song findByG_U_Last(long groupId, long userId,
-		OrderByComparator orderByComparator)
-		throws NoSuchSongException, SystemException {
-		Song song = fetchByG_U_Last(groupId, userId, orderByComparator);
-
-		if (song != null) {
-			return song;
-		}
-
-		StringBundler msg = new StringBundler(6);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("groupId=");
-		msg.append(groupId);
-
-		msg.append(", userId=");
-		msg.append(userId);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchSongException(msg.toString());
-	}
-
-	/**
-	 * Returns the last song in the ordered set where groupId = &#63; and userId = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param userId the user ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching song, or <code>null</code> if a matching song could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public Song fetchByG_U_Last(long groupId, long userId,
-		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByG_U(groupId, userId);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<Song> list = findByG_U(groupId, userId, count - 1, count,
+		List<Song> list = findByG_A_S(groupId, albumId, status, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -4532,19 +4493,89 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 	}
 
 	/**
-	 * Returns the songs before and after the current song in the ordered set where groupId = &#63; and userId = &#63;.
+	 * Returns the last song in the ordered set where groupId = &#63; and albumId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param albumId the album ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching song
+	 * @throws org.liferay.jukebox.NoSuchSongException if a matching song could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Song findByG_A_S_Last(long groupId, long albumId, int status,
+		OrderByComparator orderByComparator)
+		throws NoSuchSongException, SystemException {
+		Song song = fetchByG_A_S_Last(groupId, albumId, status,
+				orderByComparator);
+
+		if (song != null) {
+			return song;
+		}
+
+		StringBundler msg = new StringBundler(8);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", albumId=");
+		msg.append(albumId);
+
+		msg.append(", status=");
+		msg.append(status);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchSongException(msg.toString());
+	}
+
+	/**
+	 * Returns the last song in the ordered set where groupId = &#63; and albumId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param albumId the album ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching song, or <code>null</code> if a matching song could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Song fetchByG_A_S_Last(long groupId, long albumId, int status,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByG_A_S(groupId, albumId, status);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Song> list = findByG_A_S(groupId, albumId, status, count - 1,
+				count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the songs before and after the current song in the ordered set where groupId = &#63; and albumId = &#63; and status = &#63;.
 	 *
 	 * @param songId the primary key of the current song
 	 * @param groupId the group ID
-	 * @param userId the user ID
+	 * @param albumId the album ID
+	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next song
 	 * @throws org.liferay.jukebox.NoSuchSongException if a song with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Song[] findByG_U_PrevAndNext(long songId, long groupId, long userId,
-		OrderByComparator orderByComparator)
+	public Song[] findByG_A_S_PrevAndNext(long songId, long groupId,
+		long albumId, int status, OrderByComparator orderByComparator)
 		throws NoSuchSongException, SystemException {
 		Song song = findByPrimaryKey(songId);
 
@@ -4555,13 +4586,13 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 
 			Song[] array = new SongImpl[3];
 
-			array[0] = getByG_U_PrevAndNext(session, song, groupId, userId,
-					orderByComparator, true);
+			array[0] = getByG_A_S_PrevAndNext(session, song, groupId, albumId,
+					status, orderByComparator, true);
 
 			array[1] = song;
 
-			array[2] = getByG_U_PrevAndNext(session, song, groupId, userId,
-					orderByComparator, false);
+			array[2] = getByG_A_S_PrevAndNext(session, song, groupId, albumId,
+					status, orderByComparator, false);
 
 			return array;
 		}
@@ -4573,9 +4604,9 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 		}
 	}
 
-	protected Song getByG_U_PrevAndNext(Session session, Song song,
-		long groupId, long userId, OrderByComparator orderByComparator,
-		boolean previous) {
+	protected Song getByG_A_S_PrevAndNext(Session session, Song song,
+		long groupId, long albumId, int status,
+		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -4588,9 +4619,11 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 
 		query.append(_SQL_SELECT_SONG_WHERE);
 
-		query.append(_FINDER_COLUMN_G_U_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_A_S_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_U_USERID_2);
+		query.append(_FINDER_COLUMN_G_A_S_ALBUMID_2);
+
+		query.append(_FINDER_COLUMN_G_A_S_STATUS_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -4662,7 +4695,9 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 
 		qPos.add(groupId);
 
-		qPos.add(userId);
+		qPos.add(albumId);
+
+		qPos.add(status);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(song);
@@ -4683,49 +4718,52 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 	}
 
 	/**
-	 * Returns all the songs that the user has permission to view where groupId = &#63; and userId = &#63;.
+	 * Returns all the songs that the user has permission to view where groupId = &#63; and albumId = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param userId the user ID
+	 * @param albumId the album ID
+	 * @param status the status
 	 * @return the matching songs that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Song> filterFindByG_U(long groupId, long userId)
+	public List<Song> filterFindByG_A_S(long groupId, long albumId, int status)
 		throws SystemException {
-		return filterFindByG_U(groupId, userId, QueryUtil.ALL_POS,
+		return filterFindByG_A_S(groupId, albumId, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the songs that the user has permission to view where groupId = &#63; and userId = &#63;.
+	 * Returns a range of all the songs that the user has permission to view where groupId = &#63; and albumId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.SongModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
-	 * @param userId the user ID
+	 * @param albumId the album ID
+	 * @param status the status
 	 * @param start the lower bound of the range of songs
 	 * @param end the upper bound of the range of songs (not inclusive)
 	 * @return the range of matching songs that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Song> filterFindByG_U(long groupId, long userId, int start,
-		int end) throws SystemException {
-		return filterFindByG_U(groupId, userId, start, end, null);
+	public List<Song> filterFindByG_A_S(long groupId, long albumId, int status,
+		int start, int end) throws SystemException {
+		return filterFindByG_A_S(groupId, albumId, status, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the songs that the user has permissions to view where groupId = &#63; and userId = &#63;.
+	 * Returns an ordered range of all the songs that the user has permissions to view where groupId = &#63; and albumId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.SongModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
-	 * @param userId the user ID
+	 * @param albumId the album ID
+	 * @param status the status
 	 * @param start the lower bound of the range of songs
 	 * @param end the upper bound of the range of songs (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -4733,20 +4771,22 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Song> filterFindByG_U(long groupId, long userId, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<Song> filterFindByG_A_S(long groupId, long albumId, int status,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByG_U(groupId, userId, start, end, orderByComparator);
+			return findByG_A_S(groupId, albumId, status, start, end,
+				orderByComparator);
 		}
 
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
+			query = new StringBundler(5 +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
-			query = new StringBundler(4);
+			query = new StringBundler(5);
 		}
 
 		if (getDB().isSupportsInlineDistinct()) {
@@ -4756,9 +4796,11 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 			query.append(_FILTER_SQL_SELECT_SONG_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		query.append(_FINDER_COLUMN_G_U_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_A_S_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_U_USERID_2);
+		query.append(_FINDER_COLUMN_G_A_S_ALBUMID_2);
+
+		query.append(_FINDER_COLUMN_G_A_S_STATUS_2);
 
 		if (!getDB().isSupportsInlineDistinct()) {
 			query.append(_FILTER_SQL_SELECT_SONG_NO_INLINE_DISTINCT_WHERE_2);
@@ -4805,7 +4847,9 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 
 			qPos.add(groupId);
 
-			qPos.add(userId);
+			qPos.add(albumId);
+
+			qPos.add(status);
 
 			return (List<Song>)QueryUtil.list(q, getDialect(), start, end);
 		}
@@ -4818,22 +4862,23 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 	}
 
 	/**
-	 * Returns the songs before and after the current song in the ordered set of songs that the user has permission to view where groupId = &#63; and userId = &#63;.
+	 * Returns the songs before and after the current song in the ordered set of songs that the user has permission to view where groupId = &#63; and albumId = &#63; and status = &#63;.
 	 *
 	 * @param songId the primary key of the current song
 	 * @param groupId the group ID
-	 * @param userId the user ID
+	 * @param albumId the album ID
+	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next song
 	 * @throws org.liferay.jukebox.NoSuchSongException if a song with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Song[] filterFindByG_U_PrevAndNext(long songId, long groupId,
-		long userId, OrderByComparator orderByComparator)
+	public Song[] filterFindByG_A_S_PrevAndNext(long songId, long groupId,
+		long albumId, int status, OrderByComparator orderByComparator)
 		throws NoSuchSongException, SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByG_U_PrevAndNext(songId, groupId, userId,
+			return findByG_A_S_PrevAndNext(songId, groupId, albumId, status,
 				orderByComparator);
 		}
 
@@ -4846,13 +4891,13 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 
 			Song[] array = new SongImpl[3];
 
-			array[0] = filterGetByG_U_PrevAndNext(session, song, groupId,
-					userId, orderByComparator, true);
+			array[0] = filterGetByG_A_S_PrevAndNext(session, song, groupId,
+					albumId, status, orderByComparator, true);
 
 			array[1] = song;
 
-			array[2] = filterGetByG_U_PrevAndNext(session, song, groupId,
-					userId, orderByComparator, false);
+			array[2] = filterGetByG_A_S_PrevAndNext(session, song, groupId,
+					albumId, status, orderByComparator, false);
 
 			return array;
 		}
@@ -4864,9 +4909,9 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 		}
 	}
 
-	protected Song filterGetByG_U_PrevAndNext(Session session, Song song,
-		long groupId, long userId, OrderByComparator orderByComparator,
-		boolean previous) {
+	protected Song filterGetByG_A_S_PrevAndNext(Session session, Song song,
+		long groupId, long albumId, int status,
+		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -4884,9 +4929,11 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 			query.append(_FILTER_SQL_SELECT_SONG_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		query.append(_FINDER_COLUMN_G_U_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_A_S_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_U_USERID_2);
+		query.append(_FINDER_COLUMN_G_A_S_ALBUMID_2);
+
+		query.append(_FINDER_COLUMN_G_A_S_STATUS_2);
 
 		if (!getDB().isSupportsInlineDistinct()) {
 			query.append(_FILTER_SQL_SELECT_SONG_NO_INLINE_DISTINCT_WHERE_2);
@@ -4988,7 +5035,9 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 
 		qPos.add(groupId);
 
-		qPos.add(userId);
+		qPos.add(albumId);
+
+		qPos.add(status);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(song);
@@ -5009,46 +5058,51 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 	}
 
 	/**
-	 * Removes all the songs where groupId = &#63; and userId = &#63; from the database.
+	 * Removes all the songs where groupId = &#63; and albumId = &#63; and status = &#63; from the database.
 	 *
 	 * @param groupId the group ID
-	 * @param userId the user ID
+	 * @param albumId the album ID
+	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByG_U(long groupId, long userId)
+	public void removeByG_A_S(long groupId, long albumId, int status)
 		throws SystemException {
-		for (Song song : findByG_U(groupId, userId, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
+		for (Song song : findByG_A_S(groupId, albumId, status,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(song);
 		}
 	}
 
 	/**
-	 * Returns the number of songs where groupId = &#63; and userId = &#63;.
+	 * Returns the number of songs where groupId = &#63; and albumId = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param userId the user ID
+	 * @param albumId the album ID
+	 * @param status the status
 	 * @return the number of matching songs
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByG_U(long groupId, long userId) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_U;
+	public int countByG_A_S(long groupId, long albumId, int status)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_A_S;
 
-		Object[] finderArgs = new Object[] { groupId, userId };
+		Object[] finderArgs = new Object[] { groupId, albumId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
 				this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(3);
+			StringBundler query = new StringBundler(4);
 
 			query.append(_SQL_COUNT_SONG_WHERE);
 
-			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_A_S_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_G_U_USERID_2);
+			query.append(_FINDER_COLUMN_G_A_S_ALBUMID_2);
+
+			query.append(_FINDER_COLUMN_G_A_S_STATUS_2);
 
 			String sql = query.toString();
 
@@ -5063,7 +5117,9 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 
 				qPos.add(groupId);
 
-				qPos.add(userId);
+				qPos.add(albumId);
+
+				qPos.add(status);
 
 				count = (Long)q.uniqueResult();
 
@@ -5083,27 +5139,30 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 	}
 
 	/**
-	 * Returns the number of songs that the user has permission to view where groupId = &#63; and userId = &#63;.
+	 * Returns the number of songs that the user has permission to view where groupId = &#63; and albumId = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param userId the user ID
+	 * @param albumId the album ID
+	 * @param status the status
 	 * @return the number of matching songs that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int filterCountByG_U(long groupId, long userId)
+	public int filterCountByG_A_S(long groupId, long albumId, int status)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return countByG_U(groupId, userId);
+			return countByG_A_S(groupId, albumId, status);
 		}
 
-		StringBundler query = new StringBundler(3);
+		StringBundler query = new StringBundler(4);
 
 		query.append(_FILTER_SQL_COUNT_SONG_WHERE);
 
-		query.append(_FINDER_COLUMN_G_U_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_A_S_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_G_U_USERID_2);
+		query.append(_FINDER_COLUMN_G_A_S_ALBUMID_2);
+
+		query.append(_FINDER_COLUMN_G_A_S_STATUS_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
 				Song.class.getName(), _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN,
@@ -5123,7 +5182,9 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 
 			qPos.add(groupId);
 
-			qPos.add(userId);
+			qPos.add(albumId);
+
+			qPos.add(status);
 
 			Long count = (Long)q.uniqueResult();
 
@@ -5137,8 +5198,9 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 		}
 	}
 
-	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "song.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_U_USERID_2 = "song.userId = ?";
+	private static final String _FINDER_COLUMN_G_A_S_GROUPID_2 = "song.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_A_S_ALBUMID_2 = "song.albumId = ? AND ";
+	private static final String _FINDER_COLUMN_G_A_S_STATUS_2 = "song.status = ?";
 
 	public SongPersistenceImpl() {
 		setModelClass(Song.class);
@@ -5534,22 +5596,24 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 			}
 
 			if ((songModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_U.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A_S.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						songModelImpl.getOriginalGroupId(),
-						songModelImpl.getOriginalUserId()
+						songModelImpl.getOriginalAlbumId(),
+						songModelImpl.getOriginalStatus()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_U,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_A_S, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A_S,
 					args);
 
 				args = new Object[] {
-						songModelImpl.getGroupId(), songModelImpl.getUserId()
+						songModelImpl.getGroupId(), songModelImpl.getAlbumId(),
+						songModelImpl.getStatus()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_U,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_A_S, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A_S,
 					args);
 			}
 		}

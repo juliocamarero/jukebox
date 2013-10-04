@@ -109,9 +109,10 @@ public class ArtistModelImpl extends BaseModelImpl<Artist>
 			true);
 	public static long COMPANYID_COLUMN_BITMASK = 1L;
 	public static long GROUPID_COLUMN_BITMASK = 2L;
-	public static long USERID_COLUMN_BITMASK = 4L;
-	public static long UUID_COLUMN_BITMASK = 8L;
-	public static long ARTISTID_COLUMN_BITMASK = 16L;
+	public static long STATUS_COLUMN_BITMASK = 4L;
+	public static long USERID_COLUMN_BITMASK = 8L;
+	public static long UUID_COLUMN_BITMASK = 16L;
+	public static long ARTISTID_COLUMN_BITMASK = 32L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -469,7 +470,19 @@ public class ArtistModelImpl extends BaseModelImpl<Artist>
 
 	@Override
 	public void setStatus(int status) {
+		_columnBitmask |= STATUS_COLUMN_BITMASK;
+
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = _status;
+		}
+
 		_status = status;
+	}
+
+	public int getOriginalStatus() {
+		return _originalStatus;
 	}
 
 	@JSON
@@ -842,6 +855,10 @@ public class ArtistModelImpl extends BaseModelImpl<Artist>
 
 		artistModelImpl._setOriginalUserId = false;
 
+		artistModelImpl._originalStatus = artistModelImpl._status;
+
+		artistModelImpl._setOriginalStatus = false;
+
 		artistModelImpl._columnBitmask = 0;
 	}
 
@@ -1057,6 +1074,8 @@ public class ArtistModelImpl extends BaseModelImpl<Artist>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private int _status;
+	private int _originalStatus;
+	private boolean _setOriginalStatus;
 	private long _statusByUserId;
 	private String _statusByUserUuid;
 	private String _statusByUserName;

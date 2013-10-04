@@ -78,6 +78,35 @@ public class AlbumServiceSoap {
 		}
 	}
 
+	public static org.liferay.jukebox.model.AlbumSoap[] getAlbums(long groupId)
+		throws RemoteException {
+		try {
+			java.util.List<org.liferay.jukebox.model.Album> returnValue = AlbumServiceUtil.getAlbums(groupId);
+
+			return org.liferay.jukebox.model.AlbumSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static org.liferay.jukebox.model.AlbumSoap[] getAlbumsByArtistId(
+		long groupId, long artistId) throws RemoteException {
+		try {
+			java.util.List<org.liferay.jukebox.model.Album> returnValue = AlbumServiceUtil.getAlbumsByArtistId(groupId,
+					artistId);
+
+			return org.liferay.jukebox.model.AlbumSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static org.liferay.jukebox.model.AlbumSoap[] getAlbums(
 		long groupId, int start, int end) throws RemoteException {
 		try {
@@ -93,12 +122,11 @@ public class AlbumServiceSoap {
 		}
 	}
 
-	public static org.liferay.jukebox.model.AlbumSoap[] getAlbums(long groupId)
-		throws RemoteException {
+	public static int getAlbumsCount(long groupId) throws RemoteException {
 		try {
-			java.util.List<org.liferay.jukebox.model.Album> returnValue = AlbumServiceUtil.getAlbums(groupId);
+			int returnValue = AlbumServiceUtil.getAlbumsCount(groupId);
 
-			return org.liferay.jukebox.model.AlbumSoap.toSoapModels(returnValue);
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -107,9 +135,11 @@ public class AlbumServiceSoap {
 		}
 	}
 
-	public static int getAlbumsCount(long groupId) throws RemoteException {
+	public static int getAlbumsCountByArtistId(long groupId, long artistId)
+		throws RemoteException {
 		try {
-			int returnValue = AlbumServiceUtil.getAlbumsCount(groupId);
+			int returnValue = AlbumServiceUtil.getAlbumsCountByArtistId(groupId,
+					artistId);
 
 			return returnValue;
 		}
