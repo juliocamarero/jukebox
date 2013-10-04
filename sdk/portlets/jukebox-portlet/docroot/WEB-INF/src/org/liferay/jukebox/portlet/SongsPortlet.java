@@ -104,8 +104,6 @@ public class SongsPortlet extends MVCPortlet {
 			if (moveToTrash) {
 				Song song = SongServiceUtil.moveSongToTrash(songId);
 
-				SessionMessages.add(request, "songMovedToTrash");
-
 				Map<String, String[]> data = new HashMap<String, String[]>();
 
 				data.put(
