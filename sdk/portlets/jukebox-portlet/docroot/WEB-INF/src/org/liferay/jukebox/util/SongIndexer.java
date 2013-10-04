@@ -37,8 +37,10 @@ import java.util.Locale;
 
 import javax.portlet.PortletURL;
 
+import org.liferay.jukebox.model.Album;
 import org.liferay.jukebox.model.Artist;
 import org.liferay.jukebox.model.Song;
+import org.liferay.jukebox.service.AlbumLocalServiceUtil;
 import org.liferay.jukebox.service.ArtistLocalServiceUtil;
 import org.liferay.jukebox.service.SongLocalServiceUtil;
 import org.liferay.jukebox.service.permission.SongPermission;
@@ -111,6 +113,7 @@ public class SongIndexer extends BaseIndexer {
 		}
 
 		addSearchTerm(searchQuery, searchContext, Field.TITLE, true);
+		addSearchTerm(searchQuery, searchContext, "album", true);
 		addSearchTerm(searchQuery, searchContext, "artist", true);
 	}
 
@@ -129,6 +132,11 @@ public class SongIndexer extends BaseIndexer {
 
 		document.addDate(Field.MODIFIED_DATE, song.getModifiedDate());
 		document.addText(Field.TITLE, song.getName());
+
+		Album album = AlbumLocalServiceUtil.getAlbum(song.getAlbumId());
+
+		document.addText("album", album.getName());
+		document.addKeyword("albumId", album.getAlbumId());
 
 		Artist artist = ArtistLocalServiceUtil.getArtist(song.getArtistId());
 

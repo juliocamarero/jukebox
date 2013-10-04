@@ -27,6 +27,7 @@ public class SongSearchTerms extends SongDisplayTerms {
 	public SongSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
+		album = DAOParamUtil.getString(portletRequest, ALBUM);
 		artist = DAOParamUtil.getString(portletRequest, ARTIST);
 		groupId = ParamUtil.getLong(portletRequest, GROUP_ID);
 		title = DAOParamUtil.getString(portletRequest, TITLE);

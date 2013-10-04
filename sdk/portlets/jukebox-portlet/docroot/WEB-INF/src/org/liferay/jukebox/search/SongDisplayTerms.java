@@ -24,6 +24,8 @@ import javax.portlet.PortletRequest;
  */
 public class SongDisplayTerms extends DisplayTerms {
 
+	public static final String ALBUM = "album";
+
 	public static final String ARTIST = "artist";
 
 	public static final String GROUP_ID = "groupId";
@@ -33,9 +35,14 @@ public class SongDisplayTerms extends DisplayTerms {
 	public SongDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
+		album = ParamUtil.getString(portletRequest, ALBUM);
 		artist = ParamUtil.getString(portletRequest, ARTIST);
 		groupId = ParamUtil.getLong(portletRequest, GROUP_ID);
 		title = ParamUtil.getString(portletRequest, TITLE);
+	}
+
+	public String getAlbum() {
+		return album;
 	}
 
 	public String getArtist() {
@@ -50,6 +57,7 @@ public class SongDisplayTerms extends DisplayTerms {
 		return title;
 	}
 
+	protected String album;
 	protected String artist;
 	protected long groupId;
 	protected String title;

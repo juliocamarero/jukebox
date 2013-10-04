@@ -48,6 +48,8 @@ public class SongSearch extends SearchContainer<AssetEntry> {
 		SongDisplayTerms displayTerms = (SongDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
+			SongDisplayTerms.ALBUM, displayTerms.getAlbum());
+		iteratorURL.setParameter(
 			SongDisplayTerms.ARTIST, displayTerms.getArtist());
 		iteratorURL.setParameter(
 			SongDisplayTerms.TITLE, displayTerms.getTitle());
