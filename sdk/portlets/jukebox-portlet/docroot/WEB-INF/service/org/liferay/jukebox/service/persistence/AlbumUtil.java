@@ -1516,21 +1516,22 @@ public class AlbumUtil {
 	}
 
 	/**
-	* Returns all the albums where groupId = &#63; and artistId = &#63;.
+	* Returns all the albums where groupId = &#63; and artistId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
 	* @param artistId the artist ID
+	* @param status the status
 	* @return the matching albums
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<org.liferay.jukebox.model.Album> findByG_A(
-		long groupId, long artistId)
+	public static java.util.List<org.liferay.jukebox.model.Album> findByG_A_S(
+		long groupId, long artistId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByG_A(groupId, artistId);
+		return getPersistence().findByG_A_S(groupId, artistId, status);
 	}
 
 	/**
-	* Returns a range of all the albums where groupId = &#63; and artistId = &#63;.
+	* Returns a range of all the albums where groupId = &#63; and artistId = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.AlbumModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -1538,19 +1539,21 @@ public class AlbumUtil {
 	*
 	* @param groupId the group ID
 	* @param artistId the artist ID
+	* @param status the status
 	* @param start the lower bound of the range of albums
 	* @param end the upper bound of the range of albums (not inclusive)
 	* @return the range of matching albums
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<org.liferay.jukebox.model.Album> findByG_A(
-		long groupId, long artistId, int start, int end)
+	public static java.util.List<org.liferay.jukebox.model.Album> findByG_A_S(
+		long groupId, long artistId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByG_A(groupId, artistId, start, end);
+		return getPersistence()
+				   .findByG_A_S(groupId, artistId, status, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the albums where groupId = &#63; and artistId = &#63;.
+	* Returns an ordered range of all the albums where groupId = &#63; and artistId = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.AlbumModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -1558,129 +1561,141 @@ public class AlbumUtil {
 	*
 	* @param groupId the group ID
 	* @param artistId the artist ID
+	* @param status the status
 	* @param start the lower bound of the range of albums
 	* @param end the upper bound of the range of albums (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching albums
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<org.liferay.jukebox.model.Album> findByG_A(
-		long groupId, long artistId, int start, int end,
+	public static java.util.List<org.liferay.jukebox.model.Album> findByG_A_S(
+		long groupId, long artistId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_A(groupId, artistId, start, end, orderByComparator);
+				   .findByG_A_S(groupId, artistId, status, start, end,
+			orderByComparator);
 	}
 
 	/**
-	* Returns the first album in the ordered set where groupId = &#63; and artistId = &#63;.
+	* Returns the first album in the ordered set where groupId = &#63; and artistId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
 	* @param artistId the artist ID
+	* @param status the status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching album
 	* @throws org.liferay.jukebox.NoSuchAlbumException if a matching album could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static org.liferay.jukebox.model.Album findByG_A_First(
-		long groupId, long artistId,
+	public static org.liferay.jukebox.model.Album findByG_A_S_First(
+		long groupId, long artistId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			org.liferay.jukebox.NoSuchAlbumException {
 		return getPersistence()
-				   .findByG_A_First(groupId, artistId, orderByComparator);
+				   .findByG_A_S_First(groupId, artistId, status,
+			orderByComparator);
 	}
 
 	/**
-	* Returns the first album in the ordered set where groupId = &#63; and artistId = &#63;.
+	* Returns the first album in the ordered set where groupId = &#63; and artistId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
 	* @param artistId the artist ID
+	* @param status the status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching album, or <code>null</code> if a matching album could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static org.liferay.jukebox.model.Album fetchByG_A_First(
-		long groupId, long artistId,
+	public static org.liferay.jukebox.model.Album fetchByG_A_S_First(
+		long groupId, long artistId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .fetchByG_A_First(groupId, artistId, orderByComparator);
+				   .fetchByG_A_S_First(groupId, artistId, status,
+			orderByComparator);
 	}
 
 	/**
-	* Returns the last album in the ordered set where groupId = &#63; and artistId = &#63;.
+	* Returns the last album in the ordered set where groupId = &#63; and artistId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
 	* @param artistId the artist ID
+	* @param status the status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching album
 	* @throws org.liferay.jukebox.NoSuchAlbumException if a matching album could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static org.liferay.jukebox.model.Album findByG_A_Last(long groupId,
-		long artistId,
+	public static org.liferay.jukebox.model.Album findByG_A_S_Last(
+		long groupId, long artistId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			org.liferay.jukebox.NoSuchAlbumException {
 		return getPersistence()
-				   .findByG_A_Last(groupId, artistId, orderByComparator);
+				   .findByG_A_S_Last(groupId, artistId, status,
+			orderByComparator);
 	}
 
 	/**
-	* Returns the last album in the ordered set where groupId = &#63; and artistId = &#63;.
+	* Returns the last album in the ordered set where groupId = &#63; and artistId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
 	* @param artistId the artist ID
+	* @param status the status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching album, or <code>null</code> if a matching album could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static org.liferay.jukebox.model.Album fetchByG_A_Last(
-		long groupId, long artistId,
+	public static org.liferay.jukebox.model.Album fetchByG_A_S_Last(
+		long groupId, long artistId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .fetchByG_A_Last(groupId, artistId, orderByComparator);
+				   .fetchByG_A_S_Last(groupId, artistId, status,
+			orderByComparator);
 	}
 
 	/**
-	* Returns the albums before and after the current album in the ordered set where groupId = &#63; and artistId = &#63;.
+	* Returns the albums before and after the current album in the ordered set where groupId = &#63; and artistId = &#63; and status = &#63;.
 	*
 	* @param albumId the primary key of the current album
 	* @param groupId the group ID
 	* @param artistId the artist ID
+	* @param status the status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next album
 	* @throws org.liferay.jukebox.NoSuchAlbumException if a album with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static org.liferay.jukebox.model.Album[] findByG_A_PrevAndNext(
-		long albumId, long groupId, long artistId,
+	public static org.liferay.jukebox.model.Album[] findByG_A_S_PrevAndNext(
+		long albumId, long groupId, long artistId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			org.liferay.jukebox.NoSuchAlbumException {
 		return getPersistence()
-				   .findByG_A_PrevAndNext(albumId, groupId, artistId,
+				   .findByG_A_S_PrevAndNext(albumId, groupId, artistId, status,
 			orderByComparator);
 	}
 
 	/**
-	* Returns all the albums that the user has permission to view where groupId = &#63; and artistId = &#63;.
+	* Returns all the albums that the user has permission to view where groupId = &#63; and artistId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
 	* @param artistId the artist ID
+	* @param status the status
 	* @return the matching albums that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<org.liferay.jukebox.model.Album> filterFindByG_A(
-		long groupId, long artistId)
+	public static java.util.List<org.liferay.jukebox.model.Album> filterFindByG_A_S(
+		long groupId, long artistId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().filterFindByG_A(groupId, artistId);
+		return getPersistence().filterFindByG_A_S(groupId, artistId, status);
 	}
 
 	/**
-	* Returns a range of all the albums that the user has permission to view where groupId = &#63; and artistId = &#63;.
+	* Returns a range of all the albums that the user has permission to view where groupId = &#63; and artistId = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.AlbumModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -1688,19 +1703,21 @@ public class AlbumUtil {
 	*
 	* @param groupId the group ID
 	* @param artistId the artist ID
+	* @param status the status
 	* @param start the lower bound of the range of albums
 	* @param end the upper bound of the range of albums (not inclusive)
 	* @return the range of matching albums that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<org.liferay.jukebox.model.Album> filterFindByG_A(
-		long groupId, long artistId, int start, int end)
+	public static java.util.List<org.liferay.jukebox.model.Album> filterFindByG_A_S(
+		long groupId, long artistId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().filterFindByG_A(groupId, artistId, start, end);
+		return getPersistence()
+				   .filterFindByG_A_S(groupId, artistId, status, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the albums that the user has permissions to view where groupId = &#63; and artistId = &#63;.
+	* Returns an ordered range of all the albums that the user has permissions to view where groupId = &#63; and artistId = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.AlbumModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -1708,78 +1725,83 @@ public class AlbumUtil {
 	*
 	* @param groupId the group ID
 	* @param artistId the artist ID
+	* @param status the status
 	* @param start the lower bound of the range of albums
 	* @param end the upper bound of the range of albums (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching albums that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<org.liferay.jukebox.model.Album> filterFindByG_A(
-		long groupId, long artistId, int start, int end,
+	public static java.util.List<org.liferay.jukebox.model.Album> filterFindByG_A_S(
+		long groupId, long artistId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .filterFindByG_A(groupId, artistId, start, end,
+				   .filterFindByG_A_S(groupId, artistId, status, start, end,
 			orderByComparator);
 	}
 
 	/**
-	* Returns the albums before and after the current album in the ordered set of albums that the user has permission to view where groupId = &#63; and artistId = &#63;.
+	* Returns the albums before and after the current album in the ordered set of albums that the user has permission to view where groupId = &#63; and artistId = &#63; and status = &#63;.
 	*
 	* @param albumId the primary key of the current album
 	* @param groupId the group ID
 	* @param artistId the artist ID
+	* @param status the status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next album
 	* @throws org.liferay.jukebox.NoSuchAlbumException if a album with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static org.liferay.jukebox.model.Album[] filterFindByG_A_PrevAndNext(
-		long albumId, long groupId, long artistId,
+	public static org.liferay.jukebox.model.Album[] filterFindByG_A_S_PrevAndNext(
+		long albumId, long groupId, long artistId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			org.liferay.jukebox.NoSuchAlbumException {
 		return getPersistence()
-				   .filterFindByG_A_PrevAndNext(albumId, groupId, artistId,
-			orderByComparator);
+				   .filterFindByG_A_S_PrevAndNext(albumId, groupId, artistId,
+			status, orderByComparator);
 	}
 
 	/**
-	* Removes all the albums where groupId = &#63; and artistId = &#63; from the database.
+	* Removes all the albums where groupId = &#63; and artistId = &#63; and status = &#63; from the database.
 	*
 	* @param groupId the group ID
 	* @param artistId the artist ID
+	* @param status the status
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByG_A(long groupId, long artistId)
+	public static void removeByG_A_S(long groupId, long artistId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByG_A(groupId, artistId);
+		getPersistence().removeByG_A_S(groupId, artistId, status);
 	}
 
 	/**
-	* Returns the number of albums where groupId = &#63; and artistId = &#63;.
+	* Returns the number of albums where groupId = &#63; and artistId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
 	* @param artistId the artist ID
+	* @param status the status
 	* @return the number of matching albums
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByG_A(long groupId, long artistId)
+	public static int countByG_A_S(long groupId, long artistId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByG_A(groupId, artistId);
+		return getPersistence().countByG_A_S(groupId, artistId, status);
 	}
 
 	/**
-	* Returns the number of albums that the user has permission to view where groupId = &#63; and artistId = &#63;.
+	* Returns the number of albums that the user has permission to view where groupId = &#63; and artistId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
 	* @param artistId the artist ID
+	* @param status the status
 	* @return the number of matching albums that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int filterCountByG_A(long groupId, long artistId)
+	public static int filterCountByG_A_S(long groupId, long artistId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().filterCountByG_A(groupId, artistId);
+		return getPersistence().filterCountByG_A_S(groupId, artistId, status);
 	}
 
 	/**

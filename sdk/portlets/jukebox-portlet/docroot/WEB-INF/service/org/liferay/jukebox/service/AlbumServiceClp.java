@@ -53,13 +53,21 @@ public class AlbumServiceClp implements AlbumService {
 
 		_methodParameterTypes6 = new String[] { "long", "int", "int" };
 
-		_methodName7 = "getAlbumsCount";
+		_methodName7 = "getAlbumsByArtistId";
 
-		_methodParameterTypes7 = new String[] { "long" };
+		_methodParameterTypes7 = new String[] { "long", "long" };
 
-		_methodName8 = "updateAlbum";
+		_methodName8 = "getAlbumsCount";
 
-		_methodParameterTypes8 = new String[] {
+		_methodParameterTypes8 = new String[] { "long" };
+
+		_methodName9 = "getAlbumsCountByArtistId";
+
+		_methodParameterTypes9 = new String[] { "long", "long" };
+
+		_methodName10 = "updateAlbum";
+
+		_methodParameterTypes10 = new String[] {
 				"long", "long", "java.lang.String", "int", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
@@ -259,13 +267,70 @@ public class AlbumServiceClp implements AlbumService {
 	}
 
 	@Override
-	public int getAlbumsCount(long groupId)
+	public java.util.List<org.liferay.jukebox.model.Album> getAlbumsByArtistId(
+		long groupId, long artistId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7, new Object[] { groupId });
+					_methodParameterTypes7, new Object[] { groupId, artistId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<org.liferay.jukebox.model.Album>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public int getAlbumsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8, new Object[] { groupId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
+	@Override
+	public int getAlbumsCountByArtistId(long groupId, long artistId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName9,
+					_methodParameterTypes9, new Object[] { groupId, artistId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -296,8 +361,8 @@ public class AlbumServiceClp implements AlbumService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName8,
-					_methodParameterTypes8,
+			returnObj = _invokableService.invokeMethod(_methodName10,
+					_methodParameterTypes10,
 					new Object[] {
 						albumId,
 						
@@ -352,4 +417,8 @@ public class AlbumServiceClp implements AlbumService {
 	private String[] _methodParameterTypes7;
 	private String _methodName8;
 	private String[] _methodParameterTypes8;
+	private String _methodName9;
+	private String[] _methodParameterTypes9;
+	private String _methodName10;
+	private String[] _methodParameterTypes10;
 }

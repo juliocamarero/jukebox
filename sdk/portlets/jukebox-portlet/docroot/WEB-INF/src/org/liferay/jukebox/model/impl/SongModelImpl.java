@@ -111,9 +111,10 @@ public class SongModelImpl extends BaseModelImpl<Song> implements SongModel {
 	public static long ARTISTID_COLUMN_BITMASK = 2L;
 	public static long COMPANYID_COLUMN_BITMASK = 4L;
 	public static long GROUPID_COLUMN_BITMASK = 8L;
-	public static long USERID_COLUMN_BITMASK = 16L;
-	public static long UUID_COLUMN_BITMASK = 32L;
-	public static long SONGID_COLUMN_BITMASK = 64L;
+	public static long STATUS_COLUMN_BITMASK = 16L;
+	public static long USERID_COLUMN_BITMASK = 32L;
+	public static long UUID_COLUMN_BITMASK = 64L;
+	public static long SONGID_COLUMN_BITMASK = 128L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -541,7 +542,19 @@ public class SongModelImpl extends BaseModelImpl<Song> implements SongModel {
 
 	@Override
 	public void setStatus(int status) {
+		_columnBitmask |= STATUS_COLUMN_BITMASK;
+
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = _status;
+		}
+
 		_status = status;
+	}
+
+	public int getOriginalStatus() {
+		return _originalStatus;
 	}
 
 	@JSON
@@ -891,6 +904,10 @@ public class SongModelImpl extends BaseModelImpl<Song> implements SongModel {
 
 		songModelImpl._setOriginalAlbumId = false;
 
+		songModelImpl._originalStatus = songModelImpl._status;
+
+		songModelImpl._setOriginalStatus = false;
+
 		songModelImpl._columnBitmask = 0;
 	}
 
@@ -1115,6 +1132,8 @@ public class SongModelImpl extends BaseModelImpl<Song> implements SongModel {
 	private boolean _setOriginalAlbumId;
 	private String _name;
 	private int _status;
+	private int _originalStatus;
+	private boolean _setOriginalStatus;
 	private long _statusByUserId;
 	private String _statusByUserUuid;
 	private String _statusByUserName;

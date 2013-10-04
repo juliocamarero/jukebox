@@ -107,9 +107,39 @@ public class AlbumServiceSoap {
 		}
 	}
 
+	public static org.liferay.jukebox.model.AlbumSoap[] getAlbumsByArtistId(
+		long groupId, long artistId) throws RemoteException {
+		try {
+			java.util.List<org.liferay.jukebox.model.Album> returnValue = AlbumServiceUtil.getAlbumsByArtistId(groupId,
+					artistId);
+
+			return org.liferay.jukebox.model.AlbumSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getAlbumsCount(long groupId) throws RemoteException {
 		try {
 			int returnValue = AlbumServiceUtil.getAlbumsCount(groupId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getAlbumsCountByArtistId(long groupId, long artistId)
+		throws RemoteException {
+		try {
+			int returnValue = AlbumServiceUtil.getAlbumsCountByArtistId(groupId,
+					artistId);
 
 			return returnValue;
 		}

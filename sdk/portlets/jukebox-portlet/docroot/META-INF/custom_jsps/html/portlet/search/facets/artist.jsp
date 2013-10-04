@@ -1,6 +1,3 @@
-<%@ page import="org.liferay.jukebox.model.Artist" %>
-<%@ page import="org.liferay.jukebox.service.ArtistLocalServiceUtil" %>
-
 <%--
 /**
  * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
@@ -18,6 +15,9 @@
 --%>
 
 <%@ include file="/html/portlet/search/facets/init.jsp" %>
+
+<%@ page import="org.liferay.jukebox.model.Artist" %>
+<%@ page import="org.liferay.jukebox.service.ArtistLocalServiceUtil" %>
 
 <%
 if (termCollectors.isEmpty()) {

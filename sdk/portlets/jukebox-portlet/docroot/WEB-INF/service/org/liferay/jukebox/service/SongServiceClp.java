@@ -54,17 +54,21 @@ public class SongServiceClp implements SongService {
 
 		_methodParameterTypes6 = new String[] { "long", "int", "int" };
 
-		_methodName7 = "getSongsCount";
+		_methodName7 = "getSongsByAlbumId";
 
-		_methodParameterTypes7 = new String[] { "long" };
+		_methodParameterTypes7 = new String[] { "long", "long" };
 
-		_methodName8 = "moveSongToTrash";
+		_methodName8 = "getSongsCount";
 
 		_methodParameterTypes8 = new String[] { "long" };
 
-		_methodName9 = "updateSong";
+		_methodName9 = "getSongsCountByAlbumId";
 
-		_methodParameterTypes9 = new String[] {
+		_methodParameterTypes9 = new String[] { "long", "long" };
+
+		_methodName10 = "updateSong";
+
+		_methodParameterTypes10 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String",
 				"java.io.InputStream", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
@@ -270,13 +274,42 @@ public class SongServiceClp implements SongService {
 	}
 
 	@Override
-	public int getSongsCount(long groupId)
+	public java.util.List<org.liferay.jukebox.model.Song> getSongsByAlbumId(
+		long groupId, long albumId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7, new Object[] { groupId });
+					_methodParameterTypes7, new Object[] { groupId, albumId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<org.liferay.jukebox.model.Song>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public int getSongsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8, new Object[] { groupId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -298,21 +331,16 @@ public class SongServiceClp implements SongService {
 	}
 
 	@Override
-	public org.liferay.jukebox.model.Song moveSongToTrash(long songId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+	public int getSongsCountByAlbumId(long groupId, long albumId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName8,
-					_methodParameterTypes8, new Object[] { songId });
+			returnObj = _invokableService.invokeMethod(_methodName9,
+					_methodParameterTypes9, new Object[] { groupId, albumId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
-				throw (com.liferay.portal.kernel.exception.PortalException)t;
-			}
 
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
@@ -327,7 +355,7 @@ public class SongServiceClp implements SongService {
 			}
 		}
 
-		return (org.liferay.jukebox.model.Song)ClpSerializer.translateOutput(returnObj);
+		return ((Integer)returnObj).intValue();
 	}
 
 	@Override
@@ -341,8 +369,8 @@ public class SongServiceClp implements SongService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName9,
-					_methodParameterTypes9,
+			returnObj = _invokableService.invokeMethod(_methodName10,
+					_methodParameterTypes10,
 					new Object[] {
 						songId,
 						
@@ -403,4 +431,6 @@ public class SongServiceClp implements SongService {
 	private String[] _methodParameterTypes8;
 	private String _methodName9;
 	private String[] _methodParameterTypes9;
+	private String _methodName10;
+	private String[] _methodParameterTypes10;
 }

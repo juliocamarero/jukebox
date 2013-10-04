@@ -90,16 +90,22 @@ public class SongServiceWrapper implements SongService,
 	}
 
 	@Override
+	public java.util.List<org.liferay.jukebox.model.Song> getSongsByAlbumId(
+		long groupId, long albumId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _songService.getSongsByAlbumId(groupId, albumId);
+	}
+
+	@Override
 	public int getSongsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _songService.getSongsCount(groupId);
 	}
 
 	@Override
-	public org.liferay.jukebox.model.Song moveSongToTrash(long songId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _songService.moveSongToTrash(songId);
+	public int getSongsCountByAlbumId(long groupId, long albumId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _songService.getSongsCountByAlbumId(groupId, albumId);
 	}
 
 	@Override

@@ -91,9 +91,20 @@ public class AlbumServiceUtil {
 		return getService().getAlbums(groupId, start, end);
 	}
 
+	public static java.util.List<org.liferay.jukebox.model.Album> getAlbumsByArtistId(
+		long groupId, long artistId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getAlbumsByArtistId(groupId, artistId);
+	}
+
 	public static int getAlbumsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getAlbumsCount(groupId);
+	}
+
+	public static int getAlbumsCountByArtistId(long groupId, long artistId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getAlbumsCountByArtistId(groupId, artistId);
 	}
 
 	public static org.liferay.jukebox.model.Album updateAlbum(long albumId,

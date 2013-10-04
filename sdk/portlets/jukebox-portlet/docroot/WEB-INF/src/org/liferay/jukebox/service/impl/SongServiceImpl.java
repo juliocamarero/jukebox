@@ -16,6 +16,7 @@ package org.liferay.jukebox.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 
@@ -79,19 +80,22 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 		return songPersistence.filterFindByGroupId(groupId, start, end);
 	}
 
+	public List<Song> getSongsByAlbumId(long groupId, long albumId)
+		throws SystemException {
+
+		return songPersistence.filterFindByG_A_S(
+			groupId, albumId, WorkflowConstants.STATUS_APPROVED);
+	}
+
 	public int getSongsCount(long groupId) throws SystemException {
 		return songPersistence.filterCountByGroupId(groupId);
 	}
 
-	@Override
-	public Song moveSongToTrash(long songId)
-		throws PortalException, SystemException {
+	public int getSongsCountByAlbumId(long groupId, long albumId)
+		throws SystemException {
 
-		Song song = songPersistence.findByPrimaryKey(songId);
-
-		SongPermission.check(getPermissionChecker(), song, ActionKeys.DELETE);
-
-		return songLocalService.moveSongToTrash(getUserId(), song);
+		return songPersistence.filterCountByG_A_S(
+			groupId, albumId, WorkflowConstants.STATUS_APPROVED);
 	}
 
 	public Song updateSong(

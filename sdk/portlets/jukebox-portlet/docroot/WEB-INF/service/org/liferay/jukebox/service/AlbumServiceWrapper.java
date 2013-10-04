@@ -89,9 +89,22 @@ public class AlbumServiceWrapper implements AlbumService,
 	}
 
 	@Override
+	public java.util.List<org.liferay.jukebox.model.Album> getAlbumsByArtistId(
+		long groupId, long artistId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _albumService.getAlbumsByArtistId(groupId, artistId);
+	}
+
+	@Override
 	public int getAlbumsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _albumService.getAlbumsCount(groupId);
+	}
+
+	@Override
+	public int getAlbumsCountByArtistId(long groupId, long artistId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _albumService.getAlbumsCountByArtistId(groupId, artistId);
 	}
 
 	@Override

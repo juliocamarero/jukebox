@@ -16,6 +16,7 @@ package org.liferay.jukebox.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 
@@ -78,8 +79,22 @@ public class AlbumServiceImpl extends AlbumServiceBaseImpl {
 		return albumPersistence.filterFindByGroupId(groupId, start, end);
 	}
 
+	public List<Album> getAlbumsByArtistId(long groupId, long artistId)
+		throws SystemException {
+
+		return albumPersistence.filterFindByG_A_S(
+			groupId, artistId, WorkflowConstants.STATUS_APPROVED);
+	}
+
 	public int getAlbumsCount(long groupId) throws SystemException {
 		return albumPersistence.filterCountByGroupId(groupId);
+	}
+
+	public int getAlbumsCountByArtistId(long groupId, long artistId)
+		throws SystemException {
+
+		return albumPersistence.filterCountByG_A_S(
+			groupId, artistId, WorkflowConstants.STATUS_APPROVED);
 	}
 
 	public Album updateAlbum(
