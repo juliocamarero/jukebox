@@ -74,13 +74,13 @@ else {
 		  <!-- SM2 flash goes here -->
 		 </div>
 
-		 <ul class="graphic">
+		 <ul class="songs-list graphic">
 
 			 <%
 			for (Song song : songs) {
 			%>
 
-				<li>
+				<li class="song">
 
 					<%
 					Artist artist = ArtistLocalServiceUtil.getArtist(song.getArtistId());
@@ -88,17 +88,9 @@ else {
 					Album album = AlbumLocalServiceUtil.getAlbum(song.getAlbumId());
 					%>
 
-					<%--
-					<portlet:renderURL var="viewSongURL">
-						<portlet:param name="jspPage" value="/html/songs/view_song.jsp" />
-						<portlet:param name="songId" value="<%= String.valueOf(song.getSongId()) %>" />
-						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
-					</portlet:renderURL>
-
-					<aui:a href="<%= viewSongURL %>" label="<%= song.getName() %>" />, <%= artist.getName() %>, <%= album.getName() %>
-					--%>
-
-			 		<a class="song-link" href="<%= song.getSongURL(themeDisplay, "mp3") %>"><%= song.getName() %></a>
+			 		<a class="song-link" href="<%= song.getSongURL(themeDisplay, "mp3") %>" type="audio/mpeg">
+						<%= song.getName() %>
+					</a>
 
 					<c:if test="<%= SongPermission.contains(permissionChecker, song.getSongId(), ActionKeys.UPDATE) %>">
 						<portlet:renderURL var="editSongURL">
@@ -107,8 +99,16 @@ else {
 							<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 						</portlet:renderURL>
 
-						<liferay-ui:icon image="edit" message="edit" url="<%= editSongURL %>" />
+						<liferay-ui:icon cssClass="song-small-link" image="../aui/pencil" message="edit" url="<%= editSongURL %>" />
 					</c:if>
+
+					<portlet:renderURL var="viewSongURL">
+						<portlet:param name="jspPage" value="/html/songs/view_song.jsp" />
+						<portlet:param name="songId" value="<%= String.valueOf(song.getSongId()) %>" />
+						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
+					</portlet:renderURL>
+
+					<liferay-ui:icon cssClass="song-small-link" image="../aui/info" message="edit" url="<%= viewSongURL %>" />
 				</li>
 
 			<%

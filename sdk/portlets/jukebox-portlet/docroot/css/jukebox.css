@@ -1,0 +1,116 @@
+@import "compass";
+
+// Artists
+
+.artists-list {
+	overflow: auto;
+
+	.artist {
+		display: block;
+		float: left;
+		padding: 2em;
+		text-align: center;
+
+		.artist-image {
+			@include box-shadow(0px 3px 5px #CCC);
+			display: block;
+			width: 150px;
+			height: 150px;
+		}
+
+		.artist-small-link {
+			padding-left: 1em;
+		}
+	}
+}
+
+.artist-detail {
+	margin-top: 3em;
+
+	.artist-image {
+		@include box-shadow(0px 3px 5px #CCC);
+		display: block;
+		float: left;
+		margin-right: 3em;
+		width: 250px;
+		height: 250px;
+	}
+
+	.artist-bio {
+		font-style: italic;
+		margin-bottom: 2em;
+	}
+
+	.container {
+		margin-bottom: 2em;
+	}
+}
+
+// Albums
+
+.albums-list {
+	overflow: auto;
+
+	.album {
+		display: block;
+		float: left;
+		padding: 2em;
+
+		.album-image {
+			@include box-shadow(0px 3px 5px #CCC);
+			display: block;
+			width: 150px;
+			height: 150px;
+		}
+
+		.album-small-link {
+			padding-left: 1em;
+		}
+	}
+}
+
+.album-detail {
+	margin-top: 3em;
+
+	.album-image {
+		@include box-shadow(0px 3px 5px #CCC);
+		display: block;
+		float: left;
+		margin-right: 3em;
+		width: 250px;
+		height: 250px;
+	}
+
+	.album-artist {
+		font-style: italic;
+		margin-bottom: 2em;
+
+		.artist-image {
+			width: 50px;
+			height: 50px;
+			margin-right: 2em;
+			float: left;
+		}
+	}
+
+	.album-songs-number {
+		margin-bottom: 3em;
+	}
+
+	.container {
+		margin-bottom: 2em;
+	}
+}
+
+
+// Songs
+
+.songs-list {
+	.song {
+
+
+		.song-small-link {
+			padding-left: 1em;
+		}
+	}
+}

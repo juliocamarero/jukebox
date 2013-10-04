@@ -100,7 +100,7 @@ else {
 						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 					</portlet:renderURL>
 
-					<liferay-ui:icon image="edit" message="edit" url="<%= editAlbumURL %>" />
+					<liferay-ui:icon cssClass="album-small-link" image="../aui/pencil" message="edit" url="<%= editAlbumURL %>" />
 				</c:if>
 
 				<div class="album-artist-name">

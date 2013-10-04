@@ -11,7 +11,7 @@
 		<asset-renderer-factory>org.liferay.jukebox.asset.ArtistAssetRendererFactory</asset-renderer-factory>
 		<instanceable>false</instanceable>
 		<scopeable>true</scopeable>
-		<header-portlet-css>/css/artists.css</header-portlet-css>
+		<header-portlet-css>/css/jukebox.css</header-portlet-css>
 		<header-portlet-css>/css/inlineplayer.css</header-portlet-css>
 		<header-portlet-css>/css/flashblock.css</header-portlet-css>
 		<header-portlet-javascript>/js/soundmanager2-jsmin.js</header-portlet-javascript>
@@ -28,7 +28,7 @@
 		<asset-renderer-factory>org.liferay.jukebox.asset.AlbumAssetRendererFactory</asset-renderer-factory>
 		<instanceable>false</instanceable>
 		<scopeable>true</scopeable>
-		<header-portlet-css>/css/albums.css</header-portlet-css>
+		<header-portlet-css>/css/jukebox.css</header-portlet-css>
 		<header-portlet-css>/css/inlineplayer.css</header-portlet-css>
 		<header-portlet-css>/css/flashblock.css</header-portlet-css>
 		<header-portlet-javascript>/js/soundmanager2-jsmin.js</header-portlet-javascript>
@@ -45,7 +45,7 @@
 		<asset-renderer-factory>org.liferay.jukebox.asset.SongAssetRendererFactory</asset-renderer-factory>
 		<instanceable>false</instanceable>
 		<scopeable>true</scopeable>
-		<header-portlet-css>/css/songs.css</header-portlet-css>
+		<header-portlet-css>/css/jukebox.css</header-portlet-css>
 		<header-portlet-css>/css/inlineplayer.css</header-portlet-css>
 		<header-portlet-css>/css/flashblock.css</header-portlet-css>
 		<header-portlet-javascript>/js/soundmanager2-jsmin.js</header-portlet-javascript>

@@ -76,7 +76,7 @@ List<Artist> artists = ArtistServiceUtil.getArtists(scopeGroupId);
 						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 					</portlet:renderURL>
 
-					<liferay-ui:icon image="edit" message="edit" url="<%= editArtistURL %>" />
+					<liferay-ui:icon cssClass="artist-small-link" image="../aui/pencil" message="edit" url="<%= editArtistURL %>" />
 				</c:if>
 			</li>
 
