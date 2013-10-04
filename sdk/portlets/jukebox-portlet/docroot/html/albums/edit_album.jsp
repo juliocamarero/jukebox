@@ -77,6 +77,7 @@ if (albumId > 0) {
 		<c:if test="<%= album != null %>">
 			<portlet:actionURL name="deleteAlbum" var="deleteAlbumURL">
 				<portlet:param name="albumId" value="<%= String.valueOf(album.getAlbumId()) %>" />
+				<portlet:param name="redirect" value="<%= redirect %>" />
 			</portlet:actionURL>
 
 			<aui:button cssClass="btn-danger" href="<%= deleteAlbumURL %>" value="delete" />

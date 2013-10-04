@@ -83,6 +83,7 @@ if (songId > 0) {
 			<portlet:actionURL name="deleteSong" var="deleteSongURL">
 				<portlet:param name="songId" value="<%= String.valueOf(song.getSongId()) %>" />
 				<portlet:param name="moveToTrash" value="<%= String.valueOf(trashEnabled) %>" />
+				<portlet:param name="redirect" value="<%= redirect %>" />
 			</portlet:actionURL>
 
 			<aui:button cssClass="btn-danger" href="<%= deleteSongURL %>" value='<%= trashEnabled ? "move-to-trash" : "delete" %>' />

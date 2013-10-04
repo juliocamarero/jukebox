@@ -61,6 +61,7 @@ if (artistId > 0) {
 		<c:if test="<%= artist != null %>">
 			<portlet:actionURL name="deleteArtist" var="deleteArtistURL">
 				<portlet:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
+				<portlet:param name="redirect" value="<%= redirect %>" />
 			</portlet:actionURL>
 
 			<aui:button cssClass="btn-danger" href="<%= deleteArtistURL %>" value="delete" />
