@@ -35,6 +35,9 @@ import java.util.Locale;
 
 import javax.portlet.PortletURL;
 
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.messageboards.model.MBMessage;
 import org.liferay.jukebox.model.Artist;
 import org.liferay.jukebox.service.ArtistLocalServiceUtil;
 import org.liferay.jukebox.service.permission.ArtistPermission;
@@ -71,6 +74,22 @@ public class ArtistIndexer extends BaseIndexer {
 
 		return ArtistPermission.contains(
 			permissionChecker, entryClassPK, ActionKeys.VIEW);
+	}
+
+	@Override
+	public void addRelatedEntryFields(Document document, Object obj)
+		throws Exception {
+
+		DLFileEntry dlFileEntry = (DLFileEntry)obj;
+
+		Artist artist = ArtistLocalServiceUtil.getArtist(
+			GetterUtil.getLong(dlFileEntry.getTitle()));
+
+		document.addKeyword(
+			Field.CLASS_NAME_ID,
+			PortalUtil.getClassNameId(Artist.class.getName()));
+		document.addKeyword(Field.CLASS_PK, artist.getArtistId());
+		document.addKeyword(Field.RELATED_ENTRY, true);
 	}
 
 	@Override

@@ -35,6 +35,8 @@ import java.util.Locale;
 
 import javax.portlet.PortletURL;
 
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import org.liferay.jukebox.model.Album;
 import org.liferay.jukebox.model.Artist;
 import org.liferay.jukebox.service.AlbumLocalServiceUtil;
@@ -81,6 +83,22 @@ public class AlbumIndexer extends BaseIndexer {
 		throws Exception {
 
 		addStatus(contextQuery, searchContext);
+	}
+
+	@Override
+	public void addRelatedEntryFields(Document document, Object obj)
+			throws Exception {
+
+		DLFileEntry dlFileEntry = (DLFileEntry)obj;
+
+		Album album = AlbumLocalServiceUtil.getAlbum(
+			GetterUtil.getLong(dlFileEntry.getTitle()));
+
+		document.addKeyword(
+			Field.CLASS_NAME_ID,
+			PortalUtil.getClassNameId(Album.class.getName()));
+		document.addKeyword(Field.CLASS_PK, album.getAlbumId());
+		document.addKeyword(Field.RELATED_ENTRY, true);
 	}
 
 	@Override

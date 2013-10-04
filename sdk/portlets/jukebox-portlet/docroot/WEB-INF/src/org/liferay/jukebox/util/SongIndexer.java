@@ -35,6 +35,8 @@ import java.util.Locale;
 
 import javax.portlet.PortletURL;
 
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import org.liferay.jukebox.model.Artist;
 import org.liferay.jukebox.model.Song;
 import org.liferay.jukebox.service.ArtistLocalServiceUtil;
@@ -73,6 +75,22 @@ public class SongIndexer extends BaseIndexer {
 
 		return SongPermission.contains(
 			permissionChecker, entryClassPK, ActionKeys.VIEW);
+	}
+
+	@Override
+	public void addRelatedEntryFields(Document document, Object obj)
+			throws Exception {
+
+		DLFileEntry dlFileEntry = (DLFileEntry)obj;
+
+		Song song = SongLocalServiceUtil.getSong(
+			GetterUtil.getLong(dlFileEntry.getTitle()));
+
+		document.addKeyword(
+			Field.CLASS_NAME_ID,
+			PortalUtil.getClassNameId(Song.class.getName()));
+		document.addKeyword(Field.CLASS_PK, song.getSongId());
+		document.addKeyword(Field.RELATED_ENTRY, true);
 	}
 
 	@Override

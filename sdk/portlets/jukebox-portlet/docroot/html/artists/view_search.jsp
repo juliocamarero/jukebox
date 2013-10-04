@@ -42,6 +42,7 @@ else {
 	searchContext.setKeywords(displayTerms.getKeywords());
 }
 
+searchContext.setIncludeAttachments(true);
 searchContext.setIncludeDiscussions(true);
 
 Hits hits = indexer.search(searchContext);
