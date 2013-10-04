@@ -70,7 +70,8 @@ public class ArtistServiceImpl extends ArtistServiceBaseImpl {
 	}
 
 	public List<Artist> getArtists(long groupId) throws SystemException {
-		return artistPersistence.filterFindByGroupId(groupId);
+		return artistPersistence.filterFindByG_S(
+			groupId, WorkflowConstants.STATUS_APPROVED);
 	}
 
 	public List<Artist> getArtists(long groupId, int start, int end)

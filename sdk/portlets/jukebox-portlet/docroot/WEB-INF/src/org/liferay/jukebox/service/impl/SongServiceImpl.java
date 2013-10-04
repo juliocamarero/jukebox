@@ -71,13 +71,15 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 	}
 
 	public List<Song> getSongs(long groupId) throws SystemException {
-		return songPersistence.filterFindByGroupId(groupId);
+		return songPersistence.filterFindByG_S(
+			groupId, WorkflowConstants.STATUS_APPROVED);
 	}
 
 	public List<Song> getSongs(long groupId, int start, int end)
 		throws SystemException {
 
-		return songPersistence.filterFindByGroupId(groupId, start, end);
+		return songPersistence.filterFindByG_S(
+			groupId, WorkflowConstants.STATUS_APPROVED, start, end);
 	}
 
 	public List<Song> getSongsByAlbumId(long groupId, long albumId)
@@ -88,7 +90,8 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 	}
 
 	public int getSongsCount(long groupId) throws SystemException {
-		return songPersistence.filterCountByGroupId(groupId);
+		return songPersistence.filterCountByG_S(
+			groupId, WorkflowConstants.STATUS_APPROVED);
 	}
 
 	public int getSongsCountByAlbumId(long groupId, long albumId)

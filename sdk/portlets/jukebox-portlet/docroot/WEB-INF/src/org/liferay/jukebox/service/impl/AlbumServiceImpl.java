@@ -70,13 +70,15 @@ public class AlbumServiceImpl extends AlbumServiceBaseImpl {
 	}
 
 	public List<Album> getAlbums(long groupId) throws SystemException {
-		return albumPersistence.filterFindByGroupId(groupId);
+		return albumPersistence.filterFindByG_S(
+			groupId, WorkflowConstants.STATUS_APPROVED);
 	}
 
 	public List<Album> getAlbums(long groupId, int start, int end)
 		throws SystemException {
 
-		return albumPersistence.filterFindByGroupId(groupId, start, end);
+		return albumPersistence.filterFindByG_S(
+			groupId, WorkflowConstants.STATUS_APPROVED, start, end);
 	}
 
 	public List<Album> getAlbumsByArtistId(long groupId, long artistId)
@@ -87,7 +89,8 @@ public class AlbumServiceImpl extends AlbumServiceBaseImpl {
 	}
 
 	public int getAlbumsCount(long groupId) throws SystemException {
-		return albumPersistence.filterCountByGroupId(groupId);
+		return albumPersistence.filterCountByG_S(
+			groupId, WorkflowConstants.STATUS_APPROVED);
 	}
 
 	public int getAlbumsCountByArtistId(long groupId, long artistId)

@@ -101,6 +101,10 @@
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 		</finder>
+		<finder name="G_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="status" />
+		</finder>
 		<finder name="G_A_S" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="artistId" />
@@ -158,6 +162,10 @@
 		</finder>
 		<finder name="AlbumId" return-type="Collection">
 			<finder-column name="albumId" />
+		</finder>
+		<finder name="G_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="status" />
 		</finder>
 		<finder name="G_A_S" return-type="Collection">
 			<finder-column name="groupId" />
