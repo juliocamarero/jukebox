@@ -129,6 +129,7 @@ public class ArtistIndexer extends BaseIndexer {
 
 		document.addDate(Field.MODIFIED_DATE, artist.getModifiedDate());
 		document.addText(Field.TITLE, artist.getName());
+		document.addKeyword("artistId", artist.getArtistId());
 		document.addText("bio", artist.getBio());
 
 		return document;
