@@ -1141,12 +1141,15 @@ public class SongLocalServiceClp implements SongLocalService {
 	}
 
 	@Override
-	public void restoreSongFromTrash(long userId, long songId)
+	public org.liferay.jukebox.model.Song restoreSongFromTrash(long userId,
+		long songId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
 		try {
-			_invokableLocalService.invokeMethod(_methodName31,
-				_methodParameterTypes31, new Object[] { userId, songId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName31,
+					_methodParameterTypes31, new Object[] { userId, songId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1167,6 +1170,8 @@ public class SongLocalServiceClp implements SongLocalService {
 					" is not a valid exception");
 			}
 		}
+
+		return (org.liferay.jukebox.model.Song)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override

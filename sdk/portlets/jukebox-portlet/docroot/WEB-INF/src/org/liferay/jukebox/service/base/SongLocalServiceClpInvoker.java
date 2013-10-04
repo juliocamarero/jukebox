@@ -380,10 +380,8 @@ public class SongLocalServiceClpInvoker {
 
 		if (_methodName101.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
-			SongLocalServiceUtil.restoreSongFromTrash(((Long)arguments[0]).longValue(),
+			return SongLocalServiceUtil.restoreSongFromTrash(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
-
-			return null;
 		}
 
 		if (_methodName102.equals(name) &&

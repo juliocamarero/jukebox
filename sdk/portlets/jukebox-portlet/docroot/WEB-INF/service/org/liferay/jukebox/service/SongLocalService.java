@@ -341,7 +341,8 @@ public interface SongLocalService extends BaseLocalService, InvokableLocalServic
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void restoreSongFromTrash(long userId, long songId)
+	public org.liferay.jukebox.model.Song restoreSongFromTrash(long userId,
+		long songId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
