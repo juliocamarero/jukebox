@@ -34,7 +34,7 @@ long portletDisplayDDMTemplateId = PortletDisplayTemplateUtil.getPortletDisplayT
 List<Album> albums = null;
 
 if (artistId > 0) {
-	albums = AlbumLocalServiceUtil.getAlbumsByArtistId(artistId);
+	albums = AlbumServiceUtil.getAlbumsByArtistId(scopeGroupId, artistId);
 }
 else {
 	albums = AlbumServiceUtil.getAlbums(scopeGroupId);

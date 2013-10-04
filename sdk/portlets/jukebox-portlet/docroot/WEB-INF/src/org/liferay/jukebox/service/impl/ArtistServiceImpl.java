@@ -16,6 +16,7 @@ package org.liferay.jukebox.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 
@@ -75,11 +76,13 @@ public class ArtistServiceImpl extends ArtistServiceBaseImpl {
 	public List<Artist> getArtists(long groupId, int start, int end)
 		throws SystemException {
 
-		return artistPersistence.filterFindByGroupId(groupId, start, end);
+		return artistPersistence.filterFindByG_S(
+			groupId, start, end, WorkflowConstants.STATUS_APPROVED);
 	}
 
 	public int getArtistsCount(long groupId) throws SystemException {
-		return artistPersistence.filterCountByGroupId(groupId);
+		return artistPersistence.filterCountByG_S(
+			groupId, WorkflowConstants.STATUS_APPROVED);
 	}
 
 	public Artist updateArtist(
