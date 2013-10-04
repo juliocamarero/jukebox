@@ -108,7 +108,7 @@ else {
 						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 					</portlet:renderURL>
 
-					<liferay-ui:icon cssClass="song-small-link" image="../aui/info" message="edit" url="<%= viewSongURL %>" />
+					<liferay-ui:icon cssClass="song-small-link" image="../aui/info" message="info" url="<%= viewSongURL %>" />
 				</li>
 
 			<%
