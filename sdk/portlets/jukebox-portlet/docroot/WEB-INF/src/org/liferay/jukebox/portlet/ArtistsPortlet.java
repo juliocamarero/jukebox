@@ -58,7 +58,7 @@ public class ArtistsPortlet extends MVCPortlet {
 		try {
 			ArtistServiceUtil.addArtist(name, bio, inputStream, serviceContext);
 
-			SessionMessages.add(uploadPortletRequest, "artistAdded");
+			SessionMessages.add(request, "artistAdded");
 
 			sendRedirect(request, response);
 		}
@@ -66,7 +66,7 @@ public class ArtistsPortlet extends MVCPortlet {
 			if (e instanceof ArtistNameException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(uploadPortletRequest, e.getClass().getName());
+				SessionErrors.add(request, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/artists/edit_artist.jsp");
@@ -116,7 +116,7 @@ public class ArtistsPortlet extends MVCPortlet {
 			ArtistServiceUtil.updateArtist(
 				artistId, name, bio, inputStream, serviceContext);
 
-			SessionMessages.add(uploadPortletRequest, "artistUpdated");
+			SessionMessages.add(request, "artistUpdated");
 
 			sendRedirect(request, response);
 		}
@@ -124,7 +124,7 @@ public class ArtistsPortlet extends MVCPortlet {
 			if (e instanceof ArtistNameException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(uploadPortletRequest, e.getClass().getName());
+				SessionErrors.add(request, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/artists/edit_artist.jsp");

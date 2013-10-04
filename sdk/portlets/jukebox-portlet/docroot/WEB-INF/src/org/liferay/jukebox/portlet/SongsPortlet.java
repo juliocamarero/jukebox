@@ -65,7 +65,7 @@ public class SongsPortlet extends MVCPortlet {
 				albumId, name, songFileName, songInputStream, lyricsFileName,
 				lyricsInputStream, serviceContext);
 
-			SessionMessages.add(uploadPortletRequest, "songAdded");
+			SessionMessages.add(request, "songAdded");
 
 			sendRedirect(request, response);
 		}
@@ -73,7 +73,7 @@ public class SongsPortlet extends MVCPortlet {
 			if (e instanceof SongNameException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(uploadPortletRequest, e.getClass().getName());
+				SessionErrors.add(request, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/songs/edit_song.jsp");
@@ -139,7 +139,7 @@ public class SongsPortlet extends MVCPortlet {
 				songId, albumId, name, songFileName, songInputStream,
 				lyricsFileName, lyricsInputStream, serviceContext);
 
-			SessionMessages.add(uploadPortletRequest, "songUpdated");
+			SessionMessages.add(request, "songUpdated");
 
 			sendRedirect(request, response);
 		}
@@ -147,7 +147,7 @@ public class SongsPortlet extends MVCPortlet {
 			if (e instanceof SongNameException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(uploadPortletRequest, e.getClass().getName());
+				SessionErrors.add(request, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/songs/edit_song.jsp");

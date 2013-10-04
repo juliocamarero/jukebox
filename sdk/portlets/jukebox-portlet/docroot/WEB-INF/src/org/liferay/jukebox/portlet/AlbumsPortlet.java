@@ -59,7 +59,7 @@ public class AlbumsPortlet extends MVCPortlet {
 			AlbumServiceUtil.addAlbum(
 				artistId, name, year, inputStream, serviceContext);
 
-			SessionMessages.add(uploadPortletRequest, "albumAdded");
+			SessionMessages.add(request, "albumAdded");
 
 			sendRedirect(request, response);
 		}
@@ -67,7 +67,7 @@ public class AlbumsPortlet extends MVCPortlet {
 			if (e instanceof AlbumNameException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(uploadPortletRequest, e.getClass().getName());
+				SessionErrors.add(request, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/albums/edit_album.jsp");
@@ -118,7 +118,7 @@ public class AlbumsPortlet extends MVCPortlet {
 			AlbumServiceUtil.updateAlbum(
 				albumId, artistId, name, year, inputStream, serviceContext);
 
-			SessionMessages.add(uploadPortletRequest, "albumUpdated");
+			SessionMessages.add(request, "albumUpdated");
 
 			sendRedirect(request, response);
 		}
@@ -126,7 +126,7 @@ public class AlbumsPortlet extends MVCPortlet {
 			if (e instanceof AlbumNameException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(uploadPortletRequest, e.getClass().getName());
+				SessionErrors.add(request, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/albums/edit_album.jsp");
