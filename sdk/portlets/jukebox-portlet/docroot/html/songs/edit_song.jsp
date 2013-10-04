@@ -1,3 +1,5 @@
+<%@ page import="com.liferay.portlet.trash.util.TrashUtil" %>
+
 <%--
 /**
  * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
@@ -75,11 +77,17 @@ if (songId > 0) {
 		<aui:button type="submit" />
 
 		<c:if test="<%= song != null %>">
+
+			<%
+			boolean trashEnabled = TrashUtil.isTrashEnabled(scopeGroupId);
+			%>
+
 			<portlet:actionURL name="deleteSong" var="deleteSongURL">
 				<portlet:param name="songId" value="<%= String.valueOf(song.getSongId()) %>" />
+				<portlet:param name="moveToTrash" value="<%= String.valueOf(trashEnabled) %>" />
 			</portlet:actionURL>
 
-			<aui:button cssClass="btn-danger" href="<%= deleteSongURL %>" value="delete" />
+			<aui:button cssClass="btn-danger" href="<%= deleteSongURL %>" value='<%= trashEnabled ? "move-to-trash" : "delete" %>' />
 		</c:if>
 	</aui:button-row>
 </aui:form>

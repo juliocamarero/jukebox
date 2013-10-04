@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.transaction.TransactionCommitCallbackRegistryUt
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.User;
 import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
@@ -228,6 +229,39 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 
 	public int getSongsCount(long groupId) throws SystemException {
 		return songPersistence.countByGroupId(groupId);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	public Song moveSongToTrash(long userId, Song song)
+		throws PortalException, SystemException {
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		// Entry
+
+		User user = userPersistence.findByPrimaryKey(userId);
+		Date now = new Date();
+
+		int oldStatus = song.getStatus();
+
+		song.setModifiedDate(serviceContext.getModifiedDate(now));
+		song.setStatus(WorkflowConstants.STATUS_IN_TRASH);
+		song.setStatusByUserId(user.getUserId());
+		song.setStatusByUserName(user.getFullName());
+		song.setStatusDate(serviceContext.getModifiedDate(now));
+
+		// Asset
+
+		assetEntryLocalService.updateVisible(
+			Song.class.getName(), song.getSongId(), false);
+
+		// Trash
+
+		trashEntryLocalService.addTrashEntry(
+			userId, song.getGroupId(), Song.class.getName(), song.getSongId(),
+			song.getUuid(), null, oldStatus, null, null);
+
+		return song;
 	}
 
 	public void updateAsset(

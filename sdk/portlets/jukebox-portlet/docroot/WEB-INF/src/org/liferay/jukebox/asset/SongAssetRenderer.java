@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.trash.TrashRenderer;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -41,7 +42,8 @@ import org.liferay.jukebox.service.permission.SongPermission;
  * @author Julio Camarero
  */
 
-public class SongAssetRenderer extends BaseAssetRenderer {
+public class SongAssetRenderer
+	extends BaseAssetRenderer implements TrashRenderer {
 
 	public SongAssetRenderer(Song song) {
 		_song = song;

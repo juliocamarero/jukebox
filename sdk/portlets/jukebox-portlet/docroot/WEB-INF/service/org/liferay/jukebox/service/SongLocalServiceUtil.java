@@ -381,6 +381,13 @@ public class SongLocalServiceUtil {
 		return getService().getSongsCount(groupId);
 	}
 
+	public static org.liferay.jukebox.model.Song moveSongToTrash(long userId,
+		org.liferay.jukebox.model.Song song)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().moveSongToTrash(userId, song);
+	}
+
 	public static void updateAsset(long userId,
 		org.liferay.jukebox.model.Song song, long[] assetCategoryIds,
 		java.lang.String[] assetTagNames)

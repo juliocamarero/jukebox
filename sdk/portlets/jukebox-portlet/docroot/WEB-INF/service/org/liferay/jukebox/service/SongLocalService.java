@@ -336,6 +336,11 @@ public interface SongLocalService extends BaseLocalService, InvokableLocalServic
 	public int getSongsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public org.liferay.jukebox.model.Song moveSongToTrash(long userId,
+		org.liferay.jukebox.model.Song song)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void updateAsset(long userId, org.liferay.jukebox.model.Song song,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)
 		throws com.liferay.portal.kernel.exception.PortalException,

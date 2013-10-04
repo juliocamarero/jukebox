@@ -76,16 +76,16 @@ public class AlbumServiceWrapper implements AlbumService,
 
 	@Override
 	public java.util.List<org.liferay.jukebox.model.Album> getAlbums(
-		long groupId, int start, int end)
+		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _albumService.getAlbums(groupId, start, end);
+		return _albumService.getAlbums(groupId);
 	}
 
 	@Override
 	public java.util.List<org.liferay.jukebox.model.Album> getAlbums(
-		long groupId)
+		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _albumService.getAlbums(groupId);
+		return _albumService.getAlbums(groupId, start, end);
 	}
 
 	@Override
