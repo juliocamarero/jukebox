@@ -16,6 +16,7 @@ package org.liferay.jukebox.asset;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.asset.model.AssetRenderer;
@@ -65,7 +66,8 @@ public class ArtistAssetRendererFactory extends BaseAssetRendererFactory {
 
 	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
-		return themeDisplay.getPathThemeImages() + "/common/date.png";
+		return themeDisplay.getPortalURL() +
+			"/jukebox-portlet/icons/artists.png";
 	}
 
 	private static final boolean _LINKABLE = true;

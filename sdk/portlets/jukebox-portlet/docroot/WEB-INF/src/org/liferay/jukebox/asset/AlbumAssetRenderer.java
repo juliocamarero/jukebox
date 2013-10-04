@@ -64,7 +64,8 @@ public class AlbumAssetRenderer extends BaseAssetRenderer {
 
 	@Override
 	public String getIconPath(ThemeDisplay themeDisplay) {
-		return themeDisplay.getPathThemeImages() + "/blogs/blogs.png";
+		return themeDisplay.getPortalURL() +
+			"/jukebox-portlet/icons/albums.png";
 	}
 
 	public String getPortletId() {
@@ -87,8 +88,8 @@ public class AlbumAssetRenderer extends BaseAssetRenderer {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		return themeDisplay.getPathThemeImages() +
-			"/file_system/large/blog.png";
+		return themeDisplay.getPortalURL() +
+			"/jukebox-portlet/icons/albums.png";
 	}
 
 	@Override
