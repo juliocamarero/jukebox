@@ -20,20 +20,4 @@
 	<jsp:param name="showHeader" value="<%= String.valueOf(false) %>" />
 </jsp:include>
 
-<liferay-util:body-bottom outputKey="jukebox-css">
-
-	<%
-	String headerPortalCss = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + "/jukebox-portlet/css/jukebox.css");
-	%>
-
-	<script type="text/javascript">
-		// Load the CSS Asynchronously
-
-		(function(d){
-			  var css, id = 'jukebox-css'; if (d.getElementById(id)) {return;}
-			  css = d.createElement('link'); css.id = id; css.async = true; css.rel = 'stylesheet'; css.type = 'text/css'
-			  css.href = '<%= HtmlUtil.escapeJS(headerPortalCss) %>';
-			  d.getElementsByTagName('head')[0].appendChild(css);
-		}(document));
-	</script>
-</liferay-util:body-bottom>
+<jsp:include page="/html/resources.jsp" />
