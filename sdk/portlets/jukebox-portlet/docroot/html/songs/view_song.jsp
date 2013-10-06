@@ -66,6 +66,10 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 				<a class="song-link" href="<%= song.getSongURL(themeDisplay, "mp3") %>" type="audio/mpeg">
 					<%= song.getName() %>
 				</a>
+
+				<c:if test="<%= Validator.isNotNull(song.getLyricsURL(themeDisplay)) %>">
+					<liferay-ui:icon image="../aui/align-left" url="<%= song.getLyricsURL(themeDisplay) %>" message="lyrics" />
+				</c:if>
 			</li>
 		</ul>
 	</div>

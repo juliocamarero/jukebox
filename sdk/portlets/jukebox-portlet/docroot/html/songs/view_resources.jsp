@@ -89,6 +89,10 @@ else {
 					</portlet:renderURL>
 
 					<liferay-ui:icon cssClass="song-small-link" image="../aui/info" message="info" url="<%= viewSongURL %>" />
+
+					<c:if test="<%= Validator.isNotNull(song.getLyricsURL(themeDisplay)) %>">
+						<liferay-ui:icon image="../aui/align-left" url="<%= song.getLyricsURL(themeDisplay) %>" message="lyrics" />
+					</c:if>
 				</li>
 
 			<%
