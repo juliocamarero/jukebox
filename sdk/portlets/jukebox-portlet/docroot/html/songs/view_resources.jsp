@@ -54,22 +54,15 @@ else {
 
 		<div id="sm2-container">
 		  <!-- SM2 flash goes here -->
-		 </div>
+		</div>
 
-		 <ul class="songs-list graphic">
+		<ul class="songs-list graphic">
 
-			 <%
+			<%
 			for (Song song : songs) {
 			%>
 
 				<li class="song">
-
-					<%
-					Artist artist = ArtistLocalServiceUtil.getArtist(song.getArtistId());
-
-					Album album = AlbumLocalServiceUtil.getAlbum(song.getAlbumId());
-					%>
-
 			 		<a class="song-link" href="<%= song.getSongURL(themeDisplay, "mp3") %>" type="audio/mpeg">
 						<%= song.getName() %>
 					</a>
@@ -95,7 +88,7 @@ else {
 
 			<%
 			}
-			 %>
+			%>
 
 	</c:otherwise>
 </c:choose>
