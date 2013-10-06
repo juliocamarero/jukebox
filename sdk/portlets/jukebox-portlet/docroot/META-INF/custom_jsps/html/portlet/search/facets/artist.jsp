@@ -34,7 +34,7 @@ boolean showAssetCount = dataJSONObject.getBoolean("showAssetCount", true);
 
 	<ul class="artist unstyled">
 		<li class="facet-value default <%= Validator.isNull(fieldParam) ? "current-term" : StringPool.BLANK %>">
-			<a data-value="" href="javascript:;"><img alt="" src='<%= themeDisplay.getPathThemeImages() + "/common/user_icon.png" %>' /><liferay-ui:message key="any" /> <liferay-ui:message key="<%= facetConfiguration.getLabel() %>" /></a>
+			<a data-value="" href="javascript:;"><img alt="" class="any-artist-result" src='<%= themeDisplay.getPortalURL() + "/jukebox-portlet/icons/artists.png" %>' /><liferay-ui:message key="any" /> <liferay-ui:message key="<%= facetConfiguration.getLabel() %>" /></a>
 		</li>
 
 		<%
@@ -66,7 +66,7 @@ boolean showAssetCount = dataJSONObject.getBoolean("showAssetCount", true);
 			%>
 
 			<li class="facet-value <%= (artistId == curArtistId) ? "current-term" : StringPool.BLANK %>">
-				<a data-value="<%= curArtistId %>" href="javascript:;"><%= HtmlUtil.escape(curArtist.getName()) %></a><c:if test="<%= showAssetCount %>"> <span class="frequency">(<%= termCollector.getFrequency() %>)</span></c:if>
+				<a data-value="<%= curArtistId %>" href="javascript:;"><img alt="" class="artist-search-result img-circle" src='<%= curArtist.getImageURL(themeDisplay) %>' /><%= HtmlUtil.escape(curArtist.getName()) %></a><c:if test="<%= showAssetCount %>"> <span class="frequency">(<%= termCollector.getFrequency() %>)</span></c:if>
 			</li>
 
 		<%
@@ -75,3 +75,15 @@ boolean showAssetCount = dataJSONObject.getBoolean("showAssetCount", true);
 
 	</ul>
 </div>
+
+<style type="text/css">
+	.artist-search-result {
+		width: 30px;
+		height: 30px;
+
+	}
+
+	.any-artist-result {
+		width: 25px;
+	}
+</style>
