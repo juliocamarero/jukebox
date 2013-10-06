@@ -141,10 +141,10 @@
 		display: block;
 
 		.entry-thumbnail {
-   			img {
+			img {
 				max-height: 128px;
 				max-width: 100%;
-   			}
+			}
 		}
 	}
 }
