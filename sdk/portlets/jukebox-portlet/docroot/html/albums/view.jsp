@@ -29,6 +29,7 @@ boolean showToolbar = ParamUtil.getBoolean(request, "showToolbar", true);
 	<portlet:renderURL var="searchURL">
 		<portlet:param name="jspPage" value="/html/albums/view_search.jsp" />
 		<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
+		<portlet:param name="searchView" value="<%= Boolean.TRUE.toString() %>" />
 	</portlet:renderURL>
 
 	<aui:form action="<%= searchURL %>" method="post" name="fm">

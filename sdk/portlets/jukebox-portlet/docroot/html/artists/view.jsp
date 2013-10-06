@@ -23,6 +23,7 @@
 <portlet:renderURL var="searchURL">
 	<portlet:param name="jspPage" value="/html/artists/view_search.jsp" />
 	<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
+	<portlet:param name="searchView" value="<%= Boolean.TRUE.toString() %>" />
 </portlet:renderURL>
 
 <aui:form action="<%= searchURL %>" method="post" name="fm">

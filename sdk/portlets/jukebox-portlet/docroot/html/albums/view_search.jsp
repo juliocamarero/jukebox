@@ -61,10 +61,13 @@ Hits hits = indexer.search(searchContext);
 <portlet:renderURL var="searchURL">
 	<portlet:param name="jspPage" value="/html/albums/view_search.jsp" />
 	<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
+	<portlet:param name="searchView" value="<%= Boolean.TRUE.toString() %>" />
 </portlet:renderURL>
 
 <aui:form action="<%= searchURL %>" method="post" name="fm">
-	<jsp:include page="/html/albums/toolbar.jsp" />
+	<jsp:include page="/html/albums/toolbar.jsp">
+		<jsp:param name="searchView" value="<%= Boolean.TRUE %>" />
+	</jsp:include>
 </aui:form>
 
 <c:choose>
