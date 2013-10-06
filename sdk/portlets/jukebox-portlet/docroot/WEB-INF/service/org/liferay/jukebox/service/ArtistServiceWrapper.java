@@ -82,6 +82,13 @@ public class ArtistServiceWrapper implements ArtistService,
 
 	@Override
 	public java.util.List<org.liferay.jukebox.model.Artist> getArtists(
+		long groupId, java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _artistService.getArtists(groupId, keywords);
+	}
+
+	@Override
+	public java.util.List<org.liferay.jukebox.model.Artist> getArtists(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _artistService.getArtists(groupId, start, end);
@@ -91,6 +98,12 @@ public class ArtistServiceWrapper implements ArtistService,
 	public int getArtistsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _artistService.getArtistsCount(groupId);
+	}
+
+	@Override
+	public int getArtistsCount(long groupId, java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _artistService.getArtistsCount(groupId, keywords);
 	}
 
 	@Override

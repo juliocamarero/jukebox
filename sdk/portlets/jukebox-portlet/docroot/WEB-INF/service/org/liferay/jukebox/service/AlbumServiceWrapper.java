@@ -83,6 +83,13 @@ public class AlbumServiceWrapper implements AlbumService,
 
 	@Override
 	public java.util.List<org.liferay.jukebox.model.Album> getAlbums(
+		long groupId, java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _albumService.getAlbums(groupId, keywords);
+	}
+
+	@Override
+	public java.util.List<org.liferay.jukebox.model.Album> getAlbums(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _albumService.getAlbums(groupId, start, end);
@@ -99,6 +106,12 @@ public class AlbumServiceWrapper implements AlbumService,
 	public int getAlbumsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _albumService.getAlbumsCount(groupId);
+	}
+
+	@Override
+	public int getAlbumsCount(long groupId, java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _albumService.getAlbumsCount(groupId, keywords);
 	}
 
 	@Override

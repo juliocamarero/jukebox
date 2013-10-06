@@ -86,6 +86,12 @@ public class ArtistServiceUtil {
 	}
 
 	public static java.util.List<org.liferay.jukebox.model.Artist> getArtists(
+		long groupId, java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getArtists(groupId, keywords);
+	}
+
+	public static java.util.List<org.liferay.jukebox.model.Artist> getArtists(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getArtists(groupId, start, end);
@@ -94,6 +100,11 @@ public class ArtistServiceUtil {
 	public static int getArtistsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getArtistsCount(groupId);
+	}
+
+	public static int getArtistsCount(long groupId, java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getArtistsCount(groupId, keywords);
 	}
 
 	public static org.liferay.jukebox.model.Artist updateArtist(long artistId,

@@ -89,6 +89,12 @@ public class SongServiceUtil {
 	}
 
 	public static java.util.List<org.liferay.jukebox.model.Song> getSongs(
+		long groupId, java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getSongs(groupId, keywords);
+	}
+
+	public static java.util.List<org.liferay.jukebox.model.Song> getSongs(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getSongs(groupId, start, end);
@@ -103,6 +109,11 @@ public class SongServiceUtil {
 	public static int getSongsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getSongsCount(groupId);
+	}
+
+	public static int getSongsCount(long groupId, java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getSongsCount(groupId, keywords);
 	}
 
 	public static int getSongsCountByAlbumId(long groupId, long albumId)

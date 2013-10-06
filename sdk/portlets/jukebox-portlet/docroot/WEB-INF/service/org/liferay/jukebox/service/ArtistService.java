@@ -83,11 +83,20 @@ public interface ArtistService extends BaseService, InvokableService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<org.liferay.jukebox.model.Artist> getArtists(
+		long groupId, java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<org.liferay.jukebox.model.Artist> getArtists(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getArtistsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getArtistsCount(long groupId, java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public org.liferay.jukebox.model.Artist updateArtist(long artistId,

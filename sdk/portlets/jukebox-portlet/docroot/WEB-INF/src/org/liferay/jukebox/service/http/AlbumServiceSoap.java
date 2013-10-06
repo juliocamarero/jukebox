@@ -93,6 +93,21 @@ public class AlbumServiceSoap {
 	}
 
 	public static org.liferay.jukebox.model.AlbumSoap[] getAlbums(
+		long groupId, java.lang.String keywords) throws RemoteException {
+		try {
+			java.util.List<org.liferay.jukebox.model.Album> returnValue = AlbumServiceUtil.getAlbums(groupId,
+					keywords);
+
+			return org.liferay.jukebox.model.AlbumSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static org.liferay.jukebox.model.AlbumSoap[] getAlbums(
 		long groupId, int start, int end) throws RemoteException {
 		try {
 			java.util.List<org.liferay.jukebox.model.Album> returnValue = AlbumServiceUtil.getAlbums(groupId,
@@ -125,6 +140,20 @@ public class AlbumServiceSoap {
 	public static int getAlbumsCount(long groupId) throws RemoteException {
 		try {
 			int returnValue = AlbumServiceUtil.getAlbumsCount(groupId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getAlbumsCount(long groupId, java.lang.String keywords)
+		throws RemoteException {
+		try {
+			int returnValue = AlbumServiceUtil.getAlbumsCount(groupId, keywords);
 
 			return returnValue;
 		}

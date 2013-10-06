@@ -93,6 +93,21 @@ public class ArtistServiceSoap {
 	}
 
 	public static org.liferay.jukebox.model.ArtistSoap[] getArtists(
+		long groupId, java.lang.String keywords) throws RemoteException {
+		try {
+			java.util.List<org.liferay.jukebox.model.Artist> returnValue = ArtistServiceUtil.getArtists(groupId,
+					keywords);
+
+			return org.liferay.jukebox.model.ArtistSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static org.liferay.jukebox.model.ArtistSoap[] getArtists(
 		long groupId, int start, int end) throws RemoteException {
 		try {
 			java.util.List<org.liferay.jukebox.model.Artist> returnValue = ArtistServiceUtil.getArtists(groupId,
@@ -110,6 +125,21 @@ public class ArtistServiceSoap {
 	public static int getArtistsCount(long groupId) throws RemoteException {
 		try {
 			int returnValue = ArtistServiceUtil.getArtistsCount(groupId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getArtistsCount(long groupId, java.lang.String keywords)
+		throws RemoteException {
+		try {
+			int returnValue = ArtistServiceUtil.getArtistsCount(groupId,
+					keywords);
 
 			return returnValue;
 		}

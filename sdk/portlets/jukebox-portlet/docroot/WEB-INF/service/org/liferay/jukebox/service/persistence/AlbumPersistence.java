@@ -1693,6 +1693,247 @@ public interface AlbumPersistence extends BasePersistence<Album> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns all the albums where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @return the matching albums
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Album> findByG_LikeN_S(
+		long groupId, java.lang.String name, int status)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the albums where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.AlbumModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param start the lower bound of the range of albums
+	* @param end the upper bound of the range of albums (not inclusive)
+	* @return the range of matching albums
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Album> findByG_LikeN_S(
+		long groupId, java.lang.String name, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the albums where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.AlbumModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param start the lower bound of the range of albums
+	* @param end the upper bound of the range of albums (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching albums
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Album> findByG_LikeN_S(
+		long groupId, java.lang.String name, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first album in the ordered set where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching album
+	* @throws org.liferay.jukebox.NoSuchAlbumException if a matching album could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Album findByG_LikeN_S_First(long groupId,
+		java.lang.String name, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchAlbumException;
+
+	/**
+	* Returns the first album in the ordered set where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching album, or <code>null</code> if a matching album could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Album fetchByG_LikeN_S_First(
+		long groupId, java.lang.String name, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last album in the ordered set where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching album
+	* @throws org.liferay.jukebox.NoSuchAlbumException if a matching album could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Album findByG_LikeN_S_Last(long groupId,
+		java.lang.String name, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchAlbumException;
+
+	/**
+	* Returns the last album in the ordered set where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching album, or <code>null</code> if a matching album could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Album fetchByG_LikeN_S_Last(long groupId,
+		java.lang.String name, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the albums before and after the current album in the ordered set where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param albumId the primary key of the current album
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next album
+	* @throws org.liferay.jukebox.NoSuchAlbumException if a album with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Album[] findByG_LikeN_S_PrevAndNext(
+		long albumId, long groupId, java.lang.String name, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchAlbumException;
+
+	/**
+	* Returns all the albums that the user has permission to view where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @return the matching albums that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Album> filterFindByG_LikeN_S(
+		long groupId, java.lang.String name, int status)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the albums that the user has permission to view where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.AlbumModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param start the lower bound of the range of albums
+	* @param end the upper bound of the range of albums (not inclusive)
+	* @return the range of matching albums that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Album> filterFindByG_LikeN_S(
+		long groupId, java.lang.String name, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the albums that the user has permissions to view where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.AlbumModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param start the lower bound of the range of albums
+	* @param end the upper bound of the range of albums (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching albums that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Album> filterFindByG_LikeN_S(
+		long groupId, java.lang.String name, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the albums before and after the current album in the ordered set of albums that the user has permission to view where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param albumId the primary key of the current album
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next album
+	* @throws org.liferay.jukebox.NoSuchAlbumException if a album with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Album[] filterFindByG_LikeN_S_PrevAndNext(
+		long albumId, long groupId, java.lang.String name, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchAlbumException;
+
+	/**
+	* Removes all the albums where groupId = &#63; and name LIKE &#63; and status = &#63; from the database.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByG_LikeN_S(long groupId, java.lang.String name,
+		int status) throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of albums where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @return the number of matching albums
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByG_LikeN_S(long groupId, java.lang.String name, int status)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of albums that the user has permission to view where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @return the number of matching albums that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByG_LikeN_S(long groupId, java.lang.String name,
+		int status) throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Caches the album in the entity cache if it is enabled.
 	*
 	* @param album the album

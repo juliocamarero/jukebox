@@ -110,10 +110,11 @@ public class AlbumModelImpl extends BaseModelImpl<Album> implements AlbumModel {
 	public static long ARTISTID_COLUMN_BITMASK = 1L;
 	public static long COMPANYID_COLUMN_BITMASK = 2L;
 	public static long GROUPID_COLUMN_BITMASK = 4L;
-	public static long STATUS_COLUMN_BITMASK = 8L;
-	public static long USERID_COLUMN_BITMASK = 16L;
-	public static long UUID_COLUMN_BITMASK = 32L;
-	public static long ALBUMID_COLUMN_BITMASK = 64L;
+	public static long NAME_COLUMN_BITMASK = 8L;
+	public static long STATUS_COLUMN_BITMASK = 16L;
+	public static long USERID_COLUMN_BITMASK = 32L;
+	public static long UUID_COLUMN_BITMASK = 64L;
+	public static long ALBUMID_COLUMN_BITMASK = 128L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -507,7 +508,17 @@ public class AlbumModelImpl extends BaseModelImpl<Album> implements AlbumModel {
 
 	@Override
 	public void setName(String name) {
+		_columnBitmask |= NAME_COLUMN_BITMASK;
+
+		if (_originalName == null) {
+			_originalName = _name;
+		}
+
 		_name = name;
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	@JSON
@@ -887,6 +898,8 @@ public class AlbumModelImpl extends BaseModelImpl<Album> implements AlbumModel {
 
 		albumModelImpl._setOriginalArtistId = false;
 
+		albumModelImpl._originalName = albumModelImpl._name;
+
 		albumModelImpl._originalStatus = albumModelImpl._status;
 
 		albumModelImpl._setOriginalStatus = false;
@@ -1111,6 +1124,7 @@ public class AlbumModelImpl extends BaseModelImpl<Album> implements AlbumModel {
 	private long _originalArtistId;
 	private boolean _setOriginalArtistId;
 	private String _name;
+	private String _originalName;
 	private int _year;
 	private int _status;
 	private int _originalStatus;

@@ -1317,6 +1317,247 @@ public interface ArtistPersistence extends BasePersistence<Artist> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns all the artists where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @return the matching artists
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Artist> findByG_LikeN_S(
+		long groupId, java.lang.String name, int status)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the artists where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.ArtistModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param start the lower bound of the range of artists
+	* @param end the upper bound of the range of artists (not inclusive)
+	* @return the range of matching artists
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Artist> findByG_LikeN_S(
+		long groupId, java.lang.String name, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the artists where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.ArtistModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param start the lower bound of the range of artists
+	* @param end the upper bound of the range of artists (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching artists
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Artist> findByG_LikeN_S(
+		long groupId, java.lang.String name, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first artist in the ordered set where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching artist
+	* @throws org.liferay.jukebox.NoSuchArtistException if a matching artist could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Artist findByG_LikeN_S_First(
+		long groupId, java.lang.String name, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchArtistException;
+
+	/**
+	* Returns the first artist in the ordered set where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching artist, or <code>null</code> if a matching artist could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Artist fetchByG_LikeN_S_First(
+		long groupId, java.lang.String name, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last artist in the ordered set where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching artist
+	* @throws org.liferay.jukebox.NoSuchArtistException if a matching artist could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Artist findByG_LikeN_S_Last(long groupId,
+		java.lang.String name, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchArtistException;
+
+	/**
+	* Returns the last artist in the ordered set where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching artist, or <code>null</code> if a matching artist could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Artist fetchByG_LikeN_S_Last(
+		long groupId, java.lang.String name, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the artists before and after the current artist in the ordered set where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param artistId the primary key of the current artist
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next artist
+	* @throws org.liferay.jukebox.NoSuchArtistException if a artist with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Artist[] findByG_LikeN_S_PrevAndNext(
+		long artistId, long groupId, java.lang.String name, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchArtistException;
+
+	/**
+	* Returns all the artists that the user has permission to view where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @return the matching artists that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Artist> filterFindByG_LikeN_S(
+		long groupId, java.lang.String name, int status)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the artists that the user has permission to view where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.ArtistModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param start the lower bound of the range of artists
+	* @param end the upper bound of the range of artists (not inclusive)
+	* @return the range of matching artists that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Artist> filterFindByG_LikeN_S(
+		long groupId, java.lang.String name, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the artists that the user has permissions to view where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.liferay.jukebox.model.impl.ArtistModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param start the lower bound of the range of artists
+	* @param end the upper bound of the range of artists (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching artists that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.liferay.jukebox.model.Artist> filterFindByG_LikeN_S(
+		long groupId, java.lang.String name, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the artists before and after the current artist in the ordered set of artists that the user has permission to view where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param artistId the primary key of the current artist
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next artist
+	* @throws org.liferay.jukebox.NoSuchArtistException if a artist with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Artist[] filterFindByG_LikeN_S_PrevAndNext(
+		long artistId, long groupId, java.lang.String name, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchArtistException;
+
+	/**
+	* Removes all the artists where groupId = &#63; and name LIKE &#63; and status = &#63; from the database.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByG_LikeN_S(long groupId, java.lang.String name,
+		int status) throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of artists where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @return the number of matching artists
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByG_LikeN_S(long groupId, java.lang.String name, int status)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of artists that the user has permission to view where groupId = &#63; and name LIKE &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param status the status
+	* @return the number of matching artists that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByG_LikeN_S(long groupId, java.lang.String name,
+		int status) throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Caches the artist in the entity cache if it is enabled.
 	*
 	* @param artist the artist

@@ -51,15 +51,23 @@ public class ArtistServiceClpInvoker {
 
 		_methodName69 = "getArtists";
 
-		_methodParameterTypes69 = new String[] { "long", "int", "int" };
+		_methodParameterTypes69 = new String[] { "long", "java.lang.String" };
 
-		_methodName70 = "getArtistsCount";
+		_methodName70 = "getArtists";
 
-		_methodParameterTypes70 = new String[] { "long" };
+		_methodParameterTypes70 = new String[] { "long", "int", "int" };
 
-		_methodName71 = "updateArtist";
+		_methodName71 = "getArtistsCount";
 
-		_methodParameterTypes71 = new String[] {
+		_methodParameterTypes71 = new String[] { "long" };
+
+		_methodName72 = "getArtistsCount";
+
+		_methodParameterTypes72 = new String[] { "long", "java.lang.String" };
+
+		_methodName73 = "updateArtist";
+
+		_methodParameterTypes73 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
@@ -102,17 +110,29 @@ public class ArtistServiceClpInvoker {
 		if (_methodName69.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
 			return ArtistServiceUtil.getArtists(((Long)arguments[0]).longValue(),
-				((Integer)arguments[1]).intValue(),
-				((Integer)arguments[2]).intValue());
+				(java.lang.String)arguments[1]);
 		}
 
 		if (_methodName70.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
-			return ArtistServiceUtil.getArtistsCount(((Long)arguments[0]).longValue());
+			return ArtistServiceUtil.getArtists(((Long)arguments[0]).longValue(),
+				((Integer)arguments[1]).intValue(),
+				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName71.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
+			return ArtistServiceUtil.getArtistsCount(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName72.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
+			return ArtistServiceUtil.getArtistsCount(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1]);
+		}
+
+		if (_methodName73.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
 			return ArtistServiceUtil.updateArtist(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.io.InputStream)arguments[3],
@@ -138,4 +158,8 @@ public class ArtistServiceClpInvoker {
 	private String[] _methodParameterTypes70;
 	private String _methodName71;
 	private String[] _methodParameterTypes71;
+	private String _methodName72;
+	private String[] _methodParameterTypes72;
+	private String _methodName73;
+	private String[] _methodParameterTypes73;
 }
