@@ -82,6 +82,13 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 			groupId, WorkflowConstants.STATUS_APPROVED, start, end);
 	}
 
+	public List<Song> getSongs(long groupId, String keywords)
+		throws SystemException {
+
+		return songPersistence.filterFindByG_LikeN_S(
+			groupId, keywords, WorkflowConstants.STATUS_APPROVED);
+	}
+
 	public List<Song> getSongsByAlbumId(long groupId, long albumId)
 		throws SystemException {
 
@@ -92,6 +99,13 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 	public int getSongsCount(long groupId) throws SystemException {
 		return songPersistence.filterCountByG_S(
 			groupId, WorkflowConstants.STATUS_APPROVED);
+	}
+
+	public int getSongsCount(long groupId, String keywords)
+		throws SystemException {
+
+		return songPersistence.filterCountByG_LikeN_S(
+			groupId, keywords, WorkflowConstants.STATUS_APPROVED);
 	}
 
 	public int getSongsCountByAlbumId(long groupId, long albumId)

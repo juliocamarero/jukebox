@@ -48,6 +48,11 @@
 			<finder-column name="groupId" />
 			<finder-column name="status" />
 		</finder>
+		<finder name="G_LikeN_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="name" case-sensitive="false" comparator="LIKE" />
+			<finder-column name="status" />
+		</finder>
 
 		<!-- References -->
 
@@ -110,6 +115,11 @@
 			<finder-column name="artistId" />
 			<finder-column name="status" />
 		</finder>
+		<finder name="G_LikeN_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="name" case-sensitive="false" comparator="LIKE" />
+			<finder-column name="status" />
+		</finder>
 
 		<!-- References -->
 
@@ -170,6 +180,11 @@
 		<finder name="G_A_S" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="albumId" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="G_LikeN_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="name" case-sensitive="false" comparator="LIKE" />
 			<finder-column name="status" />
 		</finder>
 

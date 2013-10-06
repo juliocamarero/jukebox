@@ -81,9 +81,23 @@ public class ArtistServiceImpl extends ArtistServiceBaseImpl {
 			groupId, start, end, WorkflowConstants.STATUS_APPROVED);
 	}
 
+	public List<Artist> getArtists(long groupId, String keywords)
+		throws SystemException {
+
+		return artistPersistence.filterFindByG_LikeN_S(
+			groupId, keywords, WorkflowConstants.STATUS_APPROVED);
+	}
+
 	public int getArtistsCount(long groupId) throws SystemException {
 		return artistPersistence.filterCountByG_S(
 			groupId, WorkflowConstants.STATUS_APPROVED);
+	}
+
+	public int getArtistsCount(long groupId, String keywords)
+		throws SystemException {
+
+		return artistPersistence.filterCountByG_LikeN_S(
+			groupId, keywords, WorkflowConstants.STATUS_APPROVED);
 	}
 
 	public Artist updateArtist(
