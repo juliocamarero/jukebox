@@ -44,6 +44,12 @@ else {
 searchContext.setIncludeAttachments(true);
 searchContext.setIncludeDiscussions(true);
 
+QueryConfig queryConfig = new QueryConfig();
+
+queryConfig.setHighlightEnabled(true);
+
+searchContext.setQueryConfig(queryConfig);
+
 Hits hits = indexer.search(searchContext);
 %>
 
