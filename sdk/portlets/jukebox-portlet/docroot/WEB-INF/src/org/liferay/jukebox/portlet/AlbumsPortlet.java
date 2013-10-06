@@ -61,8 +61,8 @@ public class AlbumsPortlet extends MVCPortlet {
 
 			SessionMessages.add(request, "albumAdded");
 
-			String redirect =
-				ParamUtil.getString(uploadPortletRequest, "redirect");
+			String redirect = ParamUtil.getString(
+				uploadPortletRequest, "redirect");
 
 			response.sendRedirect(redirect);
 		}
@@ -123,8 +123,8 @@ public class AlbumsPortlet extends MVCPortlet {
 
 			SessionMessages.add(request, "albumUpdated");
 
-			String redirect =
-					ParamUtil.getString(uploadPortletRequest, "redirect");
+			String redirect = ParamUtil.getString(
+					uploadPortletRequest, "redirect");
 
 				response.sendRedirect(redirect);
 		}

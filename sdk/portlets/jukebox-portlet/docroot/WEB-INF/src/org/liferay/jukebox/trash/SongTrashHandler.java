@@ -19,10 +19,10 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.trash.BaseTrashHandler;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.theme.ThemeDisplay;
 
 import javax.portlet.PortletRequest;
 
-import com.liferay.portal.theme.ThemeDisplay;
 import org.liferay.jukebox.model.Song;
 import org.liferay.jukebox.service.SongLocalServiceUtil;
 import org.liferay.jukebox.service.permission.SongPermission;

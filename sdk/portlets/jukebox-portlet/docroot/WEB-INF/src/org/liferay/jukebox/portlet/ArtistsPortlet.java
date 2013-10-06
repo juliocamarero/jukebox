@@ -60,10 +60,10 @@ public class ArtistsPortlet extends MVCPortlet {
 
 			SessionMessages.add(request, "artistAdded");
 
-			String redirect =
-				ParamUtil.getString(uploadPortletRequest, "redirect");
+			String redirect = ParamUtil.getString(
+				uploadPortletRequest, "redirect");
 
-			response.sendRedirect(redirect);		}
+			response.sendRedirect(redirect); }
 		catch (Exception e) {
 			if (e instanceof ArtistNameException ||
 				e instanceof PrincipalException) {
@@ -120,8 +120,8 @@ public class ArtistsPortlet extends MVCPortlet {
 
 			SessionMessages.add(request, "artistUpdated");
 
-			String redirect =
-				ParamUtil.getString(uploadPortletRequest, "redirect");
+			String redirect = ParamUtil.getString(
+				uploadPortletRequest, "redirect");
 
 			response.sendRedirect(redirect);
 		}

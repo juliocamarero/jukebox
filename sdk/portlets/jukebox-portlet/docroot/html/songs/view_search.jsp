@@ -105,8 +105,8 @@ Hits hits = indexer.search(searchContext);
 						fileEntryTuples="<%= searchResult.getFileEntryTuples() %>"
 						mbMessages="<%= searchResult.getMBMessages() %>"
 						queryTerms="<%= hits.getQueryTerms() %>"
-						title="<%= (summary != null) ? HtmlUtil.escape(summary.getTitle()) : song.getName() %>"
 						thumbnailSrc="<%= song.getImageURL(themeDisplay) %>"
+						title="<%= (summary != null) ? HtmlUtil.escape(summary.getTitle()) : song.getName() %>"
 						url="<%= viewSongURL %>"
 					/>
 				</li>

@@ -31,6 +31,7 @@ import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.util.DLProcessorRegistryUtil;
+import com.liferay.portlet.trash.model.TrashEntry;
 
 import java.io.InputStream;
 
@@ -38,7 +39,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import com.liferay.portlet.trash.model.TrashEntry;
 import org.liferay.jukebox.SongNameException;
 import org.liferay.jukebox.model.Album;
 import org.liferay.jukebox.model.Song;

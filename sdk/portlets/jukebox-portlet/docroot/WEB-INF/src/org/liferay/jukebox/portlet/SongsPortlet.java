@@ -67,8 +67,8 @@ public class SongsPortlet extends MVCPortlet {
 
 			SessionMessages.add(request, "songAdded");
 
-			String redirect =
-				ParamUtil.getString(uploadPortletRequest, "redirect");
+			String redirect = ParamUtil.getString(
+				uploadPortletRequest, "redirect");
 
 			response.sendRedirect(redirect);
 		}
@@ -144,8 +144,8 @@ public class SongsPortlet extends MVCPortlet {
 
 			SessionMessages.add(request, "songUpdated");
 
-			String redirect =
-				ParamUtil.getString(uploadPortletRequest, "redirect");
+			String redirect = ParamUtil.getString(
+				uploadPortletRequest, "redirect");
 
 			response.sendRedirect(redirect);
 		}
