@@ -17,12 +17,21 @@
 <%@ include file="../init.jsp" %>
 
 <%
+String keywords = ParamUtil.getString(liferayPortletRequest, "keywords");
+
 String displayStyle = GetterUtil.getString(portletPreferences.getValue("displayStyle", StringPool.BLANK));
 long displayStyleGroupId = GetterUtil.getLong(portletPreferences.getValue("displayStyleGroupId", null), scopeGroupId);
 
 long portletDisplayDDMTemplateId = PortletDisplayTemplateUtil.getPortletDisplayTemplateDDMTemplateId(displayStyleGroupId, displayStyle);
 
-List<Artist> artists = ArtistServiceUtil.getArtists(scopeGroupId);
+List<Artist> artists = null;
+
+if (Validator.isNotNull(keywords)) {
+	artists = ArtistServiceUtil.getArtists(scopeGroupId, StringPool.PERCENT + keywords + StringPool.PERCENT);
+}
+else {
+	artists = ArtistServiceUtil.getArtists(scopeGroupId);
+}
 %>
 
 <c:choose>
@@ -45,7 +54,7 @@ List<Artist> artists = ArtistServiceUtil.getArtists(scopeGroupId);
 				<portlet:renderURL var="viewArtistURL">
 					<portlet:param name="jspPage" value="/html/artists/view_artist.jsp" />
 					<portlet:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
-					<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
+					<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(liferayPortletRequest) %>" />
 				</portlet:renderURL>
 
 				<aui:a href="<%= viewArtistURL %>">
@@ -58,7 +67,7 @@ List<Artist> artists = ArtistServiceUtil.getArtists(scopeGroupId);
 					<portlet:renderURL var="editArtistURL">
 						<portlet:param name="jspPage" value="/html/artists/edit_artist.jsp" />
 						<portlet:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
-						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
+						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(liferayPortletRequest) %>" />
 					</portlet:renderURL>
 
 					<liferay-ui:icon cssClass="artist-small-link" image="../aui/pencil" message="edit" url="<%= editArtistURL %>" />

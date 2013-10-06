@@ -17,7 +17,9 @@
 <%@ include file="../init.jsp" %>
 
 <%
-long artistId = ParamUtil.getLong(renderRequest, "artistId");
+String keywords = ParamUtil.getString(liferayPortletRequest, "keywords");
+
+long artistId = ParamUtil.getLong(liferayPortletRequest, "artistId");
 
 String displayStyle = GetterUtil.getString(portletPreferences.getValue("displayStyle", StringPool.BLANK));
 long displayStyleGroupId = GetterUtil.getLong(portletPreferences.getValue("displayStyleGroupId", null), scopeGroupId);
@@ -28,6 +30,9 @@ List<Album> albums = null;
 
 if (artistId > 0) {
 	albums = AlbumServiceUtil.getAlbumsByArtistId(scopeGroupId, artistId);
+}
+else if (Validator.isNotNull(keywords)) {
+	albums = AlbumServiceUtil.getAlbums(scopeGroupId, StringPool.PERCENT + keywords + StringPool.PERCENT);
 }
 else {
 	albums = AlbumServiceUtil.getAlbums(scopeGroupId);
@@ -66,7 +71,7 @@ else {
 				<portlet:renderURL var="viewAlbumURL">
 					<portlet:param name="jspPage" value="/html/albums/view_album.jsp" />
 					<portlet:param name="albumId" value="<%= String.valueOf(album.getAlbumId()) %>" />
-					<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
+					<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(liferayPortletRequest) %>" />
 				</portlet:renderURL>
 
 				<aui:a href="<%= viewAlbumURL %>">
@@ -79,7 +84,7 @@ else {
 					<portlet:renderURL var="editAlbumURL">
 						<portlet:param name="jspPage" value="/html/albums/edit_album.jsp" />
 						<portlet:param name="albumId" value="<%= String.valueOf(album.getAlbumId()) %>" />
-						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
+						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(liferayPortletRequest) %>" />
 					</portlet:renderURL>
 
 					<liferay-ui:icon cssClass="album-small-link" image="../aui/pencil" message="edit" url="<%= editAlbumURL %>" />

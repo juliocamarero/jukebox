@@ -61,3 +61,17 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem");
 		</div>
 	</aui:nav-bar-search>
 </aui:nav-bar>
+
+<aui:script use="liferay-jukebox-search">
+	var artistPanel = A.one('#<portlet:namespace />artistPanel');
+	var inputNode = A.one('#<portlet:namespace />keywords');
+
+	var search = new Liferay.JukeBoxContentSearch(
+		{
+			contentPanel: artistPanel,
+			inputNode: inputNode,
+			resourceURL: '<portlet:resourceURL><portlet:param name="jspPage" value="/html/artists/view_resources.jsp" /></portlet:resourceURL>',
+			namespace: '<portlet:namespace />'
+		}
+	);
+</aui:script>
