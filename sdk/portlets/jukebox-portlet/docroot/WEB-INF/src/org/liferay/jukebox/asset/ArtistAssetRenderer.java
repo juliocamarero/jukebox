@@ -18,10 +18,14 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 
@@ -36,6 +40,7 @@ import javax.portlet.WindowState;
 import org.liferay.jukebox.model.Artist;
 import org.liferay.jukebox.portlet.ArtistsPortlet;
 import org.liferay.jukebox.service.permission.ArtistPermission;
+import org.liferay.jukebox.util.PortletKeys;
 
 /**
  * @author Julio Camarero
@@ -133,6 +138,36 @@ public class ArtistAssetRenderer extends BaseAssetRenderer {
 		portletURL.setWindowState(windowState);
 
 		return portletURL;
+	}
+
+	@Override
+	public String getURLViewInContext(
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse,
+		String noSuchEntryRedirect) {
+
+		try {
+			long plid = PortalUtil.getPlidFromPortletId(
+				_artist.getGroupId(), PortletKeys.ARTISTS);
+
+			if (plid == LayoutConstants.DEFAULT_PLID) {
+				return StringPool.BLANK;
+			}
+
+			PortletURL portletURL = PortletURLFactoryUtil.create(
+				liferayPortletRequest, PortletKeys.ARTISTS, plid,
+				PortletRequest.RENDER_PHASE);
+
+			portletURL.setParameter("jspPage", "/html/artists/view_artist.jsp");
+			portletURL.setParameter(
+				"artistId", String.valueOf(_artist.getArtistId()));
+
+			return portletURL.toString();
+		}
+		catch (Exception e) {
+		}
+
+		return StringPool.BLANK;
 	}
 
 	@Override

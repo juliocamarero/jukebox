@@ -18,10 +18,14 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 
@@ -36,6 +40,7 @@ import javax.portlet.WindowState;
 import org.liferay.jukebox.model.Album;
 import org.liferay.jukebox.portlet.AlbumsPortlet;
 import org.liferay.jukebox.service.permission.AlbumPermission;
+import org.liferay.jukebox.util.PortletKeys;
 
 /**
  * @author Julio Camarero
@@ -131,6 +136,36 @@ public class AlbumAssetRenderer extends BaseAssetRenderer {
 		portletURL.setWindowState(windowState);
 
 		return portletURL;
+	}
+
+	@Override
+	public String getURLViewInContext(
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse,
+		String noSuchEntryRedirect) {
+
+		try {
+			long plid = PortalUtil.getPlidFromPortletId(
+				_album.getGroupId(), PortletKeys.ALBUMS);
+
+			if (plid == LayoutConstants.DEFAULT_PLID) {
+				return StringPool.BLANK;
+			}
+
+			PortletURL portletURL = PortletURLFactoryUtil.create(
+				liferayPortletRequest, PortletKeys.ALBUMS, plid,
+				PortletRequest.RENDER_PHASE);
+
+			portletURL.setParameter("jspPage", "/html/albums/view_album.jsp");
+			portletURL.setParameter(
+				"albumId", String.valueOf(_album.getAlbumId()));
+
+			return portletURL.toString();
+		}
+		catch (Exception e) {
+		}
+
+		return StringPool.BLANK;
 	}
 
 	@Override

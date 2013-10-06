@@ -19,10 +19,14 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.trash.TrashRenderer;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 
@@ -37,6 +41,7 @@ import javax.portlet.WindowState;
 import org.liferay.jukebox.model.Song;
 import org.liferay.jukebox.portlet.SongsPortlet;
 import org.liferay.jukebox.service.permission.SongPermission;
+import org.liferay.jukebox.util.PortletKeys;
 
 /**
  * @author Julio Camarero
@@ -133,6 +138,36 @@ public class SongAssetRenderer
 		portletURL.setWindowState(windowState);
 
 		return portletURL;
+	}
+
+	@Override
+	public String getURLViewInContext(
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse,
+		String noSuchEntryRedirect) {
+
+		try {
+			long plid = PortalUtil.getPlidFromPortletId(
+				_song.getGroupId(), PortletKeys.SONGS);
+
+			if (plid == LayoutConstants.DEFAULT_PLID) {
+				return StringPool.BLANK;
+			}
+
+			PortletURL portletURL = PortletURLFactoryUtil.create(
+				liferayPortletRequest, PortletKeys.SONGS, plid,
+				PortletRequest.RENDER_PHASE);
+
+			portletURL.setParameter("jspPage", "/html/songs/view_song.jsp");
+			portletURL.setParameter(
+				"songId", String.valueOf(_song.getSongId()));
+
+			return portletURL.toString();
+		}
+		catch (Exception e) {
+		}
+
+		return StringPool.BLANK;
 	}
 
 	@Override
