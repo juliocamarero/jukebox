@@ -16,20 +16,9 @@
 
 <%@ include file="../init.jsp" %>
 
-<%
-String displayStyle = GetterUtil.getString(portletPreferences.getValue("displayStyle", StringPool.BLANK));
-long displayStyleGroupId = GetterUtil.getLong(portletPreferences.getValue("displayStyleGroupId", null), scopeGroupId);
-
-long portletDisplayDDMTemplateId = PortletDisplayTemplateUtil.getPortletDisplayTemplateDDMTemplateId(displayStyleGroupId, displayStyle);
-%>
-
 <liferay-ui:success key="artistAdded" message="the-artist-was-added-successfully" />
 <liferay-ui:success key="artistUpdated" message="the-artist-was-updated-successfully" />
 <liferay-ui:success key="artistDeleted" message="the-artist-was-deleted-successfully" />
-
-<%
-List<Artist> artists = ArtistServiceUtil.getArtists(scopeGroupId);
-%>
 
 <portlet:renderURL var="searchURL">
 	<portlet:param name="jspPage" value="/html/artists/view_search.jsp" />
@@ -40,50 +29,6 @@ List<Artist> artists = ArtistServiceUtil.getArtists(scopeGroupId);
 	<jsp:include page="/html/artists/toolbar.jsp" />
 </aui:form>
 
-<c:choose>
-	<c:when test="<%= portletDisplayDDMTemplateId > 0 %>">
-		<%= PortletDisplayTemplateUtil.renderDDMTemplate(pageContext, portletDisplayDDMTemplateId, artists) %>
-	</c:when>
-	<c:when test="<%= artists.isEmpty() %>">
-		<div class="alert alert-info">
-			<liferay-ui:message key="there-are-no-artists" />
-		</div>
-	</c:when>
-	<c:otherwise>
-		<ul class="artists-list unstyled">
-
-			<%
-			for (Artist artist : artists) {
-			%>
-
-			<li class="artist">
-				<portlet:renderURL var="viewArtistURL">
-					<portlet:param name="jspPage" value="/html/artists/view_artist.jsp" />
-					<portlet:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
-					<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
-				</portlet:renderURL>
-
-				<aui:a href="<%= viewArtistURL %>">
-					<img alt="" class="artist-image img-circle" src="<%= artist.getImageURL(themeDisplay) %>" />
-
-					<%= artist.getName() %>
-				</aui:a>
-
-				<c:if test="<%= ArtistPermission.contains(permissionChecker, artist.getArtistId(), ActionKeys.UPDATE) %>">
-					<portlet:renderURL var="editArtistURL">
-						<portlet:param name="jspPage" value="/html/artists/edit_artist.jsp" />
-						<portlet:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
-						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
-					</portlet:renderURL>
-
-					<liferay-ui:icon cssClass="artist-small-link" image="../aui/pencil" message="edit" url="<%= editArtistURL %>" />
-				</c:if>
-			</li>
-
-			<%
-			}
-			%>
-
-		</ul>
-	</c:otherwise>
-</c:choose>
+<div id="<portlet:namespace />artistPanel">
+	<jsp:include page="/html/artists/view_resources.jsp" />
+</div>
