@@ -19,28 +19,12 @@
 <%
 long albumId = ParamUtil.getLong(renderRequest, "albumId");
 boolean showToolbar = ParamUtil.getBoolean(request, "showToolbar", true);
-
-String displayStyle = GetterUtil.getString(portletPreferences.getValue("displayStyle", StringPool.BLANK));
-long displayStyleGroupId = GetterUtil.getLong(portletPreferences.getValue("displayStyleGroupId", null), scopeGroupId);
-
-long portletDisplayDDMTemplateId = PortletDisplayTemplateUtil.getPortletDisplayTemplateDDMTemplateId(displayStyleGroupId, displayStyle);
 %>
 
 <liferay-ui:success key="songAdded" message="the-song-was-added-successfully" />
 <liferay-ui:success key="songUpdated" message="the-song-was-updated-successfully" />
 <liferay-ui:success key="songDeleted" message="the-song-was-deleted-successfully" />
 <liferay-ui:success key="songMovedToTrash" message="the-song-was-moved-to-trash-successfully" />
-
-<%
-List<Song> songs = null;
-
-if (albumId > 0) {
-	songs = SongServiceUtil.getSongsByAlbumId(scopeGroupId, albumId);
-}
-else {
-	songs = SongServiceUtil.getSongs(scopeGroupId);
-}
-%>
 
 <c:if test="<%= (albumId <= 0) && showToolbar %>">
 	<portlet:renderURL var="searchURL">
@@ -53,68 +37,6 @@ else {
 	</aui:form>
 </c:if>
 
-<c:choose>
-	<c:when test="<%= portletDisplayDDMTemplateId > 0 %>">
-		<%= PortletDisplayTemplateUtil.renderDDMTemplate(pageContext, portletDisplayDDMTemplateId, songs) %>
-	</c:when>
-	<c:when test="<%= songs.isEmpty() %>">
-		<div class="alert alert-info">
-			<c:choose>
-				<c:when test="<%= albumId > 0 %>">
-					<liferay-ui:message key="this-album-does-not-have-any-song" />
-				</c:when>
-				<c:otherwise>
-					<liferay-ui:message key="there-are-no-songs" />
-				</c:otherwise>
-			</c:choose>
-		</div>
-	</c:when>
-	<c:otherwise>
-
-		<div id="sm2-container">
-		  <!-- SM2 flash goes here -->
-		 </div>
-
-		 <ul class="songs-list graphic">
-
-			 <%
-			for (Song song : songs) {
-			%>
-
-				<li class="song">
-
-					<%
-					Artist artist = ArtistLocalServiceUtil.getArtist(song.getArtistId());
-
-					Album album = AlbumLocalServiceUtil.getAlbum(song.getAlbumId());
-					%>
-
-			 		<a class="song-link" href="<%= song.getSongURL(themeDisplay, "mp3") %>" type="audio/mpeg">
-						<%= song.getName() %>
-					</a>
-
-					<c:if test="<%= SongPermission.contains(permissionChecker, song.getSongId(), ActionKeys.UPDATE) %>">
-						<portlet:renderURL var="editSongURL">
-							<portlet:param name="jspPage" value="/html/songs/edit_song.jsp" />
-							<portlet:param name="songId" value="<%= String.valueOf(song.getSongId()) %>" />
-							<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
-						</portlet:renderURL>
-
-						<liferay-ui:icon cssClass="song-small-link" image="../aui/pencil" message="edit" url="<%= editSongURL %>" />
-					</c:if>
-
-					<portlet:renderURL var="viewSongURL">
-						<portlet:param name="jspPage" value="/html/songs/view_song.jsp" />
-						<portlet:param name="songId" value="<%= String.valueOf(song.getSongId()) %>" />
-						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
-					</portlet:renderURL>
-
-					<liferay-ui:icon cssClass="song-small-link" image="../aui/info" message="info" url="<%= viewSongURL %>" />
-				</li>
-
-			<%
-			}
-			 %>
-
-	</c:otherwise>
-</c:choose>
+<div id="<portlet:namespace />songPanel">
+	<jsp:include page="/html/songs/view_resources.jsp" />
+</div>
