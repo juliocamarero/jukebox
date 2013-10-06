@@ -19,27 +19,11 @@
 <%
 long artistId = ParamUtil.getLong(renderRequest, "artistId");
 boolean showToolbar = ParamUtil.getBoolean(request, "showToolbar", true);
-
-String displayStyle = GetterUtil.getString(portletPreferences.getValue("displayStyle", StringPool.BLANK));
-long displayStyleGroupId = GetterUtil.getLong(portletPreferences.getValue("displayStyleGroupId", null), scopeGroupId);
-
-long portletDisplayDDMTemplateId = PortletDisplayTemplateUtil.getPortletDisplayTemplateDDMTemplateId(displayStyleGroupId, displayStyle);
 %>
 
 <liferay-ui:success key="albumAdded" message="the-album-was-added-successfully" />
 <liferay-ui:success key="albumUpdated" message="the-album-was-updated-successfully" />
 <liferay-ui:success key="albumDeleted" message="the-album-was-deleted-successfully" />
-
-<%
-List<Album> albums = null;
-
-if (artistId > 0) {
-	albums = AlbumServiceUtil.getAlbumsByArtistId(scopeGroupId, artistId);
-}
-else {
-	albums = AlbumServiceUtil.getAlbums(scopeGroupId);
-}
-%>
 
 <c:if test="<%= (artistId <= 0) && showToolbar %>">
 	<portlet:renderURL var="searchURL">
@@ -52,67 +36,6 @@ else {
 	</aui:form>
 </c:if>
 
-<c:choose>
-	<c:when test="<%= portletDisplayDDMTemplateId > 0 %>">
-		<%= PortletDisplayTemplateUtil.renderDDMTemplate(pageContext, portletDisplayDDMTemplateId, albums) %>
-	</c:when>
-	<c:when test="<%= albums.isEmpty() %>">
-		<div class="alert alert-info">
-			<c:choose>
-				<c:when test="<%= artistId > 0 %>">
-					<liferay-ui:message key="this-artist-does-not-have-any-album" />
-				</c:when>
-				<c:otherwise>
-					<liferay-ui:message key="there-are-no-albums" />
-				</c:otherwise>
-			</c:choose>
-		</div>
-	</c:when>
-	<c:otherwise>
-		<ul class="unstyled albums-list">
-
-			<%
-			for (Album album : albums) {
-			%>
-
-			<li class="album">
-
-				<%
-				Artist artist = ArtistLocalServiceUtil.getArtist(album.getArtistId());
-				%>
-
-				<portlet:renderURL var="viewAlbumURL">
-					<portlet:param name="jspPage" value="/html/albums/view_album.jsp" />
-					<portlet:param name="albumId" value="<%= String.valueOf(album.getAlbumId()) %>" />
-					<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
-				</portlet:renderURL>
-
-				<aui:a href="<%= viewAlbumURL %>">
-					<img alt="" class="album-image img-rounded" src="<%= album.getImageURL(themeDisplay) %>" />
-
-					<%= album.getName() %>
-				</aui:a>
-
-				<c:if test="<%= AlbumPermission.contains(permissionChecker, album.getAlbumId(), ActionKeys.UPDATE) %>">
-					<portlet:renderURL var="editAlbumURL">
-						<portlet:param name="jspPage" value="/html/albums/edit_album.jsp" />
-						<portlet:param name="albumId" value="<%= String.valueOf(album.getAlbumId()) %>" />
-						<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
-					</portlet:renderURL>
-
-					<liferay-ui:icon cssClass="album-small-link" image="../aui/pencil" message="edit" url="<%= editAlbumURL %>" />
-				</c:if>
-
-				<div class="album-artist-name">
-					<%= artist.getName() %>
-				</div>
-
-			</li>
-
-			<%
-			}
-			%>
-
-		</ul>
-	</c:otherwise>
-</c:choose>
+<div id="<portlet:namespace />albumPanel">
+	<jsp:include page="/html/albums/view_resources.jsp" />
+</div>
