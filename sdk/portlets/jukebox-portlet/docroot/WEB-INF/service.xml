@@ -182,6 +182,11 @@
 			<finder-column name="albumId" />
 			<finder-column name="status" />
 		</finder>
+		<finder name="G_A_A" return-type="Song" unique="true">
+			<finder-column name="groupId" />
+			<finder-column name="artistId" />
+			<finder-column name="albumId" />
+		</finder>
 		<finder name="G_LikeN_S" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="name" case-sensitive="false" comparator="LIKE" />
