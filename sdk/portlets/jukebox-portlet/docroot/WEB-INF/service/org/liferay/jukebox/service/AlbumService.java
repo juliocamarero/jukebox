@@ -108,6 +108,14 @@ public interface AlbumService extends BaseService, InvokableService {
 	public int getAlbumsCountByArtistId(long groupId, long artistId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public org.liferay.jukebox.model.Album moveAlbumToTrash(long albumId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public org.liferay.jukebox.model.Album restoreAlbumFromTrash(long albumId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public org.liferay.jukebox.model.Album updateAlbum(long albumId,
 		long artistId, java.lang.String name, int year,
 		java.io.InputStream inputStream,

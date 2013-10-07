@@ -118,6 +118,19 @@ public class AlbumServiceUtil {
 		return getService().getAlbumsCountByArtistId(groupId, artistId);
 	}
 
+	public static org.liferay.jukebox.model.Album moveAlbumToTrash(long albumId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().moveAlbumToTrash(albumId);
+	}
+
+	public static org.liferay.jukebox.model.Album restoreAlbumFromTrash(
+		long albumId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().restoreAlbumFromTrash(albumId);
+	}
+
 	public static org.liferay.jukebox.model.Album updateAlbum(long albumId,
 		long artistId, java.lang.String name, int year,
 		java.io.InputStream inputStream,

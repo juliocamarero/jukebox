@@ -121,6 +121,20 @@ public class AlbumServiceWrapper implements AlbumService,
 	}
 
 	@Override
+	public org.liferay.jukebox.model.Album moveAlbumToTrash(long albumId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _albumService.moveAlbumToTrash(albumId);
+	}
+
+	@Override
+	public org.liferay.jukebox.model.Album restoreAlbumFromTrash(long albumId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _albumService.restoreAlbumFromTrash(albumId);
+	}
+
+	@Override
 	public org.liferay.jukebox.model.Album updateAlbum(long albumId,
 		long artistId, java.lang.String name, int year,
 		java.io.InputStream inputStream,

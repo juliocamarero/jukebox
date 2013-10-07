@@ -333,8 +333,31 @@ public interface SongLocalService extends BaseLocalService, InvokableLocalServic
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<org.liferay.jukebox.model.Song> getSongsByAlbumId(
+		long albumId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<org.liferay.jukebox.model.Song> getSongsByAlbumId(
+		long groupId, long albumId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getSongsByAlbumIdCount(long albumId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getSongsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public org.liferay.jukebox.model.Song moveSong(long songId, long albumId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public org.liferay.jukebox.model.Song moveSongFromTrash(long userId,
+		long songId, long albumId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public org.liferay.jukebox.model.Song moveSongToTrash(long userId,
 		org.liferay.jukebox.model.Song song)

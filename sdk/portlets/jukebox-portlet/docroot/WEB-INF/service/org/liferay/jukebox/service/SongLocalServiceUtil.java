@@ -376,9 +376,40 @@ public class SongLocalServiceUtil {
 		return getService().getSongsByAlbumId(albumId);
 	}
 
+	public static java.util.List<org.liferay.jukebox.model.Song> getSongsByAlbumId(
+		long albumId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getSongsByAlbumId(albumId, start, end);
+	}
+
+	public static java.util.List<org.liferay.jukebox.model.Song> getSongsByAlbumId(
+		long groupId, long albumId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getSongsByAlbumId(groupId, albumId, status);
+	}
+
+	public static int getSongsByAlbumIdCount(long albumId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getSongsByAlbumIdCount(albumId);
+	}
+
 	public static int getSongsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getSongsCount(groupId);
+	}
+
+	public static org.liferay.jukebox.model.Song moveSong(long songId,
+		long albumId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().moveSong(songId, albumId);
+	}
+
+	public static org.liferay.jukebox.model.Song moveSongFromTrash(
+		long userId, long songId, long albumId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().moveSongFromTrash(userId, songId, albumId);
 	}
 
 	public static org.liferay.jukebox.model.Song moveSongToTrash(long userId,

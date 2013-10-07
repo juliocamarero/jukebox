@@ -394,9 +394,44 @@ public class SongLocalServiceWrapper implements SongLocalService,
 	}
 
 	@Override
+	public java.util.List<org.liferay.jukebox.model.Song> getSongsByAlbumId(
+		long albumId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _songLocalService.getSongsByAlbumId(albumId, start, end);
+	}
+
+	@Override
+	public java.util.List<org.liferay.jukebox.model.Song> getSongsByAlbumId(
+		long groupId, long albumId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _songLocalService.getSongsByAlbumId(groupId, albumId, status);
+	}
+
+	@Override
+	public int getSongsByAlbumIdCount(long albumId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _songLocalService.getSongsByAlbumIdCount(albumId);
+	}
+
+	@Override
 	public int getSongsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _songLocalService.getSongsCount(groupId);
+	}
+
+	@Override
+	public org.liferay.jukebox.model.Song moveSong(long songId, long albumId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _songLocalService.moveSong(songId, albumId);
+	}
+
+	@Override
+	public org.liferay.jukebox.model.Song moveSongFromTrash(long userId,
+		long songId, long albumId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _songLocalService.moveSongFromTrash(userId, songId, albumId);
 	}
 
 	@Override

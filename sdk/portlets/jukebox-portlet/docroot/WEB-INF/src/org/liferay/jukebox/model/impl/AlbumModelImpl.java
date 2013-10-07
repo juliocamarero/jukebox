@@ -605,6 +605,30 @@ public class AlbumModelImpl extends BaseModelImpl<Album> implements AlbumModel {
 	}
 
 	@Override
+	public long getContainerModelId() {
+		return getAlbumId();
+	}
+
+	@Override
+	public void setContainerModelId(long containerModelId) {
+		_albumId = containerModelId;
+	}
+
+	@Override
+	public String getContainerModelName() {
+		return String.valueOf(getName());
+	}
+
+	@Override
+	public long getParentContainerModelId() {
+		return 0;
+	}
+
+	@Override
+	public void setParentContainerModelId(long parentContainerModelId) {
+	}
+
+	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(PortalUtil.getClassNameId(
 				Album.class.getName()));

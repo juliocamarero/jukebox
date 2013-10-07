@@ -586,6 +586,25 @@ public class AlbumClp extends BaseModelImpl<Album> implements Album {
 		}
 	}
 
+	public long getContainerModelId() {
+		return getAlbumId();
+	}
+
+	public void setContainerModelId(long containerModelId) {
+		_albumId = containerModelId;
+	}
+
+	public String getContainerModelName() {
+		return String.valueOf(getName());
+	}
+
+	public long getParentContainerModelId() {
+		return 0;
+	}
+
+	public void setParentContainerModelId(long parentContainerModelId) {
+	}
+
 	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(PortalUtil.getClassNameId(

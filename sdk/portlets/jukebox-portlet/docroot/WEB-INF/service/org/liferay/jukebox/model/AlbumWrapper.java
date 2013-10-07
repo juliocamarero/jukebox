@@ -668,6 +668,56 @@ public class AlbumWrapper implements Album, ModelWrapper<Album> {
 		return _album.isScheduled();
 	}
 
+	/**
+	* Returns the container model ID of this album.
+	*
+	* @return the container model ID of this album
+	*/
+	@Override
+	public long getContainerModelId() {
+		return _album.getContainerModelId();
+	}
+
+	/**
+	* Sets the container model ID of this album.
+	*
+	* @param containerModelId the container model ID of this album
+	*/
+	@Override
+	public void setContainerModelId(long containerModelId) {
+		_album.setContainerModelId(containerModelId);
+	}
+
+	/**
+	* Returns the container name of this album.
+	*
+	* @return the container name of this album
+	*/
+	@Override
+	public java.lang.String getContainerModelName() {
+		return _album.getContainerModelName();
+	}
+
+	/**
+	* Returns the parent container model ID of this album.
+	*
+	* @return the parent container model ID of this album
+	*/
+	@Override
+	public long getParentContainerModelId() {
+		return _album.getParentContainerModelId();
+	}
+
+	/**
+	* Sets the parent container model ID of this album.
+	*
+	* @param parentContainerModelId the parent container model ID of this album
+	*/
+	@Override
+	public void setParentContainerModelId(long parentContainerModelId) {
+		_album.setParentContainerModelId(parentContainerModelId);
+	}
+
 	@Override
 	public boolean isNew() {
 		return _album.isNew();

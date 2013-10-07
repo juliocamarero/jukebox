@@ -179,5 +179,33 @@ public class AlbumServiceSoap {
 		}
 	}
 
+	public static org.liferay.jukebox.model.AlbumSoap moveAlbumToTrash(
+		long albumId) throws RemoteException {
+		try {
+			org.liferay.jukebox.model.Album returnValue = AlbumServiceUtil.moveAlbumToTrash(albumId);
+
+			return org.liferay.jukebox.model.AlbumSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static org.liferay.jukebox.model.AlbumSoap restoreAlbumFromTrash(
+		long albumId) throws RemoteException {
+		try {
+			org.liferay.jukebox.model.Album returnValue = AlbumServiceUtil.restoreAlbumFromTrash(albumId);
+
+			return org.liferay.jukebox.model.AlbumSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(AlbumServiceSoap.class);
 }

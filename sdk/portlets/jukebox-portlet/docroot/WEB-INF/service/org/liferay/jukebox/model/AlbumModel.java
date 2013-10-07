@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.trash.TrashHandler;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
+import com.liferay.portal.model.ContainerModel;
 import com.liferay.portal.model.StagedGroupedModel;
 import com.liferay.portal.model.TrashedModel;
 import com.liferay.portal.model.WorkflowedModel;
@@ -45,8 +46,8 @@ import java.util.Date;
  * @see org.liferay.jukebox.model.impl.AlbumModelImpl
  * @generated
  */
-public interface AlbumModel extends BaseModel<Album>, StagedGroupedModel,
-	TrashedModel, WorkflowedModel {
+public interface AlbumModel extends BaseModel<Album>, ContainerModel,
+	StagedGroupedModel, TrashedModel, WorkflowedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -448,6 +449,46 @@ public interface AlbumModel extends BaseModel<Album>, StagedGroupedModel,
 	 */
 	@Override
 	public boolean isScheduled();
+
+	/**
+	 * Returns the container model ID of this album.
+	 *
+	 * @return the container model ID of this album
+	 */
+	@Override
+	public long getContainerModelId();
+
+	/**
+	 * Sets the container model ID of this album.
+	 *
+	 * @param containerModelId the container model ID of this album
+	 */
+	@Override
+	public void setContainerModelId(long containerModelId);
+
+	/**
+	 * Returns the container name of this album.
+	 *
+	 * @return the container name of this album
+	 */
+	@Override
+	public String getContainerModelName();
+
+	/**
+	 * Returns the parent container model ID of this album.
+	 *
+	 * @return the parent container model ID of this album
+	 */
+	@Override
+	public long getParentContainerModelId();
+
+	/**
+	 * Sets the parent container model ID of this album.
+	 *
+	 * @param parentContainerModelId the parent container model ID of this album
+	 */
+	@Override
+	public void setParentContainerModelId(long parentContainerModelId);
 
 	@Override
 	public boolean isNew();
