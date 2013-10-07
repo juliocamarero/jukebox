@@ -1962,6 +1962,85 @@ public class SongUtil {
 	}
 
 	/**
+	* Returns the song where groupId = &#63; and artistId = &#63; and albumId = &#63; or throws a {@link org.liferay.jukebox.NoSuchSongException} if it could not be found.
+	*
+	* @param groupId the group ID
+	* @param artistId the artist ID
+	* @param albumId the album ID
+	* @return the matching song
+	* @throws org.liferay.jukebox.NoSuchSongException if a matching song could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static org.liferay.jukebox.model.Song findByG_A_A(long groupId,
+		long artistId, long albumId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchSongException {
+		return getPersistence().findByG_A_A(groupId, artistId, albumId);
+	}
+
+	/**
+	* Returns the song where groupId = &#63; and artistId = &#63; and albumId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param groupId the group ID
+	* @param artistId the artist ID
+	* @param albumId the album ID
+	* @return the matching song, or <code>null</code> if a matching song could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static org.liferay.jukebox.model.Song fetchByG_A_A(long groupId,
+		long artistId, long albumId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByG_A_A(groupId, artistId, albumId);
+	}
+
+	/**
+	* Returns the song where groupId = &#63; and artistId = &#63; and albumId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param groupId the group ID
+	* @param artistId the artist ID
+	* @param albumId the album ID
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching song, or <code>null</code> if a matching song could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static org.liferay.jukebox.model.Song fetchByG_A_A(long groupId,
+		long artistId, long albumId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByG_A_A(groupId, artistId, albumId, retrieveFromCache);
+	}
+
+	/**
+	* Removes the song where groupId = &#63; and artistId = &#63; and albumId = &#63; from the database.
+	*
+	* @param groupId the group ID
+	* @param artistId the artist ID
+	* @param albumId the album ID
+	* @return the song that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public static org.liferay.jukebox.model.Song removeByG_A_A(long groupId,
+		long artistId, long albumId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchSongException {
+		return getPersistence().removeByG_A_A(groupId, artistId, albumId);
+	}
+
+	/**
+	* Returns the number of songs where groupId = &#63; and artistId = &#63; and albumId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param artistId the artist ID
+	* @param albumId the album ID
+	* @return the number of matching songs
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByG_A_A(long groupId, long artistId, long albumId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByG_A_A(groupId, artistId, albumId);
+	}
+
+	/**
 	* Returns all the songs where groupId = &#63; and name LIKE &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
