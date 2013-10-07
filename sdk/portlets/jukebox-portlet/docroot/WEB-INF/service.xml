@@ -128,6 +128,8 @@
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
+		<reference package-path="com.liferay.portlet.trash" entity="TrashEntry" />
+		<reference package-path="com.liferay.portlet.trash" entity="TrashVersion" />
 	</entity>
 	<entity name="Song" local-service="true" remote-service="true" uuid="true" trash-enabled="true">
 
@@ -202,6 +204,7 @@
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 		<reference package-path="com.liferay.portlet.trash" entity="TrashEntry" />
+		<reference package-path="com.liferay.portlet.trash" entity="TrashVersion" />
 	</entity>
 	<exceptions>
 		<exception>AlbumName</exception>
