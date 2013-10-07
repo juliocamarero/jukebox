@@ -24,16 +24,36 @@ import org.liferay.jukebox.service.AlbumLocalServiceUtil;
 
 /**
  * @author Julio Camarero
+ * @author Sergio González
+ * @author Eudaldo Alonso
  */
 public class AlbumPermission {
+
+	public static void check(
+			PermissionChecker permissionChecker, Album album, String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, album, actionId)) {
+			throw new PrincipalException();
+		}
+	}
 
 	public static void check(
 			PermissionChecker permissionChecker, long albumId, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, albumId, actionId)) {
-			throw new PrincipalException();
-		}
+		Album album = AlbumLocalServiceUtil.getAlbum(albumId);
+
+		check(permissionChecker, album, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, Album album, String actionId)
+		throws PortalException, SystemException {
+
+		return permissionChecker.hasPermission(
+			album.getGroupId(), Album.class.getName(), album.getAlbumId(),
+			actionId);
 	}
 
 	public static boolean contains(
@@ -42,9 +62,7 @@ public class AlbumPermission {
 
 		Album album = AlbumLocalServiceUtil.getAlbum(albumId);
 
-		return permissionChecker.hasPermission(
-			album.getGroupId(), Album.class.getName(), album.getAlbumId(),
-			actionId);
+		return contains(permissionChecker, album, actionId);
 	}
 
 }
