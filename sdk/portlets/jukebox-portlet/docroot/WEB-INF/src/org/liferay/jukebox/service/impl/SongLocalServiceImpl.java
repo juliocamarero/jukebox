@@ -232,6 +232,22 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		return songPersistence.findByAlbumId(albumId);
 	}
 
+	public List<Song> getSongsByAlbumId(long albumId, int start, int end)
+		throws SystemException {
+
+		return songPersistence.findByAlbumId(albumId, start, end);
+	}
+
+	public List<Song> getSongsByAlbumId(long groupId, long albumId, int status)
+		throws SystemException {
+
+		return songPersistence.findByG_A_S(groupId, albumId, status);
+	}
+
+	public int getSongsByAlbumIdCount(long albumId) throws SystemException {
+		return songPersistence.countByAlbumId(albumId);
+	}
+
 	public int getSongsCount(long groupId) throws SystemException {
 		return songPersistence.countByGroupId(groupId);
 	}
