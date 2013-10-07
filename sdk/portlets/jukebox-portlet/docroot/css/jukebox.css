@@ -107,6 +107,19 @@
 
 .songs-list {
 	.song {
+		span.song-link {
+			background-color: #2AAAE6;
+			border-radius: 3px 3px 3px 3px;
+			color: #F6F9FF;
+			display: inline-block;
+			font-weight: normal;
+			min-height: 16px;
+			min-width: 19em;
+			padding: 3px 3px 3px 25px;
+			text-decoration: none;
+			vertical-align: middle;
+		}
+
 		.song-small-link {
 			padding-left: 1em;
 		}

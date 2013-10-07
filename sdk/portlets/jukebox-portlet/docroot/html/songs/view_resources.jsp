@@ -74,9 +74,23 @@ else {
 			%>
 
 				<li class="song">
-			 		<a class="song-link" href="<%= song.getSongURL(themeDisplay, "mp3") %>" type="audio/mpeg">
-						<%= song.getName() %>
-					</a>
+
+					<%
+					String songURL = song.getSongURL(themeDisplay, "mp3");
+					%>
+
+					<c:choose>
+						<c:when test="<%= Validator.isNotNull(songURL) %>">
+							<a class="song-link" href="<%= songURL %>" type="audio/mpeg">
+								<%= song.getName() %>
+							</a>
+						</c:when>
+						<c:otherwise>
+							<span class="song-link">
+								<%= song.getName() %>
+							</span>
+						</c:otherwise>
+					</c:choose>
 
 					<c:if test="<%= SongPermission.contains(permissionChecker, song.getSongId(), ActionKeys.UPDATE) %>">
 						<portlet:renderURL var="editSongURL">
