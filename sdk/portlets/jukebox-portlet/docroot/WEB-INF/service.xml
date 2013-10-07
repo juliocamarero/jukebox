@@ -66,7 +66,7 @@
 
 		<!-- Primary key column -->
 
-		<column name="albumId" type="long" primary="true" />
+		<column name="albumId" type="long" primary="true" container-model="true" />
 
 		<!-- Foreign key columns -->
 
