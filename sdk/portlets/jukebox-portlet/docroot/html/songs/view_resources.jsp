@@ -61,6 +61,12 @@ else {
 		  <!-- SM2 flash goes here -->
 		</div>
 
+		<c:if test="<%= !XugglerUtil.isEnabled() %>">
+			<div class="alert alert-warning">
+				<liferay-ui:message key="you-should-activate-xuggler" />
+			</div>
+		</c:if>
+
 		<ul class="songs-list graphic">
 
 			<%
