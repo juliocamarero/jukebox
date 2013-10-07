@@ -221,6 +221,14 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		return songPersistence.remove(songId);
 	}
 
+	public Song getSong(
+			long groupId, long artistId, long albumId, String name)
+		throws SystemException {
+
+		return songPersistence.fetchByG_A_A_N(
+			groupId, artistId, albumId, name);
+	}
+
 	public List<Song> getSongs(long groupId) throws SystemException {
 		return songPersistence.findByGroupId(groupId);
 	}

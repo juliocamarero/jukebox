@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.trash.TrashActionKeys;
 import com.liferay.portal.kernel.trash.TrashHandler;
 import com.liferay.portal.kernel.trash.TrashHandlerRegistryUtil;
 import com.liferay.portal.kernel.trash.TrashRenderer;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.ContainerModel;
 import com.liferay.portal.model.TrashedModel;
@@ -28,6 +29,8 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletURLFactoryUtil;
+import com.liferay.portlet.trash.DuplicateEntryException;
+import com.liferay.portlet.trash.TrashEntryConstants;
 import com.liferay.portlet.trash.model.TrashEntry;
 
 import java.util.ArrayList;
@@ -50,6 +53,37 @@ import org.liferay.jukebox.util.PortletKeys;
  * @author Sergio González
  */
 public class SongTrashHandler extends JukeBoxBaseTrashHandler {
+
+	public void checkDuplicateTrashEntry(
+			TrashEntry trashEntry, long containerModelId, String newName)
+		throws PortalException, SystemException {
+
+		Song song = SongLocalServiceUtil.getSong(trashEntry.getClassPK());
+
+		if (containerModelId == TrashEntryConstants.DEFAULT_CONTAINER_ID) {
+			containerModelId = song.getAlbumId();
+		}
+
+		String originalName = trashEntry.getTypeSettingsProperty("title");
+
+		if (Validator.isNotNull(newName)) {
+			originalName = newName;
+		}
+
+		Song duplicateSong = SongLocalServiceUtil.getSong(
+			song.getGroupId(), song.getArtistId(), containerModelId,
+			originalName);
+
+		if (duplicateSong != null) {
+			DuplicateEntryException dee = new DuplicateEntryException();
+
+			dee.setDuplicateEntryId(duplicateSong.getSongId());
+			dee.setOldName(duplicateSong.getName());
+			dee.setTrashEntryId(trashEntry.getEntryId());
+
+			throw dee;
+		}
+	}
 
 	@Override
 	public void deleteTrashEntry(long classPK)
@@ -222,6 +256,17 @@ public class SongTrashHandler extends JukeBoxBaseTrashHandler {
 		throws PortalException, SystemException {
 
 		SongLocalServiceUtil.restoreSongFromTrash(userId, classPK);
+	}
+	
+	@Override
+	public void updateTitle(long classPK, String name)
+		throws PortalException, SystemException {
+
+		Song song = SongLocalServiceUtil.getSong(classPK);
+
+		song.setName(name);
+
+		SongLocalServiceUtil.updateSong(song);
 	}
 
 	@Override
