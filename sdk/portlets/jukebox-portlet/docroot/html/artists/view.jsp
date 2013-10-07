@@ -27,9 +27,9 @@
 </portlet:renderURL>
 
 <aui:form action="<%= searchURL %>" method="post" name="fm">
-	<jsp:include page="/html/artists/toolbar.jsp" />
+	<liferay-util:include page="/html/artists/toolbar.jsp" servletContext="<%= application %>" />
 </aui:form>
 
 <div id="<portlet:namespace />artistPanel">
-	<jsp:include page="/html/artists/view_resources.jsp" />
+	<liferay-util:include page="/html/artists/view_resources.jsp" servletContext="<%= application %>" />
 </div>

@@ -37,10 +37,10 @@ boolean showToolbar = ParamUtil.getBoolean(request, "showToolbar", true);
 	</portlet:renderURL>
 
 	<aui:form action="<%= searchURL %>" method="post" name="fm">
-		<jsp:include page="/html/songs/toolbar.jsp" />
+		<liferay-util:include page="/html/songs/toolbar.jsp" servletContext="<%= application %>" />
 	</aui:form>
 </c:if>
 
 <div id="<portlet:namespace />songPanel">
-	<jsp:include page="/html/songs/view_resources.jsp" />
+	<liferay-util:include page="/html/songs/view_resources.jsp" servletContext="<%= application %>" />
 </div>

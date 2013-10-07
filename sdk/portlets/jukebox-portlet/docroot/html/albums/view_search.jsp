@@ -65,9 +65,9 @@ Hits hits = indexer.search(searchContext);
 </portlet:renderURL>
 
 <aui:form action="<%= searchURL %>" method="post" name="fm">
-	<jsp:include page="/html/albums/toolbar.jsp">
-		<jsp:param name="searchView" value="<%= Boolean.TRUE %>" />
-	</jsp:include>
+	<liferay-util:include page="/html/albums/toolbar.jsp" servletContext="<%= application %>">
+		<liferay-util:param name="searchView" value="<%= Boolean.TRUE %>" />
+	</liferay-util:include>
 </aui:form>
 
 <c:choose>

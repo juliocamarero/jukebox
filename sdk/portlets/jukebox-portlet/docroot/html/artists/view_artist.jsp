@@ -56,10 +56,10 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 	</div>
 
 	<c:if test="<%= !albums.isEmpty() %>">
-		<jsp:include page="/html/albums/view.jsp">
-			<jsp:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
-			<jsp:param name="showToolbar" value="<%= String.valueOf(false) %>" />
-		</jsp:include>
+		<liferay-util:include page="/html/albums/view.jsp" servletContext="<%= application %>">
+			<liferay-util:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
+			<liferay-util:param name="showToolbar" value="<%= String.valueOf(false) %>" />
+		</liferay-util:include>
 	</c:if>
 
 	<c:if test="<%= showHeader %>">
