@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -131,6 +132,17 @@ public class AlbumsPortlet extends MVCPortlet {
 			SessionErrors.add(request, e.getClass().getName());
 
 			response.setRenderParameter("jspPage", "/html/error.jsp");
+		}
+	}
+
+	public void restoreAlbum(ActionRequest request, ActionResponse response)
+		throws Exception {
+
+		long[] restoreEntryIds = StringUtil.split(
+			ParamUtil.getString(request, "restoreEntryIds"), 0L);
+
+		for (long restoreEntryId : restoreEntryIds) {
+			AlbumServiceUtil.restoreAlbumFromTrash(restoreEntryId);
 		}
 	}
 

@@ -25,6 +25,10 @@ boolean showToolbar = ParamUtil.getBoolean(request, "showToolbar", true);
 <liferay-ui:success key="albumUpdated" message="the-album-was-updated-successfully" />
 <liferay-ui:success key="albumDeleted" message="the-album-was-deleted-successfully" />
 
+<portlet:actionURL name="restoreAlbum" var="undoTrashURL" />
+
+<liferay-ui:trash-undo portletURL="<%= undoTrashURL %>" />
+
 <c:if test="<%= (artistId <= 0) && showToolbar %>">
 	<portlet:renderURL var="searchURL">
 		<portlet:param name="jspPage" value="/html/albums/view_search.jsp" />

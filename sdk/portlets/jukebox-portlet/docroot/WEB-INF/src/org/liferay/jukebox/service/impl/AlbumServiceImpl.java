@@ -125,6 +125,16 @@ public class AlbumServiceImpl extends AlbumServiceBaseImpl {
 		return albumLocalService.moveAlbumToTrash(getUserId(), albumId);
 	}
 
+	@Override
+	public Album restoreAlbumFromTrash(long albumId)
+		throws PortalException, SystemException {
+
+		AlbumPermission.check(
+			getPermissionChecker(), albumId, ActionKeys.DELETE);
+
+		return albumLocalService.restoreAlbumFromTrash(getUserId(), albumId);
+	}
+
 	public Album updateAlbum(
 			long albumId, long artistId, String name, int year,
 			InputStream inputStream, ServiceContext serviceContext)
