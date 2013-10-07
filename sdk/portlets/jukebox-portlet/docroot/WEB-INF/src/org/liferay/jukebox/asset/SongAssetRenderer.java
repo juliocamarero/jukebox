@@ -39,6 +39,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
+import com.liferay.portlet.trash.util.TrashUtil;
 import org.liferay.jukebox.model.Song;
 import org.liferay.jukebox.portlet.SongsPortlet;
 import org.liferay.jukebox.service.permission.SongPermission;
@@ -108,7 +109,11 @@ public class SongAssetRenderer
 
 	@Override
 	public String getTitle(Locale locale) {
-		return _song.getName();
+		if (!_song.isInTrash()) {
+			return _song.getName();
+		}
+
+		return TrashUtil.getOriginalTitle(_song.getName());
 	}
 
 	public String getType() {

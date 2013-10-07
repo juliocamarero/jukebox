@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.TransactionCommitCallbackRegistryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Repository;
@@ -39,6 +40,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import com.liferay.portlet.trash.util.TrashUtil;
 import org.liferay.jukebox.DuplicatedSongException;
 import org.liferay.jukebox.SongNameException;
 import org.liferay.jukebox.model.Album;
@@ -253,7 +255,6 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		song.setStatusByUserName(user.getFullName());
 		song.setStatusDate(serviceContext.getModifiedDate(now));
 
-		songPersistence.update(song);
 
 		// Asset
 
@@ -262,9 +263,17 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 
 		// Trash
 
-		trashEntryLocalService.addTrashEntry(
+		UnicodeProperties typeSettingsProperties = new UnicodeProperties();
+
+		typeSettingsProperties.put("title", song.getName());
+
+		TrashEntry trashEntry = trashEntryLocalService.addTrashEntry(
 			userId, song.getGroupId(), Song.class.getName(), song.getSongId(),
-			song.getUuid(), null, oldStatus, null, null);
+			song.getUuid(), null, oldStatus, null, typeSettingsProperties);
+
+		song.setName(TrashUtil.getTrashTitle(trashEntry.getEntryId()));
+
+		songPersistence.update(song);
 
 		return song;
 	}
@@ -286,6 +295,7 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 
 		Song song = songPersistence.findByPrimaryKey(songId);
 
+		song.setName(TrashUtil.getOriginalTitle(song.getName()));
 		song.setModifiedDate(serviceContext.getModifiedDate(now));
 		song.setStatus(trashEntry.getStatus());
 		song.setStatusByUserId(user.getUserId());
@@ -443,7 +453,8 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 			throw new SongNameException();
 		}
 
-		Song song = songPersistence.fetchByG_A_A(groupId, artistId, albumId);
+		Song song = songPersistence.fetchByG_A_A_N(
+			groupId, artistId, albumId, name);
 
 		if ((song != null) && (song.getSongId() != songId)) {
 			throw new DuplicatedSongException();

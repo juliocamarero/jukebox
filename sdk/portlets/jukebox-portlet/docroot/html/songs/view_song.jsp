@@ -64,7 +64,7 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 		<ul class="songs-list graphic">
 			<li class="song">
 				<a class="song-link" href="<%= song.getSongURL(themeDisplay, "mp3") %>" type="audio/mpeg">
-					<%= song.getName() %>
+					<%= song.isInTrash() ? TrashUtil.getOriginalTitle(song.getName()) : song.getName() %>
 				</a>
 
 				<c:if test="<%= Validator.isNotNull(song.getLyricsURL(themeDisplay)) %>">

@@ -23,6 +23,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.trash.util.TrashUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import java.io.InputStream;
@@ -111,7 +112,9 @@ public class SongsPortlet extends MVCPortlet {
 				data.put(
 					"deleteEntryClassName",
 					new String[] {Song.class.getName()});
-				data.put("deleteEntryTitle", new String[] {song.getName()});
+				data.put(
+					"deleteEntryTitle",
+					new String[] {TrashUtil.getOriginalTitle(song.getName())});
 				data.put(
 					"restoreEntryIds", new String[] {String.valueOf(songId)});
 
