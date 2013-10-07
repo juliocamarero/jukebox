@@ -45,6 +45,7 @@
 		<indexer-class>org.liferay.jukebox.util.SongIndexer</indexer-class>
 		<template-handler>org.liferay.jukebox.template.SongsPortletDisplayTemplateHandler</template-handler>
 		<asset-renderer-factory>org.liferay.jukebox.asset.SongAssetRendererFactory</asset-renderer-factory>
+		<trash-handler>org.liferay.jukebox.trash.AlbumTrashHandler</trash-handler>
 		<trash-handler>org.liferay.jukebox.trash.SongTrashHandler</trash-handler>
 		<instanceable>false</instanceable>
 		<scopeable>true</scopeable>

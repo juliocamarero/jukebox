@@ -20,14 +20,19 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.User;
 import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.trash.model.TrashEntry;
+import com.liferay.portlet.trash.model.TrashVersion;
 
 import java.io.InputStream;
 
@@ -189,6 +194,94 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public Album moveAlbumToTrash(long userId, long albumId)
+		throws PortalException, SystemException {
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		// Folder
+
+		User user = userPersistence.findByPrimaryKey(userId);
+		Date now = new Date();
+
+		Album album = albumPersistence.findByPrimaryKey(albumId);
+
+		int oldStatus = album.getStatus();
+
+		album.setModifiedDate(serviceContext.getModifiedDate(now));
+		album.setStatus(WorkflowConstants.STATUS_IN_TRASH);
+		album.setStatusByUserId(user.getUserId());
+		album.setStatusByUserName(user.getFullName());
+		album.setStatusDate(serviceContext.getModifiedDate(now));
+
+		albumPersistence.update(album);
+
+		// Asset
+
+		assetEntryLocalService.updateVisible(
+			Album.class.getName(), album.getAlbumId(), false);
+
+		// Trash
+
+		TrashEntry trashEntry = trashEntryLocalService.addTrashEntry(
+			userId, album.getGroupId(), Album.class.getName(),
+			album.getAlbumId(), album.getUuid(), null, oldStatus, null, null);
+
+		// Folders and entries
+
+		List<Song> songs = songLocalService.getSongsByAlbumId(
+			album.getAlbumId());
+
+		moveDependentsToTrash(songs, trashEntry.getEntryId());
+
+		return album;
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public Album restoreAlbumFromTrash(long userId, long albumId)
+		throws PortalException, SystemException {
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		// Folder
+
+		User user = userPersistence.findByPrimaryKey(userId);
+		Date now = new Date();
+
+		Album album = albumPersistence.findByPrimaryKey(albumId);
+
+		TrashEntry trashEntry = trashEntryLocalService.getEntry(
+			Album.class.getName(), albumId);
+
+		album.setModifiedDate(serviceContext.getModifiedDate(now));
+		album.setStatus(trashEntry.getStatus());
+		album.setStatusByUserId(user.getUserId());
+		album.setStatusByUserName(user.getFullName());
+		album.setStatusDate(serviceContext.getModifiedDate(now));
+
+		albumPersistence.update(album);
+
+		assetEntryLocalService.updateVisible(
+			Album.class.getName(), album.getAlbumId(), true);
+
+		// Songs
+
+		List<Song> songs = songLocalService.getSongsByAlbumId(
+			album.getGroupId(), album.getAlbumId(),
+			WorkflowConstants.STATUS_IN_TRASH);
+
+		restoreDependentsFromTrash(songs, trashEntry.getEntryId());
+
+		// Trash
+
+		trashEntryLocalService.deleteEntry(trashEntry.getEntryId());
+
+		return album;
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
 	public Album updateAlbum(
 			long userId, long albumId, long artistId, String name, int year,
 			InputStream inputStream, ServiceContext serviceContext)
@@ -257,6 +350,101 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 			album.getUuid(), 0, assetCategoryIds, assetTagNames, true, null,
 			null, null, ContentTypes.TEXT_HTML, album.getName(), null, null,
 			null, null, 0, 0, null, false);
+	}
+
+	protected void moveDependentsToTrash(List<Song> songs, long trashEntryId)
+		throws PortalException, SystemException {
+
+		for (Song song : songs) {
+
+			// Entry
+
+			if (song.isInTrash()) {
+				continue;
+			}
+
+			int oldStatus = song.getStatus();
+
+			song.setStatus(WorkflowConstants.STATUS_IN_TRASH);
+
+			songPersistence.update(song);
+
+			// Trash
+
+			int status = oldStatus;
+
+			if (oldStatus == WorkflowConstants.STATUS_PENDING) {
+				status = WorkflowConstants.STATUS_DRAFT;
+			}
+
+			if (oldStatus != WorkflowConstants.STATUS_APPROVED) {
+				trashVersionLocalService.addTrashVersion(
+					trashEntryId, Song.class.getName(), song.getSongId(),
+					status);
+			}
+
+			// Asset
+
+			assetEntryLocalService.updateVisible(
+				Song.class.getName(), song.getSongId(), false);
+
+			// Indexer
+
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				Song.class);
+
+			indexer.reindex(song);
+		}
+	}
+
+	protected void restoreDependentsFromTrash(
+			List<Song> songs, long trashEntryId)
+		throws PortalException, SystemException {
+
+		for (Song song : songs) {
+
+			// Song
+
+			TrashEntry trashEntry = trashEntryLocalService.fetchEntry(
+				Song.class.getName(), song.getSongId());
+
+			if (trashEntry != null) {
+				continue;
+			}
+
+			TrashVersion trashVersion = trashVersionLocalService.fetchVersion(
+				trashEntryId, Song.class.getName(), song.getSongId());
+
+			int oldStatus = WorkflowConstants.STATUS_APPROVED;
+
+			if (trashVersion != null) {
+				oldStatus = trashVersion.getStatus();
+			}
+
+			song.setStatus(oldStatus);
+
+			songPersistence.update(song);
+
+			// Trash
+
+			if (trashVersion != null) {
+				trashVersionLocalService.deleteTrashVersion(trashVersion);
+			}
+
+			// Asset
+
+			if (oldStatus == WorkflowConstants.STATUS_APPROVED) {
+				assetEntryLocalService.updateVisible(
+					Song.class.getName(), song.getSongId(), true);
+			}
+
+			// Indexer
+
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				Song.class);
+
+			indexer.reindex(song);
+		}
 	}
 
 	protected void validate(String name) throws PortalException {
