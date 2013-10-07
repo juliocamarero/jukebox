@@ -26,6 +26,9 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import java.io.InputStream;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
@@ -87,15 +90,42 @@ public class AlbumsPortlet extends MVCPortlet {
 
 		long albumId = ParamUtil.getLong(request, "albumId");
 
+		boolean moveToTrash = ParamUtil.getBoolean(request, "moveToTrash");
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Album.class.getName(), request);
 
 		try {
-			AlbumServiceUtil.deleteAlbum(albumId, serviceContext);
+			if (moveToTrash) {
+				Album album = AlbumServiceUtil.moveAlbumToTrash(albumId);
 
-			SessionMessages.add(request, "albumDeleted");
+				Map<String, String[]> data = new HashMap<String, String[]>();
 
-			sendRedirect(request, response);
+				data.put(
+					"deleteEntryClassName",
+					new String[] {Album.class.getName()});
+				data.put("deleteEntryTitle", new String[] {album.getName()});
+				data.put(
+					"restoreEntryIds", new String[] {String.valueOf(albumId)});
+
+				SessionMessages.add(
+					request,
+					PortalUtil.getPortletId(request) +
+						SessionMessages.KEY_SUFFIX_DELETE_SUCCESS_DATA, data);
+
+				SessionMessages.add(
+					request,
+					PortalUtil.getPortletId(request) +
+						SessionMessages.
+							KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
+			}
+			else {
+				AlbumServiceUtil.deleteAlbum(albumId, serviceContext);
+
+				SessionMessages.add(request, "albumDeleted");
+
+				sendRedirect(request, response);
+			}
 		}
 		catch (Exception e) {
 			SessionErrors.add(request, e.getClass().getName());

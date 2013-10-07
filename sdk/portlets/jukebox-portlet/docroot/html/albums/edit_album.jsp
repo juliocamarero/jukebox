@@ -78,12 +78,18 @@ if (albumId > 0) {
 		<aui:button type="submit" />
 
 		<c:if test="<%= album != null %>">
+
+			<%
+			boolean trashEnabled = TrashUtil.isTrashEnabled(scopeGroupId);
+			%>
+
 			<portlet:actionURL name="deleteAlbum" var="deleteAlbumURL">
 				<portlet:param name="albumId" value="<%= String.valueOf(album.getAlbumId()) %>" />
+				<portlet:param name="moveToTrash" value="<%= String.valueOf(trashEnabled) %>" />
 				<portlet:param name="redirect" value="<%= redirect %>" />
 			</portlet:actionURL>
 
-			<aui:button cssClass="btn-danger" href="<%= deleteAlbumURL %>" value="delete" />
+			<aui:button cssClass="btn-danger" href="<%= deleteAlbumURL %>" value='<%= trashEnabled ? "move-to-trash" : "delete" %>' />
 		</c:if>
 	</aui:button-row>
 </aui:form>

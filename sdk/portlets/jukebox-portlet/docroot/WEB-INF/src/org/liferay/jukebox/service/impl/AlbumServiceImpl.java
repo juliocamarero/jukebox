@@ -114,6 +114,17 @@ public class AlbumServiceImpl extends AlbumServiceBaseImpl {
 			groupId, artistId, WorkflowConstants.STATUS_APPROVED);
 	}
 
+	@Override
+	public Album moveAlbumToTrash(long albumId)
+		throws PortalException, SystemException {
+
+		Album album = albumPersistence.findByPrimaryKey(albumId);
+
+		AlbumPermission.check(getPermissionChecker(), album, ActionKeys.DELETE);
+
+		return albumLocalService.moveAlbumToTrash(getUserId(), albumId);
+	}
+
 	public Album updateAlbum(
 			long albumId, long artistId, String name, int year,
 			InputStream inputStream, ServiceContext serviceContext)
