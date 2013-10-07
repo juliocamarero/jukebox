@@ -84,16 +84,16 @@ public class SongServiceWrapper implements SongService,
 
 	@Override
 	public java.util.List<org.liferay.jukebox.model.Song> getSongs(
-		long groupId, java.lang.String keywords)
+		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _songService.getSongs(groupId, keywords);
+		return _songService.getSongs(groupId, start, end);
 	}
 
 	@Override
 	public java.util.List<org.liferay.jukebox.model.Song> getSongs(
-		long groupId, int start, int end)
+		long groupId, java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _songService.getSongs(groupId, start, end);
+		return _songService.getSongs(groupId, keywords);
 	}
 
 	@Override
@@ -126,6 +126,13 @@ public class SongServiceWrapper implements SongService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _songService.moveSongToTrash(songId);
+	}
+
+	@Override
+	public org.liferay.jukebox.model.Song restoreSongFromTrash(long songId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _songService.restoreSongFromTrash(songId);
 	}
 
 	@Override

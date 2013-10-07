@@ -51,11 +51,11 @@ public class AlbumServiceClpInvoker {
 
 		_methodName69 = "getAlbums";
 
-		_methodParameterTypes69 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes69 = new String[] { "long", "int", "int" };
 
 		_methodName70 = "getAlbums";
 
-		_methodParameterTypes70 = new String[] { "long", "int", "int" };
+		_methodParameterTypes70 = new String[] { "long", "java.lang.String" };
 
 		_methodName71 = "getAlbumsByArtistId";
 
@@ -118,14 +118,14 @@ public class AlbumServiceClpInvoker {
 		if (_methodName69.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
 			return AlbumServiceUtil.getAlbums(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1]);
+				((Integer)arguments[1]).intValue(),
+				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName70.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
 			return AlbumServiceUtil.getAlbums(((Long)arguments[0]).longValue(),
-				((Integer)arguments[1]).intValue(),
-				((Integer)arguments[2]).intValue());
+				(java.lang.String)arguments[1]);
 		}
 
 		if (_methodName71.equals(name) &&

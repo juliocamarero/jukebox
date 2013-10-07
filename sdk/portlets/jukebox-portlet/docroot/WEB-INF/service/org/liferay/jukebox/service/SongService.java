@@ -84,12 +84,12 @@ public interface SongService extends BaseService, InvokableService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<org.liferay.jukebox.model.Song> getSongs(
-		long groupId, java.lang.String keywords)
+		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<org.liferay.jukebox.model.Song> getSongs(
-		long groupId, int start, int end)
+		long groupId, java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -110,6 +110,10 @@ public interface SongService extends BaseService, InvokableService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public org.liferay.jukebox.model.Song moveSongToTrash(long songId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public org.liferay.jukebox.model.Song restoreSongFromTrash(long songId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

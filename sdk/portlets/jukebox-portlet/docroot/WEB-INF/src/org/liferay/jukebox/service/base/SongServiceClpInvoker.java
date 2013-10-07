@@ -52,11 +52,11 @@ public class SongServiceClpInvoker {
 
 		_methodName75 = "getSongs";
 
-		_methodParameterTypes75 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes75 = new String[] { "long", "int", "int" };
 
 		_methodName76 = "getSongs";
 
-		_methodParameterTypes76 = new String[] { "long", "int", "int" };
+		_methodParameterTypes76 = new String[] { "long", "java.lang.String" };
 
 		_methodName77 = "getSongsByAlbumId";
 
@@ -78,9 +78,13 @@ public class SongServiceClpInvoker {
 
 		_methodParameterTypes81 = new String[] { "long" };
 
-		_methodName82 = "updateSong";
+		_methodName82 = "restoreSongFromTrash";
 
-		_methodParameterTypes82 = new String[] {
+		_methodParameterTypes82 = new String[] { "long" };
+
+		_methodName83 = "updateSong";
+
+		_methodParameterTypes83 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String",
 				"java.io.InputStream", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
@@ -125,14 +129,14 @@ public class SongServiceClpInvoker {
 		if (_methodName75.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
 			return SongServiceUtil.getSongs(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1]);
+				((Integer)arguments[1]).intValue(),
+				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName76.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
 			return SongServiceUtil.getSongs(((Long)arguments[0]).longValue(),
-				((Integer)arguments[1]).intValue(),
-				((Integer)arguments[2]).intValue());
+				(java.lang.String)arguments[1]);
 		}
 
 		if (_methodName77.equals(name) &&
@@ -165,6 +169,11 @@ public class SongServiceClpInvoker {
 
 		if (_methodName82.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes82, parameterTypes)) {
+			return SongServiceUtil.restoreSongFromTrash(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName83.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes83, parameterTypes)) {
 			return SongServiceUtil.updateSong(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
@@ -203,4 +212,6 @@ public class SongServiceClpInvoker {
 	private String[] _methodParameterTypes81;
 	private String _methodName82;
 	private String[] _methodParameterTypes82;
+	private String _methodName83;
+	private String[] _methodParameterTypes83;
 }

@@ -51,11 +51,11 @@ public class AlbumServiceClp implements AlbumService {
 
 		_methodName6 = "getAlbums";
 
-		_methodParameterTypes6 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes6 = new String[] { "long", "int", "int" };
 
 		_methodName7 = "getAlbums";
 
-		_methodParameterTypes7 = new String[] { "long", "int", "int" };
+		_methodParameterTypes7 = new String[] { "long", "java.lang.String" };
 
 		_methodName8 = "getAlbumsByArtistId";
 
@@ -247,15 +247,13 @@ public class AlbumServiceClp implements AlbumService {
 
 	@Override
 	public java.util.List<org.liferay.jukebox.model.Album> getAlbums(
-		long groupId, java.lang.String keywords)
+		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6,
-					new Object[] { groupId, ClpSerializer.translateInput(
-							keywords) });
+					_methodParameterTypes6, new Object[] { groupId, start, end });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -278,13 +276,15 @@ public class AlbumServiceClp implements AlbumService {
 
 	@Override
 	public java.util.List<org.liferay.jukebox.model.Album> getAlbums(
-		long groupId, int start, int end)
+		long groupId, java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7, new Object[] { groupId, start, end });
+					_methodParameterTypes7,
+					new Object[] { groupId, ClpSerializer.translateInput(
+							keywords) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
