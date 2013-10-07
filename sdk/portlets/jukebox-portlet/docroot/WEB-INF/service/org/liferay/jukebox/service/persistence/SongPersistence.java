@@ -1599,74 +1599,6 @@ public interface SongPersistence extends BasePersistence<Song> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the song where groupId = &#63; and artistId = &#63; and albumId = &#63; or throws a {@link org.liferay.jukebox.NoSuchSongException} if it could not be found.
-	*
-	* @param groupId the group ID
-	* @param artistId the artist ID
-	* @param albumId the album ID
-	* @return the matching song
-	* @throws org.liferay.jukebox.NoSuchSongException if a matching song could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public org.liferay.jukebox.model.Song findByG_A_A(long groupId,
-		long artistId, long albumId)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			org.liferay.jukebox.NoSuchSongException;
-
-	/**
-	* Returns the song where groupId = &#63; and artistId = &#63; and albumId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param groupId the group ID
-	* @param artistId the artist ID
-	* @param albumId the album ID
-	* @return the matching song, or <code>null</code> if a matching song could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public org.liferay.jukebox.model.Song fetchByG_A_A(long groupId,
-		long artistId, long albumId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the song where groupId = &#63; and artistId = &#63; and albumId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param groupId the group ID
-	* @param artistId the artist ID
-	* @param albumId the album ID
-	* @param retrieveFromCache whether to use the finder cache
-	* @return the matching song, or <code>null</code> if a matching song could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public org.liferay.jukebox.model.Song fetchByG_A_A(long groupId,
-		long artistId, long albumId, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes the song where groupId = &#63; and artistId = &#63; and albumId = &#63; from the database.
-	*
-	* @param groupId the group ID
-	* @param artistId the artist ID
-	* @param albumId the album ID
-	* @return the song that was removed
-	* @throws SystemException if a system exception occurred
-	*/
-	public org.liferay.jukebox.model.Song removeByG_A_A(long groupId,
-		long artistId, long albumId)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			org.liferay.jukebox.NoSuchSongException;
-
-	/**
-	* Returns the number of songs where groupId = &#63; and artistId = &#63; and albumId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param artistId the artist ID
-	* @param albumId the album ID
-	* @return the number of matching songs
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByG_A_A(long groupId, long artistId, long albumId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Returns all the songs where groupId = &#63; and name LIKE &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
@@ -1906,6 +1838,81 @@ public interface SongPersistence extends BasePersistence<Song> {
 	*/
 	public int filterCountByG_LikeN_S(long groupId, java.lang.String name,
 		int status) throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the song where groupId = &#63; and artistId = &#63; and albumId = &#63; and name = &#63; or throws a {@link org.liferay.jukebox.NoSuchSongException} if it could not be found.
+	*
+	* @param groupId the group ID
+	* @param artistId the artist ID
+	* @param albumId the album ID
+	* @param name the name
+	* @return the matching song
+	* @throws org.liferay.jukebox.NoSuchSongException if a matching song could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Song findByG_A_A_N(long groupId,
+		long artistId, long albumId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchSongException;
+
+	/**
+	* Returns the song where groupId = &#63; and artistId = &#63; and albumId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param groupId the group ID
+	* @param artistId the artist ID
+	* @param albumId the album ID
+	* @param name the name
+	* @return the matching song, or <code>null</code> if a matching song could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Song fetchByG_A_A_N(long groupId,
+		long artistId, long albumId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the song where groupId = &#63; and artistId = &#63; and albumId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param groupId the group ID
+	* @param artistId the artist ID
+	* @param albumId the album ID
+	* @param name the name
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching song, or <code>null</code> if a matching song could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Song fetchByG_A_A_N(long groupId,
+		long artistId, long albumId, java.lang.String name,
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the song where groupId = &#63; and artistId = &#63; and albumId = &#63; and name = &#63; from the database.
+	*
+	* @param groupId the group ID
+	* @param artistId the artist ID
+	* @param albumId the album ID
+	* @param name the name
+	* @return the song that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public org.liferay.jukebox.model.Song removeByG_A_A_N(long groupId,
+		long artistId, long albumId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.liferay.jukebox.NoSuchSongException;
+
+	/**
+	* Returns the number of songs where groupId = &#63; and artistId = &#63; and albumId = &#63; and name = &#63;.
+	*
+	* @param groupId the group ID
+	* @param artistId the artist ID
+	* @param albumId the album ID
+	* @param name the name
+	* @return the number of matching songs
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByG_A_A_N(long groupId, long artistId, long albumId,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Caches the song in the entity cache if it is enabled.

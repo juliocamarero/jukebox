@@ -6104,262 +6104,6 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 	private static final String _FINDER_COLUMN_G_A_S_GROUPID_2 = "song.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_A_S_ALBUMID_2 = "song.albumId = ? AND ";
 	private static final String _FINDER_COLUMN_G_A_S_STATUS_2 = "song.status = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_A_A = new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
-			SongModelImpl.FINDER_CACHE_ENABLED, SongImpl.class,
-			FINDER_CLASS_NAME_ENTITY, "fetchByG_A_A",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			},
-			SongModelImpl.GROUPID_COLUMN_BITMASK |
-			SongModelImpl.ARTISTID_COLUMN_BITMASK |
-			SongModelImpl.ALBUMID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_A_A = new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
-			SongModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_A_A",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			});
-
-	/**
-	 * Returns the song where groupId = &#63; and artistId = &#63; and albumId = &#63; or throws a {@link org.liferay.jukebox.NoSuchSongException} if it could not be found.
-	 *
-	 * @param groupId the group ID
-	 * @param artistId the artist ID
-	 * @param albumId the album ID
-	 * @return the matching song
-	 * @throws org.liferay.jukebox.NoSuchSongException if a matching song could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public Song findByG_A_A(long groupId, long artistId, long albumId)
-		throws NoSuchSongException, SystemException {
-		Song song = fetchByG_A_A(groupId, artistId, albumId);
-
-		if (song == null) {
-			StringBundler msg = new StringBundler(8);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("groupId=");
-			msg.append(groupId);
-
-			msg.append(", artistId=");
-			msg.append(artistId);
-
-			msg.append(", albumId=");
-			msg.append(albumId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchSongException(msg.toString());
-		}
-
-		return song;
-	}
-
-	/**
-	 * Returns the song where groupId = &#63; and artistId = &#63; and albumId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param groupId the group ID
-	 * @param artistId the artist ID
-	 * @param albumId the album ID
-	 * @return the matching song, or <code>null</code> if a matching song could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public Song fetchByG_A_A(long groupId, long artistId, long albumId)
-		throws SystemException {
-		return fetchByG_A_A(groupId, artistId, albumId, true);
-	}
-
-	/**
-	 * Returns the song where groupId = &#63; and artistId = &#63; and albumId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param groupId the group ID
-	 * @param artistId the artist ID
-	 * @param albumId the album ID
-	 * @param retrieveFromCache whether to use the finder cache
-	 * @return the matching song, or <code>null</code> if a matching song could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public Song fetchByG_A_A(long groupId, long artistId, long albumId,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, artistId, albumId };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_A_A,
-					finderArgs, this);
-		}
-
-		if (result instanceof Song) {
-			Song song = (Song)result;
-
-			if ((groupId != song.getGroupId()) ||
-					(artistId != song.getArtistId()) ||
-					(albumId != song.getAlbumId())) {
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(5);
-
-			query.append(_SQL_SELECT_SONG_WHERE);
-
-			query.append(_FINDER_COLUMN_G_A_A_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_A_A_ARTISTID_2);
-
-			query.append(_FINDER_COLUMN_G_A_A_ALBUMID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(artistId);
-
-				qPos.add(albumId);
-
-				List<Song> list = q.list();
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_A,
-						finderArgs, list);
-				}
-				else {
-					Song song = list.get(0);
-
-					result = song;
-
-					cacheResult(song);
-
-					if ((song.getGroupId() != groupId) ||
-							(song.getArtistId() != artistId) ||
-							(song.getAlbumId() != albumId)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_A,
-							finderArgs, song);
-					}
-				}
-			}
-			catch (Exception e) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_A,
-					finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (Song)result;
-		}
-	}
-
-	/**
-	 * Removes the song where groupId = &#63; and artistId = &#63; and albumId = &#63; from the database.
-	 *
-	 * @param groupId the group ID
-	 * @param artistId the artist ID
-	 * @param albumId the album ID
-	 * @return the song that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public Song removeByG_A_A(long groupId, long artistId, long albumId)
-		throws NoSuchSongException, SystemException {
-		Song song = findByG_A_A(groupId, artistId, albumId);
-
-		return remove(song);
-	}
-
-	/**
-	 * Returns the number of songs where groupId = &#63; and artistId = &#63; and albumId = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param artistId the artist ID
-	 * @param albumId the album ID
-	 * @return the number of matching songs
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public int countByG_A_A(long groupId, long artistId, long albumId)
-		throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_A_A;
-
-		Object[] finderArgs = new Object[] { groupId, artistId, albumId };
-
-		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
-				this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_COUNT_SONG_WHERE);
-
-			query.append(_FINDER_COLUMN_G_A_A_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_A_A_ARTISTID_2);
-
-			query.append(_FINDER_COLUMN_G_A_A_ALBUMID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(artistId);
-
-				qPos.add(albumId);
-
-				count = (Long)q.uniqueResult();
-
-				FinderCacheUtil.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				FinderCacheUtil.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_G_A_A_GROUPID_2 = "song.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_A_A_ARTISTID_2 = "song.artistId = ? AND ";
-	private static final String _FINDER_COLUMN_G_A_A_ALBUMID_2 = "song.albumId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_LIKEN_S =
 		new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
 			SongModelImpl.FINDER_CACHE_ENABLED, SongImpl.class,
@@ -7396,6 +7140,315 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 	private static final String _FINDER_COLUMN_G_LIKEN_S_NAME_2 = "lower(song.name) LIKE ? AND ";
 	private static final String _FINDER_COLUMN_G_LIKEN_S_NAME_3 = "(song.name IS NULL OR song.name LIKE '') AND ";
 	private static final String _FINDER_COLUMN_G_LIKEN_S_STATUS_2 = "song.status = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_A_A_N = new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
+			SongModelImpl.FINDER_CACHE_ENABLED, SongImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByG_A_A_N",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				String.class.getName()
+			},
+			SongModelImpl.GROUPID_COLUMN_BITMASK |
+			SongModelImpl.ARTISTID_COLUMN_BITMASK |
+			SongModelImpl.ALBUMID_COLUMN_BITMASK |
+			SongModelImpl.NAME_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_A_A_N = new FinderPath(SongModelImpl.ENTITY_CACHE_ENABLED,
+			SongModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_A_A_N",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				String.class.getName()
+			});
+
+	/**
+	 * Returns the song where groupId = &#63; and artistId = &#63; and albumId = &#63; and name = &#63; or throws a {@link org.liferay.jukebox.NoSuchSongException} if it could not be found.
+	 *
+	 * @param groupId the group ID
+	 * @param artistId the artist ID
+	 * @param albumId the album ID
+	 * @param name the name
+	 * @return the matching song
+	 * @throws org.liferay.jukebox.NoSuchSongException if a matching song could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Song findByG_A_A_N(long groupId, long artistId, long albumId,
+		String name) throws NoSuchSongException, SystemException {
+		Song song = fetchByG_A_A_N(groupId, artistId, albumId, name);
+
+		if (song == null) {
+			StringBundler msg = new StringBundler(10);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", artistId=");
+			msg.append(artistId);
+
+			msg.append(", albumId=");
+			msg.append(albumId);
+
+			msg.append(", name=");
+			msg.append(name);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchSongException(msg.toString());
+		}
+
+		return song;
+	}
+
+	/**
+	 * Returns the song where groupId = &#63; and artistId = &#63; and albumId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group ID
+	 * @param artistId the artist ID
+	 * @param albumId the album ID
+	 * @param name the name
+	 * @return the matching song, or <code>null</code> if a matching song could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Song fetchByG_A_A_N(long groupId, long artistId, long albumId,
+		String name) throws SystemException {
+		return fetchByG_A_A_N(groupId, artistId, albumId, name, true);
+	}
+
+	/**
+	 * Returns the song where groupId = &#63; and artistId = &#63; and albumId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group ID
+	 * @param artistId the artist ID
+	 * @param albumId the album ID
+	 * @param name the name
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching song, or <code>null</code> if a matching song could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Song fetchByG_A_A_N(long groupId, long artistId, long albumId,
+		String name, boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, artistId, albumId, name };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_A_A_N,
+					finderArgs, this);
+		}
+
+		if (result instanceof Song) {
+			Song song = (Song)result;
+
+			if ((groupId != song.getGroupId()) ||
+					(artistId != song.getArtistId()) ||
+					(albumId != song.getAlbumId()) ||
+					!Validator.equals(name, song.getName())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(6);
+
+			query.append(_SQL_SELECT_SONG_WHERE);
+
+			query.append(_FINDER_COLUMN_G_A_A_N_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_A_A_N_ARTISTID_2);
+
+			query.append(_FINDER_COLUMN_G_A_A_N_ALBUMID_2);
+
+			boolean bindName = false;
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_G_A_A_N_NAME_1);
+			}
+			else if (name.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_A_A_N_NAME_3);
+			}
+			else {
+				bindName = true;
+
+				query.append(_FINDER_COLUMN_G_A_A_N_NAME_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(artistId);
+
+				qPos.add(albumId);
+
+				if (bindName) {
+					qPos.add(name);
+				}
+
+				List<Song> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_A_N,
+						finderArgs, list);
+				}
+				else {
+					Song song = list.get(0);
+
+					result = song;
+
+					cacheResult(song);
+
+					if ((song.getGroupId() != groupId) ||
+							(song.getArtistId() != artistId) ||
+							(song.getAlbumId() != albumId) ||
+							(song.getName() == null) ||
+							!song.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_A_N,
+							finderArgs, song);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_A_N,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (Song)result;
+		}
+	}
+
+	/**
+	 * Removes the song where groupId = &#63; and artistId = &#63; and albumId = &#63; and name = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param artistId the artist ID
+	 * @param albumId the album ID
+	 * @param name the name
+	 * @return the song that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Song removeByG_A_A_N(long groupId, long artistId, long albumId,
+		String name) throws NoSuchSongException, SystemException {
+		Song song = findByG_A_A_N(groupId, artistId, albumId, name);
+
+		return remove(song);
+	}
+
+	/**
+	 * Returns the number of songs where groupId = &#63; and artistId = &#63; and albumId = &#63; and name = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param artistId the artist ID
+	 * @param albumId the album ID
+	 * @param name the name
+	 * @return the number of matching songs
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByG_A_A_N(long groupId, long artistId, long albumId,
+		String name) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_A_A_N;
+
+		Object[] finderArgs = new Object[] { groupId, artistId, albumId, name };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(5);
+
+			query.append(_SQL_COUNT_SONG_WHERE);
+
+			query.append(_FINDER_COLUMN_G_A_A_N_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_A_A_N_ARTISTID_2);
+
+			query.append(_FINDER_COLUMN_G_A_A_N_ALBUMID_2);
+
+			boolean bindName = false;
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_G_A_A_N_NAME_1);
+			}
+			else if (name.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_A_A_N_NAME_3);
+			}
+			else {
+				bindName = true;
+
+				query.append(_FINDER_COLUMN_G_A_A_N_NAME_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(artistId);
+
+				qPos.add(albumId);
+
+				if (bindName) {
+					qPos.add(name);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_G_A_A_N_GROUPID_2 = "song.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_A_A_N_ARTISTID_2 = "song.artistId = ? AND ";
+	private static final String _FINDER_COLUMN_G_A_A_N_ALBUMID_2 = "song.albumId = ? AND ";
+	private static final String _FINDER_COLUMN_G_A_A_N_NAME_1 = "song.name IS NULL";
+	private static final String _FINDER_COLUMN_G_A_A_N_NAME_2 = "song.name = ?";
+	private static final String _FINDER_COLUMN_G_A_A_N_NAME_3 = "(song.name IS NULL OR song.name = '')";
 
 	public SongPersistenceImpl() {
 		setModelClass(Song.class);
@@ -7414,9 +7467,10 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] { song.getUuid(), song.getGroupId() }, song);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_A,
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_A_N,
 			new Object[] {
-				song.getGroupId(), song.getArtistId(), song.getAlbumId()
+				song.getGroupId(), song.getArtistId(), song.getAlbumId(),
+				song.getName()
 			}, song);
 
 		song.resetOriginalValues();
@@ -7500,12 +7554,13 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args, song);
 
 			args = new Object[] {
-					song.getGroupId(), song.getArtistId(), song.getAlbumId()
+					song.getGroupId(), song.getArtistId(), song.getAlbumId(),
+					song.getName()
 				};
 
-			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_A_A, args,
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_A_A_N, args,
 				Long.valueOf(1));
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_A, args, song);
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_A_N, args, song);
 		}
 		else {
 			SongModelImpl songModelImpl = (SongModelImpl)song;
@@ -7521,14 +7576,16 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 			}
 
 			if ((songModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_G_A_A.getColumnBitmask()) != 0) {
+					FINDER_PATH_FETCH_BY_G_A_A_N.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						song.getGroupId(), song.getArtistId(), song.getAlbumId()
+						song.getGroupId(), song.getArtistId(), song.getAlbumId(),
+						song.getName()
 					};
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_A_A, args,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_A_A_N, args,
 					Long.valueOf(1));
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_A, args, song);
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_A_N, args,
+					song);
 			}
 		}
 	}
@@ -7553,22 +7610,24 @@ public class SongPersistenceImpl extends BasePersistenceImpl<Song>
 		}
 
 		args = new Object[] {
-				song.getGroupId(), song.getArtistId(), song.getAlbumId()
+				song.getGroupId(), song.getArtistId(), song.getAlbumId(),
+				song.getName()
 			};
 
-		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_A_A, args);
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_A, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_A_A_N, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_A_N, args);
 
 		if ((songModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_G_A_A.getColumnBitmask()) != 0) {
+				FINDER_PATH_FETCH_BY_G_A_A_N.getColumnBitmask()) != 0) {
 			args = new Object[] {
 					songModelImpl.getOriginalGroupId(),
 					songModelImpl.getOriginalArtistId(),
-					songModelImpl.getOriginalAlbumId()
+					songModelImpl.getOriginalAlbumId(),
+					songModelImpl.getOriginalName()
 				};
 
-			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_A_A, args);
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_A, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_A_A_N, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_A_N, args);
 		}
 	}
 
