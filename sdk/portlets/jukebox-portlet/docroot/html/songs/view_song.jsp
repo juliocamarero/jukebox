@@ -68,7 +68,7 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 				</a>
 
 				<c:if test="<%= Validator.isNotNull(song.getLyricsURL(themeDisplay)) %>">
-					<liferay-ui:icon image="../aui/align-left" url="<%= song.getLyricsURL(themeDisplay) %>" message="lyrics" />
+					<liferay-ui:icon cssClass="song-small-link" image="../aui/align-left" label="<%= true %>" url="<%= song.getLyricsURL(themeDisplay) %>" message="lyrics" method="get" />
 				</c:if>
 			</li>
 		</ul>
