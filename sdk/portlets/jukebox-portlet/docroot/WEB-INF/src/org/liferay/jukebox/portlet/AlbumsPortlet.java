@@ -124,9 +124,9 @@ public class AlbumsPortlet extends MVCPortlet {
 				AlbumServiceUtil.deleteAlbum(albumId, serviceContext);
 
 				SessionMessages.add(request, "albumDeleted");
-
-				sendRedirect(request, response);
 			}
+
+			sendRedirect(request, response);
 		}
 		catch (Exception e) {
 			SessionErrors.add(request, e.getClass().getName());
