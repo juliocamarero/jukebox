@@ -1,3 +1,5 @@
+<%@ page import="org.liferay.jukebox.SongNameException" %>
+<%@ page import="org.liferay.jukebox.DuplicatedSongException" %>
 <%--
 /**
  * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
@@ -56,6 +58,9 @@ if (songId > 0) {
 		%>
 
 	</aui:select>
+
+	<liferay-ui:error exception="<%= SongNameException.class %>" message="please-enter-a-valid-name" />
+	<liferay-ui:error exception="<%= DuplicatedSongException.class %>" message="a-song-with-the-same-name-already-exists-in-this-album" />
 
 	<aui:input name="name" />
 

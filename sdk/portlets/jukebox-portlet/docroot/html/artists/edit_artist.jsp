@@ -1,3 +1,4 @@
+<%@ page import="org.liferay.jukebox.ArtistNameException" %>
 <%--
 /**
  * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
@@ -40,6 +41,8 @@ if (artistId > 0) {
 
 	<aui:input name="artistId" type="hidden" value="<%= artistId %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+
+	<liferay-ui:error exception="<%= ArtistNameException.class %>" message="please-enter-a-valid-name" />
 
 	<aui:input name="name" />
 

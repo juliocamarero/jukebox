@@ -39,6 +39,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import org.liferay.jukebox.DuplicatedSongException;
 import org.liferay.jukebox.SongNameException;
 import org.liferay.jukebox.model.Album;
 import org.liferay.jukebox.model.Song;
@@ -98,9 +99,10 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 
 		Date now = new Date();
 
-		validate(name);
-
 		long songId = counterLocalService.increment();
+		Album album = albumPersistence.findByPrimaryKey(albumId);
+
+		validate(songId, groupId, album.getArtistId(),albumId, name);
 
 		Song song = songPersistence.create(songId);
 
@@ -112,7 +114,6 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		song.setCreateDate(serviceContext.getCreateDate(now));
 		song.setModifiedDate(serviceContext.getModifiedDate(now));
 
-		Album album = albumPersistence.findByPrimaryKey(albumId);
 
 		song.setArtistId(album.getArtistId());
 		song.setAlbumId(albumId);
@@ -326,13 +327,12 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		validate(name);
-
 		Song song = songPersistence.findByPrimaryKey(songId);
+		Album album = albumPersistence.findByPrimaryKey(albumId);
+
+		validate(songId, song.getGroupId(), album.getArtistId(), albumId, name);
 
 		song.setModifiedDate(serviceContext.getModifiedDate(null));
-
-		Album album = albumPersistence.findByPrimaryKey(albumId);
 
 		song.setArtistId(album.getArtistId());
 		song.setAlbumId(albumId);
@@ -435,9 +435,18 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 			});
 	}
 
-	protected void validate(String name) throws PortalException {
+	protected void validate(
+			long songId, long groupId, long artistId, long albumId, String name)
+		throws PortalException, SystemException {
+
 		if (Validator.isNull(name)) {
 			throw new SongNameException();
+		}
+
+		Song song = songPersistence.fetchByG_A_A(groupId, artistId, albumId);
+
+		if ((song != null) && (song.getSongId() != songId)) {
+			throw new DuplicatedSongException();
 		}
 	}
 

@@ -32,6 +32,7 @@ import java.util.Map;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
+import org.liferay.jukebox.DuplicatedSongException;
 import org.liferay.jukebox.SongNameException;
 import org.liferay.jukebox.model.Song;
 import org.liferay.jukebox.service.SongServiceUtil;
@@ -79,6 +80,7 @@ public class SongsPortlet extends MVCPortlet {
 			SessionErrors.add(request, e.getClass().getName());
 
 			if (e instanceof SongNameException ||
+				e instanceof DuplicatedSongException ||
 				e instanceof PrincipalException) {
 
 				response.setRenderParameter(

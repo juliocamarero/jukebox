@@ -206,6 +206,9 @@
 		<exception>AlbumName</exception>
 		<exception>ArtistName</exception>
 		<exception>SongName</exception>
+		<exception>DuplicatedSong</exception>
+		<exception>DuplicatedArtist</exception>
+		<exception>DuplicatedAlbum</exception>
 		<exception>NoSuchArtist</exception>
 		<exception>NoSuchAlbum</exception>
 		<exception>NoSuchSong</exception>

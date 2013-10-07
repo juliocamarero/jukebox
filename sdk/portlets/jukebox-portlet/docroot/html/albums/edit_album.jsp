@@ -1,3 +1,4 @@
+<%@ page import="org.liferay.jukebox.AlbumNameException" %>
 <%--
 /**
  * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
@@ -56,6 +57,8 @@ if (albumId > 0) {
 		%>
 
 	</aui:select>
+
+	<liferay-ui:error exception="<%= AlbumNameException.class %>" message="please-enter-a-valid-name" />
 
 	<aui:input name="name" />
 
