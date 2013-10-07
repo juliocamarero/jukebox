@@ -279,6 +279,18 @@ public class ClpSerializer {
 			return new org.liferay.jukebox.ArtistNameException();
 		}
 
+		if (className.equals("org.liferay.jukebox.DuplicatedAlbumException")) {
+			return new org.liferay.jukebox.DuplicatedAlbumException();
+		}
+
+		if (className.equals("org.liferay.jukebox.DuplicatedArtistException")) {
+			return new org.liferay.jukebox.DuplicatedArtistException();
+		}
+
+		if (className.equals("org.liferay.jukebox.DuplicatedSongException")) {
+			return new org.liferay.jukebox.DuplicatedSongException();
+		}
+
 		if (className.equals("org.liferay.jukebox.NoSuchAlbumException")) {
 			return new org.liferay.jukebox.NoSuchAlbumException();
 		}
