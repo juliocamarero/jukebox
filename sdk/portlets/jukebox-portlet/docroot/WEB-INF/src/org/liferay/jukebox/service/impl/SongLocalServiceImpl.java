@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.transaction.TransactionCommitCallbackRegistryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
@@ -33,6 +35,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.util.DLProcessorRegistryUtil;
 import com.liferay.portlet.trash.model.TrashEntry;
+import com.liferay.portlet.trash.model.TrashVersion;
 
 import java.io.InputStream;
 
@@ -250,6 +253,82 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 
 	public int getSongsCount(long groupId) throws SystemException {
 		return songPersistence.countByGroupId(groupId);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public Song moveSong(long songId, long albumId)
+		throws PortalException, SystemException {
+
+		Song song = getSong(songId);
+
+		song.setAlbumId(albumId);
+
+		songPersistence.update(song);
+
+		return song;
+	}
+
+	@Override
+	public Song moveSongFromTrash(long userId, long songId, long albumId)
+		throws PortalException, SystemException {
+
+		Song song = getSong(songId);
+
+		TrashEntry trashEntry = song.getTrashEntry();
+
+		if (trashEntry.isTrashEntry(Song.class, songId)) {
+			restoreSongFromTrash(userId, songId);
+		}
+		else {
+
+			// Entry
+
+			TrashVersion trashVersion =
+				trashVersionLocalService.fetchVersion(
+					trashEntry.getEntryId(), Song.class.getName(), songId);
+
+			int status = WorkflowConstants.STATUS_APPROVED;
+
+			if (trashVersion != null) {
+				status = trashVersion.getStatus();
+			}
+
+			ServiceContext serviceContext = new ServiceContext();
+
+			// Entry
+
+			User user = userPersistence.findByPrimaryKey(userId);
+			Date now = new Date();
+
+			song.setModifiedDate(serviceContext.getModifiedDate(now));
+			song.setStatus(status);
+			song.setStatusByUserId(user.getUserId());
+			song.setStatusByUserName(user.getFullName());
+			song.setStatusDate(serviceContext.getModifiedDate(now));
+
+			songPersistence.update(song);
+
+			// Asset
+
+			assetEntryLocalService.updateVisible(
+				Song.class.getName(), song.getSongId(), false);
+
+			// Indexer
+
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				Song.class);
+
+			indexer.reindex(song);
+
+			// Trash
+
+			if (trashVersion != null) {
+				trashVersionLocalService.deleteTrashVersion(trashVersion);
+			}
+		}
+
+		return songLocalService.moveSong(songId, albumId);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
