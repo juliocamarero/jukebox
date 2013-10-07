@@ -242,7 +242,7 @@ soundManager.setup({
   preferFlash: false,
   useFlashBlock: true,
   // path to directory containing SM2 SWF
-  url: Temporal.getPortalURL + '/jukebox-portlet/js/swf/',  // This should be replaced by Liferay.ThemeDisplay.getPortalURL() after 6.2RC4
+  url: Temporal.getPortalURL() + '/jukebox-portlet/js/swf/',  // This should be replaced by Liferay.ThemeDisplay.getPortalURL() after 6.2RC4
   // optional: enable MPEG-4/AAC support (requires flash 9)
   flashVersion: 9
 });
