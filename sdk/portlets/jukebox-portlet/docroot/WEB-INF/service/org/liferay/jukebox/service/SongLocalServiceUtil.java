@@ -358,6 +358,12 @@ public class SongLocalServiceUtil {
 			songInputStream, lyricsFileName, lyricsInputStream, serviceContext);
 	}
 
+	public static org.liferay.jukebox.model.Song getSong(long groupId,
+		long artistId, long albumId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getSong(groupId, artistId, albumId, name);
+	}
+
 	public static java.util.List<org.liferay.jukebox.model.Song> getSongs(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {

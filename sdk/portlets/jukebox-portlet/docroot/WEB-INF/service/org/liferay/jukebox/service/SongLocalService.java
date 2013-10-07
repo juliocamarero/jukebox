@@ -319,6 +319,11 @@ public interface SongLocalService extends BaseLocalService, InvokableLocalServic
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public org.liferay.jukebox.model.Song getSong(long groupId, long artistId,
+		long albumId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<org.liferay.jukebox.model.Song> getSongs(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
