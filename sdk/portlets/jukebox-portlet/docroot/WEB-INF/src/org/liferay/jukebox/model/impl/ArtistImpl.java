@@ -45,24 +45,24 @@ public class ArtistImpl extends ArtistBaseImpl {
 			PortletFileRepositoryUtil.fetchPortletRepository(
 				getGroupId(), Constants.JUKEBOX_PORTLET_REPOSITORY);
 
-		if (repository == null) {
-			return StringPool.BLANK;
-		}
-
 		try {
-			FileEntry fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
-				repository.getRepositoryId(),
-				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-				String.valueOf(getArtistId()));
+			if (repository != null) {
+				FileEntry fileEntry =
+					PortletFileRepositoryUtil.getPortletFileEntry(
+						repository.getRepositoryId(),
+						DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+						String.valueOf(getArtistId()));
 
-			return DLUtil.getPreviewURL(
-				fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
-				StringPool.BLANK);
+				return DLUtil.getPreviewURL(
+					fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
+					StringPool.BLANK);
+			}
 		}
 		catch (Exception e) {
-			return themeDisplay.getPortalURL() +
-				"/jukebox-portlet/images/singer2.jpeg";
 		}
+
+		return themeDisplay.getPortalURL() +
+			"/jukebox-portlet/images/singer2.jpeg";
 	}
 
 }
