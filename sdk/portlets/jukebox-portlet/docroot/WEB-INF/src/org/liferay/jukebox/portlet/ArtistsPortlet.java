@@ -65,10 +65,10 @@ public class ArtistsPortlet extends MVCPortlet {
 
 			response.sendRedirect(redirect); }
 		catch (Exception e) {
+			SessionErrors.add(request, e.getClass().getName());
+
 			if (e instanceof ArtistNameException ||
 				e instanceof PrincipalException) {
-
-				SessionErrors.add(request, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/artists/edit_artist.jsp");
@@ -95,6 +95,8 @@ public class ArtistsPortlet extends MVCPortlet {
 			sendRedirect(request, response);
 		}
 		catch (Exception e) {
+			SessionErrors.add(request, e.getClass().getName());
+
 			response.setRenderParameter("jspPage", "/html/error.jsp");
 		}
 	}
@@ -126,10 +128,10 @@ public class ArtistsPortlet extends MVCPortlet {
 			response.sendRedirect(redirect);
 		}
 		catch (Exception e) {
+			SessionErrors.add(request, e.getClass().getName());
+
 			if (e instanceof ArtistNameException ||
 				e instanceof PrincipalException) {
-
-				SessionErrors.add(request, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/artists/edit_artist.jsp");

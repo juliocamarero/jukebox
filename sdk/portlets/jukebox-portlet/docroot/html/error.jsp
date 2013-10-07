@@ -13,3 +13,9 @@
  * details.
  */
 --%>
+
+<%@ include file="init.jsp" %>
+
+<div class="alert alert-error">
+	<liferay-ui:message key="an-unexpected-error-occurred" />
+</div>

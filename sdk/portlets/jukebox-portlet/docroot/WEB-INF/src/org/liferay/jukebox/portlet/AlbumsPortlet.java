@@ -67,10 +67,11 @@ public class AlbumsPortlet extends MVCPortlet {
 			response.sendRedirect(redirect);
 		}
 		catch (Exception e) {
+			SessionErrors.add(request, e.getClass().getName());
+
 			if (e instanceof AlbumNameException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(request, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/albums/edit_album.jsp");
@@ -97,6 +98,8 @@ public class AlbumsPortlet extends MVCPortlet {
 			sendRedirect(request, response);
 		}
 		catch (Exception e) {
+			SessionErrors.add(request, e.getClass().getName());
+
 			response.setRenderParameter("jspPage", "/html/error.jsp");
 		}
 	}
@@ -129,10 +132,10 @@ public class AlbumsPortlet extends MVCPortlet {
 				response.sendRedirect(redirect);
 		}
 		catch (Exception e) {
+			SessionErrors.add(request, e.getClass().getName());
+
 			if (e instanceof AlbumNameException ||
 				e instanceof PrincipalException) {
-
-				SessionErrors.add(request, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/albums/edit_album.jsp");

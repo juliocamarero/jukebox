@@ -76,10 +76,10 @@ public class SongsPortlet extends MVCPortlet {
 			response.sendRedirect(redirect);
 		}
 		catch (Exception e) {
+			SessionErrors.add(request, e.getClass().getName());
+
 			if (e instanceof SongNameException ||
 				e instanceof PrincipalException) {
-
-				SessionErrors.add(request, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/songs/edit_song.jsp");
@@ -133,6 +133,8 @@ public class SongsPortlet extends MVCPortlet {
 			sendRedirect(request, response);
 		}
 		catch (Exception e) {
+			SessionErrors.add(request, e.getClass().getName());
+
 			response.setRenderParameter("jspPage", "/html/error.jsp");
 		}
 	}
@@ -182,10 +184,10 @@ public class SongsPortlet extends MVCPortlet {
 			response.sendRedirect(redirect);
 		}
 		catch (Exception e) {
+			SessionErrors.add(request, e.getClass().getName());
+
 			if (e instanceof SongNameException ||
 				e instanceof PrincipalException) {
-
-				SessionErrors.add(request, e.getClass().getName());
 
 				response.setRenderParameter(
 					"jspPage", "/html/songs/edit_song.jsp");
