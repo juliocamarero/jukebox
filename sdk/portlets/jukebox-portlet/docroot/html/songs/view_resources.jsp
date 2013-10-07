@@ -99,5 +99,6 @@ else {
 			}
 			%>
 
+		</ul>
 	</c:otherwise>
 </c:choose>
