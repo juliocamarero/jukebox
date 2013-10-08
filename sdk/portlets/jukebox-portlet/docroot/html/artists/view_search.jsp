@@ -66,7 +66,7 @@ Hits hits = indexer.search(searchContext);
 
 <aui:form action="<%= searchURL %>" method="post" name="fm">
 	<liferay-util:include page="/html/artists/toolbar.jsp" servletContext="<%= application %>">
-		<liferay-util:param name="searchView" value="<%= Boolean.TRUE %>" />
+		<liferay-util:param name="searchView" value="<%= Boolean.TRUE.toString() %>" />
 	</liferay-util:include>
 </aui:form>
 
