@@ -61,16 +61,18 @@ public class ArtistIndexer extends BaseIndexer {
 	public void addRelatedEntryFields(Document document, Object obj)
 		throws Exception {
 
-		DLFileEntry dlFileEntry = (DLFileEntry)obj;
+		if (obj instanceof DLFileEntry) {
+			DLFileEntry dlFileEntry = (DLFileEntry)obj;
 
-		Artist artist = ArtistLocalServiceUtil.getArtist(
-			GetterUtil.getLong(dlFileEntry.getTitle()));
+			Artist artist = ArtistLocalServiceUtil.getArtist(
+				GetterUtil.getLong(dlFileEntry.getTitle()));
 
-		document.addKeyword(
-			Field.CLASS_NAME_ID,
-			PortalUtil.getClassNameId(Artist.class.getName()));
-		document.addKeyword(Field.CLASS_PK, artist.getArtistId());
-		document.addKeyword(Field.RELATED_ENTRY, true);
+			document.addKeyword(
+				Field.CLASS_NAME_ID,
+				PortalUtil.getClassNameId(Artist.class.getName()));
+			document.addKeyword(Field.CLASS_PK, artist.getArtistId());
+			document.addKeyword(Field.RELATED_ENTRY, true);
+		}
 	}
 
 	@Override
