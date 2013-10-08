@@ -100,14 +100,6 @@ AUI.add(
 						var instance = this;
 
 						instance._search.after('query', instance._refreshContentList, instance);
-
-						instance.get('inputNode').on('keydown', instance._onSearchInputKeyDown, instance);
-					},
-
-					_onSearchInputKeyDown: function(event) {
-						if (event.isKey('ENTER')) {
-							event.halt();
-						}
 					},
 
 					_refreshContentList: function(event) {
