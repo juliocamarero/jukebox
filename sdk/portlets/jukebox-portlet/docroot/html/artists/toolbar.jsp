@@ -55,7 +55,7 @@ boolean searchView = ParamUtil.getBoolean(request, "searchView");
 				id="<%= renderResponse.getNamespace() %>"
 			>
 				<aui:fieldset>
-					<aui:input name="<%= displayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>" />
+					<aui:input label="name" name="<%= displayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>" />
 
 					<aui:input name="<%= displayTerms.BIO %>" size="20" type="text" value="<%= displayTerms.getBio() %>" />
 				</aui:fieldset>
