@@ -137,6 +137,21 @@ public class SongServiceSoap {
 		}
 	}
 
+	public static org.liferay.jukebox.model.SongSoap[] getSongsByAlbumId(
+		long groupId, long albumId, int status) throws RemoteException {
+		try {
+			java.util.List<org.liferay.jukebox.model.Song> returnValue = SongServiceUtil.getSongsByAlbumId(groupId,
+					albumId, status);
+
+			return org.liferay.jukebox.model.SongSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getSongsCount(long groupId) throws RemoteException {
 		try {
 			int returnValue = SongServiceUtil.getSongsCount(groupId);
@@ -169,6 +184,21 @@ public class SongServiceSoap {
 		try {
 			int returnValue = SongServiceUtil.getSongsCountByAlbumId(groupId,
 					albumId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getSongsCountByAlbumId(long groupId, long albumId,
+		int status) throws RemoteException {
+		try {
+			int returnValue = SongServiceUtil.getSongsCountByAlbumId(groupId,
+					albumId, status);
 
 			return returnValue;
 		}
