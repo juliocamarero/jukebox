@@ -179,6 +179,10 @@
 			<finder-column name="groupId" />
 			<finder-column name="status" />
 		</finder>
+		<finder name="G_A" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="albumId" />
+		</finder>
 		<finder name="G_A_S" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="albumId" />

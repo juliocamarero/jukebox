@@ -29,7 +29,15 @@ long portletDisplayDDMTemplateId = PortletDisplayTemplateUtil.getPortletDisplayT
 List<Song> songs = null;
 
 if (albumId > 0) {
-	songs = SongServiceUtil.getSongsByAlbumId(scopeGroupId, albumId);
+	Album album = AlbumLocalServiceUtil.getAlbum(albumId);
+
+	if (album.isInTrash()) {
+		songs = SongServiceUtil.getSongsByAlbumId(scopeGroupId, albumId, WorkflowConstants.STATUS_ANY);
+	}
+	else {
+		songs = SongServiceUtil.getSongsByAlbumId(scopeGroupId, albumId);
+	}
+
 }
 else if (Validator.isNotNull(keywords)) {
 	songs = SongServiceUtil.getSongs(scopeGroupId, StringPool.PERCENT + keywords + StringPool.PERCENT);

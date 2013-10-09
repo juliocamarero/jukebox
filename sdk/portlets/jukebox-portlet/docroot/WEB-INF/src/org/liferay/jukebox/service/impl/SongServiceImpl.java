@@ -96,6 +96,17 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 			groupId, albumId, WorkflowConstants.STATUS_APPROVED);
 	}
 
+	public List<Song> getSongsByAlbumId(long groupId, long albumId, int status)
+		throws SystemException {
+
+		if (status == WorkflowConstants.STATUS_APPROVED) {
+			return songPersistence.filterFindByG_A(groupId, albumId);
+		}
+
+		return songPersistence.filterFindByG_A_S(
+			groupId, albumId, status);
+	}
+
 	public int getSongsCount(long groupId) throws SystemException {
 		return songPersistence.filterCountByG_S(
 			groupId, WorkflowConstants.STATUS_APPROVED);
@@ -113,6 +124,16 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 
 		return songPersistence.filterCountByG_A_S(
 			groupId, albumId, WorkflowConstants.STATUS_APPROVED);
+	}
+
+	public int getSongsCountByAlbumId(long groupId, long albumId, int status)
+		throws SystemException {
+
+		if (status == WorkflowConstants.STATUS_APPROVED) {
+			return songPersistence.filterCountByG_A(groupId, albumId);
+		}
+
+		return songPersistence.filterCountByG_A_S(groupId, albumId, status);
 	}
 
 	@Override
