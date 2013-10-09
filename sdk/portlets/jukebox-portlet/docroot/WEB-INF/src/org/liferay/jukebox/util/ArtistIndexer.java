@@ -19,7 +19,9 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchContext;
@@ -28,6 +30,7 @@ import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PortalUtil;
@@ -101,6 +104,13 @@ public class ArtistIndexer extends BaseIndexer {
 		throws Exception {
 
 		addStatus(contextQuery, searchContext);
+
+		int artistId = GetterUtil.getInteger(
+			searchContext.getAttribute("artistId"));
+
+		if (artistId != 0) {
+			contextQuery.addRequiredTerm("artistId", artistId);
+		}
 	}
 
 	@Override

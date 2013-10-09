@@ -16,8 +16,11 @@
 
 <%@ include file="/html/portlet/search/facets/init.jsp" %>
 
-<%@ page import="org.liferay.jukebox.model.Artist" %>
-<%@ page import="org.liferay.jukebox.service.ArtistLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.model.Repository" %>
+<%@ page import="com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil" %>
+<%@ page import="com.liferay.portal.kernel.repository.model.FileEntry" %>
+<%@ page import="com.liferay.portlet.documentlibrary.model.DLFolderConstants" %>
+<%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
 
 <%
 if (termCollectors.isEmpty()) {
@@ -27,6 +30,8 @@ if (termCollectors.isEmpty()) {
 int frequencyThreshold = dataJSONObject.getInt("frequencyThreshold");
 int maxTerms = dataJSONObject.getInt("maxTerms", 10);
 boolean showAssetCount = dataJSONObject.getBoolean("showAssetCount", true);
+
+Indexer indexer = IndexerRegistryUtil.getIndexer("org.liferay.jukebox.model.Artist");
 %>
 
 <div class="<%= cssClass %>" data-facetFieldName="<%= facet.getFieldId() %>" id="<%= randomNamespace %>facet">
@@ -45,7 +50,20 @@ boolean showAssetCount = dataJSONObject.getBoolean("showAssetCount", true);
 
 			long curArtistId = GetterUtil.getLong(termCollector.getTerm());
 
-			Artist curArtist = ArtistLocalServiceUtil.getArtist(curArtistId);
+			SearchContext searchContext = SearchContextFactory.getInstance(request);
+
+			searchContext.setAttribute("artistId", curArtistId);
+			searchContext.setKeywords(StringPool.BLANK);
+
+			Hits results = indexer.search(searchContext);
+
+			if (results.getLength() == 0) {
+				continue;
+			}
+
+			Document document = results.doc(0);
+
+			String artistName = document.get(Field.TITLE);
 		%>
 
 			<c:if test="<%= artistId == curArtistId %>">
@@ -53,7 +71,7 @@ boolean showAssetCount = dataJSONObject.getBoolean("showAssetCount", true);
 					Liferay.Search.tokenList.add(
 						{
 							clearFields: '<%= renderResponse.getNamespace() + facet.getFieldId() %>',
-							text: '<%= HtmlUtil.escapeJS(curArtist.getName()) %>'
+							text: '<%= artistName %>'
 						}
 					);
 				</aui:script>
@@ -66,7 +84,7 @@ boolean showAssetCount = dataJSONObject.getBoolean("showAssetCount", true);
 			%>
 
 			<li class="facet-value <%= (artistId == curArtistId) ? "current-term" : StringPool.BLANK %>">
-				<a data-value="<%= curArtistId %>" href="javascript:;"><img alt="" class="artist-search-result img-circle" src='<%= curArtist.getImageURL(themeDisplay) %>' /><%= HtmlUtil.escape(curArtist.getName()) %></a><c:if test="<%= showAssetCount %>"> <span class="frequency">(<%= termCollector.getFrequency() %>)</span></c:if>
+				<a data-value="<%= curArtistId %>" href="javascript:;"><img alt="" class="artist-search-result img-circle" src='<%= getImageURL(curArtistId, themeDisplay) %>' /><%= HtmlUtil.escape(artistName) %></a><c:if test="<%= showAssetCount %>"> <span class="frequency">(<%= termCollector.getFrequency() %>)</span></c:if>
 			</li>
 
 		<%
@@ -87,3 +105,21 @@ boolean showAssetCount = dataJSONObject.getBoolean("showAssetCount", true);
 		width: 25px;
 	}
 </style>
+
+<%!
+protected String getImageURL(long artistId, ThemeDisplay themeDisplay) throws SystemException {
+	Repository repository = PortletFileRepositoryUtil.fetchPortletRepository(themeDisplay.getScopeGroupId(), "JukeboxPortletRepository");
+
+	try {
+		if (repository != null) {
+			FileEntry fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(repository.getRepositoryId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, String.valueOf(artistId));
+
+			return DLUtil.getPreviewURL(fileEntry, fileEntry.getLatestFileVersion(), themeDisplay, StringPool.BLANK);
+		}
+	}
+	catch (Exception e) {
+	}
+
+	return themeDisplay.getPortalURL() + "/jukebox-portlet/images/singer2.jpeg";
+}
+%>
