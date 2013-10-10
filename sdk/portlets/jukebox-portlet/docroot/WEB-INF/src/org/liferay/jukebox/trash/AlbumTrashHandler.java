@@ -110,6 +110,11 @@ public class AlbumTrashHandler extends JukeBoxBaseTrashHandler {
 	}
 
 	@Override
+	public boolean isContainerModel() {
+		return true;
+	}
+
+	@Override
 	public boolean isInTrash(long classPK)
 		throws PortalException, SystemException {
 
