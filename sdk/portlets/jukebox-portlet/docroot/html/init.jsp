@@ -44,6 +44,10 @@
 <%@ page import="org.liferay.jukebox.service.permission.ArtistPermission" %>
 <%@ page import="org.liferay.jukebox.service.permission.AlbumPermission" %>
 <%@ page import="org.liferay.jukebox.service.permission.SongPermission" %>
+<%@ page import="org.liferay.jukebox.AlbumNameException" %>
+<%@ page import="org.liferay.jukebox.ArtistNameException" %>
+<%@ page import="org.liferay.jukebox.DuplicatedSongException" %>
+<%@ page import="org.liferay.jukebox.SongNameException" %>
 
 <%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
 <%@ page import="com.liferay.portal.kernel.template.TemplateHandler" %>

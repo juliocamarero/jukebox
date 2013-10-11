@@ -16,9 +16,9 @@
 
 <%@ include file="/html/portlet/search/facets/init.jsp" %>
 
+<%@ page import="com.liferay.portal.kernel.repository.model.FileEntry" %>
 <%@ page import="com.liferay.portal.model.Repository" %>
 <%@ page import="com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil" %>
-<%@ page import="com.liferay.portal.kernel.repository.model.FileEntry" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFolderConstants" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
 

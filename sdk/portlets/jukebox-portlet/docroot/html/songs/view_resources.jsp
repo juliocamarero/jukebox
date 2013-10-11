@@ -119,7 +119,7 @@ else {
 					<liferay-ui:icon cssClass="song-small-link" image="../aui/info" message="info" url="<%= viewSongURL %>" />
 
 					<c:if test="<%= Validator.isNotNull(song.getLyricsURL(themeDisplay)) %>">
-						<liferay-ui:icon cssClass="song-small-link" image="../aui/align-left" url="<%= song.getLyricsURL(themeDisplay) %>" message="lyrics" method="get" />
+						<liferay-ui:icon cssClass="song-small-link" image="../aui/align-left" message="lyrics" method="get" url="<%= song.getLyricsURL(themeDisplay) %>" />
 					</c:if>
 				</li>
 

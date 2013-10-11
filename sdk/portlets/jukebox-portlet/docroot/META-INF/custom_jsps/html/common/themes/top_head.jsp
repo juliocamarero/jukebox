@@ -11,5 +11,3 @@
 </script>
 
 <liferay-util:include page="/html/common/themes/top_head.portal.jsp" />
-
-

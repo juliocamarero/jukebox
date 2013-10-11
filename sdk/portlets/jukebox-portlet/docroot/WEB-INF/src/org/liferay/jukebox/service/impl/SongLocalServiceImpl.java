@@ -36,6 +36,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.util.DLProcessorRegistryUtil;
 import com.liferay.portlet.trash.model.TrashEntry;
 import com.liferay.portlet.trash.model.TrashVersion;
+import com.liferay.portlet.trash.util.TrashUtil;
 
 import java.io.InputStream;
 
@@ -43,7 +44,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import com.liferay.portlet.trash.util.TrashUtil;
 import org.liferay.jukebox.DuplicatedSongException;
 import org.liferay.jukebox.SongNameException;
 import org.liferay.jukebox.model.Album;
@@ -107,7 +107,7 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		long songId = counterLocalService.increment();
 		Album album = albumPersistence.findByPrimaryKey(albumId);
 
-		validate(songId, groupId, album.getArtistId(),albumId, name);
+		validate(songId, groupId, album.getArtistId(), albumId, name);
 
 		Song song = songPersistence.create(songId);
 
@@ -118,7 +118,6 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		song.setUserName(user.getFullName());
 		song.setCreateDate(serviceContext.getCreateDate(now));
 		song.setModifiedDate(serviceContext.getModifiedDate(now));
-
 
 		song.setArtistId(album.getArtistId());
 		song.setAlbumId(albumId);
@@ -221,12 +220,10 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		return songPersistence.remove(songId);
 	}
 
-	public Song getSong(
-			long groupId, long artistId, long albumId, String name)
+	public Song getSong(long groupId, long artistId, long albumId, String name)
 		throws SystemException {
 
-		return songPersistence.fetchByG_A_A_N(
-			groupId, artistId, albumId, name);
+		return songPersistence.fetchByG_A_A_N(groupId, artistId, albumId, name);
 	}
 
 	public List<Song> getSongs(long groupId) throws SystemException {
@@ -357,7 +354,6 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		song.setStatusByUserId(user.getUserId());
 		song.setStatusByUserName(user.getFullName());
 		song.setStatusDate(serviceContext.getModifiedDate(now));
-
 
 		// Asset
 

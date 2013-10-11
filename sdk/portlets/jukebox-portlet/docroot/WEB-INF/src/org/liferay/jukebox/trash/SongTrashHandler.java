@@ -117,7 +117,7 @@ public class SongTrashHandler extends JukeBoxBaseTrashHandler {
 
 	@Override
 	public String getRestoreContainerModelLink(
-		PortletRequest portletRequest, long classPK)
+			PortletRequest portletRequest, long classPK)
 		throws PortalException, SystemException {
 
 		Song song = SongLocalServiceUtil.getSong(classPK);
@@ -257,7 +257,7 @@ public class SongTrashHandler extends JukeBoxBaseTrashHandler {
 
 		SongLocalServiceUtil.restoreSongFromTrash(userId, classPK);
 	}
-	
+
 	@Override
 	public void updateTitle(long classPK, String name)
 		throws PortalException, SystemException {

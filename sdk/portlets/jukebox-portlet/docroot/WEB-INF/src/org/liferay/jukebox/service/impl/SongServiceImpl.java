@@ -103,8 +103,7 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 			return songPersistence.filterFindByG_A(groupId, albumId);
 		}
 
-		return songPersistence.filterFindByG_A_S(
-			groupId, albumId, status);
+		return songPersistence.filterFindByG_A_S(groupId, albumId, status);
 	}
 
 	public int getSongsCount(long groupId) throws SystemException {
@@ -151,8 +150,7 @@ public class SongServiceImpl extends SongServiceBaseImpl {
 	public Song restoreSongFromTrash(long songId)
 		throws PortalException, SystemException {
 
-		SongPermission.check(
-			getPermissionChecker(), songId, ActionKeys.DELETE);
+		SongPermission.check(getPermissionChecker(), songId, ActionKeys.DELETE);
 
 		return songLocalService.restoreSongFromTrash(getUserId(), songId);
 	}
