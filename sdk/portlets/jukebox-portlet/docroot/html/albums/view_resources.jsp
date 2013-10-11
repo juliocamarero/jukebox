@@ -19,7 +19,7 @@
 <%
 String keywords = ParamUtil.getString(liferayPortletRequest, "keywords");
 
-long artistId = ParamUtil.getLong(liferayPortletRequest, "artistId");
+long artistId = ParamUtil.getLong(request, "artistId");
 
 String displayStyle = GetterUtil.getString(portletPreferences.getValue("displayStyle", StringPool.BLANK));
 long displayStyleGroupId = GetterUtil.getLong(portletPreferences.getValue("displayStyleGroupId", null), scopeGroupId);

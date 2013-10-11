@@ -17,7 +17,7 @@
 <%@ include file="../init.jsp" %>
 
 <%
-long albumId = ParamUtil.getLong(renderRequest, "albumId");
+long albumId = ParamUtil.getLong(request, "albumId");
 boolean showToolbar = ParamUtil.getBoolean(request, "showToolbar", true);
 %>
 
@@ -42,5 +42,7 @@ boolean showToolbar = ParamUtil.getBoolean(request, "showToolbar", true);
 </c:if>
 
 <div id="<portlet:namespace />songPanel">
-	<liferay-util:include page="/html/songs/view_resources.jsp" servletContext="<%= application %>" />
+	<liferay-util:include page="/html/songs/view_resources.jsp" servletContext="<%= application %>">
+		<liferay-util:param name="albumId" value="<%= String.valueOf(albumId) %>" />
+	</liferay-util:include>
 </div>
