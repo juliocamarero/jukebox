@@ -173,6 +173,16 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 		return albumPersistence.remove(albumId);
 	}
 
+	public void deleteAlbums(long groupId)
+		throws PortalException, SystemException {
+
+		List<Album> albums = getAlbums(groupId);
+
+		for (Album album : albums) {
+			albumLocalService.deleteAlbum(album.getAlbumId());
+		}
+	}
+
 	public List<Album> getAlbums(long groupId) throws SystemException {
 		return albumPersistence.findByGroupId(groupId);
 	}

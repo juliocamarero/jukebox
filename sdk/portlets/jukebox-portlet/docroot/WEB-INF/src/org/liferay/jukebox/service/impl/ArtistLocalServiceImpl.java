@@ -160,6 +160,16 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 		return artistPersistence.remove(artistId);
 	}
 
+	public void deleteArtists(long groupId)
+		throws PortalException, SystemException {
+
+		List<Artist> artists = getArtists(groupId);
+
+		for (Artist artist : artists) {
+			artistLocalService.deleteArtist(artist.getArtistId());
+		}
+	}
+
 	public List<Artist> getArtists(long groupId) throws SystemException {
 		return artistPersistence.findByGroupId(groupId);
 	}
