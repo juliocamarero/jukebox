@@ -116,101 +116,101 @@ public class SongLocalServiceClpInvoker {
 
 		_methodParameterTypes19 = new String[] { "org.liferay.jukebox.model.Song" };
 
-		_methodName90 = "getBeanIdentifier";
+		_methodName96 = "getBeanIdentifier";
 
-		_methodParameterTypes90 = new String[] {  };
+		_methodParameterTypes96 = new String[] {  };
 
-		_methodName91 = "setBeanIdentifier";
+		_methodName97 = "setBeanIdentifier";
 
-		_methodParameterTypes91 = new String[] { "java.lang.String" };
+		_methodParameterTypes97 = new String[] { "java.lang.String" };
 
-		_methodName96 = "addEntryResources";
+		_methodName102 = "addEntryResources";
 
-		_methodParameterTypes96 = new String[] {
+		_methodParameterTypes102 = new String[] {
 				"org.liferay.jukebox.model.Song", "boolean", "boolean"
 			};
 
-		_methodName97 = "addEntryResources";
+		_methodName103 = "addEntryResources";
 
-		_methodParameterTypes97 = new String[] {
+		_methodParameterTypes103 = new String[] {
 				"org.liferay.jukebox.model.Song", "java.lang.String[][]",
 				"java.lang.String[][]"
 			};
 
-		_methodName98 = "addSong";
+		_methodName104 = "addSong";
 
-		_methodParameterTypes98 = new String[] {
+		_methodParameterTypes104 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String",
 				"java.io.InputStream", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName99 = "deleteSong";
+		_methodName105 = "deleteSong";
 
-		_methodParameterTypes99 = new String[] { "long" };
+		_methodParameterTypes105 = new String[] { "long" };
 
-		_methodName100 = "getSong";
+		_methodName106 = "getSong";
 
-		_methodParameterTypes100 = new String[] {
+		_methodParameterTypes106 = new String[] {
 				"long", "long", "long", "java.lang.String"
 			};
 
-		_methodName101 = "getSongs";
-
-		_methodParameterTypes101 = new String[] { "long" };
-
-		_methodName102 = "getSongs";
-
-		_methodParameterTypes102 = new String[] { "long", "int", "int" };
-
-		_methodName103 = "getSongsByAlbumId";
-
-		_methodParameterTypes103 = new String[] { "long" };
-
-		_methodName104 = "getSongsByAlbumId";
-
-		_methodParameterTypes104 = new String[] { "long", "int", "int" };
-
-		_methodName105 = "getSongsByAlbumId";
-
-		_methodParameterTypes105 = new String[] { "long", "long", "int" };
-
-		_methodName106 = "getSongsByAlbumIdCount";
-
-		_methodParameterTypes106 = new String[] { "long" };
-
-		_methodName107 = "getSongsCount";
+		_methodName107 = "getSongs";
 
 		_methodParameterTypes107 = new String[] { "long" };
 
-		_methodName108 = "moveSong";
+		_methodName108 = "getSongs";
 
-		_methodParameterTypes108 = new String[] { "long", "long" };
+		_methodParameterTypes108 = new String[] { "long", "int", "int" };
 
-		_methodName109 = "moveSongFromTrash";
+		_methodName109 = "getSongsByAlbumId";
 
-		_methodParameterTypes109 = new String[] { "long", "long", "long" };
+		_methodParameterTypes109 = new String[] { "long" };
 
-		_methodName110 = "moveSongToTrash";
+		_methodName110 = "getSongsByAlbumId";
 
-		_methodParameterTypes110 = new String[] {
+		_methodParameterTypes110 = new String[] { "long", "int", "int" };
+
+		_methodName111 = "getSongsByAlbumId";
+
+		_methodParameterTypes111 = new String[] { "long", "long", "int" };
+
+		_methodName112 = "getSongsByAlbumIdCount";
+
+		_methodParameterTypes112 = new String[] { "long" };
+
+		_methodName113 = "getSongsCount";
+
+		_methodParameterTypes113 = new String[] { "long" };
+
+		_methodName114 = "moveSong";
+
+		_methodParameterTypes114 = new String[] { "long", "long" };
+
+		_methodName115 = "moveSongFromTrash";
+
+		_methodParameterTypes115 = new String[] { "long", "long", "long" };
+
+		_methodName116 = "moveSongToTrash";
+
+		_methodParameterTypes116 = new String[] {
 				"long", "org.liferay.jukebox.model.Song"
 			};
 
-		_methodName111 = "restoreSongFromTrash";
+		_methodName117 = "restoreSongFromTrash";
 
-		_methodParameterTypes111 = new String[] { "long", "long" };
+		_methodParameterTypes117 = new String[] { "long", "long" };
 
-		_methodName112 = "updateAsset";
+		_methodName118 = "updateAsset";
 
-		_methodParameterTypes112 = new String[] {
+		_methodParameterTypes118 = new String[] {
 				"long", "org.liferay.jukebox.model.Song", "long[][]",
 				"java.lang.String[][]"
 			};
 
-		_methodName113 = "updateSong";
+		_methodName119 = "updateSong";
 
-		_methodParameterTypes113 = new String[] {
+		_methodParameterTypes119 = new String[] {
 				"long", "long", "long", "java.lang.String", "java.lang.String",
 				"java.io.InputStream", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
@@ -330,20 +330,20 @@ public class SongLocalServiceClpInvoker {
 			return SongLocalServiceUtil.updateSong((org.liferay.jukebox.model.Song)arguments[0]);
 		}
 
-		if (_methodName90.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
+		if (_methodName96.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
 			return SongLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName91.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
+		if (_methodName97.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
 			SongLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName96.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
+		if (_methodName102.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes102, parameterTypes)) {
 			SongLocalServiceUtil.addEntryResources((org.liferay.jukebox.model.Song)arguments[0],
 				((Boolean)arguments[1]).booleanValue(),
 				((Boolean)arguments[2]).booleanValue());
@@ -351,8 +351,8 @@ public class SongLocalServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName97.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
+		if (_methodName103.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes103, parameterTypes)) {
 			SongLocalServiceUtil.addEntryResources((org.liferay.jukebox.model.Song)arguments[0],
 				(java.lang.String[])arguments[1],
 				(java.lang.String[])arguments[2]);
@@ -360,8 +360,8 @@ public class SongLocalServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName98.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
+		if (_methodName104.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes104, parameterTypes)) {
 			return SongLocalServiceUtil.addSong(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
@@ -371,86 +371,86 @@ public class SongLocalServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[7]);
 		}
 
-		if (_methodName99.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes99, parameterTypes)) {
+		if (_methodName105.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes105, parameterTypes)) {
 			return SongLocalServiceUtil.deleteSong(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName100.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
+		if (_methodName106.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes106, parameterTypes)) {
 			return SongLocalServiceUtil.getSong(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(), (java.lang.String)arguments[3]);
 		}
 
-		if (_methodName101.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
+		if (_methodName107.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes107, parameterTypes)) {
 			return SongLocalServiceUtil.getSongs(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName102.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes102, parameterTypes)) {
+		if (_methodName108.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes108, parameterTypes)) {
 			return SongLocalServiceUtil.getSongs(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName103.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes103, parameterTypes)) {
+		if (_methodName109.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes109, parameterTypes)) {
 			return SongLocalServiceUtil.getSongsByAlbumId(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName104.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes104, parameterTypes)) {
+		if (_methodName110.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes110, parameterTypes)) {
 			return SongLocalServiceUtil.getSongsByAlbumId(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName105.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes105, parameterTypes)) {
+		if (_methodName111.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes111, parameterTypes)) {
 			return SongLocalServiceUtil.getSongsByAlbumId(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName106.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes106, parameterTypes)) {
+		if (_methodName112.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes112, parameterTypes)) {
 			return SongLocalServiceUtil.getSongsByAlbumIdCount(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName107.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes107, parameterTypes)) {
+		if (_methodName113.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes113, parameterTypes)) {
 			return SongLocalServiceUtil.getSongsCount(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName108.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes108, parameterTypes)) {
+		if (_methodName114.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes114, parameterTypes)) {
 			return SongLocalServiceUtil.moveSong(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
 
-		if (_methodName109.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes109, parameterTypes)) {
+		if (_methodName115.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes115, parameterTypes)) {
 			return SongLocalServiceUtil.moveSongFromTrash(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue());
 		}
 
-		if (_methodName110.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes110, parameterTypes)) {
+		if (_methodName116.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes116, parameterTypes)) {
 			return SongLocalServiceUtil.moveSongToTrash(((Long)arguments[0]).longValue(),
 				(org.liferay.jukebox.model.Song)arguments[1]);
 		}
 
-		if (_methodName111.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes111, parameterTypes)) {
+		if (_methodName117.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes117, parameterTypes)) {
 			return SongLocalServiceUtil.restoreSongFromTrash(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
 
-		if (_methodName112.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes112, parameterTypes)) {
+		if (_methodName118.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes118, parameterTypes)) {
 			SongLocalServiceUtil.updateAsset(((Long)arguments[0]).longValue(),
 				(org.liferay.jukebox.model.Song)arguments[1],
 				(long[])arguments[2], (java.lang.String[])arguments[3]);
@@ -458,8 +458,8 @@ public class SongLocalServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName113.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes113, parameterTypes)) {
+		if (_methodName119.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes119, parameterTypes)) {
 			return SongLocalServiceUtil.updateSong(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
@@ -513,22 +513,10 @@ public class SongLocalServiceClpInvoker {
 	private String[] _methodParameterTypes18;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
-	private String _methodName90;
-	private String[] _methodParameterTypes90;
-	private String _methodName91;
-	private String[] _methodParameterTypes91;
 	private String _methodName96;
 	private String[] _methodParameterTypes96;
 	private String _methodName97;
 	private String[] _methodParameterTypes97;
-	private String _methodName98;
-	private String[] _methodParameterTypes98;
-	private String _methodName99;
-	private String[] _methodParameterTypes99;
-	private String _methodName100;
-	private String[] _methodParameterTypes100;
-	private String _methodName101;
-	private String[] _methodParameterTypes101;
 	private String _methodName102;
 	private String[] _methodParameterTypes102;
 	private String _methodName103;
@@ -553,4 +541,16 @@ public class SongLocalServiceClpInvoker {
 	private String[] _methodParameterTypes112;
 	private String _methodName113;
 	private String[] _methodParameterTypes113;
+	private String _methodName114;
+	private String[] _methodParameterTypes114;
+	private String _methodName115;
+	private String[] _methodParameterTypes115;
+	private String _methodName116;
+	private String[] _methodParameterTypes116;
+	private String _methodName117;
+	private String[] _methodParameterTypes117;
+	private String _methodName118;
+	private String[] _methodParameterTypes118;
+	private String _methodName119;
+	private String[] _methodParameterTypes119;
 }
