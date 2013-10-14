@@ -118,6 +118,12 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 				serviceContext.getGuestPermissions());
 		}
 
+		// Message boards
+
+		mbMessageLocalService.addDiscussionMessage(
+			userId, album.getUserName(), groupId, Album.class.getName(),
+			albumId, WorkflowConstants.ACTION_PUBLISH);
+
 		// Asset
 
 		updateAsset(

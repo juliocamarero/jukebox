@@ -185,6 +185,13 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 				serviceContext.getGuestPermissions());
 		}
 
+		// Message boards
+
+		mbMessageLocalService.addDiscussionMessage(
+			userId, album.getUserName(), groupId, Song.class.getName(),
+			songId, WorkflowConstants.ACTION_PUBLISH);
+
+
 		// Asset
 
 		updateAsset(

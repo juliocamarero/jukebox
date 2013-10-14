@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.User;
 import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
@@ -110,6 +111,12 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 				artist, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
+
+		// Message boards
+
+		mbMessageLocalService.addDiscussionMessage(
+			userId, artist.getUserName(), groupId, Artist.class.getName(),
+			artistId, WorkflowConstants.ACTION_PUBLISH);
 
 		// Asset
 
