@@ -359,6 +359,12 @@ public class AlbumLocalServiceUtil {
 		getService().addEntryResources(album, groupPermissions, guestPermissions);
 	}
 
+	public static void deleteAlbums(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteAlbums(groupId);
+	}
+
 	public static java.util.List<org.liferay.jukebox.model.Album> getAlbums(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {

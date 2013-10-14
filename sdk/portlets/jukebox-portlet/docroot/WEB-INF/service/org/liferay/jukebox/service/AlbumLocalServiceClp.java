@@ -144,41 +144,45 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 				"java.lang.String[][]"
 			};
 
-		_methodName26 = "getAlbums";
+		_methodName26 = "deleteAlbums";
 
 		_methodParameterTypes26 = new String[] { "long" };
 
 		_methodName27 = "getAlbums";
 
-		_methodParameterTypes27 = new String[] { "long", "int", "int" };
+		_methodParameterTypes27 = new String[] { "long" };
 
-		_methodName28 = "getAlbumsByArtistId";
+		_methodName28 = "getAlbums";
 
-		_methodParameterTypes28 = new String[] { "long" };
+		_methodParameterTypes28 = new String[] { "long", "int", "int" };
 
-		_methodName29 = "getAlbumsCount";
+		_methodName29 = "getAlbumsByArtistId";
 
 		_methodParameterTypes29 = new String[] { "long" };
 
-		_methodName30 = "moveAlbumToTrash";
+		_methodName30 = "getAlbumsCount";
 
-		_methodParameterTypes30 = new String[] { "long", "long" };
+		_methodParameterTypes30 = new String[] { "long" };
 
-		_methodName31 = "restoreAlbumFromTrash";
+		_methodName31 = "moveAlbumToTrash";
 
 		_methodParameterTypes31 = new String[] { "long", "long" };
 
-		_methodName32 = "updateAlbum";
+		_methodName32 = "restoreAlbumFromTrash";
 
-		_methodParameterTypes32 = new String[] {
+		_methodParameterTypes32 = new String[] { "long", "long" };
+
+		_methodName33 = "updateAlbum";
+
+		_methodParameterTypes33 = new String[] {
 				"long", "long", "long", "java.lang.String", "int",
 				"java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName33 = "updateAsset";
+		_methodName34 = "updateAsset";
 
-		_methodParameterTypes33 = new String[] {
+		_methodParameterTypes34 = new String[] {
 				"long", "org.liferay.jukebox.model.Album", "long[][]",
 				"java.lang.String[][]"
 			};
@@ -983,14 +987,43 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 	}
 
 	@Override
+	public void deleteAlbums(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName26,
+				_methodParameterTypes26, new Object[] { groupId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
 	public java.util.List<org.liferay.jukebox.model.Album> getAlbums(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName26,
-					_methodParameterTypes26, new Object[] { groupId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName27,
+					_methodParameterTypes27, new Object[] { groupId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1018,8 +1051,8 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName27,
-					_methodParameterTypes27,
+			returnObj = _invokableLocalService.invokeMethod(_methodName28,
+					_methodParameterTypes28,
 					new Object[] { groupId, start, end });
 		}
 		catch (Throwable t) {
@@ -1048,8 +1081,8 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName28,
-					_methodParameterTypes28, new Object[] { artistId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName29,
+					_methodParameterTypes29, new Object[] { artistId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1076,8 +1109,8 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName29,
-					_methodParameterTypes29, new Object[] { groupId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName30,
+					_methodParameterTypes30, new Object[] { groupId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1106,8 +1139,8 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName30,
-					_methodParameterTypes30, new Object[] { userId, albumId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName31,
+					_methodParameterTypes31, new Object[] { userId, albumId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1140,8 +1173,8 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName31,
-					_methodParameterTypes31, new Object[] { userId, albumId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName32,
+					_methodParameterTypes32, new Object[] { userId, albumId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1176,8 +1209,8 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName32,
-					_methodParameterTypes32,
+			returnObj = _invokableLocalService.invokeMethod(_methodName33,
+					_methodParameterTypes33,
 					new Object[] {
 						userId,
 						
@@ -1223,8 +1256,8 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			_invokableLocalService.invokeMethod(_methodName33,
-				_methodParameterTypes33,
+			_invokableLocalService.invokeMethod(_methodName34,
+				_methodParameterTypes34,
 				new Object[] {
 					userId,
 					
@@ -1323,4 +1356,6 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 	private String[] _methodParameterTypes32;
 	private String _methodName33;
 	private String[] _methodParameterTypes33;
+	private String _methodName34;
+	private String[] _methodParameterTypes34;
 }

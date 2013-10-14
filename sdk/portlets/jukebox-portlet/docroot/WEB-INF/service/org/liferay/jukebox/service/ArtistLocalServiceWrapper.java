@@ -374,6 +374,13 @@ public class ArtistLocalServiceWrapper implements ArtistLocalService,
 	}
 
 	@Override
+	public void deleteArtists(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_artistLocalService.deleteArtists(groupId);
+	}
+
+	@Override
 	public java.util.List<org.liferay.jukebox.model.Artist> getArtists(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {

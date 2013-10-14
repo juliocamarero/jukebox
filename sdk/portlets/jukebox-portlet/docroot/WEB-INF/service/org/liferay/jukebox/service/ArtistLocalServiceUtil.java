@@ -359,6 +359,12 @@ public class ArtistLocalServiceUtil {
 			.addEntryResources(artist, groupPermissions, guestPermissions);
 	}
 
+	public static void deleteArtists(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteArtists(groupId);
+	}
+
 	public static java.util.List<org.liferay.jukebox.model.Artist> getArtists(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {

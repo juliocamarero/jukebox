@@ -373,6 +373,13 @@ public class AlbumLocalServiceWrapper implements AlbumLocalService,
 	}
 
 	@Override
+	public void deleteAlbums(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_albumLocalService.deleteAlbums(groupId);
+	}
+
+	@Override
 	public java.util.List<org.liferay.jukebox.model.Album> getAlbums(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
