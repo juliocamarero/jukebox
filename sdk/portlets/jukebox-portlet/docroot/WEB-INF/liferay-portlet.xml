@@ -7,6 +7,7 @@
 		<icon>/icons/artists.png</icon>
 		<configuration-action-class>com.liferay.portal.kernel.portlet.DefaultConfigurationAction</configuration-action-class>
 		<indexer-class>org.liferay.jukebox.util.ArtistIndexer</indexer-class>
+		<portlet-data-handler-class>org.liferay.jukebox.lar.JukeboxPortletDataHandler</portlet-data-handler-class>
 		<template-handler>org.liferay.jukebox.template.ArtistsPortletDisplayTemplateHandler</template-handler>
 		<asset-renderer-factory>org.liferay.jukebox.asset.ArtistAssetRendererFactory</asset-renderer-factory>
 		<instanceable>false</instanceable>
@@ -25,6 +26,9 @@
 		<icon>/icons/albums.png</icon>
 		<configuration-action-class>com.liferay.portal.kernel.portlet.DefaultConfigurationAction</configuration-action-class>
 		<indexer-class>org.liferay.jukebox.util.AlbumIndexer</indexer-class>
+		<portlet-data-handler-class>org.liferay.jukebox.lar.JukeboxPortletDataHandler</portlet-data-handler-class>
+		<staged-model-data-handler-class>org.liferay.jukebox.lar.AlbumStagedModelDataHandler</staged-model-data-handler-class>
+		<staged-model-data-handler-class>org.liferay.jukebox.lar.ArtistStagedModelDataHandler</staged-model-data-handler-class>
 		<template-handler>org.liferay.jukebox.template.AlbumsPortletDisplayTemplateHandler</template-handler>
 		<asset-renderer-factory>org.liferay.jukebox.asset.AlbumAssetRendererFactory</asset-renderer-factory>
 		<instanceable>false</instanceable>
