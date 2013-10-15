@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.StagedModelDataHandlerUtil;
+import com.liferay.portal.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.xml.Element;
 
 import java.util.List;
@@ -40,6 +41,9 @@ public class JukeboxPortletDataHandler extends BasePortletDataHandler {
 	public static final String NAMESPACE = "jukebox";
 
 	public JukeboxPortletDataHandler() {
+		setDeletionSystemEventStagedModelTypes(
+			new StagedModelType(Artist.class),
+			new StagedModelType(Album.class));
 		setExportControls(
 			new PortletDataHandlerBoolean(
 				NAMESPACE, "albums", true, false, null, Album.class.getName()),
