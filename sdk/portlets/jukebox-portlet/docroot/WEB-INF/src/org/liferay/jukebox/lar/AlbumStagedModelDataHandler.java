@@ -20,12 +20,14 @@ import com.liferay.portal.kernel.lar.BaseStagedModelDataHandler;
 import com.liferay.portal.kernel.lar.ExportImportPathUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.StagedModelDataHandlerUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.trash.TrashHandler;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.service.ServiceContext;
 
+import java.util.List;
 import java.util.Map;
 
 import org.liferay.jukebox.model.Album;
@@ -98,6 +100,14 @@ public class AlbumStagedModelDataHandler
 				PortletDataContext.REFERENCE_TYPE_DEPENDENCY, true);
 		}
 
+		if (album.hasCustomImage()) {
+			FileEntry fileEntry = album.getCustomImage();
+
+			StagedModelDataHandlerUtil.exportReferenceStagedModel(
+				portletDataContext, album, Album.class, fileEntry,
+				FileEntry.class, PortletDataContext.REFERENCE_TYPE_WEAK);
+		}
+
 		portletDataContext.addClassedModel(
 			albumElement, ExportImportPathUtil.getModelPath(album), album);
 	}
@@ -152,6 +162,26 @@ public class AlbumStagedModelDataHandler
 			importedAlbum = AlbumLocalServiceUtil.addAlbum(
 				userId, artistId, album.getName(), album.getYear(), null,
 				serviceContext);
+		}
+
+		Element albumElement =
+			portletDataContext.getImportDataStagedModelElement(album);
+
+		List<Element> attachmentElements =
+			portletDataContext.getReferenceDataElements(
+				albumElement, FileEntry.class,
+				PortletDataContext.REFERENCE_TYPE_WEAK);
+
+		for (Element attachmentElement : attachmentElements) {
+			String path = attachmentElement.attributeValue("path");
+
+			FileEntry fileEntry =
+				(FileEntry)portletDataContext.getZipEntryAsObject(path);
+
+			importedAlbum = AlbumLocalServiceUtil.updateAlbum(
+				userId, importedAlbum.getAlbumId(), importedAlbum.getArtistId(),
+				importedAlbum.getName(), importedAlbum.getYear(),
+				fileEntry.getContentStream(), serviceContext);
 		}
 
 		portletDataContext.importClassedModel(album, importedAlbum);

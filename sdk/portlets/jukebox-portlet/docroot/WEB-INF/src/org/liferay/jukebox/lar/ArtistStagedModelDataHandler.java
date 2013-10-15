@@ -19,12 +19,16 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BaseStagedModelDataHandler;
 import com.liferay.portal.kernel.lar.ExportImportPathUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
+import com.liferay.portal.kernel.lar.StagedModelDataHandlerUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.trash.TrashHandler;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.service.ServiceContext;
 
 import org.liferay.jukebox.model.Artist;
 import org.liferay.jukebox.service.ArtistLocalServiceUtil;
+
+import java.util.List;
 
 /**
  * @author Mate Thurzo
@@ -64,7 +68,13 @@ public class ArtistStagedModelDataHandler
 
 		Element artistElement = portletDataContext.getExportDataElement(artist);
 
+		if (artist.hasCustomImage()) {
+			FileEntry fileEntry = artist.getCustomImage();
 
+			StagedModelDataHandlerUtil.exportReferenceStagedModel(
+				portletDataContext, artist, Artist.class, fileEntry,
+				FileEntry.class, PortletDataContext.REFERENCE_TYPE_WEAK);
+		}
 
 		portletDataContext.addClassedModel(
 			artistElement, ExportImportPathUtil.getModelPath(artist), artist);
@@ -103,6 +113,26 @@ public class ArtistStagedModelDataHandler
 		else {
 			importedArtist = ArtistLocalServiceUtil.addArtist(
 				userId, artist.getName(), artist.getBio(), null,
+				serviceContext);
+		}
+
+		Element artistElement =
+			portletDataContext.getImportDataStagedModelElement(artist);
+
+		List<Element> attachmentElements =
+			portletDataContext.getReferenceDataElements(
+				artistElement, FileEntry.class,
+				PortletDataContext.REFERENCE_TYPE_WEAK);
+
+		for (Element attachmentElement : attachmentElements) {
+			String path = attachmentElement.attributeValue("path");
+
+			FileEntry fileEntry =
+				(FileEntry)portletDataContext.getZipEntryAsObject(path);
+
+			importedArtist = ArtistLocalServiceUtil.updateArtist(
+				userId, importedArtist.getArtistId(), importedArtist.getName(),
+				importedArtist.getBio(), fileEntry.getContentStream(),
 				serviceContext);
 		}
 

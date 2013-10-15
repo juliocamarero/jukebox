@@ -64,7 +64,7 @@ public class AlbumImpl extends AlbumBaseImpl {
 		return false;
 	}
 
-	protected FileEntry getCustomImage() throws SystemException {
+	public FileEntry getCustomImage() throws SystemException {
 		Repository repository =
 			PortletFileRepositoryUtil.fetchPortletRepository(
 			getGroupId(), Constants.JUKEBOX_PORTLET_REPOSITORY);
