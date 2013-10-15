@@ -64,6 +64,8 @@ public class ArtistStagedModelDataHandler
 
 		Element artistElement = portletDataContext.getExportDataElement(artist);
 
+
+
 		portletDataContext.addClassedModel(
 			artistElement, ExportImportPathUtil.getModelPath(artist), artist);
 	}

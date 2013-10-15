@@ -565,6 +565,25 @@ public class AlbumClp extends BaseModelImpl<Album> implements Album {
 	}
 
 	@Override
+	public boolean hasCustomImage() {
+		try {
+			String methodName = "hasCustomImage";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			Boolean returnObj = (Boolean)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
 	public java.lang.String getImageURL(
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
 		try {
