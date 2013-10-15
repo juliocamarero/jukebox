@@ -16,10 +16,12 @@ package org.liferay.jukebox.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.staging.permission.StagingPermissionUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 import org.liferay.jukebox.model.Album;
+import org.liferay.jukebox.portlet.AlbumsPortlet;
 import org.liferay.jukebox.service.AlbumLocalServiceUtil;
 
 /**
@@ -50,6 +52,14 @@ public class AlbumPermission {
 	public static boolean contains(
 			PermissionChecker permissionChecker, Album album, String actionId)
 		throws PortalException, SystemException {
+
+		Boolean hasPermission = StagingPermissionUtil.hasPermission(
+			permissionChecker, album.getGroupId(), Album.class.getName(),
+			album.getAlbumId(), AlbumsPortlet.PORTLET_ID, actionId);
+
+		if (hasPermission != null) {
+			return hasPermission.booleanValue();
+		}
 
 		return permissionChecker.hasPermission(
 			album.getGroupId(), Album.class.getName(), album.getAlbumId(),

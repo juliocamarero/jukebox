@@ -15,13 +15,18 @@
 package org.liferay.jukebox.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.staging.permission.StagingPermissionUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.util.PortletKeys;
+import org.liferay.jukebox.portlet.AlbumsPortlet;
 
 /**
  * @author Julio Camarero
  */
 public class JukeBoxPermission {
+
+	public static final String RESOURCE_NAME = "org.liferay.jukebox.model";
 
 	public static void check(
 			PermissionChecker permissionChecker, long groupId, String actionId)
@@ -35,8 +40,16 @@ public class JukeBoxPermission {
 	public static boolean contains(
 		PermissionChecker permissionChecker, long groupId, String actionId) {
 
+		Boolean hasPermission = StagingPermissionUtil.hasPermission(
+			permissionChecker, groupId, RESOURCE_NAME, groupId,
+			AlbumsPortlet.PORTLET_ID, actionId);
+
+		if (hasPermission != null) {
+			return hasPermission.booleanValue();
+		}
+
 		return permissionChecker.hasPermission(
-			groupId, "org.liferay.jukebox.model", groupId, actionId);
+			groupId, RESOURCE_NAME, groupId, actionId);
 	}
 
 }

@@ -16,10 +16,12 @@ package org.liferay.jukebox.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.staging.permission.StagingPermissionUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 import org.liferay.jukebox.model.Song;
+import org.liferay.jukebox.portlet.AlbumsPortlet;
 import org.liferay.jukebox.service.SongLocalServiceUtil;
 
 /**
@@ -52,6 +54,14 @@ public class SongPermission {
 		throws PortalException, SystemException {
 
 		Song song = SongLocalServiceUtil.getSong(songId);
+
+		Boolean hasPermission = StagingPermissionUtil.hasPermission(
+			permissionChecker, song.getGroupId(), Song.class.getName(),
+			song.getSongId(), AlbumsPortlet.PORTLET_ID, actionId);
+
+		if (hasPermission != null) {
+			return hasPermission.booleanValue();
+		}
 
 		return permissionChecker.hasPermission(
 			song.getGroupId(), Song.class.getName(), song.getSongId(),
