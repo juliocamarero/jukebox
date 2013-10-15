@@ -14,6 +14,7 @@
 
 package org.liferay.jukebox.model.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.StringPool;
@@ -37,32 +38,50 @@ import org.liferay.jukebox.util.Constants;
  * @author Eudaldo Alonso
  */
 public class AlbumImpl extends AlbumBaseImpl {
-
 	public String getImageURL(ThemeDisplay themeDisplay)
-		throws SystemException {
+		throws SystemException, PortalException {
 
+		FileEntry fileEntry = getCustomImage();
+
+		if (fileEntry != null) {
+			return  DLUtil.getPreviewURL(
+				fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
+				StringPool.BLANK);
+		}
+		else {
+			return themeDisplay.getPortalURL() +
+				"/jukebox-portlet/images/vinilo.png";
+		}
+	}
+
+	public boolean hasCustomImage() throws SystemException, PortalException {
+		FileEntry fileEntry = getCustomImage();
+
+		if (fileEntry != null) {
+			return true;
+		}
+
+		return false;
+	}
+
+	protected FileEntry getCustomImage() throws SystemException {
 		Repository repository =
 			PortletFileRepositoryUtil.fetchPortletRepository(
-				getGroupId(), Constants.JUKEBOX_PORTLET_REPOSITORY);
+			getGroupId(), Constants.JUKEBOX_PORTLET_REPOSITORY);
+
+		if (repository == null) {
+			return null;
+		}
 
 		try {
-			if (repository != null) {
-				FileEntry fileEntry =
-					PortletFileRepositoryUtil.getPortletFileEntry(
-						repository.getRepositoryId(),
-						DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-						String.valueOf(getAlbumId()));
-
-				return DLUtil.getPreviewURL(
-					fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
-					StringPool.BLANK);
-			}
+			return PortletFileRepositoryUtil.getPortletFileEntry(
+				repository.getRepositoryId(),
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				String.valueOf(getAlbumId()));
 		}
 		catch (Exception e) {
+			return null;
 		}
-
-		return themeDisplay.getPortalURL() +
-			"/jukebox-portlet/images/vinilo.png";
 	}
 
 }
