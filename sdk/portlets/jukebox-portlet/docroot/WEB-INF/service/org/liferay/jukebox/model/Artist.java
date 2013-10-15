@@ -39,4 +39,7 @@ public interface Artist extends ArtistModel, PersistedModel {
 	public boolean hasCustomImage()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.repository.model.FileEntry getCustomImage()
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

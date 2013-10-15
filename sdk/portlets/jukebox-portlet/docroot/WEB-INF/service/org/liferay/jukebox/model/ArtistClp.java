@@ -554,6 +554,25 @@ public class ArtistClp extends BaseModelImpl<Artist> implements Artist {
 	}
 
 	@Override
+	public com.liferay.portal.kernel.repository.model.FileEntry getCustomImage() {
+		try {
+			String methodName = "getCustomImage";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			com.liferay.portal.kernel.repository.model.FileEntry returnObj = (com.liferay.portal.kernel.repository.model.FileEntry)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
 	public java.lang.String getImageURL(
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
 		try {
