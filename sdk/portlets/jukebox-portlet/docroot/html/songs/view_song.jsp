@@ -64,9 +64,23 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 		<div class="song-player">
 			<ul class="songs-list graphic">
 				<li class="song">
-					<a class="song-link" href="<%= song.getSongURL(themeDisplay, "mp3") %>" type="audio/mpeg">
-						<%= song.isInTrash() ? TrashUtil.getOriginalTitle(song.getName()) : song.getName() %>
-					</a>
+
+					<%
+					String songURL = song.getSongURL(themeDisplay, "mp3");
+					%>
+
+					<c:choose>
+						<c:when test="<%= Validator.isNotNull(songURL) %>">
+							<a class="song-link" href="<%= songURL %>" type="audio/mpeg">
+								<%= song.isInTrash() ? TrashUtil.getOriginalTitle(song.getName()) : song.getName() %>
+							</a>
+						</c:when>
+						<c:otherwise>
+							<span class="song-link">
+								<%= song.isInTrash() ? TrashUtil.getOriginalTitle(song.getName()) : song.getName() %>
+							</span>
+						</c:otherwise>
+					</c:choose>
 
 					<c:if test="<%= Validator.isNotNull(song.getLyricsURL(themeDisplay)) %>">
 						<liferay-ui:icon cssClass="song-small-link" image="../aui/align-left" label="<%= true %>" message="lyrics" method="get" url="<%= song.getLyricsURL(themeDisplay) %>" />
