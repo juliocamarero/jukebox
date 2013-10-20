@@ -42,9 +42,21 @@
 		height: 250px;
 	}
 
-	.artist-bio {
-		font-style: italic;
-		margin-bottom: 2em;
+	.artist-metainfo {
+		overflow: auto;
+
+		.artist-bio {
+			font-style: italic;
+			margin-bottom: 2em;
+		}
+
+		.entry-links, .entry-tags, .entry-categories {
+			margin-top: 1em;
+		}
+
+		.asset-links-title {
+			height: auto;
+		}
 	}
 
 	.container {
@@ -99,8 +111,20 @@
 		}
 	}
 
-	.album-songs-number {
-		margin-bottom: 3em;
+	.album-metainfo {
+		overflow: auto;
+
+		.album-songs-number {
+			margin-bottom: 3em;
+		}
+
+		.entry-links, .entry-tags, .entry-categories {
+			margin-top: 1em;
+		}
+
+		.asset-links-title {
+			height: auto;
+		}
 	}
 
 	.container {
@@ -138,6 +162,7 @@
 
 	.song-info {
 		float: left;
+		margin-right: 3em;
 
 		.song-artist {
 			overflow: auto;
@@ -149,6 +174,18 @@
 			width: 50px;
 			height: 50px;
 			margin-right: 1em;
+		}
+	}
+
+	.song-metainfo {
+		overflow: auto;
+
+		.entry-links, .entry-tags, .entry-categories {
+			margin-top: 1em;
+		}
+
+		.asset-links-title {
+			height: auto;
 		}
 	}
 }

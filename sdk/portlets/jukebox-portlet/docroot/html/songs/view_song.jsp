@@ -60,18 +60,43 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 		</div>
 	</div>
 
-	<div class="song-player">
-		<ul class="songs-list graphic">
-			<li class="song">
-				<a class="song-link" href="<%= song.getSongURL(themeDisplay, "mp3") %>" type="audio/mpeg">
-					<%= song.isInTrash() ? TrashUtil.getOriginalTitle(song.getName()) : song.getName() %>
-				</a>
+	<div class="song-metainfo">
+		<div class="song-player">
+			<ul class="songs-list graphic">
+				<li class="song">
+					<a class="song-link" href="<%= song.getSongURL(themeDisplay, "mp3") %>" type="audio/mpeg">
+						<%= song.isInTrash() ? TrashUtil.getOriginalTitle(song.getName()) : song.getName() %>
+					</a>
 
-				<c:if test="<%= Validator.isNotNull(song.getLyricsURL(themeDisplay)) %>">
-					<liferay-ui:icon cssClass="song-small-link" image="../aui/align-left" label="<%= true %>" message="lyrics" method="get" url="<%= song.getLyricsURL(themeDisplay) %>" />
-				</c:if>
-			</li>
-		</ul>
+					<c:if test="<%= Validator.isNotNull(song.getLyricsURL(themeDisplay)) %>">
+						<liferay-ui:icon cssClass="song-small-link" image="../aui/align-left" label="<%= true %>" message="lyrics" method="get" url="<%= song.getLyricsURL(themeDisplay) %>" />
+					</c:if>
+				</li>
+			</ul>
+		</div>
+
+		<div class="entry-categories">
+			<liferay-ui:asset-categories-summary
+				className="<%= Song.class.getName() %>"
+				classPK="<%= songId %>"
+				portletURL="<%= renderResponse.createRenderURL() %>"
+			/>
+		</div>
+
+		<div class="entry-tags">
+			<liferay-ui:asset-tags-summary
+				className="<%= Song.class.getName() %>"
+				classPK="<%= songId %>"
+				portletURL="<%= renderResponse.createRenderURL() %>"
+			/>
+		</div>
+
+		<div class="entry-links">
+			<liferay-ui:asset-links
+				className="<%= Song.class.getName() %>"
+				classPK="<%= songId %>"
+			/>
+		</div>
 	</div>
 </div>
 

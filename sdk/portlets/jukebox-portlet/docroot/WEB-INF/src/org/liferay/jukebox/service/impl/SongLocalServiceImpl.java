@@ -32,6 +32,8 @@ import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.User;
 import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.util.DLProcessorRegistryUtil;
 import com.liferay.portlet.trash.model.TrashEntry;
@@ -196,7 +198,8 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, song, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
 
 		return song;
 	}
@@ -420,15 +423,19 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 
 	public void updateAsset(
 			long userId, Song song, long[] assetCategoryIds,
-			String[] assetTagNames)
+			String[] assetTagNames, long[] assetLinkEntryIds)
 		throws PortalException, SystemException {
 
-		assetEntryLocalService.updateEntry(
+		AssetEntry assetEntry = assetEntryLocalService.updateEntry(
 			userId, song.getGroupId(), song.getCreateDate(),
 			song.getModifiedDate(), Song.class.getName(), song.getSongId(),
 			song.getUuid(), 0, assetCategoryIds, assetTagNames, true, null,
 			null, null, ContentTypes.TEXT_HTML, song.getName(), null, null,
 			null, null, 0, 0, null, false);
+
+		assetLinkLocalService.updateLinks(
+			userId, assetEntry.getEntryId(), assetLinkEntryIds,
+			AssetLinkConstants.TYPE_RELATED);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -532,7 +539,8 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, song, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
 
 		return song;
 	}

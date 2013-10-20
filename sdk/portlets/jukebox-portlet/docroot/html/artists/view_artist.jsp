@@ -46,12 +46,37 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 	<div class="container">
 		<img alt="" class="img-circle artist-image" src="<%= artist.getImageURL(themeDisplay) %>" />
 
-		<div class="artist-bio">
-			<%= artist.getBio() %>
-		</div>
+		<div class="artist-metainfo">
+			<div class="artist-bio">
+				<%= artist.getBio() %>
+			</div>
 
-		<div class="album-songs-number">
-			<liferay-ui:message arguments="<%= albums.size() %>" key="x-albums" />
+			<div class="album-songs-number">
+				<liferay-ui:message arguments="<%= albums.size() %>" key="x-albums" />
+			</div>
+
+			<div class="entry-categories">
+				<liferay-ui:asset-categories-summary
+					className="<%= Artist.class.getName() %>"
+					classPK="<%= artistId %>"
+					portletURL="<%= renderResponse.createRenderURL() %>"
+				/>
+			</div>
+
+			<div class="entry-tags">
+				<liferay-ui:asset-tags-summary
+					className="<%= Artist.class.getName() %>"
+					classPK="<%= artistId %>"
+					portletURL="<%= renderResponse.createRenderURL() %>"
+				/>
+			</div>
+
+			<div class="entry-links">
+				<liferay-ui:asset-links
+					className="<%= Artist.class.getName() %>"
+					classPK="<%= artistId %>"
+				/>
+			</div>
 		</div>
 	</div>
 

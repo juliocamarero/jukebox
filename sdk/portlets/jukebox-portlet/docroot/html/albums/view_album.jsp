@@ -48,17 +48,42 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 	<div class="container">
 		<img alt="" class="img-rounded album-image" src="<%= album.getImageURL(themeDisplay) %>" />
 
-		<div class="album-artist">
-			<div>
-				<img alt="" class="img-circle artist-image" src="<%= artist.getImageURL(themeDisplay) %>" />
+		<div class="album-metainfo">
+			<div class="album-artist">
+				<div>
+					<img alt="" class="img-circle artist-image" src="<%= artist.getImageURL(themeDisplay) %>" />
 
-				<%= artist.getName() %>
+					<%= artist.getName() %>
 
-				<span class="album-year">(<%= album.getYear() %>)</span>
+					<span class="album-year">(<%= album.getYear() %>)</span>
 
-				<div class="album-songs-number">
-					<liferay-ui:message arguments="<%= songs.size() %>" key="x-songs" />
+					<div class="album-songs-number">
+						<liferay-ui:message arguments="<%= songs.size() %>" key="x-songs" />
+					</div>
 				</div>
+			</div>
+
+			<div class="entry-categories">
+				<liferay-ui:asset-categories-summary
+					className="<%= Album.class.getName() %>"
+					classPK="<%= albumId %>"
+					portletURL="<%= renderResponse.createRenderURL() %>"
+				/>
+			</div>
+
+			<div class="entry-tags">
+				<liferay-ui:asset-tags-summary
+					className="<%= Album.class.getName() %>"
+					classPK="<%= albumId %>"
+					portletURL="<%= renderResponse.createRenderURL() %>"
+				/>
+			</div>
+
+			<div class="entry-links">
+				<liferay-ui:asset-links
+					className="<%= Album.class.getName() %>"
+					classPK="<%= albumId %>"
+				/>
 			</div>
 
 			<c:if test="<%= !songs.isEmpty() %>">

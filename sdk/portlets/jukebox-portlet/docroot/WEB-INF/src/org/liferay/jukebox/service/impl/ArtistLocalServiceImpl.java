@@ -28,6 +28,8 @@ import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.User;
 import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 
 import java.io.InputStream;
@@ -123,7 +125,8 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, artist, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
 
 		return artist;
 	}
@@ -251,22 +254,27 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, artist, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
 
 		return artist;
 	}
 
 	public void updateAsset(
 			long userId, Artist artist, long[] assetCategoryIds,
-			String[] assetTagNames)
+			String[] assetTagNames, long[] assetLinkEntryIds)
 		throws PortalException, SystemException {
 
-		assetEntryLocalService.updateEntry(
+		AssetEntry assetEntry = assetEntryLocalService.updateEntry(
 			userId, artist.getGroupId(), artist.getCreateDate(),
 			artist.getModifiedDate(), Artist.class.getName(),
 			artist.getArtistId(), artist.getUuid(), 0, assetCategoryIds,
 			assetTagNames, true, null, null, null, ContentTypes.TEXT_HTML,
 			artist.getName(), null, null, null, null, 0, 0, null, false);
+
+		assetLinkLocalService.updateLinks(
+			userId, assetEntry.getEntryId(), assetLinkEntryIds,
+			AssetLinkConstants.TYPE_RELATED);
 	}
 
 	protected void validate(String name) throws PortalException {

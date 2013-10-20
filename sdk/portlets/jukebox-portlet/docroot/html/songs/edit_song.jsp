@@ -33,6 +33,10 @@ if (songId > 0) {
 	title='<%= (song != null) ? song.getName() : "new-song" %>'
 />
 
+<liferay-ui:asset-categories-error />
+
+<liferay-ui:asset-tags-error />
+
 <portlet:actionURL name='<%= (song != null) ? "updateSong" : "addSong" %>' var="addSongURL" />
 
 <aui:form action="<%= addSongURL %>" enctype="multipart/form-data" method="post" name="fm">
@@ -73,6 +77,23 @@ if (songId > 0) {
 				/>
 		</aui:field-wrapper>
 	</c:if>
+
+	<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="songCategorizationPanel" persistState="<%= true %>" title="categorization">
+		<aui:fieldset>
+			<aui:input name="categories" type="assetCategories" />
+
+			<aui:input name="tags" type="assetTags" />
+		</aui:fieldset>
+	</liferay-ui:panel>
+
+	<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="songAssetLinksPanel" persistState="<%= true %>" title="related-assets">
+		<aui:fieldset>
+			<liferay-ui:input-asset-links
+				className="<%= Song.class.getName() %>"
+				classPK="<%= songId %>"
+			/>
+		</aui:fieldset>
+	</liferay-ui:panel>
 
 	<aui:button-row>
 		<aui:button type="submit" />

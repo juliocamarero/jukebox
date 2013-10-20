@@ -33,6 +33,10 @@ if (albumId > 0) {
 	title='<%= (album != null) ? album.getName() : "new-album" %>'
 />
 
+<liferay-ui:asset-categories-error />
+
+<liferay-ui:asset-tags-error />
+
 <portlet:actionURL name='<%= (album != null) ? "updateAlbum" : "addAlbum" %>' var="addAlbumURL" />
 
 <aui:form action="<%= addAlbumURL %>" enctype="multipart/form-data" method="post" name="fm">
@@ -72,6 +76,23 @@ if (albumId > 0) {
 			/>
 		</aui:field-wrapper>
 	</c:if>
+
+	<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="albumCategorizationPanel" persistState="<%= true %>" title="categorization">
+		<aui:fieldset>
+			<aui:input name="categories" type="assetCategories" />
+
+			<aui:input name="tags" type="assetTags" />
+		</aui:fieldset>
+	</liferay-ui:panel>
+
+	<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="albumAssetLinksPanel" persistState="<%= true %>" title="related-assets">
+		<aui:fieldset>
+			<liferay-ui:input-asset-links
+				className="<%= Album.class.getName() %>"
+				classPK="<%= albumId %>"
+			/>
+		</aui:fieldset>
+	</liferay-ui:panel>
 
 	<aui:button-row>
 		<aui:button type="submit" />

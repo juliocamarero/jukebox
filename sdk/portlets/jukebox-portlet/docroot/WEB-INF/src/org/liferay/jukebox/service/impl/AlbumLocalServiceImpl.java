@@ -30,6 +30,8 @@ import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.User;
 import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.trash.model.TrashEntry;
 import com.liferay.portlet.trash.model.TrashVersion;
@@ -128,7 +130,8 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, album, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
 
 		return album;
 	}
@@ -350,22 +353,27 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, album, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
 
 		return album;
 	}
 
 	public void updateAsset(
 			long userId, Album album, long[] assetCategoryIds,
-			String[] assetTagNames)
+			String[] assetTagNames, long[] assetLinkEntryIds)
 		throws PortalException, SystemException {
 
-		assetEntryLocalService.updateEntry(
+		AssetEntry assetEntry = assetEntryLocalService.updateEntry(
 			userId, album.getGroupId(), album.getCreateDate(),
 			album.getModifiedDate(), Album.class.getName(), album.getAlbumId(),
 			album.getUuid(), 0, assetCategoryIds, assetTagNames, true, null,
 			null, null, ContentTypes.TEXT_HTML, album.getName(), null, null,
 			null, null, 0, 0, null, false);
+
+		assetLinkLocalService.updateLinks(
+			userId, assetEntry.getEntryId(), assetLinkEntryIds,
+			AssetLinkConstants.TYPE_RELATED);
 	}
 
 	protected void moveDependentsToTrash(List<Song> songs, long trashEntryId)
