@@ -128,8 +128,10 @@ public class AlbumStagedModelDataHandler
 		Artist artist = (Artist)portletDataContext.getZipEntryAsObject(
 			artistPath);
 
-		StagedModelDataHandlerUtil.importReferenceStagedModel(
-			portletDataContext, artist);
+		if (artist != null) {
+			StagedModelDataHandlerUtil.importReferenceStagedModel(
+				portletDataContext, album, Artist.class, album.getArtistId());
+		}
 
 		Map<Long, Long> artistIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
