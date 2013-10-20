@@ -83,13 +83,39 @@ if (songId > 0) {
 			boolean trashEnabled = TrashUtil.isTrashEnabled(scopeGroupId);
 			%>
 
-			<portlet:actionURL name="deleteSong" var="deleteSongURL">
-				<portlet:param name="songId" value="<%= String.valueOf(song.getSongId()) %>" />
-				<portlet:param name="moveToTrash" value="<%= String.valueOf(trashEnabled) %>" />
-				<portlet:param name="redirect" value="<%= redirect %>" />
-			</portlet:actionURL>
+			<c:if test="<%= SongPermission.contains(permissionChecker, song.getSongId(), ActionKeys.PERMISSIONS) %>">
+				<liferay-security:permissionsURL
+					modelResource="<%= Song.class.getName() %>"
+					modelResourceDescription="<%= song.getName() %>"
+					resourcePrimKey="<%= String.valueOf(song.getSongId()) %>"
+					var="permissionsSongURL"
+					windowState="<%= LiferayWindowState.POP_UP.toString() %>"
+				/>
 
-			<aui:button cssClass="btn-danger" href="<%= deleteSongURL %>" value='<%= trashEnabled ? "move-to-trash" : "delete" %>' />
+				<liferay-ui:icon
+					cssClass="edit-actions"
+					image="permissions"
+					label="<%= true %>"
+					method="get"
+					url="<%= permissionsSongURL %>"
+					useDialog="<%= true %>"
+				/>
+			</c:if>
+
+			<c:if test="<%= SongPermission.contains(permissionChecker, song.getSongId(), ActionKeys.DELETE) %>">
+				<portlet:actionURL name="deleteSong" var="deleteSongURL">
+					<portlet:param name="songId" value="<%= String.valueOf(song.getSongId()) %>" />
+					<portlet:param name="moveToTrash" value="<%= String.valueOf(trashEnabled) %>" />
+					<portlet:param name="redirect" value="<%= redirect %>" />
+				</portlet:actionURL>
+
+				<liferay-ui:icon-delete
+					cssClass="edit-actions"
+					label="<%= true %>"
+					trash="<%= trashEnabled %>"
+					url="<%= deleteSongURL %>"
+				/>
+			</c:if>
 		</c:if>
 	</aui:button-row>
 </aui:form>

@@ -61,12 +61,37 @@ if (artistId > 0) {
 		<aui:button type="submit" />
 
 		<c:if test="<%= artist != null %>">
-			<portlet:actionURL name="deleteArtist" var="deleteArtistURL">
-				<portlet:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
-				<portlet:param name="redirect" value="<%= redirect %>" />
-			</portlet:actionURL>
+			<c:if test="<%= ArtistPermission.contains(permissionChecker, artist.getArtistId(), ActionKeys.PERMISSIONS) %>">
+				<liferay-security:permissionsURL
+					modelResource="<%= Artist.class.getName() %>"
+					modelResourceDescription="<%= artist.getName() %>"
+					resourcePrimKey="<%= String.valueOf(artist.getArtistId()) %>"
+					var="permissionsArtistURL"
+					windowState="<%= LiferayWindowState.POP_UP.toString() %>"
+				/>
 
-			<aui:button cssClass="btn-danger" href="<%= deleteArtistURL %>" value="delete" />
+				<liferay-ui:icon
+					cssClass="edit-actions"
+					image="permissions"
+					label="<%= true %>"
+					method="get"
+					url="<%= permissionsArtistURL %>"
+					useDialog="<%= true %>"
+				/>
+			</c:if>
+
+			<c:if test="<%= ArtistPermission.contains(permissionChecker, artist.getArtistId(), ActionKeys.DELETE) %>">
+				<portlet:actionURL name="deleteArtist" var="deleteArtistURL">
+					<portlet:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
+					<portlet:param name="redirect" value="<%= redirect %>" />
+				</portlet:actionURL>
+
+				<liferay-ui:icon-delete
+					cssClass="edit-actions"
+					label="<%= true %>"
+					url="<%= deleteArtistURL %>"
+				/>
+			</c:if>
 		</c:if>
 	</aui:button-row>
 </aui:form>

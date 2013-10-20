@@ -1,5 +1,11 @@
 @import "compass";
 
+// Generic
+
+.edit-actions {
+	margin-left: 2em;
+}
+
 // Artists
 
 .artists-list {

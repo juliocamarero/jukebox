@@ -72,6 +72,7 @@
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@ page import="com.liferay.portal.kernel.xuggler.XugglerUtil" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowConstants" %>
+<%@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %>
 <%@ page import="com.liferay.portlet.trash.util.TrashUtil" %>
 
 <%@ page import="com.liferay.portal.security.permission.ActionKeys" %>
