@@ -36,6 +36,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.liferay.jukebox.ArtistNameException;
+import org.liferay.jukebox.model.Album;
 import org.liferay.jukebox.model.Artist;
 import org.liferay.jukebox.service.base.ArtistLocalServiceBaseImpl;
 import org.liferay.jukebox.util.Constants;
@@ -155,6 +156,12 @@ public class ArtistLocalServiceImpl extends ArtistLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		Artist artist = artistPersistence.findByPrimaryKey(artistId);
+
+		List<Album> albums = albumLocalService.getAlbumsByArtistId(artistId);
+
+		for (Album album : albums) {
+			albumLocalService.deleteAlbum(album.getAlbumId());
+		}
 
 		try {
 			PortletFileRepositoryUtil.deletePortletFileEntry(
