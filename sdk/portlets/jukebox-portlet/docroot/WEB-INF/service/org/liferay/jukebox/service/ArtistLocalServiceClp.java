@@ -175,7 +175,7 @@ public class ArtistLocalServiceClp implements ArtistLocalService {
 
 		_methodParameterTypes31 = new String[] {
 				"long", "org.liferay.jukebox.model.Artist", "long[][]",
-				"java.lang.String[][]"
+				"java.lang.String[][]", "long[][]"
 			};
 	}
 
@@ -1144,7 +1144,7 @@ public class ArtistLocalServiceClp implements ArtistLocalService {
 	@Override
 	public void updateAsset(long userId,
 		org.liferay.jukebox.model.Artist artist, long[] assetCategoryIds,
-		java.lang.String[] assetTagNames)
+		java.lang.String[] assetTagNames, long[] assetLinkEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -1157,7 +1157,9 @@ public class ArtistLocalServiceClp implements ArtistLocalService {
 					
 				ClpSerializer.translateInput(assetCategoryIds),
 					
-				ClpSerializer.translateInput(assetTagNames)
+				ClpSerializer.translateInput(assetTagNames),
+					
+				ClpSerializer.translateInput(assetLinkEntryIds)
 				});
 		}
 		catch (Throwable t) {

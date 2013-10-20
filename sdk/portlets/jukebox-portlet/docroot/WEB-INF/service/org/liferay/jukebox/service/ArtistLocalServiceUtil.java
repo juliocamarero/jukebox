@@ -395,10 +395,12 @@ public class ArtistLocalServiceUtil {
 
 	public static void updateAsset(long userId,
 		org.liferay.jukebox.model.Artist artist, long[] assetCategoryIds,
-		java.lang.String[] assetTagNames)
+		java.lang.String[] assetTagNames, long[] assetLinkEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateAsset(userId, artist, assetCategoryIds, assetTagNames);
+		getService()
+			.updateAsset(userId, artist, assetCategoryIds, assetTagNames,
+			assetLinkEntryIds);
 	}
 
 	public static void clearService() {

@@ -435,11 +435,12 @@ public class AlbumLocalServiceWrapper implements AlbumLocalService,
 
 	@Override
 	public void updateAsset(long userId, org.liferay.jukebox.model.Album album,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		long[] assetCategoryIds, java.lang.String[] assetTagNames,
+		long[] assetLinkEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_albumLocalService.updateAsset(userId, album, assetCategoryIds,
-			assetTagNames);
+			assetTagNames, assetLinkEntryIds);
 	}
 
 	/**

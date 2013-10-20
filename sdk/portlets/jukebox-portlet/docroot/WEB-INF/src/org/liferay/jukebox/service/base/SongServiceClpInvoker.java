@@ -24,75 +24,75 @@ import java.util.Arrays;
  */
 public class SongServiceClpInvoker {
 	public SongServiceClpInvoker() {
-		_methodName76 = "getBeanIdentifier";
+		_methodName80 = "getBeanIdentifier";
 
-		_methodParameterTypes76 = new String[] {  };
+		_methodParameterTypes80 = new String[] {  };
 
-		_methodName77 = "setBeanIdentifier";
+		_methodName81 = "setBeanIdentifier";
 
-		_methodParameterTypes77 = new String[] { "java.lang.String" };
+		_methodParameterTypes81 = new String[] { "java.lang.String" };
 
-		_methodName82 = "addSong";
+		_methodName86 = "addSong";
 
-		_methodParameterTypes82 = new String[] {
+		_methodParameterTypes86 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.io.InputStream", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName83 = "deleteSong";
+		_methodName87 = "deleteSong";
 
-		_methodParameterTypes83 = new String[] {
+		_methodParameterTypes87 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName84 = "getSongs";
+		_methodName88 = "getSongs";
 
-		_methodParameterTypes84 = new String[] { "long" };
+		_methodParameterTypes88 = new String[] { "long" };
 
-		_methodName85 = "getSongs";
+		_methodName89 = "getSongs";
 
-		_methodParameterTypes85 = new String[] { "long", "int", "int" };
+		_methodParameterTypes89 = new String[] { "long", "int", "int" };
 
-		_methodName86 = "getSongs";
-
-		_methodParameterTypes86 = new String[] { "long", "java.lang.String" };
-
-		_methodName87 = "getSongsByAlbumId";
-
-		_methodParameterTypes87 = new String[] { "long", "long" };
-
-		_methodName88 = "getSongsByAlbumId";
-
-		_methodParameterTypes88 = new String[] { "long", "long", "int" };
-
-		_methodName89 = "getSongsCount";
-
-		_methodParameterTypes89 = new String[] { "long" };
-
-		_methodName90 = "getSongsCount";
+		_methodName90 = "getSongs";
 
 		_methodParameterTypes90 = new String[] { "long", "java.lang.String" };
 
-		_methodName91 = "getSongsCountByAlbumId";
+		_methodName91 = "getSongsByAlbumId";
 
 		_methodParameterTypes91 = new String[] { "long", "long" };
 
-		_methodName92 = "getSongsCountByAlbumId";
+		_methodName92 = "getSongsByAlbumId";
 
 		_methodParameterTypes92 = new String[] { "long", "long", "int" };
 
-		_methodName93 = "moveSongToTrash";
+		_methodName93 = "getSongsCount";
 
 		_methodParameterTypes93 = new String[] { "long" };
 
-		_methodName94 = "restoreSongFromTrash";
+		_methodName94 = "getSongsCount";
 
-		_methodParameterTypes94 = new String[] { "long" };
+		_methodParameterTypes94 = new String[] { "long", "java.lang.String" };
 
-		_methodName95 = "updateSong";
+		_methodName95 = "getSongsCountByAlbumId";
 
-		_methodParameterTypes95 = new String[] {
+		_methodParameterTypes95 = new String[] { "long", "long" };
+
+		_methodName96 = "getSongsCountByAlbumId";
+
+		_methodParameterTypes96 = new String[] { "long", "long", "int" };
+
+		_methodName97 = "moveSongToTrash";
+
+		_methodParameterTypes97 = new String[] { "long" };
+
+		_methodName98 = "restoreSongFromTrash";
+
+		_methodParameterTypes98 = new String[] { "long" };
+
+		_methodName99 = "updateSong";
+
+		_methodParameterTypes99 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String",
 				"java.io.InputStream", "java.lang.String", "java.io.InputStream",
 				"com.liferay.portal.service.ServiceContext"
@@ -101,20 +101,20 @@ public class SongServiceClpInvoker {
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
-		if (_methodName76.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
+		if (_methodName80.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
 			return SongServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName77.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
+		if (_methodName81.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
 			SongServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName82.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes82, parameterTypes)) {
+		if (_methodName86.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes86, parameterTypes)) {
 			return SongServiceUtil.addSong(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.io.InputStream)arguments[3],
@@ -123,79 +123,79 @@ public class SongServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[6]);
 		}
 
-		if (_methodName83.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes83, parameterTypes)) {
+		if (_methodName87.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes87, parameterTypes)) {
 			return SongServiceUtil.deleteSong(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
-		if (_methodName84.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes84, parameterTypes)) {
+		if (_methodName88.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes88, parameterTypes)) {
 			return SongServiceUtil.getSongs(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName85.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes85, parameterTypes)) {
+		if (_methodName89.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes89, parameterTypes)) {
 			return SongServiceUtil.getSongs(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName86.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes86, parameterTypes)) {
-			return SongServiceUtil.getSongs(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1]);
-		}
-
-		if (_methodName87.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes87, parameterTypes)) {
-			return SongServiceUtil.getSongsByAlbumId(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue());
-		}
-
-		if (_methodName88.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes88, parameterTypes)) {
-			return SongServiceUtil.getSongsByAlbumId(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue(),
-				((Integer)arguments[2]).intValue());
-		}
-
-		if (_methodName89.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes89, parameterTypes)) {
-			return SongServiceUtil.getSongsCount(((Long)arguments[0]).longValue());
-		}
-
 		if (_methodName90.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
-			return SongServiceUtil.getSongsCount(((Long)arguments[0]).longValue(),
+			return SongServiceUtil.getSongs(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
 		if (_methodName91.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
-			return SongServiceUtil.getSongsCountByAlbumId(((Long)arguments[0]).longValue(),
+			return SongServiceUtil.getSongsByAlbumId(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
 
 		if (_methodName92.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes92, parameterTypes)) {
-			return SongServiceUtil.getSongsCountByAlbumId(((Long)arguments[0]).longValue(),
+			return SongServiceUtil.getSongsByAlbumId(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName93.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes93, parameterTypes)) {
-			return SongServiceUtil.moveSongToTrash(((Long)arguments[0]).longValue());
+			return SongServiceUtil.getSongsCount(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName94.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes94, parameterTypes)) {
-			return SongServiceUtil.restoreSongFromTrash(((Long)arguments[0]).longValue());
+			return SongServiceUtil.getSongsCount(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1]);
 		}
 
 		if (_methodName95.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes95, parameterTypes)) {
+			return SongServiceUtil.getSongsCountByAlbumId(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+		}
+
+		if (_methodName96.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
+			return SongServiceUtil.getSongsCountByAlbumId(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				((Integer)arguments[2]).intValue());
+		}
+
+		if (_methodName97.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
+			return SongServiceUtil.moveSongToTrash(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName98.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
+			return SongServiceUtil.restoreSongFromTrash(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName99.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes99, parameterTypes)) {
 			return SongServiceUtil.updateSong(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
@@ -208,18 +208,10 @@ public class SongServiceClpInvoker {
 		throw new UnsupportedOperationException();
 	}
 
-	private String _methodName76;
-	private String[] _methodParameterTypes76;
-	private String _methodName77;
-	private String[] _methodParameterTypes77;
-	private String _methodName82;
-	private String[] _methodParameterTypes82;
-	private String _methodName83;
-	private String[] _methodParameterTypes83;
-	private String _methodName84;
-	private String[] _methodParameterTypes84;
-	private String _methodName85;
-	private String[] _methodParameterTypes85;
+	private String _methodName80;
+	private String[] _methodParameterTypes80;
+	private String _methodName81;
+	private String[] _methodParameterTypes81;
 	private String _methodName86;
 	private String[] _methodParameterTypes86;
 	private String _methodName87;
@@ -240,4 +232,12 @@ public class SongServiceClpInvoker {
 	private String[] _methodParameterTypes94;
 	private String _methodName95;
 	private String[] _methodParameterTypes95;
+	private String _methodName96;
+	private String[] _methodParameterTypes96;
+	private String _methodName97;
+	private String[] _methodParameterTypes97;
+	private String _methodName98;
+	private String[] _methodParameterTypes98;
+	private String _methodName99;
+	private String[] _methodParameterTypes99;
 }

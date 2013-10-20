@@ -345,7 +345,7 @@ public interface ArtistLocalService extends BaseLocalService,
 
 	public void updateAsset(long userId,
 		org.liferay.jukebox.model.Artist artist, long[] assetCategoryIds,
-		java.lang.String[] assetTagNames)
+		java.lang.String[] assetTagNames, long[] assetLinkEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }

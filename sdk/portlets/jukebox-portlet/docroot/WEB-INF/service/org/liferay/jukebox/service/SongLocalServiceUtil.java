@@ -434,10 +434,12 @@ public class SongLocalServiceUtil {
 
 	public static void updateAsset(long userId,
 		org.liferay.jukebox.model.Song song, long[] assetCategoryIds,
-		java.lang.String[] assetTagNames)
+		java.lang.String[] assetTagNames, long[] assetLinkEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateAsset(userId, song, assetCategoryIds, assetTagNames);
+		getService()
+			.updateAsset(userId, song, assetCategoryIds, assetTagNames,
+			assetLinkEntryIds);
 	}
 
 	public static org.liferay.jukebox.model.Song updateSong(long userId,

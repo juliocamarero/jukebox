@@ -415,10 +415,12 @@ public class AlbumLocalServiceUtil {
 
 	public static void updateAsset(long userId,
 		org.liferay.jukebox.model.Album album, long[] assetCategoryIds,
-		java.lang.String[] assetTagNames)
+		java.lang.String[] assetTagNames, long[] assetLinkEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateAsset(userId, album, assetCategoryIds, assetTagNames);
+		getService()
+			.updateAsset(userId, album, assetCategoryIds, assetTagNames,
+			assetLinkEntryIds);
 	}
 
 	public static void clearService() {

@@ -375,7 +375,8 @@ public interface SongLocalService extends BaseLocalService, InvokableLocalServic
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void updateAsset(long userId, org.liferay.jukebox.model.Song song,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		long[] assetCategoryIds, java.lang.String[] assetTagNames,
+		long[] assetLinkEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

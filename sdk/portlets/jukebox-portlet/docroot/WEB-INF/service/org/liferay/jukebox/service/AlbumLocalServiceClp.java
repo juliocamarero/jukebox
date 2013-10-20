@@ -184,7 +184,7 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 
 		_methodParameterTypes34 = new String[] {
 				"long", "org.liferay.jukebox.model.Album", "long[][]",
-				"java.lang.String[][]"
+				"java.lang.String[][]", "long[][]"
 			};
 	}
 
@@ -1252,7 +1252,8 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 
 	@Override
 	public void updateAsset(long userId, org.liferay.jukebox.model.Album album,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		long[] assetCategoryIds, java.lang.String[] assetTagNames,
+		long[] assetLinkEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -1265,7 +1266,9 @@ public class AlbumLocalServiceClp implements AlbumLocalService {
 					
 				ClpSerializer.translateInput(assetCategoryIds),
 					
-				ClpSerializer.translateInput(assetTagNames)
+				ClpSerializer.translateInput(assetTagNames),
+					
+				ClpSerializer.translateInput(assetLinkEntryIds)
 				});
 		}
 		catch (Throwable t) {
