@@ -44,6 +44,58 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 	/>
 </c:if>
 
+<c:if test="<%= AlbumPermission.contains(permissionChecker, album.getAlbumId(), ActionKeys.UPDATE) %>">
+	<aui:nav-bar>
+		<aui:nav>
+			<portlet:renderURL var="editAlbumURL">
+				<portlet:param name="jspPage" value="/html/albums/edit_album.jsp" />
+				<portlet:param name="albumId" value="<%= String.valueOf(album.getAlbumId()) %>" />
+				<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(liferayPortletRequest) %>" />
+			</portlet:renderURL>
+
+			<aui:nav-item href="<%= editAlbumURL %>" iconCssClass="icon-pencil" label="edit" />
+		</aui:nav>
+
+		<c:if test="<%= AlbumPermission.contains(permissionChecker, album.getAlbumId(), ActionKeys.PERMISSIONS) %>">
+			<aui:nav>
+				<liferay-security:permissionsURL
+					modelResource="<%= Album.class.getName() %>"
+					modelResourceDescription="<%= album.getName() %>"
+					resourcePrimKey="<%= String.valueOf(album.getAlbumId()) %>"
+					var="permissionsAlbumURL"
+					windowState="<%= LiferayWindowState.POP_UP.toString() %>"
+				/>
+
+				<aui:nav-item href="<%= permissionsAlbumURL %>" iconCssClass="icon-key" label="permissions" useDialog="<%= true %>" title="permissions" />
+			</aui:nav>
+		</c:if>
+
+		<c:if test="<%= AlbumPermission.contains(permissionChecker, album.getAlbumId(), ActionKeys.DELETE) %>">
+
+			<%
+			boolean trashEnabled = TrashUtil.isTrashEnabled(scopeGroupId);
+			%>
+
+			<aui:nav>
+				<portlet:actionURL name="deleteAlbum" var="deleteAlbumURL">
+					<portlet:param name="albumId" value="<%= String.valueOf(album.getAlbumId()) %>" />
+					<portlet:param name="moveToTrash" value="<%= String.valueOf(trashEnabled) %>" />
+					<portlet:param name="redirect" value="<%= redirect %>" />
+				</portlet:actionURL>
+
+				<c:choose>
+					<c:when test="<%= trashEnabled %>">
+						<aui:nav-item href="<%= deleteAlbumURL %>" iconCssClass="icon-trash" label="move-to-the-recycle-bin" />
+					</c:when>
+					<c:otherwise>
+						<aui:nav-item href="<%= deleteAlbumURL %>" iconCssClass="icon-key" label="delete" useDialog="<%= true %>" />
+					</c:otherwise>
+				</c:choose>
+			</aui:nav>
+		</c:if>
+	</aui:nav-bar>
+</c:if>
+
 <div class="album-detail">
 	<div class="container">
 		<img alt="" class="img-rounded album-image" src="<%= album.getImageURL(themeDisplay) %>" />

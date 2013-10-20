@@ -42,6 +42,45 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 	/>
 </c:if>
 
+<c:if test="<%= ArtistPermission.contains(permissionChecker, artist.getArtistId(), ActionKeys.UPDATE) %>">
+	<aui:nav-bar>
+		<aui:nav>
+			<portlet:renderURL var="editArtistURL">
+				<portlet:param name="jspPage" value="/html/artists/edit_artist.jsp" />
+				<portlet:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
+				<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(liferayPortletRequest) %>" />
+			</portlet:renderURL>
+
+			<aui:nav-item href="<%= editArtistURL %>" iconCssClass="icon-pencil" label="edit" />
+		</aui:nav>
+
+		<c:if test="<%= ArtistPermission.contains(permissionChecker, artist.getArtistId(), ActionKeys.PERMISSIONS) %>">
+			<aui:nav>
+				<liferay-security:permissionsURL
+					modelResource="<%= Artist.class.getName() %>"
+					modelResourceDescription="<%= artist.getName() %>"
+					resourcePrimKey="<%= String.valueOf(artist.getArtistId()) %>"
+					var="permissionsArtistURL"
+					windowState="<%= LiferayWindowState.POP_UP.toString() %>"
+				/>
+
+				<aui:nav-item href="<%= permissionsArtistURL %>" iconCssClass="icon-key" label="permissions" useDialog="<%= true %>" title="permissions" />
+			</aui:nav>
+		</c:if>
+
+		<c:if test="<%= ArtistPermission.contains(permissionChecker, artist.getArtistId(), ActionKeys.DELETE) %>">
+			<aui:nav>
+				<portlet:actionURL name="deleteArtist" var="deleteArtistURL">
+					<portlet:param name="artistId" value="<%= String.valueOf(artist.getArtistId()) %>" />
+					<portlet:param name="redirect" value="<%= redirect %>" />
+				</portlet:actionURL>
+
+				<aui:nav-item href="<%= deleteArtistURL %>" iconCssClass="icon-remove" label="delete" />
+			</aui:nav>
+		</c:if>
+	</aui:nav-bar>
+</c:if>
+
 <div class="artist-detail">
 	<div class="container">
 		<img alt="" class="img-circle artist-image" src="<%= artist.getImageURL(themeDisplay) %>" />

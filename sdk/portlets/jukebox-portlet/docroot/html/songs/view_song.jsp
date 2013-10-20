@@ -44,6 +44,59 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 	/>
 </c:if>
 
+<c:if test="<%= SongPermission.contains(permissionChecker, song.getSongId(), ActionKeys.UPDATE) %>">
+
+	<aui:nav-bar>
+		<aui:nav>
+			<portlet:renderURL var="editSongURL">
+				<portlet:param name="jspPage" value="/html/songs/edit_song.jsp" />
+				<portlet:param name="songId" value="<%= String.valueOf(song.getSongId()) %>" />
+				<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(liferayPortletRequest) %>" />
+			</portlet:renderURL>
+
+			<aui:nav-item href="<%= editSongURL %>" iconCssClass="icon-pencil" label="edit" />
+		</aui:nav>
+
+		<c:if test="<%= SongPermission.contains(permissionChecker, song.getSongId(), ActionKeys.PERMISSIONS) %>">
+			<aui:nav>
+				<liferay-security:permissionsURL
+					modelResource="<%= Song.class.getName() %>"
+					modelResourceDescription="<%= song.getName() %>"
+					resourcePrimKey="<%= String.valueOf(song.getSongId()) %>"
+					var="permissionsSongURL"
+					windowState="<%= LiferayWindowState.POP_UP.toString() %>"
+				/>
+
+				<aui:nav-item href="<%= permissionsSongURL %>" iconCssClass="icon-key" label="permissions" useDialog="<%= true %>" title="permissions" />
+			</aui:nav>
+		</c:if>
+
+		<c:if test="<%= SongPermission.contains(permissionChecker, song.getSongId(), ActionKeys.DELETE) %>">
+
+			<%
+			boolean trashEnabled = TrashUtil.isTrashEnabled(scopeGroupId);
+			%>
+
+			<aui:nav>
+				<portlet:actionURL name="deleteSong" var="deleteSongURL">
+					<portlet:param name="songId" value="<%= String.valueOf(song.getSongId()) %>" />
+					<portlet:param name="moveToTrash" value="<%= String.valueOf(trashEnabled) %>" />
+					<portlet:param name="redirect" value="<%= redirect %>" />
+				</portlet:actionURL>
+
+				<c:choose>
+					<c:when test="<%= trashEnabled %>">
+						<aui:nav-item href="<%= deleteSongURL %>" iconCssClass="icon-trash" label="move-to-the-recycle-bin" />
+					</c:when>
+					<c:otherwise>
+						<aui:nav-item href="<%= deleteSongURL %>" iconCssClass="icon-key" label="delete" useDialog="<%= true %>" />
+					</c:otherwise>
+				</c:choose>
+			</aui:nav>
+		</c:if>
+	</aui:nav-bar>
+</c:if>
+
 <div class="song-details">
 	<div class="song-info">
 		<div class="song-artist">

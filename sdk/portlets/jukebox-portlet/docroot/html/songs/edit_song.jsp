@@ -97,46 +97,5 @@ if (songId > 0) {
 
 	<aui:button-row>
 		<aui:button type="submit" />
-
-		<c:if test="<%= song != null %>">
-
-			<%
-			boolean trashEnabled = TrashUtil.isTrashEnabled(scopeGroupId);
-			%>
-
-			<c:if test="<%= SongPermission.contains(permissionChecker, song.getSongId(), ActionKeys.PERMISSIONS) %>">
-				<liferay-security:permissionsURL
-					modelResource="<%= Song.class.getName() %>"
-					modelResourceDescription="<%= song.getName() %>"
-					resourcePrimKey="<%= String.valueOf(song.getSongId()) %>"
-					var="permissionsSongURL"
-					windowState="<%= LiferayWindowState.POP_UP.toString() %>"
-				/>
-
-				<liferay-ui:icon
-					cssClass="edit-actions"
-					image="permissions"
-					label="<%= true %>"
-					method="get"
-					url="<%= permissionsSongURL %>"
-					useDialog="<%= true %>"
-				/>
-			</c:if>
-
-			<c:if test="<%= SongPermission.contains(permissionChecker, song.getSongId(), ActionKeys.DELETE) %>">
-				<portlet:actionURL name="deleteSong" var="deleteSongURL">
-					<portlet:param name="songId" value="<%= String.valueOf(song.getSongId()) %>" />
-					<portlet:param name="moveToTrash" value="<%= String.valueOf(trashEnabled) %>" />
-					<portlet:param name="redirect" value="<%= redirect %>" />
-				</portlet:actionURL>
-
-				<liferay-ui:icon-delete
-					cssClass="edit-actions"
-					label="<%= true %>"
-					trash="<%= trashEnabled %>"
-					url="<%= deleteSongURL %>"
-				/>
-			</c:if>
-		</c:if>
 	</aui:button-row>
 </aui:form>
