@@ -30,7 +30,7 @@ boolean searchView = ParamUtil.getBoolean(request, "searchView");
 				<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
 			</portlet:renderURL>
 
-			<aui:nav-item href="<%= editAlbumURL %>" iconClass="icon-plus" label="add-album" selected='<%= toolbarItem.equals("add") %>' />
+			<aui:nav-item href="<%= editAlbumURL %>" iconCssClass="icon-plus" label="add-album" selected='<%= toolbarItem.equals("add") %>' />
 		</c:if>
 	</aui:nav>
 
