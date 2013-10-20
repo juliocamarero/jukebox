@@ -56,6 +56,18 @@ boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 			<aui:nav-item href="<%= editAlbumURL %>" iconCssClass="icon-pencil" label="edit" />
 		</aui:nav>
 
+		<c:if test='<%= JukeBoxPermission.contains(permissionChecker, scopeGroupId, "ADD_SONG") %>'>
+			<aui:nav>
+				<portlet:renderURL var="editArtistURL">
+					<portlet:param name="jspPage" value="/html/songs/edit_song.jsp" />
+					<portlet:param name="albumId" value="<%= String.valueOf(albumId) %>" />
+					<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>" />
+				</portlet:renderURL>
+
+				<aui:nav-item href="<%= editArtistURL %>" iconCssClass="icon-plus" label="add-song" />
+			</aui:nav>
+		</c:if>
+
 		<c:if test="<%= AlbumPermission.contains(permissionChecker, album.getAlbumId(), ActionKeys.PERMISSIONS) %>">
 			<aui:nav>
 				<liferay-security:permissionsURL
