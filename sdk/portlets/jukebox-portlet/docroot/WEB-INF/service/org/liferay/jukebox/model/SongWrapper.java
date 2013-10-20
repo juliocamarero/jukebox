@@ -732,7 +732,7 @@ public class SongWrapper implements Song, ModelWrapper<Song> {
 	}
 
 	@Override
-	public int compareTo(Song song) {
+	public int compareTo(org.liferay.jukebox.model.Song song) {
 		return _song.compareTo(song);
 	}
 
@@ -742,17 +742,17 @@ public class SongWrapper implements Song, ModelWrapper<Song> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<Song> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<org.liferay.jukebox.model.Song> toCacheModel() {
 		return _song.toCacheModel();
 	}
 
 	@Override
-	public Song toEscapedModel() {
+	public org.liferay.jukebox.model.Song toEscapedModel() {
 		return new SongWrapper(_song.toEscapedModel());
 	}
 
 	@Override
-	public Song toUnescapedModel() {
+	public org.liferay.jukebox.model.Song toUnescapedModel() {
 		return new SongWrapper(_song.toUnescapedModel());
 	}
 
