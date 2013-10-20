@@ -25,10 +25,10 @@ import com.liferay.portal.kernel.trash.TrashHandler;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.service.ServiceContext;
 
+import java.util.List;
+
 import org.liferay.jukebox.model.Artist;
 import org.liferay.jukebox.service.ArtistLocalServiceUtil;
-
-import java.util.List;
 
 /**
  * @author Mate Thurzo

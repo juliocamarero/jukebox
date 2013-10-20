@@ -22,7 +22,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 
 import org.liferay.jukebox.model.Artist;
 import org.liferay.jukebox.portlet.AlbumsPortlet;
-import org.liferay.jukebox.portlet.ArtistsPortlet;
 import org.liferay.jukebox.service.ArtistLocalServiceUtil;
 
 /**

@@ -190,9 +190,8 @@ public class SongLocalServiceImpl extends SongLocalServiceBaseImpl {
 		// Message boards
 
 		mbMessageLocalService.addDiscussionMessage(
-			userId, album.getUserName(), groupId, Song.class.getName(),
-			songId, WorkflowConstants.ACTION_PUBLISH);
-
+			userId, album.getUserName(), groupId, Song.class.getName(), songId,
+			WorkflowConstants.ACTION_PUBLISH);
 
 		// Asset
 

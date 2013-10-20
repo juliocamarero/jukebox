@@ -38,32 +38,6 @@ import org.liferay.jukebox.util.Constants;
  * @author Eudaldo Alonso
  */
 public class AlbumImpl extends AlbumBaseImpl {
-	public String getImageURL(ThemeDisplay themeDisplay)
-		throws SystemException, PortalException {
-
-		FileEntry fileEntry = getCustomImage();
-
-		if (fileEntry != null) {
-			return  DLUtil.getPreviewURL(
-				fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
-				StringPool.BLANK);
-		}
-		else {
-			return themeDisplay.getPortalURL() +
-				"/jukebox-portlet/images/vinilo.png";
-		}
-	}
-
-	public boolean hasCustomImage() throws SystemException, PortalException {
-		FileEntry fileEntry = getCustomImage();
-
-		if (fileEntry != null) {
-			return true;
-		}
-
-		return false;
-	}
-
 	public FileEntry getCustomImage() throws SystemException {
 		Repository repository =
 			PortletFileRepositoryUtil.fetchPortletRepository(
@@ -82,6 +56,32 @@ public class AlbumImpl extends AlbumBaseImpl {
 		catch (Exception e) {
 			return null;
 		}
+	}
+
+	public String getImageURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		FileEntry fileEntry = getCustomImage();
+
+		if (fileEntry != null) {
+			return DLUtil.getPreviewURL(
+				fileEntry, fileEntry.getLatestFileVersion(), themeDisplay,
+				StringPool.BLANK);
+		}
+		else {
+			return themeDisplay.getPortalURL() +
+				"/jukebox-portlet/images/vinilo.png";
+		}
+	}
+
+	public boolean hasCustomImage() throws PortalException, SystemException {
+		FileEntry fileEntry = getCustomImage();
+
+		if (fileEntry != null) {
+			return true;
+		}
+
+		return false;
 	}
 
 }
