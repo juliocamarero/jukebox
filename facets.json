@@ -1,0 +1,140 @@
+{"facets": [
+    {
+        "displayStyle": "scopes",
+        "weight": 1.6,
+        "static": false,
+        "order": "OrderHitsDesc",
+        "data": {
+            "maxTerms": 10,
+            "frequencyThreshold": 1,
+            "showAssetCount": true
+        },
+        "label": "site",
+        "className": "com.liferay.portal.kernel.search.facet.ScopeFacet",
+        "fieldName": "groupId"
+    },
+    {
+        "displayStyle": "asset_entries",
+        "weight": 1.5,
+        "static": false,
+        "order": "OrderHitsDesc",
+        "data": {
+            "values": [
+                "org.liferay.jukebox.model.Song",
+                "org.liferay.jukebox.model.Artist",
+                "org.liferay.jukebox.model.Album"
+            ],
+            "frequencyThreshold": 1
+        },
+        "label": "asset-type",
+        "className": "com.liferay.portal.kernel.search.facet.AssetEntriesFacet",
+        "fieldName": "entryClassName"
+    },
+    {
+        "displayStyle": "asset_tags",
+        "weight": 1.4,
+        "static": false,
+        "order": "OrderHitsDesc",
+        "data": {
+            "maxTerms": 10,
+            "displayStyle": "list",
+            "frequencyThreshold": 1,
+            "showAssetCount": true
+        },
+        "label": "tag",
+        "className": "com.liferay.portal.kernel.search.facet.MultiValueFacet",
+        "fieldName": "assetTagNames"
+    },
+    {
+        "displayStyle": "asset_tags",
+        "weight": 1.3,
+        "static": false,
+        "order": "OrderHitsDesc",
+        "data": {
+            "maxTerms": 10,
+            "displayStyle": "list",
+            "frequencyThreshold": 1,
+            "showAssetCount": true
+        },
+        "label": "category",
+        "className": "com.liferay.portal.kernel.search.facet.MultiValueFacet",
+        "fieldName": "assetCategoryTitles"
+    },
+    {
+        "displayStyle": "folders",
+        "weight": 1.2,
+        "static": false,
+        "order": "OrderHitsDesc",
+        "data": {
+            "maxTerms": 10,
+            "frequencyThreshold": 1,
+            "showAssetCount": true
+        },
+        "label": "folder",
+        "className": "com.liferay.portal.kernel.search.facet.MultiValueFacet",
+        "fieldName": "folderId"
+    },
+    {
+        "displayStyle": "users",
+        "weight": 1.1,
+        "static": false,
+        "order": "OrderHitsDesc",
+        "data": {
+            "maxTerms": 10,
+            "frequencyThreshold": 1,
+            "showAssetCount": true
+        },
+        "label": "user",
+        "className": "com.liferay.portal.kernel.search.facet.MultiValueFacet",
+        "fieldName": "userId"
+    },
+    {
+        "displayStyle": "modified",
+        "weight": 1,
+        "static": false,
+        "order": "OrderHitsDesc",
+        "data": {
+            "ranges": [
+                {
+                    "range": "[past-hour TO *]",
+                    "label": "past-hour"
+                },
+                {
+                    "range": "[past-24-hours TO *]",
+                    "label": "past-24-hours"
+                },
+                {
+                    "range": "[past-week TO *]",
+                    "label": "past-week"
+                },
+                {
+                    "range": "[past-month TO *]",
+                    "label": "past-month"
+                },
+                {
+                    "range": "[past-year TO *]",
+                    "label": "past-year"
+                }
+            ],
+            "frequencyThreshold": 0
+        },
+        "label": "modified",
+        "className": "com.liferay.portal.kernel.search.facet.ModifiedFacet",
+        "fieldName": "modified"
+    },
+    {
+        "displayStyle": "artist",
+        "static": false,
+        "weight": 1.3,
+        "order": "OrderHitsDesc",
+        "data": {
+            "displayStyle": "list",
+            "maxTerms": 10,
+            "frequencyThreshold": 1,
+            "showAssetCount": true
+        },
+        "className": "com.liferay.portal.kernel.search.facet.MultiValueFacet",
+        "label": "artist",
+        "fieldName": "artistId"
+    }
+]}
