@@ -31,6 +31,9 @@ public interface Album extends AlbumModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link org.liferay.jukebox.model.impl.AlbumImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public com.liferay.portal.kernel.repository.model.FileEntry getCustomImage()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.lang.String getImageURL(
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -39,7 +42,4 @@ public interface Album extends AlbumModel, PersistedModel {
 	public boolean hasCustomImage()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portal.kernel.repository.model.FileEntry getCustomImage()
-		throws com.liferay.portal.kernel.exception.SystemException;
 }

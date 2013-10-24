@@ -823,6 +823,12 @@ public class AlbumWrapper implements Album, ModelWrapper<Album> {
 	}
 
 	@Override
+	public com.liferay.portal.kernel.repository.model.FileEntry getCustomImage()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _album.getCustomImage();
+	}
+
+	@Override
 	public java.lang.String getImageURL(
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -835,12 +841,6 @@ public class AlbumWrapper implements Album, ModelWrapper<Album> {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _album.hasCustomImage();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.repository.model.FileEntry getCustomImage()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _album.getCustomImage();
 	}
 
 	@Override

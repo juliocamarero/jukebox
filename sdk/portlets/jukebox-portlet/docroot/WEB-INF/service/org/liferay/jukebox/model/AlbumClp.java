@@ -651,7 +651,7 @@ public class AlbumClp extends BaseModelImpl<Album> implements Album {
 
 	@Override
 	public TrashEntry getTrashEntry() throws PortalException, SystemException {
-		if (!isInTrash() && !isInTrashContainer()) {
+		if (!isInTrash()) {
 			return null;
 		}
 

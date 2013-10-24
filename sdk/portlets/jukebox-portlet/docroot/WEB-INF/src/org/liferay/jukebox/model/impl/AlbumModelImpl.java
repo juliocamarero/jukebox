@@ -636,7 +636,7 @@ public class AlbumModelImpl extends BaseModelImpl<Album> implements AlbumModel {
 
 	@Override
 	public TrashEntry getTrashEntry() throws PortalException, SystemException {
-		if (!isInTrash() && !isInTrashContainer()) {
+		if (!isInTrash()) {
 			return null;
 		}
 

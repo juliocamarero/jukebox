@@ -602,7 +602,7 @@ public class ArtistClp extends BaseModelImpl<Artist> implements Artist {
 
 	@Override
 	public TrashEntry getTrashEntry() throws PortalException, SystemException {
-		if (!isInTrash() && !isInTrashContainer()) {
+		if (!isInTrash()) {
 			return null;
 		}
 

@@ -746,6 +746,12 @@ public class ArtistWrapper implements Artist, ModelWrapper<Artist> {
 	}
 
 	@Override
+	public com.liferay.portal.kernel.repository.model.FileEntry getCustomImage()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _artist.getCustomImage();
+	}
+
+	@Override
 	public java.lang.String getImageURL(
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -758,12 +764,6 @@ public class ArtistWrapper implements Artist, ModelWrapper<Artist> {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _artist.hasCustomImage();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.repository.model.FileEntry getCustomImage()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _artist.getCustomImage();
 	}
 
 	@Override

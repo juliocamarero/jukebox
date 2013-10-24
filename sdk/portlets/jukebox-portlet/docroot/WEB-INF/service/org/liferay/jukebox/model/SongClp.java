@@ -640,7 +640,7 @@ public class SongClp extends BaseModelImpl<Song> implements Song {
 
 	@Override
 	public TrashEntry getTrashEntry() throws PortalException, SystemException {
-		if (!isInTrash() && !isInTrashContainer()) {
+		if (!isInTrash()) {
 			return null;
 		}
 

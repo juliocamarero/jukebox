@@ -625,7 +625,7 @@ public class SongModelImpl extends BaseModelImpl<Song> implements SongModel {
 
 	@Override
 	public TrashEntry getTrashEntry() throws PortalException, SystemException {
-		if (!isInTrash() && !isInTrashContainer()) {
+		if (!isInTrash()) {
 			return null;
 		}
 
