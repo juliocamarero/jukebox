@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -6620,7 +6621,9 @@ public class AlbumPersistenceImpl extends BasePersistenceImpl<Album>
 		if ((list != null) && !list.isEmpty()) {
 			for (Album album : list) {
 				if ((groupId != album.getGroupId()) ||
-						!Validator.equals(name, album.getName()) ||
+						!StringUtil.wildcardMatches(album.getName(), name,
+							CharPool.UNDERLINE, CharPool.PERCENT,
+							CharPool.BACK_SLASH, false) ||
 						(status != album.getStatus())) {
 					list = null;
 

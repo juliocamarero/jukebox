@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -5170,7 +5171,9 @@ public class ArtistPersistenceImpl extends BasePersistenceImpl<Artist>
 		if ((list != null) && !list.isEmpty()) {
 			for (Artist artist : list) {
 				if ((groupId != artist.getGroupId()) ||
-						!Validator.equals(name, artist.getName()) ||
+						!StringUtil.wildcardMatches(artist.getName(), name,
+							CharPool.UNDERLINE, CharPool.PERCENT,
+							CharPool.BACK_SLASH, false) ||
 						(status != artist.getStatus())) {
 					list = null;
 
