@@ -404,7 +404,7 @@ public class AlbumLocalServiceImpl extends AlbumLocalServiceBaseImpl {
 			if (oldStatus != WorkflowConstants.STATUS_APPROVED) {
 				trashVersionLocalService.addTrashVersion(
 					trashEntryId, Song.class.getName(), song.getSongId(),
-					status);
+					status, null);
 			}
 
 			// Asset
